@@ -100,7 +100,8 @@
                     {{ $data['casa'] }}
 
                 @elseif ($data['daño'] == 'Siniestro')
-                    Siniestro - {{ $data['folio'] }} - {{ $data['casa'] }} <br>
+                    Siniestro - {{ $data['casa'] }} <br>
+                    {{ $data['folio'] }} <br>
                     {{ $data['area'] }}
 
                 @else

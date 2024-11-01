@@ -12,4 +12,7 @@ class directores extends Model
         'NOMBRE',
         'CORREO'
     ];
+    protected $primaryKey = 'ID_DIRECTOR';
+    public $timestamps = false;
+
 }

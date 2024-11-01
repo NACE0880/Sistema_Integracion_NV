@@ -11,4 +11,7 @@ class drives extends Model
         'ID_CASA',
         'LIGA'
     ];
+    protected $primaryKey = 'ID_DRIVE';
+    public $timestamps = false;
+
 }

@@ -24,7 +24,10 @@ class tickets extends Model
         'SUPERVISOR',
         'SUBGERENTE',
         'GERENTE',
+
         'PRIORIDAD',
+        'NIVEL',
+
         'REINCIDENCIA',
         'ENTORNO',
         'SITIO',

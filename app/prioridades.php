@@ -11,4 +11,6 @@ class prioridades extends Model
         'NOMBRE'
     ];
     protected $primaryKey = 'ID_PRIORIDAD';
+    public $timestamps = false;
+
 }

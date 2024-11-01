@@ -12,6 +12,8 @@ class afecciones extends Model
         'NOMBRE'
     ];
     protected $primaryKey = 'ID_AFECCION';
+    public $timestamps = false;
+
 
     public function area_afeccion(){
         return $this->belongsTo('\App\areas', 'ID_AREA');

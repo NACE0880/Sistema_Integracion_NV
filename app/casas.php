@@ -15,6 +15,8 @@ class casas extends Model
 
     ];
     protected $primaryKey = 'ID_CASA';
+    public $timestamps = false;
+
 
     public function encargados_casa(){
         return $this->belongsToMany('\App\encargados', 'encargados_casas', 'ID_CASA', 'ID_ENCARGADO');

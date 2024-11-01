@@ -103,8 +103,16 @@
 
                 <div class="form-row mt-5">
                     <div class="form-group col-md-6">
+
+                        @if ($ticket->AREA_RESPONSABLE == 'Publicidad' || $ticket->AREA_RESPONSABLE == 'PEMSA - Seguridad Industrial' || $ticket->AREA_RESPONSABLE == 'FYCSA')
+                        <label for="monto" style="color: #ffc107;">Monto Aproximado Opcional ($MXN)</label>
+                        <input type="number"  class="form-control" id="monto" name="monto" min="0.00"  step="0.01" placeholder="0.00"/>
+
+                        @else
                         <label for="monto">Monto Aproximado ($MXN)</label>
                         <input type="number"  class="form-control" id="monto" name="monto" min="0.00"  step="0.01" placeholder="0.00" required/>
+                        @endif
+
                     </div>
 
                     <div class="form-group col-md-6">

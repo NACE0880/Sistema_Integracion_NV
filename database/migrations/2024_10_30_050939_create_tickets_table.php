@@ -29,7 +29,10 @@ class CreateTicketsTable extends Migration
             $table->string('SUPERVISOR', 100);
             $table->string('SUBGERENTE', 100);
             $table->string('GERENTE', 100);
+
             $table->string('PRIORIDAD', 50);
+            $table->string('NIVEL', 50)->nullable();
+
             $table->string('REINCIDENCIA', 50);
             $table->string('ENTORNO', 100);
             $table->string('SITIO', 100);

@@ -71,7 +71,7 @@
         }
 
         .container {
-            margin-top: 60px;
+            /* margin-top: 60px; */
         }
 
     </style>
@@ -157,14 +157,26 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                         <label for="actualizar_prioridad">Actualizar Prioridad</label>
-                        <select id="actualizar_prioridad" onchange="cargarEncargados(this)" name="actualizar_prioridad" class="form-control" required>
+                        <select id="actualizar_prioridad"  name="actualizar_prioridad" class="form-control" required>
                             <option value="{{ $ticket->PRIORIDAD }}">{{ $ticket->PRIORIDAD }}</option>
 
                             @foreach ($prioridades as $prioridad)
                                 <option value="{{ $prioridad->NOMBRE }}"> {{ $prioridad->NOMBRE }}</option>
                             @endforeach
+                        </select>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="actualizar_nivel">Nivel Notificación</label>
+                        <select id="actualizar_nivel" onchange="cargarEncargados(this)" name="actualizar_nivel" class="form-control" required>
+                            <option value="">Seleccionar un nivel de notificación...</option>
+
+                            <option value="SUPERVISION"> SUPERVISION</option>
+                            <option value="SUBGERENCIA"> SUBGERENCIA</option>
+                            <option value="GERENCIA"> GERENCIA</option>
                         </select>
 
                     </div>
@@ -274,22 +286,22 @@
 @section('js')
     <script>
 
-        function cargarEncargados(inputPrioridad){
+        function cargarEncargados(inputNivel){
             let inputsubgerente = document.getElementById('subgerente');
             let inputgerente = document.getElementById('gerente');
 
-            switch (inputPrioridad.value) {
-                case 'ALTA':
+            switch (inputNivel.value) {
+                case 'GERENCIA':
                     inputsubgerente.style.display = 'block';
                     inputgerente.style.display = 'block';
                     break;
 
-                case 'MEDIA':
+                case 'SUBGERENCIA':
                     inputsubgerente.style.display = 'block';
                     inputgerente.style.display = 'none';
                     break;
 
-                case 'BAJA':
+                case 'SUPERVISION':
                     inputsubgerente.style.display = 'none';
                     inputgerente.style.display = 'none';
                 break;
@@ -298,7 +310,7 @@
         }
 
         function cargar() {
-            let prioridad = document.getElementById('actualizar_prioridad');
+            let prioridad = document.getElementById('actualizar_nivel');
             cargarEncargados(prioridad);
         }
 

@@ -94,10 +94,17 @@
             <img src="https://bibliotecadigital.telmex.com/bibliotecaDigital/resources/img/LOGO_BDT_Flag.png" alt="Telmex">
         </div>
         <div class="content">
-            <h1>Informe de Nueva Cotizacion Ticket <br>
-                {{ $data['folio'] }} <br>
-                {{ $data['casa'] }} -  {{ $data['area'] }}
-            </h1>
+            @if ($data['ticket']->ESTATUS_COTIZACION == 'NO')
+                <h1>Informe de Nueva Cotizacion Ticket <br>
+                    {{ $data['folio'] }} <br>
+                    {{ $data['casa'] }} -  {{ $data['area'] }}
+                </h1>
+            @else
+                <h1>Informe de Nueva Fecha Compromiso Ticket <br>
+                    {{ $data['folio'] }} <br>
+                    {{ $data['casa'] }} -  {{ $data['area'] }}
+                </h1>
+            @endif
 
             @if (@empty($data['destinatario']))
             @else
@@ -192,22 +199,34 @@
             <table border="1" cellspacing="0" cellpadding="10" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="background-color: #7b1fa2; color: #ffffff; text-align: center;">Fecha Compromiso</th>
-                        <th style="background-color: #7b1fa2; color: #ffffff; text-align: center;">Monto Cotizado</th>
+                        @if ($data['ticket']->ESTATUS_COTIZACION == 'NO')
+                            <th style="background-color: #7b1fa2; color: #ffffff; text-align: center;">Fecha Compromiso</th>
+                        @else
+                            <th style="background-color: #7b1fa2; color: #ffffff; text-align: center;">Fecha Compromiso</th>
+                            <th style="background-color: #7b1fa2; color: #ffffff; text-align: center;">Monto Cotizado</th>
+                        @endif
+
 
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
+                        @if ($data['ticket']->ESTATUS_COTIZACION == 'NO')
+                            <td style="text-align: center;" class="evidencia">
+                                {{ $data['fecha_compromiso'] }}
+                            </td>
 
-                        <td style="text-align: center;" class="evidencia">
-                            {{ $data['fecha_compromiso'] }}
-                        </td>
+                        @else
+                            <td style="text-align: center;" class="evidencia">
+                                {{ $data['fecha_compromiso'] }}
+                            </td>
 
-                        <td style="text-align: center;" class="evidencia">
-                            ${{ $data['monto'] }}MXN
-                        </td>
+                            <td style="text-align: center;" class="evidencia">
+                                ${{ $data['monto'] }}MXN
+                            </td>
+                        @endif
+
 
                     </tr>
                 </tbody>
@@ -237,7 +256,7 @@
                 </tbody>
             </table><br>
 
-            @if ($data['supervisor'])
+            @if ($data['supervisor_bdt'])
                 <a href="{{ route('autorizar.ticket', [
                         'ticket'    =>  $data['ticket'],
                         'encargado' =>  $data['encript']

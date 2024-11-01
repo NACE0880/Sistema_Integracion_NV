@@ -293,10 +293,11 @@ class TicketsController extends Controller
     public function cotizarTickets(tickets $ticket, $encargado){
         // // $encrypted = Crypt::encryptString('Hello world.');
         $ultimaCotizacion = modificaciones::where('ID_TICKET', $ticket->ID_TICKET)->where('TIPO','COTIZACION')->orderBy('FECHA','DESC')->first();
+        $ultimaFechaCompromiso = modificaciones::where('ID_TICKET', $ticket->ID_TICKET)->where('TIPO','FECHA COMPROMISO')->orderBy('FECHA','DESC')->first();
         $decrypted = Crypt::decryptString($encargado);
 
         // echo $decrypted;
-        return view('Tickets.cotizarticket', compact('ticket', 'encargado', 'decrypted', 'ultimaCotizacion'));
+        return view('Tickets.cotizarticket', compact('ticket', 'encargado', 'decrypted', 'ultimaCotizacion', 'ultimaFechaCompromiso'));
     }
 
     public function modificarCotizacion(tickets $ticket, $encargado) {
@@ -455,42 +456,6 @@ class TicketsController extends Controller
 
         // Enviar correo a Vo.Bo.
         switch (true) {
-            case ($area_responsable == 'SEDENA'):
-                $destinatarios = [
-                    'supervisores' => [
-                        'Jorge Leybon' => 'reportes.bdt@gmail.com',
-                        'Saul Delgadillo' => 'reportes.bdt@gmail.com',
-                        'Nayely Aguilar' => 'reportes.bdt@gmail.com',
-                    ]
-                ];
-                // Enviar correo a supervisores Jorge - Saul -Naye
-                foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                    $data['destinatario']   = $nombre;
-                    $data['encript']        = Crypt::encryptString($nombre);
-                    $data['supervisor']     = true;
-
-                    Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-                }
-                break;
-
-            case ($area_responsable == 'SEMAR'):
-                $destinatarios = [
-                    'supervisores' => [
-                        'Jorge Leybon' => 'reportes.bdt@gmail.com',
-                        'Saul Delgadillo' => 'reportes.bdt@gmail.com',
-                        'Nayely Aguilar' => 'reportes.bdt@gmail.com',
-                    ]
-                ];
-                // Enviar correo a supervisores Jorge - Saul -Naye
-                foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                    $data['destinatario']   = $nombre;
-                    $data['encript']        = Crypt::encryptString($nombre);
-                    $data['supervisor']     = true;
-
-                    Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-                }
-                break;
-
             case ($reincidencia == 'SI'):
                 $destinatarios = [
                     'supervisores' => [
@@ -505,24 +470,13 @@ class TicketsController extends Controller
                     self::envioPrioritarioDirecto($area, $data);
 
                     // Enviar correo a supervisores Jorge - Saul
-                    foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                        $data['destinatario']   = $nombre;
-                        $data['encript']        = Crypt::encryptString($nombre);
-                        $data['supervisor']     = true;
-                        Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-
-                    }
+                    self::envioDestinatariosDirecto($destinatarios, $data);
 
                 } else {
                     self::envioPrioritarioDirecto($area, $data);
-                    
+
                     // Enviar correo a supervisores Jorge - Saul
-                    foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                        $data['destinatario']   = $nombre;
-                        $data['encript']        = Crypt::encryptString($nombre);
-                        $data['supervisor']     = true;
-                        Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-                    }
+                    self::envioDestinatariosDirecto($destinatarios, $data);
                 }
                 break;
 
@@ -540,26 +494,45 @@ class TicketsController extends Controller
                     self::envioPrioritarioDirecto($area, $data);
 
                     // Enviar correo a supervisores Jorge - Saul
-                    foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                        $data['destinatario']   = $nombre;
-                        $data['encript']        = Crypt::encryptString($nombre);
-                        $data['supervisor']     = true;
-                        Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-                    }
+                    self::envioDestinatariosDirecto($destinatarios, $data);
 
                 } else {
                     self::envioPrioritarioDirecto($area, $data);
 
                     // Enviar correo a supervisores Jorge - Saul
-                    foreach ($destinatarios['supervisores'] as $nombre => $correo) {
-                        $data['destinatario']   = $nombre;
-                        $data['encript']        = Crypt::encryptString($nombre);
-                        $data['supervisor']     = true;
-                        Mail::to($correo)->send(new NotificacionTicketDirecto($data));
-                    }
+                    self::envioDestinatariosDirecto($destinatarios, $data);
                 }
-
                 break;
+
+            case ($area_responsable == 'SEDENA'):
+                $destinatarios = [
+                    'supervisores' => [
+                        'Jorge Leybon' => 'reportes.bdt@gmail.com',
+                        'Saul Delgadillo' => 'reportes.bdt@gmail.com',
+                        'Nayely Aguilar' => 'reportes.bdt@gmail.com',
+                    ]
+                ];
+                self::envioPrioritarioDirecto($area, $data);
+
+                // Enviar correo a supervisores Jorge - Saul -Naye
+                self::envioDestinatariosDirecto($destinatarios, $data);
+                break;
+
+            case ($area_responsable == 'SEMAR'):
+                $destinatarios = [
+                    'supervisores' => [
+                        'Jorge Leybon' => 'reportes.bdt@gmail.com',
+                        'Saul Delgadillo' => 'reportes.bdt@gmail.com',
+                        'Nayely Aguilar' => 'reportes.bdt@gmail.com',
+                    ]
+                ];
+                self::envioPrioritarioDirecto($area, $data);
+
+                // Enviar correo a supervisores Jorge - Saul -Naye
+                self::envioDestinatariosDirecto($destinatarios, $data);
+                break;
+
+
 
             default:
                 $destinatario = 'reportes.bdt@gmail.com';
@@ -577,7 +550,10 @@ class TicketsController extends Controller
 
     public function validar(Request $request, tickets $ticket){
         $prioridad                  = $request->input('actualizar_prioridad');
+        $nivel                      = $request->input('actualizar_nivel');
+
         $ticket->PRIORIDAD          = $prioridad;
+        $ticket->NIVEL              = $nivel;
 
         $modificacion = new modificaciones;
 
@@ -615,6 +591,7 @@ class TicketsController extends Controller
             'elemento' =>       $ticket->ELEMENTO,
             'daño' =>           $ticket->DAÑO,
             'prioridad' =>      $ticket->PRIORIDAD,
+            'nivel'=>           $ticket->NIVEL,
             'detalle' =>        $ticket->DETALLE,
 
             'fotos' =>          $fotos,
@@ -628,12 +605,12 @@ class TicketsController extends Controller
 
 
         if ($area->NOMBRE == 'FYCSA') {
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
             $area = areas::where('NOMBRE', 'CTBR')->first();
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
 
         } else {
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
         }
 
         return redirect()->route('consultar.ticket');
@@ -668,29 +645,55 @@ class TicketsController extends Controller
         $monto =                    $request->input('monto');
         $fecha_compromiso =         $request->input('fecha_compromiso');
 
-        $ticket->ESTATUS_COTIZACION='SI';
-        $ticket->COTIZACION =       $monto;
-        $ticket->FECHA_COMPROMISO = $fecha_compromiso;
+        if (empty($monto)) {
+            $ticket->ESTATUS_COTIZACION='NO';
+            $ticket->COTIZACION =       null;
+            $ticket->FECHA_COMPROMISO = $fecha_compromiso;
 
-        // Carga y guardado de cotizaciones XLSX
-        self::eliminarArchivoCotizacion($ticket->ARCHIVO_COTIZACION);
-        $cotizacion_xls             = self::cargaCotizacion($request->file('archivo_opcional'));
+            // Carga y guardado de cotizaciones XLSX
+            self::eliminarArchivoCotizacion($ticket->ARCHIVO_COTIZACION);
+            $cotizacion_xls             = self::cargaCotizacion($request->file('archivo_opcional'));
 
-        $ticket->ARCHIVO_COTIZACION = $cotizacion_xls;
+            $ticket->ARCHIVO_COTIZACION = $cotizacion_xls;
 
-        $ticket->save();
+            $ticket->save();
 
-        $modificacion = new modificaciones;
+            $modificacion = new modificaciones;
 
-        $modificacion->ID_TICKET    = $ticket->ID_TICKET;
-        $modificacion->TIPO         = 'COTIZACION';
-        $modificacion->RESPONSABLE  = $usuario;
-        $modificacion->FECHA        = date("Y-m-d H-i-s");
+            $modificacion->ID_TICKET    = $ticket->ID_TICKET;
+            $modificacion->TIPO         = 'FECHA COMPROMISO';
+            $modificacion->RESPONSABLE  = $usuario;
+            $modificacion->FECHA        = date("Y-m-d H-i-s");
 
-        if (!is_null($request->input('justificacion'))){
-            $modificacion->JUSTIFICACION = $request->input('justificacion');
+            if (!is_null($request->input('justificacion'))){
+                $modificacion->JUSTIFICACION = $request->input('justificacion');
+            }
+            $modificacion->save();
+        } else {
+            $ticket->ESTATUS_COTIZACION='SI';
+            $ticket->COTIZACION =       $monto;
+            $ticket->FECHA_COMPROMISO = $fecha_compromiso;
+
+            // Carga y guardado de cotizaciones XLSX
+            self::eliminarArchivoCotizacion($ticket->ARCHIVO_COTIZACION);
+            $cotizacion_xls             = self::cargaCotizacion($request->file('archivo_opcional'));
+
+            $ticket->ARCHIVO_COTIZACION = $cotizacion_xls;
+
+            $ticket->save();
+
+            $modificacion = new modificaciones;
+
+            $modificacion->ID_TICKET    = $ticket->ID_TICKET;
+            $modificacion->TIPO         = 'COTIZACION';
+            $modificacion->RESPONSABLE  = $usuario;
+            $modificacion->FECHA        = date("Y-m-d H-i-s");
+
+            if (!is_null($request->input('justificacion'))){
+                $modificacion->JUSTIFICACION = $request->input('justificacion');
+            }
+            $modificacion->save();
         }
-        $modificacion->save();
 
         // NOTIFICAR COTIZACIONES
         self::envioCotizacion($ticket);
@@ -729,6 +732,7 @@ class TicketsController extends Controller
 
         // NOTIFICAR AUTORIZACIONES
         $prioridad  = $ticket->PRIORIDAD;
+        $nivel      = $ticket->NIVEL;
         $area       = $ticket->afeccion->area_afeccion;
 
         $fotos      = self::generarArregloFotos($ticket);
@@ -752,6 +756,7 @@ class TicketsController extends Controller
             'elemento' =>       $ticket->ELEMENTO,
             'daño' =>           $ticket->DAÑO,
             'prioridad' =>      $ticket->PRIORIDAD,
+            'nivel' =>          $ticket->NIVEL,
             'detalle' =>        $ticket->DETALLE,
 
             'monto' =>          $ticket->COTIZACION,
@@ -764,13 +769,13 @@ class TicketsController extends Controller
         ];
 
         if ($area->NOMBRE == 'FYCSA') {
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
 
             $area = areas::where('NOMBRE', 'CTBR')->first();
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
 
         } else {
-            self::envioPrioritario($prioridad, $area, $data);
+            self::envioPrioritario($nivel, $area, $data);
         }
 
 
@@ -961,7 +966,7 @@ class TicketsController extends Controller
     }
 
 // ENVIOS CORREOS
-    public function envioPrioritario($prioridad, $area, $data){
+    public function envioPrioritario($nivel, $area, $data){
 
         // Enviar correo a encargados
         // $area    = $ticket->afeccion->area_afeccion;
@@ -972,8 +977,8 @@ class TicketsController extends Controller
         $gerente    = $data['ticket']->casa->gerente_casa->where('ID_AREA', $area->ID_AREA)->first();
 
 
-        switch ($prioridad) {
-            case 'ALTA':
+        switch ($nivel) {
+            case 'GERENCIA':
                 // NOTIFICAR GERENTE SI EXISTE
                 if ($gerente) {
                     $data['destinatario']  = $gerente->NOMBRE;
@@ -1020,7 +1025,7 @@ class TicketsController extends Controller
                 }
                 break;
 
-            case 'MEDIA':
+            case 'SUBGERENCIA':
                 // NOTIFICAR SUBGERENTE SI EXISTE
                 if ($subgerente) {
                     $data['destinatario'] = $subgerente->NOMBRE;
@@ -1052,7 +1057,7 @@ class TicketsController extends Controller
                 }
                 break;
 
-            case 'BAJA':
+            case 'SUPERVISION':
                 // NOTIFICAR SUPERVISOR SI EXISTE
                 if ($supervisor) {
                     $data['destinatario'] = $supervisor->NOMBRE;
@@ -1118,6 +1123,15 @@ class TicketsController extends Controller
 
     }
 
+    public function envioDestinatariosDirecto($destinatarios, $data){
+        foreach ($destinatarios['supervisores'] as $nombre => $correo) {
+            $data['destinatario']   = $nombre;
+            $data['encript']        = Crypt::encryptString($nombre);
+            $data['supervisor']     = true;
+            Mail::to($correo)->send(new NotificacionTicketDirecto($data));
+        }
+    }
+
     public function envioCotizacion($ticket){
         // Carga y guardado de Imagenes para correo
         $foto_1 =             $ticket->FOTO_OBLIGATORIA;
@@ -1177,14 +1191,14 @@ class TicketsController extends Controller
             'ticket' =>         $ticket,
             'fotos' =>          $fotos,
 
-            'supervisor' =>     false,
+            'supervisor_bdt' =>     false,
         ];
 
         // Enviar correo a supervisores Jorge - Saul
         foreach ($destinatarios['supervisores'] as $nombre => $correo) {
             $data['destinatario']   = $nombre;
             $data['encript']        = Crypt::encryptString($nombre);
-            $data['supervisor']     = true;
+            $data['supervisor_bdt']     = true;
 
             Mail::to($correo)->send(new CotizacionTicket($data));
         }
@@ -1192,7 +1206,7 @@ class TicketsController extends Controller
         // Enviar correo a Finanzas Andrés Becerril - Maricarmen Ruiz
         foreach ($destinatarios['finanzas'] as $nombre => $correo) {
             $data['destinatario'] = $nombre;
-            $data['supervisor']   = false;
+            $data['supervisor_bdt']   = false;
 
             Mail::to($correo)->send(new CotizacionTicket($data));
         }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\casas;
 
 class CasasTableSeeder extends Seeder
 {
@@ -13,14 +14,27 @@ class CasasTableSeeder extends Seeder
     public function run()
     {
         DB::table('casas')->insert(['ID_CASA' => 1,  'NOMBRE' => 'Aldea Iztapalapa', 'ESTATUS' => 'ABIERTA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 2,  'NOMBRE' => 'Campeche', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 3,  'NOMBRE' => 'Cuautla', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 4,  'NOMBRE' => 'Culiacán', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 5,  'NOMBRE' => 'Saltillo', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 6,  'NOMBRE' => 'Tapachula', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 7,  'NOMBRE' => 'Tuxtla', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 8,  'NOMBRE' => 'Veracruz', 'ESTATUS' => 'CERRADA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 9,  'NOMBRE' => 'Sedena', 'ESTATUS' => 'ABIERTA', 'CORREO' => 'reportes.bdt@gmail.com']);
-        DB::table('casas')->insert(['ID_CASA' => 10,  'NOMBRE' => 'Semar', 'ESTATUS' => 'ABIERTA', 'CORREO' => 'reportes.bdt@gmail.com']);
+
+        $csvFile = fopen(storage_path("app/archivos/registrosTickets/casas.csv"), "r");
+        $firstline = true;
+        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+
+            if (!$firstline) {
+                casas::create([
+
+                    "ID_CASA" => $data['0'],
+
+                    "NOMBRE" => $data['1'],
+                    "ESTATUS" => $data['2'],
+                    "CORREO" => $data['3'],
+
+                ]);
+
+            }
+            $firstline = false;
+
+        }
+
+        fclose($csvFile);
     }
 }

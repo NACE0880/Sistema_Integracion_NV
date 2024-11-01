@@ -145,6 +145,30 @@
 
         </div>
 
+    @elseif($ticket->ESTATUS_COTIZACION == 'NO' && $ticket->FECHA_COMPROMISO)
+    <div class="container form-container">
+        <div class="form-header">
+            <h2>{{ $ticket->CASA }} - {{ $ticket->FOLIO }}</h2>
+            <h3>Elemento Comprometido para el {{ $ticket->FECHA_COMPROMISO }}<br>
+                por: {{ $ultimaFechaCompromiso->RESPONSABLE }}</h3>
+            <h4>{{ $ultimaFechaCompromiso->FECHA }}</h4>
+
+            <a href="{{ route('modificar.cotizacion.ticket',
+                [
+                    'ticket' => $ticket,
+                    'encargado' => $encargado,
+                ]) }}">
+                <button class="modificar">
+                    <i class="fa-solid fa-coins"></i>
+                    MODIFICAR
+                </button>
+            </a>
+
+        </div>
+
+
+    </div>
+
     @elseif ($ticket->ESTATUS_COTIZACION == 'NO')
         <div class="container form-container mt-5 ">
             <div class="form-header">
@@ -166,8 +190,14 @@
 
                 <div class="form-row mt-5">
                     <div class="form-group col-md-6">
+                        @if ($ticket->AREA_RESPONSABLE == 'Publicidad' || $ticket->AREA_RESPONSABLE == 'PEMSA - Seguridad Industrial' || $ticket->AREA_RESPONSABLE == 'FYCSA')
+                        <label for="monto" style="color: #ffc107;">Monto Aproximado Opcional ($MXN)</label>
+                        <input type="number"  class="form-control" id="monto" name="monto" min="0.00"  step="0.01" placeholder="0.00"/>
+
+                        @else
                         <label for="monto">Monto Aproximado ($MXN)</label>
                         <input type="number"  class="form-control" id="monto" name="monto" min="0.00"  step="0.01" placeholder="0.00" required/>
+                        @endif
                     </div>
 
                     <div class="form-group col-md-6">
@@ -296,7 +326,7 @@
                 </div>
             </div>
         </div>
-    @else
+    @elseif($ticket->ESTATUS_COTIZACION == 'SI')
         <div class="container form-container">
             <div class="form-header">
                 <h2>{{ $ticket->CASA }} - {{ $ticket->FOLIO }}</h2>
@@ -320,8 +350,6 @@
         </div>
 
     @endif
-
-
 @endsection
 
 

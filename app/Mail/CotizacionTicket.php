@@ -20,6 +20,7 @@ class CotizacionTicket extends Mailable
     {
         $this->data = $data;
         $this->nombre_archivo = $this->data['ticket']->ARCHIVO_COTIZACION;
+        $this->estatus_cotizacion = $this->data['ticket']->ESTATUS_COTIZACION;
     }
 
     /**
@@ -29,20 +30,43 @@ class CotizacionTicket extends Mailable
      */
     public function build()
     {
-        if (!is_null($this->nombre_archivo)) {
-            $path = \Storage::disk('tickets_cotizaciones')->path($this->nombre_archivo);
+        switch ($this->estatus_cotizacion) {
+            case 'SI':
+                if (!is_null($this->nombre_archivo)) {
+                    $path = \Storage::disk('tickets_cotizaciones')->path($this->nombre_archivo);
 
-            return $this->view('correos.ticketCotizado')
-            ->with('data', $this->data)
-            ->subject('Nueva Cotizacion Ticket')
-            ->attach($path);
+                    return $this->view('correos.ticketCotizado')
+                    ->with('data', $this->data)
+                    ->subject('Nueva Cotizacion Ticket')
+                    ->attach($path);
 
-        } else {
-            return $this->view('correos.ticketCotizado')
-            ->with('data', $this->data)
-            ->subject('Nueva Cotizacion Ticket')
-            ;
+                } else {
+                    return $this->view('correos.ticketCotizado')
+                    ->with('data', $this->data)
+                    ->subject('Nueva Cotizacion Ticket')
+                    ;
+                }
+                break;
+
+            case 'NO':
+                if (!is_null($this->nombre_archivo)) {
+                    $path = \Storage::disk('tickets_cotizaciones')->path($this->nombre_archivo);
+
+                    return $this->view('correos.ticketCotizado')
+                    ->with('data', $this->data)
+                    ->subject('Nueva Fecha Compromiso Ticket')
+                    ->attach($path);
+
+                } else {
+                    return $this->view('correos.ticketCotizado')
+                    ->with('data', $this->data)
+                    ->subject('Nueva Fecha Compromiso Ticket')
+                    ;
+                }
+                break;
+
         }
+
 
     }
 }
