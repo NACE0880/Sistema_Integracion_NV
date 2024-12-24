@@ -39,4 +39,18 @@ class exportarBaseTickets {
 
     }
 
+    public function store(){
+        return Excel::create('Respaldo', function($excel)  {
+
+            $excel->sheet('Detalle General', function($sheet)  {
+
+                $sheet->loadView('exports.tickets', [
+                    'tickets' => tickets::all(),
+                ]);
+
+            });
+
+        })->store('xlsx', storage_path('app/public/tickets/reportes'));
+    }
+
 }

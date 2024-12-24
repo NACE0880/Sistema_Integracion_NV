@@ -24,7 +24,7 @@
                 <p class="second-text"><i class="fa-solid fa-truck-moving"></i></p>
             </a>
         @elseif(Auth::user()->rol == 'director')
-            <a href="{{ route('consultar.ticket') }}" class="card" style="background-color: #007ced">
+            <a href="{{ route('consultar.ticket') }}" class="card mantenimientos">
                 <p class="tip">Mantenimientos</p>
                 <p class="second-text"><i class="fa-solid fa-screwdriver-wrench"></i></p>
             </a>
