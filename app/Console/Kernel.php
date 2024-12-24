@@ -47,11 +47,14 @@ class Kernel extends ConsoleKernel
                             // ->daily();
                             ->monthly();
 
+        $schedule->command('Respaldo:TicketsXlsx')
+                            ->weekly();
+
 
         $schedule->command('ResumenTickets:NoCotizados')
                             ->weeklyOn(4, '9:00');
         $schedule->command('ResumenTickets:NoCotizados')
-                            ->weeklyOn(2, '10:00');
+                            ->weeklyOn(2, '9:00');
     }
 
     /**
