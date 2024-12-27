@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\areas;
+use App\usuarios_roles;
 
-class AreasTableSeeder extends Seeder
+class UsuariosRolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,19 +13,17 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('areas')->insert(['ID_AREA' => 1,  'NOMBRE' => 'Alcaldía']);
-
-        $csvFile = fopen(storage_path("app/archivos/registros/areas.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/usuarios_roles.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
             if (!$firstline) {
-                areas::create([
+                usuarios_roles::create([
 
-                    "ID_AREA" => $data['0'],
+                    "ID_USUARIOS_ROLES" => $data['0'],
 
-                    "NOMBRE" => $data['1'],
-
+                    "ID_USUARIO" => $data['1'],
+                    "ID_ROL" => $data['2'],
                 ]);
 
             }
@@ -34,6 +32,5 @@ class AreasTableSeeder extends Seeder
         }
 
         fclose($csvFile);
-
     }
 }

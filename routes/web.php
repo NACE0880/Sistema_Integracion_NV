@@ -62,20 +62,8 @@ Route::group(['middleware'=>'XSS'], function() {
     Route::get('/exportar/autorizacion/{nombre}', 'TicketsController@exportAutorizacion')->name('exportar.autorizacion');
     Route::get('/exportar/evidenciaPago/{nombre}', 'TicketsController@exportEvidenciaPago')->name('exportar.evidencia.pago');
 
-    // Vistas
-    Route::middleware('auth')->group(function () {
-        Route::get('/tickets/creacion','TicketsController@crearTickets')->name('crear.tickets');
-        Route::get('/tickets/consultar','TicketsController@consultarTickets')->name('consultar.ticket');
-        Route::get('/tickets/reporte','TicketsController@generaReporteTickets')->name('reporte.ticket');
-        Route::get('/tickets/pesonal/modificar','TicketsController@modificarPersonal')->name('modificar.personal');
-        Route::get('/tickets/consultar/pago','TicketsController@consultarTicketsPago')->name('consultar.ticket.pago');
-        Route::get('/tickets/consultar/pasados','TicketsController@consultarTicketsPasados')->name('consultar.ticket.pasado');
-    });
 
-
-
-
-
+    // Procesos sin login
     Route::get('/tickets/{ticket}/actualizacion','TicketsController@actualizarTickets')->name('actualizar.ticket');
     Route::get('/tickets/{ticket}/historial','TicketsController@historialTickets')->name('historial.ticket');
 
@@ -119,9 +107,20 @@ Route::group(['middleware'=>'XSS'], function() {
 
 });
 
-Auth::routes();
+// MIDDLEWARE
+Route::middleware('auth')->group(function () {
+// Tickets
+    Route::get('/tickets/creacion','TicketsController@crearTickets')->name('crear.tickets');
+    Route::get('/tickets/consultar','TicketsController@consultarTickets')->name('consultar.ticket');
+    Route::get('/tickets/reporte','TicketsController@generaReporteTickets')->name('reporte.ticket');
+    Route::get('/tickets/pesonal/modificar','TicketsController@modificarPersonal')->name('modificar.personal');
+    Route::get('/tickets/consultar/pago','TicketsController@consultarTicketsPago')->name('consultar.ticket.pago');
+    Route::get('/tickets/consultar/pasados','TicketsController@consultarTicketsPasados')->name('consultar.ticket.pasado');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Tutorias
+    Route::get('/tutoria/consultar','TutoriasController@consultar')->name('consultar.tutoria');
+
+});
 
 // LOGIN
 Route::prefix('loginTickets')->group(function(){
@@ -129,3 +128,5 @@ Route::prefix('loginTickets')->group(function(){
     Route::post('/', 'Auth\LoginTicketsController@login')->name('login.tickets.submit');
 });
 
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

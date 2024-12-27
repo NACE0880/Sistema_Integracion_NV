@@ -66,8 +66,9 @@ use Carbon\Carbon;
 // Namespace para encriptacióon de cadenas
 use Illuminate\Support\Facades\Crypt;
 
-// NameSpace Telegram
+// NameSpace clases
 use App\Http\Controllers\TelegramController;
+use App\Services\UsersServices;
 
 
 class TicketsController extends Controller
@@ -234,7 +235,7 @@ class TicketsController extends Controller
         // No considerar casas no existentes admin
         $casas = casas::whereNotIn('ID_CASA',[11,12,13])->get();
 
-        if (Auth::user()->rol == 'director') {
+        if (in_array("9", UsersServices::permisos())) {
             $casaDirector =  casas::where('ID_CASA', Auth::user()->userable->casa->ID_CASA)->first();
         }
 
@@ -264,27 +265,17 @@ class TicketsController extends Controller
     }
 
     public function consultarTickets(){
-        switch (Auth::user()->rol) {
-            case 'coordinador':
-                $currentYear = date('Y');
-                $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
-                break;
-            case 'director':
-                $currentYear = date('Y');
-                $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->where('ID_CASA', Auth::user()->userable->casa->ID_CASA)
-                ->orderBy('FECHA_INICIO', 'DESC')->get();
-                break;
-
-            default:
-                $currentYear = date('Y');
-                $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
-                break;
+        $currentYear = date('Y');
+        if (in_array("10", UsersServices::permisos())) {
+            $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
+        } else if(in_array("9", UsersServices::permisos())){
+            $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->where('ID_CASA', Auth::user()->userable->casa->ID_CASA)->orderBy('FECHA_INICIO', 'DESC')->get();
+        }else {
+            $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
         }
+
         return view('Tickets.consultarticket', compact('tickets'));
 
-        // foreach (Auth::user()->userable->casa as $casa) {
-        //     echo $casa->ID_CASA;
-        // }
     }
 
     public function generaReporteTickets(){

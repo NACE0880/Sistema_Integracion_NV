@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
+use App\User;
+use App\Services\UsersServices;
+
+
+
+
 
 use Illuminate\Http\Request;
 

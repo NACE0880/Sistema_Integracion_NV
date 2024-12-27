@@ -20,7 +20,7 @@ class CasasTableSeeder extends Seeder
         //     'CORREO' => ''
         //     ]);
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/casas.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/casas.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

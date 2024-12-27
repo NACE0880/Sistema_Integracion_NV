@@ -107,34 +107,6 @@
     @auth
         <ul class="nav nav-tabs justify-content-center">
 
-            <li class="nav-item">
-                <a class="nav-link {{ Route::is('consultar.ticket') ? 'active' : '' }}" href="{{ route('consultar.ticket') }}"> <i class="fa-solid fa-house"></i> Panel </a>
-            </li>
-
-            @if (in_array("5", $UsersServices->permisos()) ? true : false)
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('consultar.ticket.pasado') ? 'active' : '' }}" href="{{ route('consultar.ticket.pasado') }}"> <i class="fa-solid fa-arrow-up-from-bracket"></i> Evidencias </a>
-                </li>
-            @endif
-
-            @if (in_array("4", $UsersServices->permisos()) ? true : false)
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('reporte.ticket') ? 'active' : '' }}" href="{{ route('reporte.ticket') }}"> <i class="fa-regular fa-file-excel"></i> Reportes</a>
-                </li>
-            @endif
-
-            @if (in_array("7", $UsersServices->permisos()) ? true : false)
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('modificar.personal') ? 'active' : '' }}" href="{{ route('modificar.personal') }}"> <i class="fa-solid fa-users"></i></i> Personal</a>
-                </li>
-            @endif
-
-            @if (in_array("8", $UsersServices->permisos()) ? true : false)
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('consultar.ticket.pago') ? 'active' : '' }}" href="{{ route('consultar.ticket.pago') }}"> <i class="fa-regular fa-money-bill-1"></i> Pagos</a>
-                </li>
-            @endif
-
 
             {{-- USUARIO --}}
             <li class="nav-item dropdown">

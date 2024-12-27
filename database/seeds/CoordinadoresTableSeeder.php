@@ -17,7 +17,7 @@ class CoordinadoresTableSeeder extends Seeder
         // DB::table('coordinadores')->insert(['ID_COORDINADOR' => 1,  'NOMBRE' =>'Jorge Leybón', 'TELEFONO' => '(+52)5527294121', 'CORREO' => 'reportes.bdt@gmail.com', 'VALIDACION' => false]);
 
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/coordinadores.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/coordinadores.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

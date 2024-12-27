@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\areas;
+use App\roles_permisos;
 
-class AreasTableSeeder extends Seeder
+class RolesPermisosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,19 +13,17 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('areas')->insert(['ID_AREA' => 1,  'NOMBRE' => 'Alcaldía']);
-
-        $csvFile = fopen(storage_path("app/archivos/registros/areas.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/roles_permisos.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
             if (!$firstline) {
-                areas::create([
+                roles_permisos::create([
 
-                    "ID_AREA" => $data['0'],
+                    "ID_ROLES_PERMISOS" => $data['0'],
 
-                    "NOMBRE" => $data['1'],
-
+                    "ID_ROL" => $data['1'],
+                    "ID_PERMISO" => $data['2'],
                 ]);
 
             }
@@ -34,6 +32,6 @@ class AreasTableSeeder extends Seeder
         }
 
         fclose($csvFile);
-
     }
 }
+

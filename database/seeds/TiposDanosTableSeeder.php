@@ -16,7 +16,7 @@ class TiposDanosTableSeeder extends Seeder
     {
         // DB::table('tipos_danos')->insert(['ID_TIPO_DANO' => 1,  'ID_PRIORIDAD' => 1, 'DETALLE' => 'Siniestro - Temblor']);
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/tipos_daños.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/tipos_daños.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
