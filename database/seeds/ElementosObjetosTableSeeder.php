@@ -17,7 +17,7 @@ class ElementosObjetosTableSeeder extends Seeder
     {
         // DB::table('elementos_objetos')->insert(['ID_ELEMENTO_OBJ' => 1,  'ID_OBJETO' => 1, 'NOMBRE' => 'Unidad Interior']);
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/elementos_obj.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/elementos_obj.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

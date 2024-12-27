@@ -14,7 +14,7 @@ class TicketsTableSeeder extends Seeder
     public function run()
     {
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/baseTickets.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/baseTickets.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

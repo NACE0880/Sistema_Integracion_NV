@@ -93,7 +93,8 @@
 
                         <th class="dt-center">DETALLE</th>
 
-                        @if (Auth::user()->rol == 'director')
+                        @if (in_array("6", $UsersServices->permisos()) ? true : false)
+
                             <th class="dt-center">ACTUALIZAR</th>
                         @endif
 
@@ -116,7 +117,8 @@
                                 </button>
                             </td>
 
-                            @if (Auth::user()->rol == 'director')
+                            @if (in_array("6", $UsersServices->permisos()) ? true : false)
+
                                 <td >
                                     @if($ticket->ESTATUS_ACTUAL == 'FINALIZADO'|| $ticket->ESTATUS_ACTUAL == 'CANCELADO' || $ticket->ESTATUS_AUTORIZACION == 'ANULADO')
                                         <button class="btn btn-outline-danger">

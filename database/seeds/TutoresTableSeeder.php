@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\areas;
+use App\tutores;
+use Illuminate\Support\Facades\Hash;
 
-class AreasTableSeeder extends Seeder
+class TutoresTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,18 +14,18 @@ class AreasTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('areas')->insert(['ID_AREA' => 1,  'NOMBRE' => 'Alcaldía']);
 
-        $csvFile = fopen(storage_path("app/archivos/registros/areas.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/tutores.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
             if (!$firstline) {
-                areas::create([
+                tutores::create([
 
-                    "ID_AREA" => $data['0'],
+                    "ID_TUTOR"   => $data['0'],
 
-                    "NOMBRE" => $data['1'],
+                    "NOMBRE"        => $data['1'],
+                    "CORREO"        => $data['2'],
 
                 ]);
 
@@ -34,6 +35,5 @@ class AreasTableSeeder extends Seeder
         }
 
         fclose($csvFile);
-
     }
 }

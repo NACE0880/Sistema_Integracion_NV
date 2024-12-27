@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'folio', 'password', 'rol',
+        'folio', 'password',
 
         'userable_id', 'userable_type'
     ];
@@ -36,4 +36,9 @@ class User extends Authenticatable
     public function userable(){
         return $this->morphTo();
     }
+
+    public function roles(){
+        return $this->belongsToMany('\App\roles', 'usuarios_roles', 'ID_USUARIO', 'ID_ROL');
+    }
+
 }

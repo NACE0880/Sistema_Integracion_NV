@@ -15,7 +15,7 @@ class DirectoresTableSeeder extends Seeder
     {
         // DB::table('directores')->insert(['ID_DIRECTOR' => 1,  'ID_CASA' => 1, 'NOMBRE' => 'Gabriel Reyes Betanzos', 'CORREO' => 'gabriel.reyes@telmexeducacion.com']);
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/directores.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/directores.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

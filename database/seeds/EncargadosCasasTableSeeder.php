@@ -18,7 +18,7 @@ class EncargadosCasasTableSeeder extends Seeder
     {
         // DB::table('encargados_casas')->insert(['ID_ENCARGADOS_CASAS' => 1,  'ID_ENCARGADO' => 1, 'ID_CASA' => 1]);
 
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/encargados_casas.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/encargados_casas.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 

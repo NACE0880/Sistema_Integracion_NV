@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $csvFile = fopen(storage_path("app/archivos/registrosTickets/users.csv"), "r");
+        $csvFile = fopen(storage_path("app/archivos/registros/users.csv"), "r");
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
@@ -23,10 +23,9 @@ class UsersTableSeeder extends Seeder
                     "id"        => $data['0'],
                     "folio"     => $data['1'],
                     "password"  => Hash::make($data['2']),
-                    "rol"       => $data['3'],
 
-                    "userable_id"   => $data['4'],
-                    "userable_type" => $data['5'],
+                    "userable_id"   => $data['3'],
+                    "userable_type" => $data['4'],
 
                 ]);
 

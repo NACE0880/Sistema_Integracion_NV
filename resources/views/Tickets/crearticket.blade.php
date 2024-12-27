@@ -66,7 +66,8 @@
                 <div class="form-group col-md-4">
                     <label for="casa">Casa</label>
 
-                        @if (Auth::user()->rol == 'coordinador')
+                        @if (in_array("10", $UsersServices->permisos()) ? true : false)
+
                             <select id="casa" onchange="cargarDependenciasCasas(this)" name="casa" class="form-control" required>
                                 <option value="">Seleccione una casa...</option>
 
@@ -77,7 +78,7 @@
                                 @endforeach
 
                             </select>
-                        @elseif (Auth::user()->rol == 'director')
+                        @elseif (in_array("9", $UsersServices->permisos()) ? true : false)
                             <input type="hidden" name="casa" value="{{ $casaDirector->ID_CASA }}"/>
                             <select id="casa" onchange="cargarDependenciasCasas(this)" name="casa" class="form-control" required disabled="true">
                                 <option data-nombre="{{ substr($casaDirector->NOMBRE,0,2) }}" value="{{ $casaDirector->ID_CASA }}" selected>

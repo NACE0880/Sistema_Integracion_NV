@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('folio')->unique();
             $table->string('password');
-            $table->string('rol');
 
             $table->unsignedInteger('userable_id');
             $table->string('userable_type');
