@@ -237,7 +237,7 @@
 
 <script>
 //RUTAS
-    //let strroute = '/Aportaciones/tickets/creacion/'
+    //let strroute = '/Sistema_Integracion/tickets/creacion/'
     let strroute = '/tickets/creacion/'
 // MODIFICACION DE ELEMENTOS INPUT FILE
     let labelArchivo = '';

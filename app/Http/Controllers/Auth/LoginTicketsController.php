@@ -25,13 +25,13 @@ class LoginTicketsController extends Controller
     {
         // Validar contenido de los inputs
         $this->validate($request, [
-            'folio' => 'required',
+            'usuario' => 'required',
             'password' => 'required',
         ]);
 
         // Redirecccion en caso de usuario director
         if(Auth::guard('web')->attempt([
-            'folio'       => $request->input('folio'),
+            'usuario'       => $request->input('usuario'),
             'password'      => $request->input('password'),
         ], $request->remember) ){
             return redirect()->intended(route('home'));
@@ -39,7 +39,7 @@ class LoginTicketsController extends Controller
 
 
         // Redirecccion en caso de credenciales erroneas
-        return redirect()->back()->withInput($request->only('folio'));
+        return redirect()->back()->withInput($request->only('usuario'));
         // return $request->all();
     }
 }

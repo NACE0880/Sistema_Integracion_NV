@@ -193,17 +193,30 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="supervisor">Supervisor</label>
-                        <input type="text" class="form-control" id="supervisor" name="supervisor"  value="{{ $ticket->SUPERVISOR }}" readonly>
+                        @if (empty($ticket->supervisor->first()->NOMBRE))
+                            <input type="text" class="form-control" id="supervisor" name="supervisor"  value="{{ $ticket->SUPERVISOR }}" readonly>
+                        @else
+                            <input type="text" class="form-control" id="supervisor" name="supervisor"  value="{{ $ticket->supervisor->first()->NOMBRE }}" readonly>
+                        @endif
+
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="subgerente">Subgerente</label>
-                        <input type="text" class="form-control" id="subgerente" name="subgerente" value="{{ $ticket->SUBGERENTE }}" style="display: none" readonly>
+                        @if (empty($ticket->subgerente->first()->NOMBRE))
+                            <input type="text" class="form-control" id="subgerente" name="subgerente"  value="{{ $ticket->SUBGERENTE }}" style="display: none" readonly>
+                        @else
+                            <input type="text" class="form-control" id="subgerente" name="subgerente"  value="{{ $ticket->subgerente->first()->NOMBRE }}" style="display: none" readonly>
+                        @endif
                     </div>
 
                     <div class="form-group col-md-4">
                         <label for="gerente">Gerente</label>
-                        <input type="text" class="form-control" id="gerente" name="gerente" value="{{ $ticket->GERENTE }}" style="display: none" readonly>
+                        @if (empty($ticket->gerente->first()->NOMBRE))
+                            <input type="text" class="form-control" id="gerente" name="gerente"  value="{{ $ticket->GERENTE }}" style="display: none" readonly>
+                        @else
+                            <input type="text" class="form-control" id="gerente" name="gerente"  value="{{ $ticket->gerente->first()->NOMBRE }}" style="display: none" readonly>
+                        @endif
                     </div>
                 </div>
 
@@ -257,7 +270,7 @@
                     <div class="modal-body">
 
                         <div class="container form-container">
-                            <form action=" {{ route('cancel.ticket', $ticket) }}" method="POST">
+                            <form action=" {{ route('cancel.ticket', $ticket) }}" method="POST" >
                                 {{-- Redireccionar a rutas de controlador  --}}
                                 @csrf
 

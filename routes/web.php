@@ -105,9 +105,24 @@ Route::group(['middleware'=>'XSS'], function() {
     Route::patch('tickets/update/personal/assign/mail','TicketsController@asignarCorreo')->name('asignar.correo.casa');
     Route::post('tickets/update/personal/create/person','TicketsController@crearPersonal')->name('crear.personal');
 
+//TUTORIAS
+    // FORMULARIOS TUTORIAS
+    // Telegram
+    Route::post('tutorias/send/contact/{adt}','TutoriasController@enviarContactosCoordinadores')->name('send.contact.adt');
+
+    // CRUD
+    Route::patch('tutorias/update/contact/{adt}','TutoriasController@actualizarContactoForm')->name('update.contact.adt');
+    Route::post('tutorias/call/fail/{adt}','TutoriasController@llamadaNoEfectivaForm')->name('call.fail.adt');
+    Route::post('tutorias/panel/call/{adt}','TutoriasController@panelLlamadaForm')->name('panel.call.adt');
+    Route::patch('tutorias/update/internet/{adt}','TutoriasController@actualizarInternetForm')->name('update.internet.adt');
+    Route::patch('tutorias/update/infrastructure/{adt}','TutoriasController@actualizarInfraestructuraForm')->name('update.infrastructure.adt');
+    Route::patch('tutorias/update/use/{adt}','TutoriasController@actualizarUsoBdtForm')->name('update.use.adt');
+    Route::patch('tutorias/update/equipment/{adt}','TutoriasController@actualizarEquipamientoForm')->name('update.equipment.adt');
+    Route::patch('tutorias/update/furniture/{adt}','TutoriasController@actualizarMobiliarioForm')->name('update.furniture.adt');
+
 });
 
-// MIDDLEWARE
+// MIDDLEWARE VISTAS
 Route::middleware('auth')->group(function () {
 // Tickets
     Route::get('/tickets/creacion','TicketsController@crearTickets')->name('crear.tickets');
@@ -119,6 +134,14 @@ Route::middleware('auth')->group(function () {
 
 // Tutorias
     Route::get('/tutoria/consultar','TutoriasController@consultar')->name('consultar.tutoria');
+    Route::get('/tutoria/actualizar/contacto/{adt}','TutoriasController@actualizarContacto')->name('actualizar.contacto.adt');
+    Route::get('/tutoria/llamada/noefectiva/{adt}','TutoriasController@llamadaNoEfectiva')->name('llamada.noefectiva.adt');
+    Route::get('/tutoria/panel/llamada/{adt}','TutoriasController@panelLlamada')->name('panel.llamada.adt');
+    Route::get('/tutoria/actualizar/internet/{adt}','TutoriasController@actualizarInternet')->name('actualizar.internet.adt');
+    Route::get('/tutoria/actualizar/infraestructura/{adt}','TutoriasController@actualizarInfraestructura')->name('actualizar.infraestructura.adt');
+    Route::get('/tutoria/actualizar/uso/{adt}','TutoriasController@actualizarUsoBdt')->name('actualizar.uso.adt');
+    Route::get('/tutoria/actualizar/equipamiento/{adt}','TutoriasController@actualizarEquipamiento')->name('actualizar.equipamiento.adt');
+    Route::get('/tutoria/actualizar/mobiliario/{adt}','TutoriasController@actualizarMobiliario')->name('actualizar.mobiliario.adt');
 
 });
 

@@ -79,4 +79,17 @@ class tickets extends Model
         return $this->hasMany('\App\modificaciones',  'ID_TICKET', 'ID_TICKET');
     }
 
+    public function validaciones(){
+        return $this->hasMany('\App\modificaciones',  'ID_TICKET', 'ID_TICKET')->where('TIPO', 'VALIDACION');
+    }
+
+    public function supervisor(){
+        return $this->casa->belongsToMany('\App\encargados', 'encargados_casas', 'ID_CASA', 'ID_ENCARGADO')->where('PUESTO', 'SUPERVISOR')->where('ID_AREA', $this->afeccion->area_afeccion->ID_AREA);
+    }
+    public function subgerente(){
+        return $this->casa->belongsToMany('\App\encargados', 'encargados_casas', 'ID_CASA', 'ID_ENCARGADO')->where('PUESTO', 'SUBGERENTE')->where('ID_AREA', $this->afeccion->area_afeccion->ID_AREA);
+    }
+    public function gerente(){
+        return $this->casa->belongsToMany('\App\encargados', 'encargados_casas', 'ID_CASA', 'ID_ENCARGADO')->where('PUESTO', 'GERENTE')->where('ID_AREA', $this->afeccion->area_afeccion->ID_AREA);
+    }
 }
