@@ -83,7 +83,7 @@ class RecordatorioTicketsNoCotizados extends Command
         ];
 
         $currentYear = date('Y');
-        $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->where([
+        $tickets = tickets::where([
             ['AREA_RESPONSABLE','<>','SEDENA'],
             ['AREA_RESPONSABLE','<>','SEMAR'],
 

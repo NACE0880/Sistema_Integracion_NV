@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -34,7 +33,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
         }
-        .form-group label {
+        .row label {
             font-weight: bold;
         }
         .form-group select,
@@ -68,7 +67,7 @@
             top: 0;
             /* left:-5px; */
             width: 100%;
-            height: 100%;
+            height: 130%;
             background-color: rgba(0, 0, 0, 0.168);
         }
 
@@ -106,23 +105,33 @@
     {{-- BARRA DE NAVEGACIÓN --}}
     @auth
         <ul class="nav nav-tabs justify-content-center">
-
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('consultar.tutoria') ? 'active' : '' }}" href="{{ route('consultar.tutoria') }}"> <i class="fa-solid fa-house"></i> Entidades </a>
+            </li>
 
             {{-- USUARIO --}}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->userable->NOMBRE }} <span class="caret"></span>
                 </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('home') }}">
+                            Menu
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                        Cerrar Sesión
-                    </a>
-                </div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
+                            Cerrar Sesión
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </ul>
+            </div>
 
         </ul>
     @endauth
@@ -134,8 +143,8 @@
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     {{-- DataTables --}}
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

@@ -18,7 +18,4 @@ class modificaciones extends Model
     protected $primaryKey = 'ID_MODIFICACION';
     public $timestamps = false;
 
-    public function ticket_cotizado(){
-        return $this->belongsTo('\App\tickets', 'ID_TICKET');
-    }
 }

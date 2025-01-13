@@ -76,4 +76,11 @@ class TelegramController extends Controller
 
         return view('Panel.mensajeriatelegram',compact('res'));
     }
+
+    // Cadenas
+    public function formatearCadena($string){
+        $string = trim($string);
+        $string = preg_replace("/[\r\n|\n|\r]+/", " - ", $string);
+        return $string;
+    }
 }

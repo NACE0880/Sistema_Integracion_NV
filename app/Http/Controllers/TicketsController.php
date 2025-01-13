@@ -266,14 +266,30 @@ class TicketsController extends Controller
 
     public function consultarTickets(){
         $currentYear = date('Y');
+
+        $ticketsBase = tickets::where([
+            ['ESTATUS_AUTORIZACION','<>','ANULADO'],
+            ['ESTATUS_AUTORIZACION','<>','CANCELADO']
+        ])->orderBy('FECHA_INICIO', 'DESC')->get();
+
+
         if (in_array("10", UsersServices::permisos())) {
             $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
+
         } else if(in_array("9", UsersServices::permisos())){
             $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->where('ID_CASA', Auth::user()->userable->casa->ID_CASA)->orderBy('FECHA_INICIO', 'DESC')->get();
+            $ticketsBase = tickets::where([
+                ['ID_CASA', Auth::user()->userable->casa->ID_CASA],
+                
+                ['ESTATUS_AUTORIZACION','<>','ANULADO'],
+                ['ESTATUS_AUTORIZACION','<>','CANCELADO']
+            ])->orderBy('FECHA_INICIO', 'DESC')->get();
+
         }else {
             $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->orderBy('FECHA_INICIO', 'DESC')->get();
         }
 
+        $tickets = $tickets->merge($ticketsBase);
         return view('Tickets.consultarticket', compact('tickets'));
 
     }
@@ -375,7 +391,7 @@ class TicketsController extends Controller
 
         ])->orderBy('FECHA_INICIO', 'DESC')->get();
 
-        $ticketsPendientes = tickets::whereYear('FECHA_INICIO', $currentYear)->where([
+        $ticketsPendientes = tickets::where([
             ['AREA_RESPONSABLE','<>','SEDENA'],
             ['AREA_RESPONSABLE','<>','SEMAR'],
 
@@ -1527,12 +1543,12 @@ class TicketsController extends Controller
         }
         // TELEGRAM
         $telegram = new TelegramController();
-        foreach ($destinatarios['coordinadores-tel'] as $nombre => $telegram) {
+        foreach ($destinatarios['coordinadores-tel'] as $nombre => $telegramId) {
             //Notificar TELEGRAM ($destinatario, data)
             $payload = "<b>NUEVO TICKET A GENERADO</b>%0A".
-            $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".$ticket->AFECCION;
+            $data['ticket']->CASA. " - ".$data['ticket']->AREA_RESPONSABLE. " - ".$data['ticket']->AFECCION;
 
-            $telegram->sendText($coordinador->TELEGRAM, $payload);
+            $telegram->sendText($telegramId, $payload);
         }
 
         // Notificar a destinatarios extra (CASAS SDN SEMAR)

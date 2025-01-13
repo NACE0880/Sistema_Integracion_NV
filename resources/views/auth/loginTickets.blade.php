@@ -132,8 +132,8 @@
         <form method="POST" action="{{ route('login.tickets.submit') }}">
             @csrf
             <div class="input-field">
-            <input id="folio" type="text" class="form-control" name="folio" value="{{ old('folio') }}" required autofocus>
-            <label>Folio</label>
+            <input id="usuario" type="text" class="form-control" name="usuario" value="{{ old('usuario') }}" required autofocus>
+            <label>Usuario</label>
         </div>
         <div class="input-field">
             <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>

@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 User::create([
 
                     "id"        => $data['0'],
-                    "folio"     => $data['1'],
+                    "usuario"   => $data['1'],
                     "password"  => Hash::make($data['2']),
 
                     "userable_id"   => $data['3'],

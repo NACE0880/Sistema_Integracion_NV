@@ -68,7 +68,7 @@
             top: 0;
             /* left:-5px; */
             width: 100%;
-            height: 100%;
+            height: 110%;
             background-color: rgba(0, 0, 0, 0.168);
         }
 
@@ -142,6 +142,9 @@
                     {{ Auth::user()->userable->NOMBRE }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('home') }}">
+                            Menu
+                    </a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         Cerrar Sesión

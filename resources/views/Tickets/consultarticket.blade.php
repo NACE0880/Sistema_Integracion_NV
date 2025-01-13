@@ -94,8 +94,11 @@
                         <th class="dt-center">DETALLE</th>
 
                         @if (in_array("6", $UsersServices->permisos()) ? true : false)
-
                             <th class="dt-center">ACTUALIZAR</th>
+                        @endif
+
+                        @if (Auth::user()->userable->VALIDACION)
+                            <th class="dt-center">VALIDAR</th>
                         @endif
 
                         <th class="dt-center">ESTATUS PROCEDIMIENTOS</th>
@@ -142,6 +145,27 @@
 
                                     @endif
 
+                                </td>
+                            @endif
+                            @if (Auth::user()->userable->VALIDACION)
+                                <td class="dt-center">
+                                    @if ($ticket->modificaciones->where('TIPO', 'VALIDACION')->isEmpty())
+                                        <a href="{{ route('validar.ticket',
+                                            [
+                                                'ticket' => $ticket,
+                                                'encargado' => Auth::user()->userable->NOMBRE,
+                                            ]) }}" class="btn btn-outline-warning">
+                                            <i class="fa-solid fa-check fa-beat-fade"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('validar.ticket',
+                                            [
+                                                'ticket' => $ticket,
+                                                'encargado' => Auth::user()->userable->NOMBRE,
+                                            ]) }}" class="btn btn-outline-success">
+                                            <i class="fa-solid fa-check"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             @endif
 
@@ -334,14 +358,25 @@
             modal.find('.modal-body input#objeto').val(ticket.OBJETO)
             modal.find('.modal-body input#elemento').val(ticket.ELEMENTO)
 
-            var source = `{!! asset('${strroute}inicio/${ticket.FOTO_OBLIGATORIA}') !!}`;
-            modal.find('.modal-body img#myimage_1').attr('src', source);
+            if(ticket.ESTATUS_ACTUAL == "FINALIZADO"){
+                var source = `{!! asset('${strroute}termino/${ticket.EVIDENCIA_TERMINO}') !!}`;
+                modal.find('.modal-body img#myimage_1').attr('src', source);
 
-            var source = `{!! asset('${strroute}inicio/${ticket.FOTO_2}') !!}`;
-            modal.find('.modal-body img#myimage_2').attr('src', source);
+                var source = `{!! asset('${strroute}termino/${ticket.EVIDENCIA_TERMINO_2}') !!}`;
+                modal.find('.modal-body img#myimage_2').attr('src', source);
 
-            var source = `{!! asset('${strroute}inicio/${ticket.FOTO_3}') !!}`;
-            modal.find('.modal-body img#myimage_3').attr('src', source);
+                var source = `{!! asset('${strroute}termino/${ticket.EVIDENCIA_TERMINO_3}') !!}`;
+                modal.find('.modal-body img#myimage_3').attr('src', source);
+            }else{
+                var source = `{!! asset('${strroute}inicio/${ticket.FOTO_OBLIGATORIA}') !!}`;
+                modal.find('.modal-body img#myimage_1').attr('src', source);
+
+                var source = `{!! asset('${strroute}inicio/${ticket.FOTO_2}') !!}`;
+                modal.find('.modal-body img#myimage_2').attr('src', source);
+
+                var source = `{!! asset('${strroute}inicio/${ticket.FOTO_3}') !!}`;
+                modal.find('.modal-body img#myimage_3').attr('src', source);
+            }
 
             modal.find('.modal-body textarea#descripcion_concreta').val(ticket.DETALLE)
         })
