@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\adts;
+
 
 class TelegramWebhookController extends Controller
 {
@@ -19,48 +21,74 @@ class TelegramWebhookController extends Controller
             $callbackQuery = $update['callback_query'];
             $callbackId = $callbackQuery['id'];
             $chatId = $callbackQuery['from']['id'];
-            $data = $callbackQuery['data'];
+            $data = explode("_", $callbackQuery['data']);
+
+            $opcion_seleccionada = $data[0];
+            $adt_id = $data[1];
+            $messageId = $callbackQuery['message']['message_id'];
+
+            $adt = adts::find($adt_id);
 
             // Procesar la opción seleccionada
-            // $responseText = match($data) {
-            //     'opcion_1' => '¡Elegiste la opción 1! ',
-            //     'opcion_2' => '¡Elegiste la opción 2! ',
-            //     default => 'Opción no válida. ',
-            // };
-            switch($data){
-                case 'opcion_1':
-                    $responseText = '¡Elegiste la opción 1!';
-                case 'opcion_2':
-                    $responseText = '¡Elegiste la opción 2!';
-                default:
-                    $responseText = 'Opción no válida. ';
-            }
+            switch($opcion_seleccionada){
 
+                case 'VALIDAR APERTURA ADT':
+                    $responseText = '<i>'.$adt->NOMBRE.'</i>%0A %0A' . ' <b>APERTURA VALIDADA</b>';
+
+                    // Actualización de registro
+                    $this->actualizarEstatusAdt($adt, 'ABIERTA');
+                    break;
+
+                case 'VALIDAR CIERRE ADT':
+                    $responseText = '<i>'.$adt->NOMBRE.'</i>%0A %0A' . ' <b>CIERRE VALIDADO</b>';
+
+                    // Actualización de registro
+                    $this->actualizarEstatusAdt($adt, 'CERRADA');
+                    break;
+
+                case "RECHAZAR CIERRE ADT":
+                    $responseText = '<i>'.$adt->NOMBRE.'</i>%0A %0A' . ' <b>CIERRE RECHAZADO</b>';
+                    break;
+
+                default:
+                    $responseText = 'Error de conectividad con el bot';
+                    break;
+
+            }
             // Enviar respuesta al usuario
-            $this->sendMessage($chatId, $responseText);
+            $this->enviarMensaje($chatId, $responseText);
 
             // Confirmar el callback_query
-            $this->answerCallbackQuery($callbackId, 'Tu selección fue procesada.');
+            $this->contestarCallbackQuery($callbackId, 'Tu selección fue procesada.');
+            $this->eliminarMensaje($chatId, $messageId);
         }
 
         return response()->json(['status' => 'success']);
     }
 
-    private function sendMessage($chatId, $text)
-    {
-        $token =  $this->token;
-        $url = "https://api.telegram.org/bot$token/sendMessage";
 
-        $data = [
-            'chat_id' => $chatId,
-            'text' => $text,
-        ];
+    public function enviarMensaje($chat_id, $payload){
 
-        $this->sendRequest($url, $data);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.telegram.org/bot'.$this->token.'/sendMessage?chat_id='.$chat_id.'&parse_mode=HTML&link_preview_options[is_disabled]=true'.'&text='.$payload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
     }
 
-    private function answerCallbackQuery($callbackId, $text)
-    {
+    private function contestarCallbackQuery($callbackId, $text){
         $token =  $this->token;
         $url = "https://api.telegram.org/bot$token/answerCallbackQuery";
 
@@ -70,14 +98,48 @@ class TelegramWebhookController extends Controller
             'show_alert' => false,
         ];
 
-        $this->sendRequest($url, $data);
+        $this->enviarSolicitud($url, $data);
     }
 
-    private function sendRequest($url, $data)
-    {
+    private function enviarSolicitud($url, $data){
         $client = new \GuzzleHttp\Client();
         $client->post($url, [
             'json' => $data,
         ]);
+    }
+
+    private function eliminarMensaje($chatId, $messageId){
+        $botToken = $this->token;
+        $url = "https://api.telegram.org/bot{$botToken}/deleteMessage";
+
+        // Datos para la solicitud
+        $data = [
+            'chat_id' => $chatId,
+            'message_id' => $messageId,
+        ];
+
+        // Configuración cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Ejecutar la solicitud y capturar la respuesta
+        $response = curl_exec($ch);
+
+        // Manejo de errores cURL
+        if (curl_errno($ch)) {
+            echo 'Error en cURL: ' . curl_error($ch);
+        }
+
+        // Cerrar cURL
+        curl_close($ch);
+    }
+
+    // Acciones BD
+    public function actualizarEstatusAdt(adts $adt, $estatus){
+        $adt->ESTATUS_ACTUAL  = $estatus;
+        $adt->save();
     }
 }

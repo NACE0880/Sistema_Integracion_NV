@@ -22,6 +22,9 @@ Route::get('/storage-link', function () {
     Artisan::call('storage:link');
 });
 
+Route::post('/telegram-webhook', 'TelegramWebhookController@handleWebhook');
+
+
 Route::get('/portal/aldea','LandingController@landingAldea')->name('landing.aldea');
 Route::get('/portal/general','LandingController@landingGeneral')->name('landing.general');
 Route::get('/portal/videos','LandingController@cardAldea')->name('landing.card');
@@ -110,7 +113,6 @@ Route::group(['middleware'=>'XSS'], function() {
     // FORMULARIOS TUTORIAS
     // Telegram
     Route::post('tutorias/send/contact/{adt}','TutoriasController@enviarContactosCoordinadores')->name('send.contact.adt');
-    Route::post('/telegram-webhook', [TelegramWebhookController::class, 'handleWebhook']);
 
     // CRUD
     Route::patch('tutorias/update/contact/{adt}','TutoriasController@actualizarContactoForm')->name('update.contact.adt');
