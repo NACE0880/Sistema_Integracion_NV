@@ -78,9 +78,42 @@ class TelegramController extends Controller
     }
 
     // Cadenas
-    public function formatearCadena($string){
+    public function format($string){
         $string = trim($string);
         $string = preg_replace("/[\r\n|\n|\r]+/", " - ", $string);
         return $string;
+    }
+
+    // Pruebas
+    public function sendButtons($chat_id, $payload){
+
+        $chat_id = "906068930";
+        $url = "https://api.telegram.org/bot$this->token/sendMessage";
+
+        $data = [
+            'chat_id' => $chat_id,
+            'text' => $payload['mensaje'],
+            'reply_markup' => json_encode([
+                'inline_keyboard' => [
+                    $payload['botones']
+                ]
+            ])
+        ];
+
+        $options = [
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+            CURLOPT_POSTFIELDS => json_encode($data)
+        ];
+
+        $curl = curl_init();
+        curl_setopt_array($curl, $options);
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        echo $response;
+
     }
 }

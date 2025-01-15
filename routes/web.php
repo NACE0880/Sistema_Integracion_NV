@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TelegramWebhookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +110,7 @@ Route::group(['middleware'=>'XSS'], function() {
     // FORMULARIOS TUTORIAS
     // Telegram
     Route::post('tutorias/send/contact/{adt}','TutoriasController@enviarContactosCoordinadores')->name('send.contact.adt');
+    Route::post('/telegram-webhook', [TelegramWebhookController::class, 'handleWebhook']);
 
     // CRUD
     Route::patch('tutorias/update/contact/{adt}','TutoriasController@actualizarContactoForm')->name('update.contact.adt');
