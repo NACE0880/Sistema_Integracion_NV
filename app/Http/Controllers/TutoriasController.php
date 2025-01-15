@@ -112,18 +112,21 @@ class TutoriasController extends Controller
         return redirect()->route('consultar.tutoria');
     }
 
-    public function validarCambiosEstatus(){
+    public function validarCambiosEstatus(adts $adt){
         $telegram = new TelegramController();
 
         $users = User::all();
         $payload = [
-            'mensaje' => 'Nuevo cambio de estatus - NOMBRE',
+            'mensaje' => 'Nuevo cambio de estatus - '. $adt->NOMBRE,
             'botones' => [
-                ['text' => 'VALIDAR', 'callback_data' => 'VALIDAR'],
-                ['text' => 'RECHAZAR', 'callback_data' => 'RECHAZAR']
+                // callback_data determina función del webhook
+                ['text' => 'VALIDAR Apertura', 'callback_data' => 'VALIDAR APERTURA ADT_'.$adt->ID_ADT],
+                ['text' => 'VALIDAR Cierre', 'callback_data' => 'VALIDAR CIERRE ADT_'.$adt->ID_ADT],
+                ['text' => 'RECHAZAR', 'callback_data' => 'RECHAZAR CIERRE ADT']
             ],
         ];
 
+        // Uso del método
         foreach ($users as $user) {
             foreach ($user->permisos() as $permiso) {
                 ($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
@@ -169,7 +172,7 @@ class TutoriasController extends Controller
 
         // return redirect()->route('consultar.tutoria');
 
-        self::validarCambiosEstatus();
+        self::validarCambiosEstatus($adt);
     }
 
     public function actualizarInternetForm(Request $request, $adt){

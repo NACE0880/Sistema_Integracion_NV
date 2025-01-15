@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'telegram-webhook', // Ruta de tu webhook
     ];
 }

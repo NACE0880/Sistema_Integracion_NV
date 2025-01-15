@@ -32,7 +32,7 @@ class TelegramController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+
     }
 
     // Documentos Adjuntos
@@ -87,7 +87,6 @@ class TelegramController extends Controller
     // Pruebas
     public function sendButtons($chat_id, $payload){
 
-        $chat_id = "906068930";
         $url = "https://api.telegram.org/bot$this->token/sendMessage";
 
         $data = [
@@ -113,7 +112,46 @@ class TelegramController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
 
-        echo $response;
-
     }
+
+    public function sendOneTimeKeyboard($chatId, $options){
+        $botToken = $this->token;
+        $url = "https://api.telegram.org/bot{$botToken}/sendMessage";
+
+        // Construir el teclado personalizado con opciones de un solo uso
+        $keyboard = [
+            'keyboard' => array_map(function ($option) { return [['text' => $option]]; }, $options),
+            'resize_keyboard' => true, // Ajustar el tamaño del teclado
+            'one_time_keyboard' => true // Teclado de un solo uso
+        ];
+
+        // Datos para la solicitud
+        $data = [
+            'chat_id' => $chatId,
+            'text' => 'Por favor, selecciona una opción:',
+            'reply_markup' => json_encode($keyboard),
+        ];
+
+        // Configuración cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Ejecutar la solicitud y capturar la respuesta
+        $response = curl_exec($ch);
+
+        // Manejo de errores cURL
+        if (curl_errno($ch)) {
+            echo 'Error en cURL: ' . curl_error($ch);
+        }
+
+        // Cerrar cURL
+        curl_close($ch);
+
+        // Retornar la respuesta
+        return $response;
+    }
+
 }
