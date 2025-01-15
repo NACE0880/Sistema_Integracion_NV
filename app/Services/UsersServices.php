@@ -22,4 +22,14 @@ class UsersServices
         }
         return $permisos;
     }
+
+    public static function nombrePermisos(){
+        $permisos = [];
+        foreach(Auth::user()->roles as $rol) {
+            foreach($rol->permisos as $permiso){
+                $permisos[] =  $permiso->NOMBRE;
+            }
+        }
+        return $permisos;
+    }
 }

@@ -74,23 +74,23 @@
 
                                 <div class="col-2">
                                     <label for="pc_funcional" class="form-label">PC</label>
-                                    <input type="number" class="form-control" id="pc_funcional" name="pc_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->PC }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->PC }}" required/>
+                                    <input type="number" class="form-control" id="pc_funcional" name="pc_funcional" min="0"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->PC }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="laptop_funcional" class="form-label">Laptop</label>
-                                    <input type="number" class="form-control" id="laptop_funcional" name="laptop_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->LAPTOP }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->LAPTOP }}" required/>
+                                    <input type="number" class="form-control" id="laptop_funcional" name="laptop_funcional" min="0"   step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->LAPTOP }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="netbook_funcional" class="form-label">Netbook</label>
-                                    <input type="number" class="form-control" id="netbook_funcional" name="netbook_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->NETBOOK }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->NETBOOK }}" required/>
+                                    <input type="number" class="form-control" id="netbook_funcional" name="netbook_funcional" min="0"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->NETBOOK }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="classmate_funcional" class="form-label">Classmate</label>
-                                    <input type="number" class="form-control" id="classmate_funcional" name="classmate_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->CLASSMATE  }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->CLASSMATE }}" required/>
+                                    <input type="number" class="form-control" id="classmate_funcional" name="classmate_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->CLASSMATE  }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->CLASSMATE }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="xo_funcional" class="form-label">XO</label>
-                                    <input type="number" class="form-control" id="xo_funcional" name="xo_funcional" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->XO }}"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->XO }}" required/>
+                                    <input type="number" class="form-control" id="xo_funcional" name="xo_funcional" min="0"  step="1" value="{{ $adt->equipamientoFuncional($adt->ID_ADT)->XO }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
 
                             </div>
@@ -105,23 +105,23 @@
 
                                 <div class="col-2">
                                     <label for="pc_dañado" class="form-label">PC</label>
-                                    <input type="number" class="form-control" id="pc_dañado" name="pc_dañado" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->PC }}"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->PC }}" required/>
+                                    <input type="number" class="form-control" id="pc_dañado" name="pc_dañado" min="0"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->PC }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="laptop_dañado" class="form-label">Laptop</label>
-                                    <input type="number" class="form-control" id="laptop_dañado" name="laptop_dañado" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->LAPTOP }}"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->LAPTOP }}" required/>
+                                    <input type="number" class="form-control" id="laptop_dañado" name="laptop_dañado" min="0"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->LAPTOP }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="netbook_dañado" class="form-label">Netbook</label>
-                                    <input type="number" class="form-control" id="netbook_dañado" name="netbook_dañado" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->NETBOOK }}"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->NETBOOK }}" required/>
+                                    <input type="number" class="form-control" id="netbook_dañado" name="netbook_dañado" min="0"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->NETBOOK }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="classmate_dañado" class="form-label">Classmate</label>
-                                    <input type="number" class="form-control" id="classmate_dañado" name="classmate_dañado" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->CLASSMATE }}"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->CLASSMATE }}" required/>
+                                    <input type="number" class="form-control" id="classmate_dañado" name="classmate_dañado" min="0" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->CLASSMATE }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="xo_dañado" class="form-label">XO</label>
-                                    <input type="number" class="form-control" id="xo_dañado" name="xo_dañado" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->XO }}"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->XO }}" required/>
+                                    <input type="number" class="form-control" id="xo_dañado" name="xo_dañado" min="0"  step="1" value="{{ $adt->equipamientoDañado($adt->ID_ADT)->XO }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
 
                             </div>
@@ -133,23 +133,23 @@
 
                                 <div class="col-2">
                                     <label for="pc_faltante" class="form-label">PC</label>
-                                    <input type="number" class="form-control" id="pc_faltante" name="pc_faltante" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->PC }}"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->PC }}" required/>
+                                    <input type="number" class="form-control" id="pc_faltante" name="pc_faltante" min="0"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->PC }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="laptop_faltante" class="form-label">Laptop</label>
-                                    <input type="number" class="form-control" id="laptop_faltante" name="laptop_faltante" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->LAPTOP }}"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->LAPTOP }}" required/>
+                                    <input type="number" class="form-control" id="laptop_faltante" name="laptop_faltante" min="0"   step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->LAPTOP }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="netbook_faltante" class="form-label">Netbook</label>
-                                    <input type="number" class="form-control" id="netbook_faltante" name="netbook_faltante" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->NETBOOK }}"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->NETBOOK }}" required/>
+                                    <input type="number" class="form-control" id="netbook_faltante" name="netbook_faltante" min="0"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->NETBOOK }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="classmate_faltante" class="form-label">Classmate</label>
-                                    <input type="number" class="form-control" id="classmate_faltante" name="classmate_faltante" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->CLASSMATE }}"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->CLASSMATE }}" required/>
+                                    <input type="number" class="form-control" id="classmate_faltante" name="classmate_faltante" min="0" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->CLASSMATE }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
                                 <div class="col-2">
                                     <label for="xo_faltante" class="form-label">XO</label>
-                                    <input type="number" class="form-control" id="xo_faltante" name="xo_faltante" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->XO }}"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->XO }}" required/>
+                                    <input type="number" class="form-control" id="xo_faltante" name="xo_faltante" min="0"  step="1" value="{{ $adt->equipamientoFaltante($adt->ID_ADT)->XO }}" onchange="bloquearIncrementos(this)" required/>
                                 </div>
 
                             </div>
@@ -162,23 +162,23 @@
 
                         <div class="col-2">
                             <label for="pc_baja" class="form-label">PC</label>
-                            <input type="number" class="form-control" id="pc_baja" name="pc_baja" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->PC }}"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->PC }}" />
+                            <input type="number" class="form-control" id="pc_baja" name="pc_baja" min="0"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->PC }}"  onchange="bloquearIncrementos(this)"/>
                         </div>
                         <div class="col-2">
                             <label for="laptop_baja" class="form-label">Laptop</label>
-                            <input type="number" class="form-control" id="laptop_baja" name="laptop_baja" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->LAPTOP }}"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->LAPTOP }}" />
+                            <input type="number" class="form-control" id="laptop_baja" name="laptop_baja" min="0"   step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->LAPTOP }}"  onchange="bloquearIncrementos(this)"/>
                         </div>
                         <div class="col-2">
                             <label for="netbook_baja" class="form-label">Netbook</label>
-                            <input type="number" class="form-control" id="netbook_baja" name="netbook_baja" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->NETBOOK }}"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->NETBOOK }}" />
+                            <input type="number" class="form-control" id="netbook_baja" name="netbook_baja" min="0"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->NETBOOK }}"  onchange="bloquearIncrementos(this)"/>
                         </div>
                         <div class="col-2">
                             <label for="classmate_baja" class="form-label">Classmate</label>
-                            <input type="number" class="form-control" id="classmate_baja" name="classmate_baja" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->CLASSMATE }}"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->CLASSMATE }}" />
+                            <input type="number" class="form-control" id="classmate_baja" name="classmate_baja" min="0" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->CLASSMATE }}"  onchange="bloquearIncrementos(this)"/>
                         </div>
                         <div class="col-2">
                             <label for="xo_baja" class="form-label">XO</label>
-                            <input type="number" class="form-control" id="xo_baja" name="xo_baja" min="0" max="{{ $adt->equipamientoInicial($adt->ID_ADT)->XO }}"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->XO }}" />
+                            <input type="number" class="form-control" id="xo_baja" name="xo_baja" min="0"  step="1" value="{{ $adt->equipamientoBaja($adt->ID_ADT)->XO }}"  onchange="bloquearIncrementos(this)"/>
                         </div>
 
                     </div>
@@ -213,24 +213,56 @@
         $("[type='number']").keypress(function (evt) {
             evt.preventDefault();
         });
+        $("[type='number']").keydown(function(){
+            return false;
+        });
+        $("[type='number']").on( "scroll",function(){
+            return false;
+        });
     </script>
 
     {{-- Regla contra absurdos --}}
     <script>
-        var pcInicial = document.querySelector('#pc_inicial');
-        // alert(pcInicial.value)
 
-        var pcFuncional = document.querySelector('#pc_funcional');
-        var pcDañado = document.querySelector('#pc_dañado');
-        var pcFaltante = document.querySelector('#pc_faltante');
-        var pcBaja = document.querySelector('#pc_baja');
+        function bloquearIncrementos(input){
+            const elemento = input.id.split("_");
 
-        pcFuncional.addEventListener("change", (event) => {
-            result = Number(pcFuncional.value) + Number(pcDañado.value) + Number(pcFaltante.value) + Number(pcBaja.value)
-            alert(result)
-        });
+            var elementoInicial = document.querySelector(`#${elemento[0]}_inicial`);
+            
+            var elementoFuncional = document.querySelector(`#${elemento[0]}_funcional`);
+            var elementoDañado = document.querySelector(`#${elemento[0]}_dañado`);
+            var elementoFaltante = document.querySelector(`#${elemento[0]}_faltante`);
+            var elementoBaja = document.querySelector(`#${elemento[0]}_baja`);
 
-        function 
+            var suma = Number(elementoFuncional.value) + Number(elementoDañado.value) + Number(elementoFaltante.value) + Number(elementoBaja.value);
+            var resto =  Number(elementoInicial.value) - suma;
+
+            if (suma >= Number(elementoInicial.value)) {
+                elementoFuncional.max = elementoFuncional.value;
+                elementoDañado.max = elementoDañado.value;
+                elementoFaltante.max = elementoFaltante.value;
+                elementoBaja.max = elementoBaja.value;
+            }else{
+                elementoFuncional.max = (elementoFuncional.value + resto);
+                elementoDañado.max = (elementoDañado.value + resto);
+                elementoFaltante.max = (elementoFaltante.value + resto);
+                elementoBaja.max = (elementoBaja.value + resto);
+            }
+
+        }
+        function calcularMaximos() {
+            const elementos = ['pc', 'laptop','netbook', 'classmate', 'xo'];
+            const inputs = [];
+
+            elementos.forEach(elemento =>{
+                inputs.push( document.querySelector(`#${elemento}_inicial`));
+            });
+
+            inputs.forEach(input => bloquearIncrementos(input));
+            bloquearIncrementos(input);
+        }
+
+        window.onload = calcularMaximos;
     </script>
 
 @endsection
