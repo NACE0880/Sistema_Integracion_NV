@@ -22,6 +22,7 @@ class CreateEquipamientosTable extends Migration
             $table->integer('NETBOOK');
             $table->integer('CLASSMATE');
             $table->integer('XO');
+            $table->string('OBSERVACIONES', 200);
             $table->string('TIPO', 100)->charset('utf8');
 
         });

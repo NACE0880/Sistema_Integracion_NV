@@ -27,7 +27,7 @@
     <div class="container form-container mt-5">
             <div class="form-header">
                 <h2>Seguimiento de Mobiliario</h2>
-                <h3>{{ $adt }}</h3>
+                <h3>{{ $adt->NOMBRE }}</h3>
             </div>
 
 
@@ -42,16 +42,16 @@
                         <h4>Inventario Inicial</h4>
 
                         <div class="col-4">
-                            <label for="mesa_circular_inicial" class="form-label">MESA CIRCULAR<br>(1.80 m)</label>
-                            <input type="number" class="form-control" id="mesa_circular_inicial" name="mesa_circular_inicial" min="0"  step="1" value="1" readonly/>
+                            <label for="mesaCircular_inicial" class="form-label">MESA CIRCULAR<br>(1.80 m)</label>
+                            <input type="number" class="form-control" id="mesaCircular_inicial" name="mesaCircular_inicial" min="0"  step="1" value="{{ $adt->mobiliarioInicial($adt->ID_ADT)->MESA_CIRCULAR }}" readonly/>
                         </div>
                         <div class="col-4">
-                            <label for="sillas_apilables_inicial" class="form-label">SILLAS<br>APILABLES</label>
-                            <input type="number" class="form-control" id="sillas_apilables_inicial" name="sillas_apilables_inicial" min="0"  step="1" value="1" readonly/>
+                            <label for="sillas_inicial" class="form-label">SILLAS<br>APILABLES</label>
+                            <input type="number" class="form-control" id="sillas_inicial" name="sillas_inicial" min="0"  step="1" value="{{ $adt->mobiliarioInicial($adt->ID_ADT)->SILLAS }}" readonly/>
                         </div>
                         <div class="col-4">
-                            <label for="mueble_resguardo_inicial" class="form-label">MUEBLE DE RESGUARDO<br>(4.80x.50 m)</label>
-                            <input type="number" class="form-control" id="mueble_resguardo_inicial" name="mueble_resguardo_inicial" min="0"  step="1" value="1" readonly/>
+                            <label for="muebleResguardo_inicial" class="form-label">MUEBLE DE RESGUARDO<br>(4.80x.50 m)</label>
+                            <input type="number" class="form-control" id="muebleResguardo_inicial" name="muebleResguardo_inicial" min="0"  step="1" value="{{ $adt->mobiliarioInicial($adt->ID_ADT)->MUEBLE_RESGUARDO }}" readonly/>
                         </div>
 
                     </div>
@@ -59,12 +59,12 @@
                     <div class="row g-3 justify-content-center gap-5">
 
                         <div class="col-5 ">
-                            <label for="mesa_rectangular_grande_inicial" class="form-label">MESA RECTANGULAR GRANDE<br>(1.20 x .90 m)</label>
-                            <input type="number" class="form-control" id="mesa_rectangular_grande_inicial" name="mesa_rectangular_grande_inicial" min="0"  step="1" value="1" readonly/>
+                            <label for="mesaRectangularGrande_inicial" class="form-label">MESA RECTANGULAR GRANDE<br>(1.20 x .90 m)</label>
+                            <input type="number" class="form-control" id="mesaRectangularGrande_inicial" name="mesaRectangularGrande_inicial" min="0"  step="1" value="{{ $adt->mobiliarioInicial($adt->ID_ADT)->MESA_RECTANGULAR_GRANDE }}" readonly/>
                         </div>
                         <div class="col-5">
-                            <label for="mesa_rectangular_mediana_inicial" class="form-label">MESA RECTANGULAR MEDIANA<br>(.90x60 m)</label>
-                            <input type="number" class="form-control" id="mesa_rectangular_mediana_inicial" name="mesa_rectangular_mediana_inicial" min="0"  step="1" value="1" readonly/>
+                            <label for="mesaRectangularMediana_inicial" class="form-label">MESA RECTANGULAR MEDIANA<br>(.90x60 m)</label>
+                            <input type="number" class="form-control" id="mesaRectangularMediana_inicial" name="mesaRectangularMediana_inicial" min="0"  step="1" value="{{ $adt->mobiliarioInicial($adt->ID_ADT)->MESA_RECTANGULAR_MEDIANA }}" readonly/>
                         </div>
 
                     </div>
@@ -73,16 +73,16 @@
                         <h4>Inventario Actual Funcional</h4>
 
                         <div class="col-4">
-                            <label for="mesa_circular_actual" class="form-label">MESA CIRCULAR<br>(1.80 m)</label>
-                            <input type="number" class="form-control" id="mesa_circular_actual" name="mesa_circular_actual" min="0"  step="1" value="1" required/>
+                            <label for="mesaCircular_funcional" class="form-label">MESA CIRCULAR<br>(1.80 m)</label>
+                            <input type="number" class="form-control" id="mesaCircular_funcional" name="mesaCircular_funcional" min="0"  step="1" value="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->MESA_CIRCULAR }}" onchange="bloquearIncrementos(this)" required/>
                         </div>
                         <div class="col-4">
-                            <label for="sillas_apilables_actual" class="form-label">SILLAS<br>APILABLES</label>
-                            <input type="number" class="form-control" id="sillas_apilables_actual" name="sillas_apilables_actual" min="0"  step="1" value="1" required/>
+                            <label for="sillas_funcional" class="form-label">SILLAS<br>APILABLES</label>
+                            <input type="number" class="form-control" id="sillas_funcional" name="sillas_funcional" min="0"  step="1" value="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->SILLAS }}" onchange="bloquearIncrementos(this)" required/>
                         </div>
                         <div class="col-4">
-                            <label for="mueble_resguardo_actual" class="form-label">MUEBLE DE RESGUARDO<br>(4.80x.50 m)</label>
-                            <input type="number" class="form-control" id="mueble_resguardo_actual" name="mueble_resguardo_actual" min="0"  step="1" value="1" required/>
+                            <label for="muebleResguardo_funcional" class="form-label">MUEBLE DE RESGUARDO<br>(4.80x.50 m)</label>
+                            <input type="number" class="form-control" id="muebleResguardo_funcional" name="muebleResguardo_funcional" min="0"  step="1" value="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->MUEBLE_RESGUARDO }}" onchange="bloquearIncrementos(this)" required/>
                         </div>
 
                     </div>
@@ -90,12 +90,12 @@
                     <div class="row g-3 justify-content-center gap-5">
 
                         <div class="col-5">
-                            <label for="mesa_rectangular_grande_actual" class="form-label">MESA RECTANGULAR GRANDE<br>(1.20 x .90 m)</label>
-                            <input type="number" class="form-control" id="mesa_rectangular_grande_actual" name="mesa_rectangular_grande_actual" min="0"  step="1" value="1" required/>
+                            <label for="mesaRectangularGrande_funcional" class="form-label">MESA RECTANGULAR GRANDE<br>(1.20 x .90 m)</label>
+                            <input type="number" class="form-control" id="mesaRectangularGrande_funcional" name="mesaRectangularGrande_funcional" min="0"  step="1" value="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->MESA_RECTANGULAR_GRANDE }}" onchange="bloquearIncrementos(this)" required/>
                         </div>
                         <div class="col-5">
-                            <label for="mesa_rectangular_mediana_actual" class="form-label">MESA RECTANGULAR MEDIANA<br>(.90x60 m)</label>
-                            <input type="number" class="form-control" id="mesa_rectangular_mediana_actual" name="mesa_rectangular_mediana_actual" min="0"  step="1" value="1" required/>
+                            <label for="mesaRectangularMediana_funcional" class="form-label">MESA RECTANGULAR MEDIANA<br>(.90x60 m)</label>
+                            <input type="number" class="form-control" id="mesaRectangularMediana_funcional" name="mesaRectangularMediana_funcional" min="0"  step="1" value="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->MESA_RECTANGULAR_MEDIANA }}" onchange="bloquearIncrementos(this)" required/>
                         </div>
 
                     </div>
@@ -127,5 +127,50 @@
 
 @section('js')
 
+{{-- Desabilitar entrada por teclado --}}
+    <script>
+        $("[type='number']").keypress(function (evt) {
+            evt.preventDefault();
+        });
+        $("[type='number']").keydown(function(){
+            return false;
+        });
+        $("[type='number']").on( "scroll",function(){
+            return false;
+        });
+    </script>
 
+    {{-- Regla contra absurdos --}}
+    <script>
+
+        function bloquearIncrementos(input){
+            const elemento = input.id.split("_");
+
+            var elementoInicial = document.querySelector(`#${elemento[0]}_inicial`);
+            var elementoFuncional = document.querySelector(`#${elemento[0]}_funcional`);
+
+
+            var resto =  Number(elementoInicial.value) - Number(elementoFuncional.value);
+
+            if (Number(elementoFuncional.value) >= Number(elementoInicial.value)) {
+                elementoFuncional.max = elementoFuncional.value;
+            }else{
+                elementoFuncional.max = (elementoFuncional.value + resto);
+            }
+
+        }
+        function calcularMaximos() {
+            const elementos = ['mesaCircular', 'sillas','muebleResguardo', 'mesaRectangularGrande', 'mesaRectangularMediana'];
+            const inputs = [];
+
+            elementos.forEach(elemento =>{
+                inputs.push( document.querySelector(`#${elemento}_inicial`));
+            });
+
+            inputs.forEach(input => bloquearIncrementos(input));
+            bloquearIncrementos(input);
+        }
+
+        window.onload = calcularMaximos;
+    </script>
 @endsection

@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 // Dependencias de Excel
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\exportarBaseTickets;
+use App\Exports\adtExport;
 
 // Namespace para fechas
 use Carbon\Carbon;
@@ -64,22 +64,22 @@ class TutoriasController extends Controller
         return view('Tutorias.panelLlamada', compact('adt'));
     }
 
-    public function actualizarInternet($adt){
+    public function actualizarInternet(adts $adt){
 
         return view('Tutorias.actualizarInternet', compact('adt'));
     }
 
-    public function actualizarInfraestructura($adt){
+    public function actualizarInfraestructura(adts $adt){
 
         return view('Tutorias.actualizarInfraestructura', compact('adt'));
     }
 
-    public function actualizarMobiliario($adt){
+    public function actualizarMobiliario(adts $adt){
 
         return view('Tutorias.actualizarMobiliario', compact('adt'));
     }
 
-    public function actualizarUsoBdt($adt){
+    public function actualizarUsoBdt(adts $adt){
 
         return view('Tutorias.actualizarUsoBdt', compact('adt'));
     }
@@ -112,21 +112,32 @@ class TutoriasController extends Controller
         return redirect()->route('consultar.tutoria');
     }
 
-    public function validarCambiosEstatus(adts $adt){
+    public function validarCambiosEstatus(adts $adt, $tipo){
         $telegram = new TelegramController();
 
         $users = User::all();
+        switch ($tipo) {
+            // callback_data determina función del webhook
+            case 'ABIERTA':
+                $botones = [
+                    ['text' => 'VALIDAR Apertura', 'callback_data' => 'VALIDAR APERTURA ADT_'.$adt->ID_ADT],
+                    ['text' => 'RECHAZAR', 'callback_data' => 'RECHAZAR APERTURA ADT_'.$adt->ID_ADT]
+                ];
+                break;
+            case 'CERRADA':
+                $botones = [
+                    ['text' => 'VALIDAR Cierre', 'callback_data' => 'VALIDAR CIERRE ADT_'.$adt->ID_ADT],
+                    ['text' => 'RECHAZAR', 'callback_data' => 'RECHAZAR CIERRE ADT_'.$adt->ID_ADT]
+                ];
+                break;
+        }
+
         $payload = [
             'mensaje' => 'Nuevo cambio de estatus - '. $adt->NOMBRE,
-            'botones' => [
-                // callback_data determina función del webhook
-                ['text' => 'VALIDAR Apertura', 'callback_data' => 'VALIDAR APERTURA ADT_'.$adt->ID_ADT],
-                ['text' => 'VALIDAR Cierre', 'callback_data' => 'VALIDAR CIERRE ADT_'.$adt->ID_ADT],
-                ['text' => 'RECHAZAR', 'callback_data' => 'RECHAZAR CIERRE ADT']
-            ],
+            'botones' => $botones,
         ];
 
-        // Uso del método
+        // Notificar Encargados de Validacion
         foreach ($users as $user) {
             foreach ($user->permisos() as $permiso) {
                 ($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
@@ -148,7 +159,7 @@ class TutoriasController extends Controller
 
         $llamada->ESTATUS       = $request->input('motivo');
         $llamada->OBSERVACIONES = $request->input('observaciones');
-        $llamada->LIGA          = '';
+        $llamada->VIDEO         = '';
         $llamada->EXPEDIENTE    = '';
 
         $llamada->save();
@@ -157,40 +168,39 @@ class TutoriasController extends Controller
     }
 
     public function panelLlamadaForm (Request $request, adts $adt){
-        // $llamada = new llamadas;
+        $llamada = new llamadas;
 
-        // $llamada->ID_ADT        = $adt->ID_ADT;
-        // $llamada->FECHA         = date("Y-m-d H:i");
-        // $llamada->RESPONSABLE   = Auth::user()->userable->NOMBRE;
+        $llamada->ID_ADT        = $adt->ID_ADT;
+        $llamada->FECHA         = date("Y-m-d H:i");
+        $llamada->RESPONSABLE   = Auth::user()->userable->NOMBRE;
 
-        // $llamada->ESTATUS       = "Llamada Efectiva";
-        // $llamada->OBSERVACIONES = $request->input('observaciones');
-        // $llamada->LIGA          = $request->input('videollamada');
-        // $llamada->EXPEDIENTE    = $request->input('expediente');
+        $llamada->ESTATUS       = "Llamada Efectiva";
+        $llamada->VIDEO         = self::cargaVideoConferencia($request->file('videollamada'));
+        $llamada->OBSERVACIONES = $request->input('observaciones');
+        $llamada->EXPEDIENTE    = self::cargaExpediente($request->file('expediente'));
 
-        // $llamada->save();
+        $llamada->save();
+        ($request->input('estatus_adt'))? self::validarCambiosEstatus($adt,$request->input('estatus_adt')): false;
 
-        // return redirect()->route('consultar.tutoria');
-
-        self::validarCambiosEstatus($adt);
+        return redirect()->route('consultar.tutoria');
     }
 
-    public function actualizarInternetForm(Request $request, $adt){
+    public function actualizarInternetForm(Request $request,adts $adt){
 
         return $request->all();
     }
 
-    public function actualizarInfraestructuraForm(Request $request, $adt){
+    public function actualizarInfraestructuraForm(Request $request,adts $adt){
 
         return $request->all();
     }
 
-    public function actualizarMobiliarioForm(Request $request, $adt){
+    public function actualizarMobiliarioForm(Request $request,adts $adt){
 
         return $request->all();
     }
 
-    public function actualizarUsoBdtForm(Request $request, $adt){
+    public function actualizarUsoBdtForm(Request $request,adts $adt){
 
         return $request->all();
     }
@@ -198,6 +208,38 @@ class TutoriasController extends Controller
     public function actualizarEquipamientoForm(Request $request, adts $adt){
 
         return $request->all();
+    }
+
+    public function exportReporte(adts $adt){
+        $archivo = new adtExport($adt);
+        $archivo->descargar();
+    }
+
+    // CARGA/BAJA IMAGENES y OBTENCION NOMBRE
+    public function cargaVideoConferencia($file){
+        if (is_null($file)){
+            return null;
+        }else{
+            //obtenemos el nombre del archivo
+            $nombre_archivo =  time()."_".$file->getClientOriginalName();
+            //indicamos que queremos guardar un nuevo archivo en el disco local
+            \Storage::disk('tutorias_videollamadas')->put($nombre_archivo,  \File::get($file));
+
+            return $nombre_archivo;
+        }
+    }
+
+    public function cargaExpediente($file){
+        if (is_null($file)){
+            return null;
+        }else{
+            //obtenemos el nombre del archivo
+            $nombre_archivo =  time()."_".$file->getClientOriginalName();
+            //indicamos que queremos guardar un nuevo archivo en el disco local
+            \Storage::disk('tutorias_expedientes')->put($nombre_archivo,  \File::get($file));
+
+            return $nombre_archivo;
+        }
     }
 
 }

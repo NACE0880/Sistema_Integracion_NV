@@ -27,7 +27,7 @@
     <div class="container form-container mt-5">
             <div class="form-header">
                 <h2>Seguimiento de Internet</h2>
-                <h3>{{ $adt }}</h3>
+                <h3>{{ $adt->NOMBRE }}</h3>
             </div>
 
 
@@ -43,16 +43,16 @@
 
                         <div class="col-4">
                             <label for="linea" class="form-label">Linea Infinitum</label>
-                            <input type="number" class="form-control" id="linea" name="linea" min="0"  step="1" value="785963258" required/>
+                            <input type="text" class="form-control" id="linea" name="linea" value="{{$adt->linea->LINEA}}" required/>
 
                         </div>
                         <div class="col-4">
                             <label for="dependencia" class="form-label">Aporta Conectividad</label>
-                            <input type="text" class="form-control" id="dependencia" name="dependencia" value="AYUNTAMIENTO DE ZAPATA"  required>
+                            <input type="text" class="form-control" id="dependencia" name="dependencia" value="{{$adt->linea->APORTA}}"  required>
                         </div>
                         <div class="col-4">
                             <label for="dependencia_pago" class="form-label">Paga Conectividad</label>
-                            <input type="text" class="form-control" id="dependencia_pago" name="dependencia_pago" value="Institución - Gobierno"  required>
+                            <input type="text" class="form-control" id="dependencia_pago" name="dependencia_pago" value="{{$adt->linea->PAGA}}"  required>
                         </div>
 
                     </div>
@@ -61,16 +61,16 @@
 
                         <div class="col-4">
                             <label for="ancho_banda" class="form-label">Ancho de Banda (MB)</label>
-                            <input type="number" class="form-control" id="ancho_banda" name="ancho_banda" min="0"  step="1" value="12" required/>
+                            <input type="number" class="form-control" id="ancho_banda" name="ancho_banda" min="0"  step="1" value="{{$adt->linea->ANCHO_BANDA}}" required/>
 
                         </div>
                         <div class="col-4">
                             <label for="tecnologia" class="form-label">Tecnología</label>
-                            <input type="text" class="form-control" id="tecnologia" name="tecnologia" value="FTTH"  required>
+                            <input type="text" class="form-control" id="tecnologia" name="tecnologia" value="{{$adt->linea->TECNOLOGIA}}"  required>
                         </div>
                         <div class="col-4">
                             <label for="semaforo" class="form-label">Semáforo de Uso</label>
-                            <input type="text" class="form-control" id="semaforo" name="semaforo" value="MEDIO"  required>
+                            <input type="text" class="form-control" id="semaforo" name="semaforo" value="{{$adt->linea->SEMAFORO}}"  required>
                         </div>
 
                     </div>

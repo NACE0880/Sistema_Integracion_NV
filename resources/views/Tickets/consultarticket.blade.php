@@ -87,6 +87,7 @@
                     <tr>
                         {{-- <th class="dt-center">ID</th> --}}
                         <th class="dt-center">FOLIO</th>
+                        <th class="dt-center">CASA</th>
                         <th class="dt-center">PRIORIDAD</th>
                         <th class="dt-center">FECHA</th>
                         <th class="dt-center">ESTATUS</th>
@@ -110,6 +111,7 @@
 
                             {{-- <td>{{ $ticket->ID_TICKET }}</td> --}}
                             <td>{{ $ticket->FOLIO }}</td>
+                            <td>{{ $ticket->casa->NOMBRE }}</td>
                             <td>{{ $ticket->PRIORIDAD }}</td>
                             <td>{{ $ticket->FECHA_INICIO }}</td>
                             <td>{{ $ticket->ESTATUS_ACTUAL }}</td>

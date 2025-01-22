@@ -20,7 +20,11 @@ class CreateAdtTable extends Migration
 
             $table->string('INICIATIVA', 50)->nullable();
             $table->string('ESTATUS_ACTUAL', 25);
-            $table->string('CLAVE', 50);
+            $table->string('CLAVE_SITIO', 50);
+            $table->string('CLAVE_MATUTINO', 100)->nullable();
+            $table->string('CLAVE_VESPERTINO', 100)->nullable();
+            $table->string('DOMICILIO', 200)->nullable();
+            $table->string('CP', 50)->nullable();
             $table->integer('PCC');
             $table->string('ESPECIFICAS', 50);
             $table->string('ENTORNO', 50);

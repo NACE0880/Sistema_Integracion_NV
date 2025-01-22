@@ -11,8 +11,12 @@ class adts extends Model
 
         'INICIATIVA',
         'ESTATUS_ACTUAL',
-        'CLAVE',
+        'CLAVE_SITIO',
+        'CLAVE_MATUTINO',
+        'CLAVE_VESPERTINO',
 
+        'DOMICILIO',
+        'CP',
         'PCC',
         'ESPECIFICAS',
 
@@ -37,6 +41,7 @@ class adts extends Model
     protected $primaryKey = 'ID_ADT';
     public $timestamps = false;
 
+// LLAMADAS
     public function llamadas(){
         return $this->hasMany('\App\llamadas',  'ID_ADT', 'ID_ADT')->orderBy('ID_LLAMADA', 'desc');
     }
@@ -47,7 +52,14 @@ class adts extends Model
 
         return $response;
     }
+    public function observacionesUltimoContacto($id){
+        $observaciones = llamadas::where('ID_ADT', $id)->orderBy('FECHA', 'desc')->first();
+        (!empty($observaciones)) ? $response = $observaciones->OBSERVACIONES: $response = "SIN REGISTROS";
 
+        return $response;
+    }
+
+// CONTACTOS
     public function contactos(){
         return $this->hasMany('\App\contactos',  'ID_ADT', 'ID_ADT');
     }
@@ -67,7 +79,7 @@ class adts extends Model
         (!empty($responsable)) ? $response = $responsable: $response = (object)['NOMBRE' => null,'CARGO' => null,'TELEFONO' => null,'CELULAR' => null,'CORREO' => null];
         return $response;
     }
-
+// EQUIPAMIENTO
     public function equipamientoInicial($id){
         $equipamiento = equipamientos::where([['ID_ADT', $id],['TIPO', 'INICIAL']])->first();
         return $equipamiento;
@@ -88,4 +100,25 @@ class adts extends Model
         $equipamiento = equipamientos::where([['ID_ADT', $id],['TIPO', 'BAJA']])->first();
         return $equipamiento;
     }
+// MOBILIARIO
+    public function mobiliarioInicial($id){
+        $mobiliario = mobiliarios::where([['ID_ADT', $id],['TIPO', 'INICIAL']])->first();
+        return $mobiliario;
+    }
+    public function mobiliarioFuncional($id){
+        $mobiliario = mobiliarios::where([['ID_ADT', $id],['TIPO', 'FUNCIONAL']])->first();
+        return $mobiliario;
+    }
+
+// INFRAESTRUCTURA
+    public function infraestructura($id){
+        $infraestructura = infraestructuras::where('ID_ADT', $id)->first();
+        (!empty($infraestructura)) ? $response = $infraestructura: $response = (object)['KIT_SENALIZACION' => null,'ELECTRICIDAD' => null,'PINTURA_INTERIOR' => null,'PINTURA_EXTERIOR' => null,'OBSERVACIONES' => null];
+        return $response;
+    }
+// INTERNET
+    public function linea(){
+        return $this->belongsTo('\App\lineas',  'ID_ADT');
+    }
+
 }

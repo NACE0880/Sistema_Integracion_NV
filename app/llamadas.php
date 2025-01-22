@@ -14,7 +14,7 @@ class llamadas extends Model
         'RESPONSABLE',
         'ESTATUS',
         'OBSERVACIONES',
-        'LIGA',
+        'VIDEO',
         'EXPEDIENTE',
     ];
     protected $primaryKey = 'ID_LLAMADA';

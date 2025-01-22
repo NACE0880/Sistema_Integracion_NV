@@ -27,7 +27,7 @@
     <div class="container form-container mt-5">
             <div class="form-header">
                 <h2>Seguimiento del Uso de la BDT</h2>
-                <h3>{{ $adt }}</h3>
+                <h3>{{ $adt->NOMBRE }}</h3>
             </div>
 
 
@@ -99,6 +99,11 @@
                         <div class="col-3">
                             <label for="usuarios_semanales" class="form-label">Usuarios Semanales</label>
                             <input type="number" class="form-control" id="usuarios_semanales" name="usuarios_semanales" min="0"  step="1" value="1" required/>
+                        </div>
+
+                        <div class="col-2">
+                            <label for="pcc" class="form-label">PCC</label>
+                            <input type="number" class="form-control" id="pcc" name="pcc" min="0"  step="1" value="{{ $adt->PCC }}" required/>
                         </div>
 
                     </div>

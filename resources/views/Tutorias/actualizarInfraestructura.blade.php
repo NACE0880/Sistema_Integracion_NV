@@ -27,7 +27,7 @@
     <div class="container form-container mt-5">
             <div class="form-header">
                 <h2>Seguimiento de Infraestructura y Señalética</h2>
-                <h3>{{ $adt }}</h3>
+                <h3>{{ $adt->NOMBRE }}</h3>
             </div>
 
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\adts;
+
 
 class PruebasController extends Controller
 {
@@ -40,7 +42,7 @@ class PruebasController extends Controller
     }
 
 //Vista real
-    public function reporte(){
+    public function reporteSedena(){
         $chunksize = 10000;
         // Cuncks de datos Contenidos Especializados - General (PLATAFORMA) - Oferta Educativa
         $chunk_CE  = self::cargarJson('app/archivos/matriculas.json', $chunksize);
@@ -92,4 +94,7 @@ class PruebasController extends Controller
         return view('Pruebas.reporte_sdn_gn',compact('chunk_CE','chunk_GENERAL_GN', 'chunk_GENERAL_SDN', 'totales'));
     }
 
+    public function mensajeDesarrollo(){
+        return view('mensajeDesarrollo');
+    }
 }

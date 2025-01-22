@@ -15,6 +15,7 @@ class equipamientos extends Model
         'NETBOOK',
         'CLASSMATE',
         'XO',
+        'OBSERVACIONES',
         'TIPO',
     ];
     protected $primaryKey = 'ID_EQUIPAMIENTO';
