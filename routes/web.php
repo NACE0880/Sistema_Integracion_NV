@@ -28,6 +28,7 @@ Route::post('/telegram-webhook', 'TelegramWebhookController@handleWebhook');
 Route::get('/portal/aldea','LandingController@landingAldea')->name('landing.aldea');
 Route::get('/portal/general','LandingController@landingGeneral')->name('landing.general');
 Route::get('/portal/videos','LandingController@cardAldea')->name('landing.card');
+Route::get('/portal/propuestas','LandingController@propuestas')->name('landing.propuestas');
 
 
 
@@ -41,7 +42,7 @@ Route::group(['middleware'=>'XSS'], function() {
 
 // PROBAR NUEVOS COMPONENTES
     // Route::get('/pruebas','PruebasController@index')->name('pruebas');
-    Route::get('/pruebas','PruebasController@reporte')->name('pruebas');
+    Route::get('/pruebas','PruebasController@mensajeDesarrollo')->name('pruebas');
 
 // TICKETS
     // Solicitud de colecciones
@@ -123,6 +124,9 @@ Route::group(['middleware'=>'XSS'], function() {
     Route::patch('tutorias/update/use/{adt}','TutoriasController@actualizarUsoBdtForm')->name('update.use.adt');
     Route::patch('tutorias/update/equipment/{adt}','TutoriasController@actualizarEquipamientoForm')->name('update.equipment.adt');
     Route::patch('tutorias/update/furniture/{adt}','TutoriasController@actualizarMobiliarioForm')->name('update.furniture.adt');
+
+    // Solicitud de Excel
+    Route::get('/exportar/reporte/{adt}', 'TutoriasController@exportReporte')->name('exportar.reporte.adt');
 
 });
 

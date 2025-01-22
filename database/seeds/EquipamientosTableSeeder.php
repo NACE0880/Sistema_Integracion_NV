@@ -29,7 +29,8 @@ class EquipamientosTableSeeder extends Seeder
                     "NETBOOK"           => $data['4'],
                     "CLASSMATE"         => $data['5'],
                     "XO"                => $data['6'],
-                    "TIPO"              => $data['7'],
+                    "OBSERVACIONES"     => $data['7'],
+                    "TIPO"              => $data['8'],
 
                 ]);
 

@@ -46,6 +46,10 @@ class TelegramWebhookController extends Controller
                     $this->actualizarEstatusAdt($adt, 'CERRADA');
                     break;
 
+                case "RECHAZAR APERTURA ADT":
+                    $responseText = '<i>'.$adt->NOMBRE.'</i>%0A %0A' . ' <b>APERTURA RECHAZADA</b>';
+                    break;
+
                 case "RECHAZAR CIERRE ADT":
                     $responseText = '<i>'.$adt->NOMBRE.'</i>%0A %0A' . ' <b>CIERRE RECHAZADO</b>';
                     break;

@@ -49,7 +49,7 @@
                 <tbody>
                     @foreach ($adts as $sede)
                         <tr class="text-sm">
-                            <td>{{ $sede->CLAVE }}</td>
+                            <td>{{ $sede->CLAVE_SITIO }}</td>
                             <td >{{ $sede->NOMBRE }}</td>
                             <td>
                                 @if ( DateTime::createFromFormat('Y-m-d H:i:s', $sede->ultimoContacto($sede->ID_ADT)) == FALSE )
@@ -66,10 +66,11 @@
 
                             {{-- Reporte --}}
                             <td>
-                                <a href="{{ route('consultar.tutoria') }}" class="btn btn-outline-info">
+                                <a href="{{ route('exportar.reporte.adt',['adt' =>$sede,]) }}" class="btn btn-outline-info">
                                     <i class="fa-solid fa-file-arrow-down"></i>
                                 </a>
                             </td>
+
                             {{-- Contacto Sede --}}
                             <td>
                                 <a href="{{ route('actualizar.contacto.adt', $sede) }}" class="btn btn-outline-dark">
@@ -209,7 +210,7 @@
             table.className="table table-striped table-bordered table-sm  table-hover dt-center historicTable";
             thead.className="table-dark";
 
-            thead.innerHTML = '<tr><th>FECHA</th><th>RESPONSABLE</th><th>ESTATUS</th><th>OBSERVACIONES</th><th>LIGA</th></tr>'
+            thead.innerHTML = '<tr><th>FECHA</th><th>RESPONSABLE</th><th>ESTATUS</th><th>OBSERVACIONES</th><th>VIDEO</th></tr>'
 
             historico.forEach((llamada) =>{
                 row.innerHTML = `
@@ -217,7 +218,7 @@
                     <td>${llamada.RESPONSABLE}</td>
                     <td>${llamada.ESTATUS}</td>
                     <td>${llamada.OBSERVACIONES}</td>
-                    <td>${llamada.LIGA}</td>
+                    <td>${llamada.VIDEO}</td>
                 `
                 tbody.append(row);
                 row = document.createElement('tr');

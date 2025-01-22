@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLlamadasTable extends Migration
+class CreateInfraestructurasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,23 @@ class CreateLlamadasTable extends Migration
      */
     public function up()
     {
-        Schema::create('llamadas', function (Blueprint $table) {
-            $table->increments('ID_LLAMADA');
+        Schema::create('infraestructuras', function (Blueprint $table) {
+            $table->increments('ID_INFRAESTRUCTURA');
             $table->integer('ID_ADT')->nullable(false)->unsigned();
 
-            $table->dateTime('FECHA');
-
-            $table->string('RESPONSABLE', 50);
-            $table->string('ESTATUS', 50);
+            $table->string('KIT_SENALIZACION', 200)->charset('utf8');
+            $table->string('ELECTRICIDAD', 200)->charset('utf8');
+            $table->string('PINTURA_INTERIOR', 200)->charset('utf8');
+            $table->string('PINTURA_EXTERIOR', 200)->charset('utf8');
             $table->string('OBSERVACIONES', 200);
-            $table->string('VIDEO', 150);
-            $table->string('EXPEDIENTE', 150);
 
         });
 
-        Schema::table('llamadas', function ($table) {
+        Schema::table('infraestructuras', function ($table) {
             $table->foreign('ID_ADT')
                 ->references('ID_ADT')->on('adts')
                 ->onDelete('cascade');
         });
-
     }
 
     /**
@@ -42,6 +39,6 @@ class CreateLlamadasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('llamadas');
+        Schema::dropIfExists('infraestructuras');
     }
 }

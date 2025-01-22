@@ -19,4 +19,8 @@ class LandingController extends Controller
         $mensaje = 'mensaje';
         return view('Landing.card-aldea', compact('mensaje'));
     }
+
+    public function propuestas(){
+        return view('Landing.propuestas');
+    }
 }

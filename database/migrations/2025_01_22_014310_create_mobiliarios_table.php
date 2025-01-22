@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLlamadasTable extends Migration
+class CreateMobiliariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,25 @@ class CreateLlamadasTable extends Migration
      */
     public function up()
     {
-        Schema::create('llamadas', function (Blueprint $table) {
-            $table->increments('ID_LLAMADA');
+        Schema::create('mobiliarios', function (Blueprint $table) {
+            $table->increments('ID_MOBILIARIO');
             $table->integer('ID_ADT')->nullable(false)->unsigned();
 
-            $table->dateTime('FECHA');
-
-            $table->string('RESPONSABLE', 50);
-            $table->string('ESTATUS', 50);
+            $table->integer('MESA_RECTANGULAR_GRANDE');
+            $table->integer('MESA_RECTANGULAR_MEDIANA');
+            $table->integer('MESA_CIRCULAR');
+            $table->integer('SILLAS');
+            $table->integer('MUEBLE_RESGUARDO');
             $table->string('OBSERVACIONES', 200);
-            $table->string('VIDEO', 150);
-            $table->string('EXPEDIENTE', 150);
+            $table->string('TIPO', 100)->charset('utf8');
 
         });
 
-        Schema::table('llamadas', function ($table) {
+        Schema::table('mobiliarios', function ($table) {
             $table->foreign('ID_ADT')
                 ->references('ID_ADT')->on('adts')
                 ->onDelete('cascade');
         });
-
     }
 
     /**
@@ -42,6 +41,6 @@ class CreateLlamadasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('llamadas');
+        Schema::dropIfExists('mobiliarios');
     }
 }

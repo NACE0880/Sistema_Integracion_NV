@@ -34,11 +34,14 @@ class DatabaseSeeder extends Seeder
         $this->call(EspaciosTableSeeder::class);
         $this->call(CoordinadoresTableSeeder::class);
         $this->call(CoordinadoresCasasTableSeeder::class);
+        // USAREMOS RESPALDO GENERADO POR CRON DEL SERVIDOR
         // $this->call(TicketsTableSeeder::class);
 
         $this->call(TutoresTableSeeder::class);
         $this->call(AdtTableSeeder::class);
         $this->call(ContactosTableSeeder::class);
         $this->call(EquipamientosTableSeeder::class);
+        $this->call(MobiliariosTableSeeder::class);
+        $this->call(LineasTableSeeder::class);
     }
 }

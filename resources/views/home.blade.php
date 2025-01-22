@@ -23,7 +23,7 @@
         @endif
 
         @if (in_array("3", $UsersServices->permisos()) ? true : false)
-            <a href="{{ route('consultar.tutoria') }}" class="card mobiliario">
+            <a href="{{ route('pruebas') }}" class="card mobiliario">
                 <p class="tip">Mobiliario</p>
                 <p class="second-text"><i class="fa-solid fa-truck-moving beat"></i></p>
             </a>
