@@ -103,7 +103,8 @@ class ticketResumenGeneral {
 
                 $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
                 $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $mesCorte = $meses[(date("n",strtotime($this->dateStart))) - 2];
+                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $mesCorte = $meses[$index];
 
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -291,7 +292,8 @@ class ticketResumenGeneral {
 
         $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
         $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-        $mesCorte = $meses[(date("n",strtotime($this->dateStart))) - 2];
+        $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+        $mesCorte = $meses[$index];
 
 
         $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();

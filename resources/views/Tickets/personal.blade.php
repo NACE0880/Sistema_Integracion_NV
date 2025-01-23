@@ -365,6 +365,7 @@
     <script>
     //RUTAS
         //let strroute = '/Sistema_Integracion/tickets/creacion/'
+        //let strroute = '/Pruebas_Sistema_Integracion/tickets/creacion/'
         let strroute = '/tickets/creacion/'
 
     // RECURSOS DE LIMPIEZA DE SELECTS
