@@ -123,12 +123,12 @@
         </div>
     </div>
 
-    {{-- Subtitulo PENDIENTES--}}
+    {{-- Subtitulo COTIZABLES--}}
     <div class="d-flex align-items-center p-3 my-3 text-white bg-subtitle-orange container rounded shadow-sm flex-centered " >
         <i class="fa-solid fa-users" style="margin-right: 20px;"z></i></i>
 
         <div class="lh-1" style="justify-items: center;">
-            <h1 class="h6 mb-0 text-white lh-1"> Pendientes Pasados</h1>
+            <h1 class="h6 mb-0 text-white lh-1"> Cotizaciones</h1>
         </div>
     </div>
     {{-- DataTable --}}
@@ -148,7 +148,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($ticketsPendientes as $ticket)
+                    @foreach ($ticketsCotizacion as $ticket)
                         <tr>
 
                             {{-- <td>{{ $ticket->ID_TICKET }}</td> --}}
@@ -165,7 +165,7 @@
 
                             <td >
 
-                                <a href="{{ route('cotizar.ticket.pendiente',[
+                                <a href="{{ route('cotizar.ticket',[
                                     "ticket" =>  $ticket,
                                     "encrypted" =>  $encrypted
                                 ]) }}" class="btn btn-outline-custom-color">

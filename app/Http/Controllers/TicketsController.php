@@ -280,7 +280,7 @@ class TicketsController extends Controller
             $tickets = tickets::whereYear('FECHA_INICIO', $currentYear)->where('ID_CASA', Auth::user()->userable->casa->ID_CASA)->orderBy('FECHA_INICIO', 'DESC')->get();
             $ticketsBase = tickets::where([
                 ['ID_CASA', Auth::user()->userable->casa->ID_CASA],
-                
+
                 ['ESTATUS_AUTORIZACION','<>','ANULADO'],
                 ['ESTATUS_AUTORIZACION','<>','CANCELADO']
             ])->orderBy('FECHA_INICIO', 'DESC')->get();
@@ -391,7 +391,7 @@ class TicketsController extends Controller
 
         ])->orderBy('FECHA_INICIO', 'DESC')->get();
 
-        $ticketsPendientes = tickets::where([
+        $ticketsCotizacion = tickets::where([
             ['AREA_RESPONSABLE','<>','SEDENA'],
             ['AREA_RESPONSABLE','<>','SEMAR'],
 
@@ -405,18 +405,13 @@ class TicketsController extends Controller
             ['ESTATUS_AUTORIZACION','<>','CANCELADO'],
             ['ESTATUS_ACTUAL','PENDIENTE'],
 
-            ['ESTATUS_COTIZACION','NO'],
-            ['FECHA_COMPROMISO',NULL],
-
-            ['COTIZACION',0],
-
         ])->orderBy('FECHA_INICIO', 'DESC')->get();
 
 
         $coordinador = Auth::user()->userable->NOMBRE;
         $encrypted = Crypt::encryptString($coordinador);
 
-        return view('Tickets.consultarTicketsPago', compact('ticketsFinalizados', 'ticketsPendientes', 'encrypted'));
+        return view('Tickets.consultarTicketsPago', compact('ticketsFinalizados', 'ticketsCotizacion', 'encrypted'));
 
     }
 
@@ -554,47 +549,46 @@ class TicketsController extends Controller
 
         $modificacion->save();
 
-
-        // $area    = $ticket->afeccion->area_afeccion;
-
         // Contenido del correo
-        $data = [
-            'destinatario'  => null,
+        // (codigo funcional, algunos equipos no soportan el envío del correo)
 
-            'folio'         => $folio,
-            'casa'          => $casa,
-            'area'          => $area_responsable,
+        // $data = [
+        //     'destinatario'  => null,
 
-            'fecha_inicio'  => $f_inicio,
-            'estatus'       => $estatus_actual,
-            'afeccion'      => $afeccion,
+        //     'folio'         => $folio,
+        //     'casa'          => $casa,
+        //     'area'          => $area_responsable,
 
-            'reinicidencia' => $reincidencia,
-            'entorno'       => $entorno,
-            'sitio'         => $sitio,
-            'espacio'       => $espacio,
-            'objeto'        => $objeto,
-            'elemento'      => $elemento,
-            'daño'          => $daño,
-            'prioridad'     => $prioridad,
-            'detalle'       => $detalle,
+        //     'fecha_inicio'  => $f_inicio,
+        //     'estatus'       => $estatus_actual,
+        //     'afeccion'      => $afeccion,
 
-            'fotos'         => $fotos,
-            'drive'         => $drive,
+        //     'reinicidencia' => $reincidencia,
+        //     'entorno'       => $entorno,
+        //     'sitio'         => $sitio,
+        //     'espacio'       => $espacio,
+        //     'objeto'        => $objeto,
+        //     'elemento'      => $elemento,
+        //     'daño'          => $daño,
+        //     'prioridad'     => $prioridad,
+        //     'detalle'       => $detalle,
 
-            'director'      => $director,
-            'ticket'        => $ticket,
+        //     'fotos'         => $fotos,
+        //     'drive'         => $drive,
 
-            'validado'      => false,
-        ];
+        //     'director'      => $director,
+        //     'ticket'        => $ticket,
+
+        //     'validado'      => false,
+        // ];
 
         // Enviar correo a Vo.Bo.
         $telegram = new TelegramController();
 
         foreach ($ticket->casa->coordinador_casa as $coordinador) {
             if ($coordinador->VALIDACION == true) {
-                $data['destinatario'] = $coordinador->NOMBRE;
-                self::enviarNuevoTicket($data, $coordinador->CORREO);
+                // $data['destinatario'] = $coordinador->NOMBRE;
+                // self::enviarNuevoTicket($data, $coordinador->CORREO);
 
                 $payload = "<b>NUEVO TICKET A VALIDAR</b>%0A".
                 $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".$ticket->AFECCION;
@@ -604,7 +598,6 @@ class TicketsController extends Controller
         }
 
         return redirect()->route('consultar.ticket');
-        // return $request->all();
     }
 
     public function validar(Request $request, tickets $ticket, $usuario){
