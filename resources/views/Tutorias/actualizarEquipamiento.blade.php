@@ -32,13 +32,13 @@
             </div>
 
 
-            <form action="{{ route('update.equipment.adt', $adt)}}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()" class="row g-3">
+            <form id="formularioEquipamiento" action="{{ route('update.equipment.adt', $adt)}}" method="POST" enctype="multipart/form-data" class="row g-3">
                 {{-- Redireccionar a rutas de actualizacion  --}}
                 @csrf
                 @method('PATCH')
 
                 <div class="">
-                    <div class="row g-3 justify-content-center">
+                    <div class="row g-3 justify-content-center mt-5">
                         {{-- EQUIPAMIENTO INICIAL --}}
                         <div class="col-6">
                             <div class="row g-3 justify-content-center">
@@ -183,18 +183,20 @@
 
                     </div>
 
-
-                    <div class="row g-3 justify-content-center">
+                    <div class="row g-3 mt-5" >
                         <div class="col-6">
                             <label for="observaciones" class="form-label">Observaciones</label>
-                            <textarea class="form-control" id="observaciones" name="observaciones" rows="3" maxlength="200" placeholder="Max 200 caracteres" required></textarea>
+                            <textarea class="form-control" id="observaciones_previas" name="observaciones_previas" rows="3" placeholder="{{ $adt->equipamientoFuncional($adt->ID_ADT)->OBSERVACIONES }}" readonly></textarea>
+                        </div>
+                         <div class="col-6">
+                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="3" maxlength="200" placeholder="Máximo 200 caracteres." required></textarea>
                         </div>
                     </div>
-
                 </div>
 
 
-                <div class="row g-3 justify-content-center">
+                <div class="row g-3 justify-content-center mt-5">
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-custom">Guardar</button>
                     </div>
@@ -228,7 +230,7 @@
             const elemento = input.id.split("_");
 
             var elementoInicial = document.querySelector(`#${elemento[0]}_inicial`);
-            
+
             var elementoFuncional = document.querySelector(`#${elemento[0]}_funcional`);
             var elementoDañado = document.querySelector(`#${elemento[0]}_dañado`);
             var elementoFaltante = document.querySelector(`#${elemento[0]}_faltante`);
@@ -236,6 +238,8 @@
 
             var suma = Number(elementoFuncional.value) + Number(elementoDañado.value) + Number(elementoFaltante.value) + Number(elementoBaja.value);
             var resto =  Number(elementoInicial.value) - suma;
+
+            var elementoInicialNumero = Number(elementoInicial.value);
 
             if (suma >= Number(elementoInicial.value)) {
                 elementoFuncional.max = elementoFuncional.value;
@@ -249,7 +253,9 @@
                 elementoBaja.max = (elementoBaja.value + resto);
             }
 
+            return {suma, elementoInicialNumero};
         }
+        
         function calcularMaximos() {
             const elementos = ['pc', 'laptop','netbook', 'classmate', 'xo'];
             const inputs = [];
@@ -259,8 +265,32 @@
             });
 
             inputs.forEach(input => bloquearIncrementos(input));
-            bloquearIncrementos(input);
+            //bloquearIncrementos(input);
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formulario = document.getElementById("formularioEquipamiento");
+
+            formulario.addEventListener("submit", function(event) {
+                const elementos = ['pc', 'laptop','netbook', 'classmate', 'xo'];
+                let todoBien = true;
+
+                elementos.forEach(elemento => {
+                    const campo = document.querySelector(`#${elemento}_inicial`);
+                    const resultado = bloquearIncrementos(campo);
+                    if (resultado.suma !== resultado.elementoInicialNumero) {
+                        todoBien = false;
+                    }
+                });
+
+                if (!todoBien) {
+                    event.preventDefault();
+                    alert("Los equipos capturados no coinciden con el equipamiento inicial.");
+                } else {
+                    showLoading();
+                }
+            });
+        });
 
         window.onload = calcularMaximos;
     </script>

@@ -124,7 +124,7 @@
                         <th style="background-color: #d5d5d5; color: #000000; text-align: center;">Fecha</th>
                         <th style="background-color: #d5d5d5; color: #000000; text-align: center;">Prioridad</th>
                         <th style="background-color: #d5d5d5; color: #000000; text-align: center;">Daño</th>
-                        <th style="background-color: #d5d5d5; color: #000000; text-align: center;">Afección</th>
+                        <th style="background-color: #d5d5d5; color: #000000; text-align: center;">Afectación</th>
 
                     </tr>
                 </thead>

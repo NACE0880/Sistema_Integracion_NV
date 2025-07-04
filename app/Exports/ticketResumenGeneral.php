@@ -119,7 +119,7 @@ class ticketResumenGeneral {
 
 
                 $pendientes_data = [
-                    'aldea'     => self::resumenSitio($pendientes, 'Aldea Iztapalapa'),
+                    'aldea'     => self::resumenSitio($pendientes, 'Iztapalapa'),
 
                     'campeche'  => self::resumenSitio($pendientes, 'Campeche'),
 
@@ -141,7 +141,7 @@ class ticketResumenGeneral {
                 ];
 
                 $procesados_data = [
-                    'aldea'     => self::resumenSitio($procesados, 'Aldea Iztapalapa'),
+                    'aldea'     => self::resumenSitio($procesados, 'Iztapalapa'),
 
                     'campeche'  => self::resumenSitio($procesados, 'Campeche'),
 
@@ -163,7 +163,7 @@ class ticketResumenGeneral {
                 ];
 
                 $finalizados_data = [
-                    'aldea'     => self::resumenSitio($finalizados, 'Aldea Iztapalapa'),
+                    'aldea'     => self::resumenSitio($finalizados, 'Iztapalapa'),
 
                     'campeche'  => self::resumenSitio($finalizados, 'Campeche'),
 
@@ -186,7 +186,7 @@ class ticketResumenGeneral {
 
                 $acumulados_data = [
                     'historico' => [
-                        'aldea'     => self::acumuladosSitio('historico', 'Aldea Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
+                        'aldea'     => self::acumuladosSitio('historico', 'Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
 
                         'campeche'  => self::acumuladosSitio('historico', 'Campeche', $colecciones, $historicDateStart, $this->dateEnd),
 
@@ -207,7 +207,7 @@ class ticketResumenGeneral {
                         'semar'     => self::acumuladosSitio('historico', 'Semar', $colecciones, $historicDateStart, $this->dateEnd),
                     ],
                     'monto' => [
-                        'aldea'     => self::acumuladosSitio('monto', 'Aldea Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
+                        'aldea'     => self::acumuladosSitio('monto', 'Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
 
                         'campeche'  => self::acumuladosSitio('monto', 'Campeche', $colecciones, $historicDateStart, $this->dateEnd),
 
@@ -308,7 +308,7 @@ class ticketResumenGeneral {
 
 
         $pendientes_data = [
-            'aldea'     => self::resumenSitio($pendientes, 'Aldea Iztapalapa'),
+            'aldea'     => self::resumenSitio($pendientes, 'Iztapalapa'),
 
             'campeche'  => self::resumenSitio($pendientes, 'Campeche'),
 
@@ -330,7 +330,7 @@ class ticketResumenGeneral {
         ];
 
         $procesados_data = [
-            'aldea'     => self::resumenSitio($procesados, 'Aldea Iztapalapa'),
+            'aldea'     => self::resumenSitio($procesados, 'Iztapalapa'),
 
             'campeche'  => self::resumenSitio($procesados, 'Campeche'),
 
@@ -352,7 +352,7 @@ class ticketResumenGeneral {
         ];
 
         $finalizados_data = [
-            'aldea'     => self::resumenSitio($finalizados, 'Aldea Iztapalapa'),
+            'aldea'     => self::resumenSitio($finalizados, 'Iztapalapa'),
 
             'campeche'  => self::resumenSitio($finalizados, 'Campeche'),
 
@@ -375,7 +375,7 @@ class ticketResumenGeneral {
 
         $acumulados_data = [
             'historico' => [
-                'aldea'     => self::acumuladosSitio('historico', 'Aldea Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
+                'aldea'     => self::acumuladosSitio('historico', 'Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
 
                 'campeche'  => self::acumuladosSitio('historico', 'Campeche', $colecciones, $historicDateStart, $this->dateEnd),
 
@@ -396,7 +396,7 @@ class ticketResumenGeneral {
                 'semar'     => self::acumuladosSitio('historico', 'Semar', $colecciones, $historicDateStart, $this->dateEnd),
             ],
             'monto' => [
-                'aldea'     => self::acumuladosSitio('monto', 'Aldea Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
+                'aldea'     => self::acumuladosSitio('monto', 'Iztapalapa', $colecciones, $historicDateStart, $this->dateEnd),
 
                 'campeche'  => self::acumuladosSitio('monto', 'Campeche', $colecciones, $historicDateStart, $this->dateEnd),
 

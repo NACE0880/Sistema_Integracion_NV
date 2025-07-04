@@ -591,7 +591,8 @@ class TicketsController extends Controller
                 // self::enviarNuevoTicket($data, $coordinador->CORREO);
 
                 $payload = "<b>NUEVO TICKET A VALIDAR</b>%0A".
-                $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".$ticket->AFECCION;
+                $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
+                $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;
 
                 $telegram->sendText($coordinador->TELEGRAM, $payload);
             }
@@ -687,6 +688,19 @@ class TicketsController extends Controller
                     self::envioPrioritario($nivel, $area, $data);
                 }
 
+                //Esto no va desde aqui...
+                /*
+                $destinatarios = [
+                    'coordinadores-tel' =>[],
+                    'coordinadores' =>[],
+                ];
+                
+                $coordinador = coordinadores::find(5);
+                $destinatarios['coordinadores-tel']+= [$coordinador->NOMBRE  => $coordinador->TELEGRAM];
+                $destinatarios['coordinadores']    += [$coordinador->NOMBRE  => $coordinador->CORREO]; //self::obtenerDestinatarios($ticket);*/
+                // ...hasta acá
+
+                //Yo comenté esto 
                 $destinatarios = self::obtenerDestinatarios($ticket);
                 // Notificar a destinatarios extra SDN SEMAR
                 foreach ($destinatarios['extra'] as $nombre => $correo) {
@@ -701,7 +715,8 @@ class TicketsController extends Controller
 
                 foreach ($destinatarios['coordinadores-tel'] as $nombre => $chat_id) {
                     $payload = "<b>NUEVO TICKET GENERADO - ".$ticket->FOLIO."</b>%0A".
-                    $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".$ticket->AFECCION;
+                    $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
+                    $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;
                     $telegram->sendText($chat_id, $payload);
                 }
                 break;
@@ -816,6 +831,7 @@ class TicketsController extends Controller
             $payload= $aux. $ticket->FOLIO .'</b>%0A'.
             $ticket->CASA.' - '.$ticket->AREA_RESPONSABLE.
             '%0A %0A Por: '.$usuario;
+
             $telegram->sendText($chat_id, $payload);
         }
 
@@ -908,7 +924,10 @@ class TicketsController extends Controller
 
         foreach ($destinatarios['coordinadores-tel'] as $nombre => $chat_id) {
             $payload= "<b>NUEVO TICKET AUTORIZADO - ". $ticket->FOLIO.'</b>%0A %0A'.
-            '- Actualización de ticket por: '.$usuario;
+            '- Actualización de ticket por: '.$usuario.
+            $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
+            $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;
+
             $telegram->sendText($chat_id, $payload);
         }
 
@@ -1319,7 +1338,7 @@ class TicketsController extends Controller
                 if ($gerente) {
                     $data['destinatario']  = $gerente->NOMBRE;
                     $data['encript']    = Crypt::encryptString($gerente->NOMBRE);
-
+ 
                     $destinatario = $gerente->CORREO;
 
                     if ($data['nuevo_ticket']) {

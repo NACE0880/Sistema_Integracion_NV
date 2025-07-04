@@ -10,15 +10,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class GeneracionTicket extends Mailable
 {
     use Queueable, SerializesModels;
-
+    
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
-    {
+    public function __construct($data){
+
         $this->data = $data;
+
     }
 
     /**
@@ -26,11 +27,14 @@ class GeneracionTicket extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
+    public function build(){
+
+        //return $this->view('correos.MeTicketeo')->render();
+
         return $this->view('correos.ticket')
         ->with('data', $this->data)
-        ->subject('Informe de Nuevo Ticket')
-        ;
+        ->subject('Informe de Nuevo Ticket');
+        
     }
+    
 }

@@ -250,7 +250,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="casa">Afección</label>
+                                <label for="casa">Afectación</label>
                                 <input type="text" class="form-control" id="casa" name="casa" value="{{ $ticket->AFECCION }}" readonly>
                             </div>
 
@@ -279,7 +279,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="afeccion">Afección</label>
+                                <label for="afeccion">Afectación</label>
                                 <textarea id="afeccion" name="afeccion" class="form-control" rows="2" maxlength="100" placeholder="{{ $ticket->AFECCION }}" readonly></textarea>
                             </div>
 

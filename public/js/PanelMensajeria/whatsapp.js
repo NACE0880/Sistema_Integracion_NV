@@ -39,7 +39,7 @@ var hello_world = {
     },
     "data": JSON.stringify({
         "messaging_product": "whatsapp",
-        "to": "525518794743",
+        "to": "",
         "type": "template",
         "template": {
         "name": "hello_world",
@@ -62,7 +62,7 @@ var notificacion_diaria = {
     "data": JSON.stringify({
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
-        "to": "525518794743",
+        "to": "",
         "type": "template",
         "template": {
         "name": "notificacion_diaria",
@@ -96,7 +96,7 @@ var reporte = {
     "data": JSON.stringify({
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
-        "to": "525518794743",
+        "to": "",
         "type": "interactive",
         "interactive": {
             "type": "cta_url",
@@ -134,7 +134,7 @@ function actualizacion_tutoria(estado){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "text",
             "text": {
                 "body": '*_- ACTUALIZACION DE TUTORIAS -_*\n\n' + estado
@@ -153,7 +153,7 @@ function actualizacion_tutoria(estado){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "text",
             "text": {
                 "body": '*_- ACTUALIZACION DE TUTORIAS -_*\n\n_PRIM clave_ : ' + 'Tutoria completada'
@@ -176,7 +176,7 @@ function reporte_atencion_1(){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "interactive",
             "interactive": {
                 "type": "cta_url",
@@ -216,7 +216,7 @@ function reporte_atencion_2(){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "interactive",
             "interactive": {
                 "type": "cta_url",
@@ -262,7 +262,7 @@ function reporte_mediciones(){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "interactive",
             "interactive": {
                 "type": "cta_url",
@@ -307,7 +307,7 @@ function incidencias(incidencias){
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "interactive",
             "interactive": {
                 "type": "cta_url",

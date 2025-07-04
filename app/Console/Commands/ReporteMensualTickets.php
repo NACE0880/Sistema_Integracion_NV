@@ -77,7 +77,9 @@ class ReporteMensualTickets extends Command
         // Prueba Individual
         // $coordinadores = ['1' => coordinadores::find(1)];
         // $coordinadores = coordinadores::whereNotIn('ID_COORDINADOR',[3])->get();
-        $coordinadores = coordinadores::all();
+        // Comente esto $coordinadores = coordinadores::all();
+        $coordinadores = ['0' => coordinadores::find(5)];
+        
 
 
         $reportes = [
@@ -89,9 +91,11 @@ class ReporteMensualTickets extends Command
     // ENVIO Telegram
         foreach ($reportes as $reporte) {
             $ruta = \Storage::disk('tickets_reportes')->path($reporte);
+            //$ruta = "Pruebas Neftalí";
 
             foreach ($coordinadores as $destinatario) {
                 $telegram->sendDocument($destinatario->TELEGRAM, $ruta);
+                //$telegram->sendText($destinatario->TELEGRAM, $ruta);
             }
         }
 

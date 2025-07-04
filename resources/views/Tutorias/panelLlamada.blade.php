@@ -174,13 +174,13 @@
                 <div class="row g-3">
                     <div class="row g-1">
                         <div class="col-4">
-                            <label for="videollamada">Video Llamada</label>
+                            <label for="videollamada">Video Llamada</label><br>
 
-                            <input id="videollamada" name="videollamada" type="file" style="display: none" onchange="cambiarContenidoVideo(this)" accept=".mp4, .mov, .avi"   required /> <br>
-                            <label id="lbl_videollamada" for="videollamada" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Video Llamada</label>
+                            <input id="videollamada" name="videollamada" type="text" onchange="cambiarContenidoVideo(this)" required/><br>       <!--<input id="videollamada" name="videollamada" type="file" style="display: none" onchange="cambiarContenidoVideo(this)" accept=".mp4, .mov, .avi"   required /> <br>-->
+                            <!--<label id="lbl_videollamada" for="videollamada" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Video Llamada</label>-->
 
-                            <br>
-                            <label for="videollamada" class="file-note">Archivos mp4, mov, avi  </label>
+                            <!--<br>-->
+                            <label for="videollamada" class="file-note">Enlaces: youtube, google drive<!--Archivos mp4, mov, avi-->  </label>
                         </div>
 
 
@@ -191,13 +191,13 @@
                         </div>
 
                         <div class="col-4">
-                            <label for="expediente">Expediente</label>
+                            <label for="expediente">Expediente</label><br>
 
-                            <input id="expediente" name="expediente" type="file" style="display: none" onchange="cambiarContenidoExpediente(this)" accept=".pdf, .docx, .xlsx, .xls"   required /> <br>
-                            <label id="lbl_expediente" for="expediente" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Expediente</label>
+                            <input id="expediente" name="expediente" type="text" onchange="cambiarContenidoExpediente(this)" required /> <br>       <!--<input id="expediente" name="expediente" type="file" style="display: none" onchange="cambiarContenidoExpediente(this)" accept=".pdf, .docx, .xlsx, .xls"   required /> <br>-->
+                            <!--<label id="lbl_expediente" for="expediente" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Expediente</label>-->
 
-                            <br>
-                            <label for="expediente" class="file-note">Archivos pdf, docx, xlsx, xls </label>
+                            <!--<br>-->
+                            <label for="expediente" class="file-note">Enlaces: google drive</label>
                         </div>
                     </div>
 
@@ -237,24 +237,28 @@
 
     <script>
         // MODIFICACION DE ELEMENTOS INPUT FILE
-        let labelArchivo = '';
+        //let labelArchivo = '';
 
-        function asignarNombre(lbl) {
+        /*function asignarNombre(lbl) {
             labelArchivo = lbl;
-        }
+        }*/
 
 
-        function cambiarContenidoVideo(inputArchivo) {
+        /*function cambiarContenidoVideo(inputArchivo) {
             // Tamaño maximo del archivo
             let maxSize = 5000000; //5mb -> 5,000,000
 
             // Validamos el primer archivo únicamente
             let archivo = inputArchivo.files[0];
             let nombreArchivo = inputArchivo.value;
-            let idExtencion = nombreArchivo.lastIndexOf(".") + 1;
+            let idExtencion = nombreArchivo.lastIndexOf(".") + 1;       
             let extArchivo = nombreArchivo.substr(idExtencion, nombreArchivo.length).toLowerCase();
+            
+            console.log(extArchivo);
 
             if (extArchivo=="mp4" && archivo.size <= maxSize|| extArchivo=="mov" && archivo.size <= maxSize|| extArchivo=="avi" && archivo.size <= maxSize){
+                
+                console.log("Aquí andamos karnal");
 
                 let nombreArchivo = inputArchivo.files[0].name;
                 if (inputArchivo.value != "") {
@@ -269,19 +273,19 @@
                 labelArchivo.innerHTML = "Adjuntar mp4,mov,avi - 5Mb máximo";
 
             }
-        }
+        }*/
 
-        function cambiarContenidoExpediente(inputArchivo) {
+        /*function cambiarContenidoExpediente(inputArchivo) {
             // Tamaño maximo del archivo
-            let maxSize = 5000000; //5mb -> 5,000,000
+            //let maxSize = 5000000; //5mb -> 5,000,000
 
             // Validamos el primer archivo únicamente
             let archivo = inputArchivo.files[0];
             let nombreArchivo = inputArchivo.value;
-            let idExtencion = nombreArchivo.lastIndexOf(".") + 1;
-            let extArchivo = nombreArchivo.substr(idExtencion, nombreArchivo.length).toLowerCase();
+            //let idExtencion = nombreArchivo.lastIndexOf(".") + 1;
+            let extArchivo = nombreArchivo.substring(8, 13);       //extArchivo = nombreArchivo.substr(idExtencion, nombreArchivo.length).toLowerCase();
 
-            if (extArchivo=="pdf" && archivo.size <= maxSize|| extArchivo=="docx" && archivo.size <= maxSize|| extArchivo=="xlsx" && archivo.size <= maxSize|| extArchivo=="xls" && archivo.size <= maxSize){
+            if (extArchivo == "docs." || extArchivo == "drive"){       //(extArchivo=="pdf" && archivo.size <= maxSize|| extArchivo=="docx" && archivo.size <= maxSize|| extArchivo=="xlsx" && archivo.size <= maxSize|| extArchivo=="xls" && archivo.size <= maxSize){
 
                 let nombreArchivo = inputArchivo.files[0].name;
                 if (inputArchivo.value != "") {
@@ -296,15 +300,14 @@
                 labelArchivo.innerHTML = "Adjuntar pdf, docx, xlsx, xls - 5Mb máximo";
 
             }
-        }
+        }*/
 
-        function cambiarBG(){
+        /*function cambiarBG(){
             let fileInputVideo = document.getElementById('videollamada');
             let lblfileInputVideo = document.getElementById('lbl_videollamada');
 
             let fileInputExpediente = document.getElementById('expediente');
             let lblfileInputExpediente = document.getElementById('lbl_expediente');
-
 
             if (fileInputVideo.value == ""){
                 lblfileInputVideo.className = 'btn btn-warning';
@@ -312,6 +315,38 @@
 
             if (fileInputExpediente.value == ""){
                 lblfileInputExpediente.className = 'btn btn-warning';
+            } 
+        }*/
+
+        function cambiarContenidoVideo(){
+            let fileInputVideo = document.getElementById('videollamada');
+            let nombreArchivo = fileInputVideo.value;
+            let extArchivo = nombreArchivo.substring(8 ,13);
+
+            if (extArchivo == "youtu" || extArchivo == "drive"){       
+
+                if (nombreArchivo.value != "") {
+
+                }
+
+            }else{
+                fileInputVideo.value="";
+            }
+        }
+
+        function cambiarContenidoExpediente() {
+            let enlaceArchivoExpediente = document.getElementById('expediente');
+            let nombreArchivo = enlaceArchivoExpediente.value;
+            let extArchivo = nombreArchivo.substring(8 ,13);
+
+            if (extArchivo == "docs." || extArchivo == "drive"){       
+
+                if (nombreArchivo.value != "") {
+
+                }
+
+            }else{
+                enlaceArchivoExpediente.value="";
             }
         }
     </script>

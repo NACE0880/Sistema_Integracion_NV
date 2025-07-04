@@ -28,7 +28,7 @@
         <tr>
             {{-- PENDIENTES --}}
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                Aldea
+                Iztapalapa
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['aldea']['cantidad'] }}

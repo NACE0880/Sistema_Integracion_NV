@@ -9,6 +9,8 @@ use App\User;
 use App\adts;
 use App\llamadas;
 use App\coordinadores;
+use App\equipamientos;
+use App\lineas;
 
 use DateTime;
 
@@ -140,7 +142,7 @@ class TutoriasController extends Controller
         // Notificar Encargados de Validacion
         foreach ($users as $user) {
             foreach ($user->permisos() as $permiso) {
-                ($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
+                //($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
             }
         }
 
@@ -175,24 +177,43 @@ class TutoriasController extends Controller
         $llamada->RESPONSABLE   = Auth::user()->userable->NOMBRE;
 
         $llamada->ESTATUS       = "Llamada Efectiva";
-        $llamada->VIDEO         = self::cargaVideoConferencia($request->file('videollamada'));
+        $llamada->VIDEO         = $request->input('videollamada');       //self::cargaVideoConferencia($request->file('videollamada'));
         $llamada->OBSERVACIONES = $request->input('observaciones');
-        $llamada->EXPEDIENTE    = self::cargaExpediente($request->file('expediente'));
+        $llamada->EXPEDIENTE    = $request->input('expediente');       //self::cargaExpediente($request->file('expediente'));
 
         $llamada->save();
-        ($request->input('estatus_adt'))? self::validarCambiosEstatus($adt,$request->input('estatus_adt')): false;
+        //($request->input('estatus_adt'))? self::validarCambiosEstatus($adt,$request->input('estatus_adt')): false;
 
         return redirect()->route('consultar.tutoria');
     }
 
     public function actualizarInternetForm(Request $request,adts $adt){
 
-        return $request->all();
+        $linea=lineas::where('ID_ADT', $adt->ID_ADT)->first();
+        $linea->LINEA = $request->input('linea');
+        $linea->APORTA = $request->input('dependencia');
+        $linea->PAGA = $request->input('dependencia_pago');
+        $linea->ANCHO_BANDA = $request->input('ancho_banda');
+        $linea->TECNOLOGIA = $request->input('tecnologia');
+        $linea->SEMAFORO = $request->input('semaforo');
+        $linea->OBSERVACIONES = $request->input('observaciones');
+        $linea->save();
+
+        return redirect()->route('panel.llamada.adt', $adt);
+
+        //return $request->all();
     }
 
     public function actualizarInfraestructuraForm(Request $request,adts $adt){
+        /*
+        $infrestructura = new infraestructuras;
 
-        return $request->all();
+        $infrestructura->KIT_SENALIZACION = $request->input('kit_señalizacion');
+        
+        $infrestructura->save();
+
+        return redirect()->route('panel.call.adt');*/
+        //return $request->all();
     }
 
     public function actualizarMobiliarioForm(Request $request,adts $adt){
@@ -207,7 +228,41 @@ class TutoriasController extends Controller
 
     public function actualizarEquipamientoForm(Request $request, adts $adt){
 
-        return $request->all();
+        $equipamiento=equipamientos::where('ID_ADT', $adt->ID_ADT)->where('TIPO', 'FUNCIONAL')->first();
+        $equipamiento->PC=$request->input('pc_funcional');
+        $equipamiento->LAPTOP=$request->input('laptop_funcional');
+        $equipamiento->NETBOOK=$request->input('netbook_funcional');
+        $equipamiento->CLASSMATE=$request->input('classmate_funcional');
+        $equipamiento->XO=$request->input('xo_funcional');
+        $equipamiento->OBSERVACIONES=$request->input('observaciones');
+        $equipamiento->save();
+
+        $equipamiento=equipamientos::where('ID_ADT', $adt->ID_ADT)->where('TIPO', 'DAÑADO')->first();
+        $equipamiento->PC=$request->input('pc_dañado');
+        $equipamiento->LAPTOP=$request->input('laptop_dañado');
+        $equipamiento->NETBOOK=$request->input('netbook_dañado');
+        $equipamiento->CLASSMATE=$request->input('classmate_dañado');
+        $equipamiento->XO=$request->input('xo_dañado');
+        $equipamiento->save();
+
+        $equipamiento=equipamientos::where('ID_ADT', $adt->ID_ADT)->where('TIPO', 'FALTANTE')->first();
+        $equipamiento->PC=$request->input('pc_faltante');
+        $equipamiento->LAPTOP=$request->input('laptop_faltante');
+        $equipamiento->NETBOOK=$request->input('netbook_faltante');
+        $equipamiento->CLASSMATE=$request->input('classmate_faltante');
+        $equipamiento->XO=$request->input('xo_faltante');
+        $equipamiento->save();
+
+        $equipamiento=equipamientos::where('ID_ADT', $adt->ID_ADT)->where('TIPO', 'BAJA')->first();
+        $equipamiento->PC=$request->input('pc_baja');
+        $equipamiento->LAPTOP=$request->input('laptop_baja');
+        $equipamiento->NETBOOK=$request->input('netbook_baja');
+        $equipamiento->CLASSMATE=$request->input('classmate_baja');
+        $equipamiento->XO=$request->input('xo_baja');
+        $equipamiento->save();
+
+        return redirect()->route('panel.llamada.adt', $adt);
+        //return $request->all();
     }
 
     public function exportReporte(adts $adt){
@@ -215,7 +270,7 @@ class TutoriasController extends Controller
         $archivo->descargar();
     }
 
-    // CARGA/BAJA IMAGENES y OBTENCION NOMBRE
+    /* // CARGA/BAJA IMAGENES y OBTENCION NOMBRE
     public function cargaVideoConferencia($file){
         if (is_null($file)){
             return null;
@@ -227,7 +282,7 @@ class TutoriasController extends Controller
 
             return $nombre_archivo;
         }
-    }
+    } 
 
     public function cargaExpediente($file){
         if (is_null($file)){
@@ -240,6 +295,6 @@ class TutoriasController extends Controller
 
             return $nombre_archivo;
         }
-    }
+    }*/
 
 }

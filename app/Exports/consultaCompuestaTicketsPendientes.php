@@ -43,7 +43,7 @@ class consultaCompuestaTicketsPendientes {
                 ])->get();
 
                 $pendientes_data = [
-                    'aldea'     => self::resumenSitio($tickets, 'Aldea Iztapalapa'),
+                    'aldea'     => self::resumenSitio($tickets, 'Iztapalapa'),
 
                     'campeche'  => self::resumenSitio($tickets, 'Campeche'),
 

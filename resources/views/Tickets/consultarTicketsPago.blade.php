@@ -220,7 +220,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="afeccion">Afección</label>
+                            <label for="afeccion">Afectación</label>
                             <input type="text" class="form-control" id="afeccion" name="afeccion" value="" readonly>
                         </div>
 

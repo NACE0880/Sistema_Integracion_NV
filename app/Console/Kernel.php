@@ -39,16 +39,16 @@ class Kernel extends ConsoleKernel
 // TICKETS
     // every minute para pruebas locales
 
-        $schedule->command('eliminarfotos:tickets')
+        //Esto también lo comenté $schedule->command('eliminarfotos:tickets')
                             // ->daily();
-                            ->cron('* * 01 */3 *');
+                            // Y esto ->cron('* * 01 */3 *');
 
 
         $schedule->command('ResumenTickets:ReportesXls')
-                            // ->everyMinute();
-                            ->monthly();
+                            ->everyMinute();
+                            //->monthly();
 
-        $schedule->command('Respaldo:TicketsXlsx')
+        /* Esto lo comenté $schedule->command('Respaldo:TicketsXlsx')
                             // ->everyMinute();
                             ->weekly();
 
@@ -58,7 +58,7 @@ class Kernel extends ConsoleKernel
                             ->weeklyOn(4, '9:00');
         $schedule->command('ResumenTickets:NoCotizados')
                             // ->everyMinute();
-                            ->weeklyOn(2, '9:00');
+                            ->weeklyOn(2, '9:00');*/
     }
 
     /**

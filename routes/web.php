@@ -161,3 +161,6 @@ Route::prefix('loginTickets')->group(function(){
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Registro de Usuarios
+Route::get('/usuarios/inicio', 'ControladorPanelUsuarios@mostrarInicioUsuarios')->name('usuarios.inicio');

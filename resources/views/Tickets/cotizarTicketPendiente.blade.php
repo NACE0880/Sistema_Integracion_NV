@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="casa">Afección</label>
+                                <label for="casa">Afectación</label>
                                 <input type="text" class="form-control" id="casa" name="casa" value="{{ $ticket->AFECCION }}" readonly>
                             </div>
 

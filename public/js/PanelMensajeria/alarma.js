@@ -47,7 +47,7 @@ function enviar() {
         "data": JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "525518794743",
+            "to": "",
             "type": "interactive",
             "interactive": {
                 "type": "cta_url",
@@ -73,7 +73,7 @@ function enviar() {
     };
     // TELEGRAM
     let access_token = '7251630970:AAFvn3K2be2mFh-bi_i-o5PAUk1E1rgZA28';
-    let chat_id = '906068930';
+    let chat_id = '';
     let text = '<b>REPORTE PROGRAMADO</b>%0AMuy buen día Miguel ANGEL%0A<blockquote expandable><b><i>Pendientes:</i></b>%0A- Biblioteca 1: 00:30:00%0A- Biblioteca 2: 2días 00:00:00 %0A- Biblioteca 3: 03:30:00%0A- Biblioteca 4: 2días 00:00:00 %0A- <s>Biblioteca 5: 00:00:00</s></blockquote>';
     let parse_mode = 'HTML';
 

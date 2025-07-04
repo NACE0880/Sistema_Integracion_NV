@@ -9,7 +9,7 @@
                 <b>ID_CASA</b>
             </th>
             <th width="25" style="color: #ffffff; background-color: #000000; border: 1px solid #000;" valign='middle ' align='center' bgcolor='black'>
-                <b>ID_AFECCION</b>
+                <b>ID_AFECTACIÓN</b>
             </th>
             <th width="25" style="color: #ffffff; background-color: #000000; border: 1px solid #000;" valign='middle ' align='center' bgcolor='black'>
                 <b>ID_ENTORNO</b>
@@ -30,7 +30,7 @@
                 <b>DIRECTOR</b>
             </th>
             <th width="25" style="color: #ffffff; background-color: #000000; border: 1px solid #000;" valign='middle ' align='center' bgcolor='black'>
-                <b>AFECCION</b>
+                <b>AFECTACIÓN</b>
             </th>
             <th width="25" style="color: #ffffff; background-color: #000000; border: 1px solid #000;" valign='middle ' align='center' bgcolor='black'>
                 <b>AREA_RESPONSABLE</b>
