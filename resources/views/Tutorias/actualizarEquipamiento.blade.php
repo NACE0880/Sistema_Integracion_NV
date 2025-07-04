@@ -185,7 +185,7 @@
 
                     <div class="row g-3 mt-5" >
                         <div class="col-6">
-                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <label for="observaciones_previas" class="form-label">Observaciones</label>
                             <textarea class="form-control" id="observaciones_previas" name="observaciones_previas" rows="3" placeholder="{{ $adt->equipamientoFuncional($adt->ID_ADT)->OBSERVACIONES }}" readonly></textarea>
                         </div>
                          <div class="col-6">
@@ -285,7 +285,7 @@
 
                 if (!todoBien) {
                     event.preventDefault();
-                    alert("Los equipos capturados no coinciden con el equipamiento inicial.");
+                    alert("Los equipos capturados no coinciden con el equipamiento registrado.");
                 } else {
                     showLoading();
                 }

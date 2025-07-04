@@ -77,7 +77,7 @@
 
                     <div class="row g-3 mt-5">
                         <div class="col-6">
-                            <label for="observaciones" class="form-label">Observaciones</label>
+                            <label for="observaciones_previas" class="form-label">Observaciones</label>
                             <textarea class="form-control" id="observaciones_previas" name="observaciones_previas" rows="3" placeholder="{{ $adt->linea->OBSERVACIONES }}" readonly></textarea>
                         </div>
                         <div class="col-6">

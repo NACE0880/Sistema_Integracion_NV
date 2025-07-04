@@ -31,7 +31,7 @@
             </div>
 
 
-            <form action="{{ route('update.furniture.adt', $adt)}}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()" class="row g-3">
+            <form id="formularioMobiliario" action="{{ route('update.furniture.adt', $adt)}}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()" class="row g-3">
                 {{-- Redireccionar a rutas de actualizacion  --}}
                 @csrf
                 @method('PATCH')
@@ -104,6 +104,10 @@
 
                     <div class="row g-3 justify-content-center">
                         <div class="col-6">
+                            <label for="observaciones_previas" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones_previas" name="observaciones_previas" rows="3" placeholder="{{ $adt->mobiliarioFuncional($adt->ID_ADT)->OBSERVACIONES }}" readonly></textarea>
+                        </div>
+                        <div class="col-6">
                             <label for="observaciones" class="form-label">Observaciones</label>
                             <textarea class="form-control" id="observaciones" name="observaciones" rows="3" maxlength="200" placeholder="Max 200 caracteres" required></textarea>
                         </div>
@@ -158,6 +162,7 @@
                 elementoFuncional.max = (elementoFuncional.value + resto);
             }
 
+            return {resto}
         }
         function calcularMaximos() {
             const elementos = ['mesaCircular', 'sillas','muebleResguardo', 'mesaRectangularGrande', 'mesaRectangularMediana'];
@@ -170,6 +175,30 @@
             inputs.forEach(input => bloquearIncrementos(input));
             bloquearIncrementos(input);
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formulario = document.getElementById("formularioMobiliario");
+
+            formulario.addEventListener("submit", function(event) {
+                const elementos = ['mesaCircular', 'sillas','muebleResguardo', 'mesaRectangularGrande', 'mesaRectangularMediana'];
+                let todoBien = true;
+
+                elementos.forEach(elemento => {
+                    const campo = document.querySelector(`#${elemento}_inicial`);
+                    const resultado = bloquearIncrementos(campo);
+                    if (!(resultado.resto >= 0)) {
+                        todoBien = false;
+                    }
+                });
+
+                if (!todoBien) {
+                    event.preventDefault();
+                    alert("El mobiliario capturado no coincide con el mobiliario resgistrado.");
+                } else {
+                    showLoading();
+                }
+            });
+        });
 
         window.onload = calcularMaximos;
     </script>

@@ -11,6 +11,7 @@ use App\llamadas;
 use App\coordinadores;
 use App\equipamientos;
 use App\lineas;
+use App\mobiliarios;
 
 use DateTime;
 
@@ -218,7 +219,18 @@ class TutoriasController extends Controller
 
     public function actualizarMobiliarioForm(Request $request,adts $adt){
 
-        return $request->all();
+        $mobiliario=mobiliarios::where('ID_ADT', $adt->ID_ADT)->where('TIPO', 'FUNCIONAL')->first();
+        $mobiliario->MESA_CIRCULAR = $request->input('mesaCircular_funcional');
+        $mobiliario->SILLAS = $request->input('sillas_funcional');
+        $mobiliario->MUEBLE_RESGUARDO = $request->input('muebleResguardo_funcional');
+        $mobiliario->MESA_RECTANGULAR_GRANDE = $request->input('mesaRectangularGrande_funcional');
+        $mobiliario->MESA_RECTANGULAR_MEDIANA = $request->input('mesaRectangularMediana_funcional');
+        $mobiliario->OBSERVACIONES = $request->input('observaciones');
+        $mobiliario->save();
+
+        return redirect()->route('panel.llamada.adt', $adt);
+
+        //return $request->all();
     }
 
     public function actualizarUsoBdtForm(Request $request,adts $adt){
