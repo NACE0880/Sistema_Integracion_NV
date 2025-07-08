@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\casas;
+use App\roles;
 
 class ControladorPanelUsuarios extends Controller
 {
@@ -13,6 +15,8 @@ class ControladorPanelUsuarios extends Controller
 
     public function mostrarInicioUsuarios(){
         $usuarios=User::all();
-        return view('Usuarios.Inicio', compact('usuarios'));
+        $casas=casas::all();
+        $roles=roles::all();
+        return view('Usuarios.Inicio', compact('usuarios', 'casas', 'roles'));
     }
 }

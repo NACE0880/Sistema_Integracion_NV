@@ -39,9 +39,21 @@
         </ul>
         @endauth
         @include('Usuarios.Tabla')
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalGeneralUsuarios" data-titulo="Nuevo Usuario">
+            Registrar Usuario
+        </button>
+        @include('Usuarios.modal')
         <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </body>
 </html>
+<script>
+    $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);         
+        var titulo = button.data('titulo');          
+        var modal = $(this);
+        modal.find('.modal-title').text(titulo);     
+    });
+</script>
