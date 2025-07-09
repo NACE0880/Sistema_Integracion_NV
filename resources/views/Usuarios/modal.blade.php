@@ -11,22 +11,22 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="casa">Nombre</label>
+                            <label for="nombre">Nombre</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="daño" name="daño" value="">
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="casa">Correo</label>
+                            <label for="correo">Correo</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="daño" name="daño" value="">
+                            <input type="text" class="form-control" id="correo" name="correo" value="">
                         </div>  
                         <div class="form-group col-md-4">
                             <label for="casa">Casa</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <select class="form-control" id="daño" name="daño">
+                            <select class="form-control" id="casa" name="casa">
                                 <option value="" selected disabled>
                                 </option>
                                 @foreach($casas as $casa)
@@ -35,16 +35,10 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="casa">Usuario</label>
+                            <label for="rol">Rol</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="daño" name="daño" value="">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="casa">Rol</label>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <select class="form-control" id="daño" name="tipo[]" multiple size="8">
+                            <select class="form-control" id="rol" name="rol[]" multiple size="4">
                                 <option value="" selected disabled>
                                 </option>
                                 @foreach($roles as $rol)
@@ -53,17 +47,40 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="casa">Contraseña</label>
+                            <label for="contrasena">Contraseña</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="daño" name="daño" value="">
+                            <input type="text" class="form-control" id="contrasena" name="contrasena" value="">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="casa">Repetir Contraseña</label>
+                            <label for="repetirContrasena">Repetir Contraseña</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="daño" name="daño" value="">
+                            <input type="text" class="form-control" id="repetirContrasena" name="repetirContrasena" value="">
                         </div>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline-primary d-inline-block">polón</button>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="d-flex justify-content-between mt-5 w-50">
+                            <button type="button" class="btn btn-outline-danger">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-outline-primary">
+                                Registrar Usuario
+                            </button>
+                        </div>-->
+
+                        <!--<div class="form-group mt-5">
+                            <div class="col-md-12 text-start">
+                                <button type="button" class="btn btn-outline-danger">
+                                    Registrar Usuario
+                                </button>
+                            </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
