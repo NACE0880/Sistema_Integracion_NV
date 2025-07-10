@@ -16,12 +16,16 @@
                         <div class="form-group col-md-8">
                             <input type="text" class="form-control" id="nombre" name="nombre" value="">
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="correo">Correo</label>
                         </div>
                         <div class="form-group col-md-8">
                             <input type="text" class="form-control" id="correo" name="correo" value="">
-                        </div>  
+                        </div>
+                    </div>  
+                    <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="casa">Casa</label>
                         </div>
@@ -34,6 +38,8 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="rol">Rol</label>
                         </div>
@@ -46,41 +52,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="contrasena">Contraseña</label>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col-12 text-right">
+                            <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                            <button type="submit" class="btn btn-outline-danger">Cancelar</button>
                         </div>
-                        <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="contrasena" name="contrasena" value="">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="repetirContrasena">Repetir Contraseña</label>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <input type="text" class="form-control" id="repetirContrasena" name="repetirContrasena" value="">
-                        </div>
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-outline-primary d-inline-block">polón</button>
-                            </div>
-                        </div>
-
-
-                        <!--<div class="d-flex justify-content-between mt-5 w-50">
-                            <button type="button" class="btn btn-outline-danger">
-                                Cancelar
-                            </button>
-                            <button type="button" class="btn btn-outline-primary">
-                                Registrar Usuario
-                            </button>
-                        </div>-->
-
-                        <!--<div class="form-group mt-5">
-                            <div class="col-md-12 text-start">
-                                <button type="button" class="btn btn-outline-danger">
-                                    Registrar Usuario
-                                </button>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
