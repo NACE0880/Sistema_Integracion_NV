@@ -12,13 +12,11 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        {{-- BARRA DE NAVEGACIÓN --}}
         @auth
         <ul class="nav nav-tabs justify-content-center">
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('usuarios.inicio') ? 'active' : '' }}" href="{{ route('usuarios.inicio') }}"> <i class="fa-solid fa-house"></i> Usuarios </a>
             </li>
-            {{-- USUARIO --}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                     {{ Auth::user()->userable->NOMBRE }} <span class="caret"></span>

@@ -55,8 +55,8 @@
                     </div>
                     <div class="form-row mt-4">
                         <div class="col-12 text-right">
-                            <button type="submit" class="btn btn-outline-primary">Registrar</button>
-                            <button type="submit" class="btn btn-outline-danger">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-success">Registrar</button>
+                            <button id="botonCancelar" name="botonCancelar" type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>
