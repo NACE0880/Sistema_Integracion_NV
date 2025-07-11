@@ -164,3 +164,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Registro de Usuarios
 Route::get('/usuarios/inicio', 'ControladorPanelUsuarios@mostrarInicioUsuarios')->name('usuarios.inicio');
+Route::post('/usuarios/inicio/registro', 'ControladorPanelUsuarios@registrarUsuario')->name('usuarios.registro');

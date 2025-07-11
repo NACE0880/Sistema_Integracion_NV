@@ -32,7 +32,6 @@
 
 
             <form action="{{ route('update.use.adt', $adt)}}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()" class="row g-3">
-                {{-- Redireccionar a rutas de actualizacion  --}}
                 @csrf
                 @method('PATCH')
 
@@ -87,12 +86,12 @@
                     <div class="row g-3 justify-content-center gap-5">
 
                         <div class="col-2">
-                            <label for="hora_inicio" class="form-label">Hora Inicio</label>
+                            <label for="hora_inicio" class="form-label">Hora de Apertura</label>
                             <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" required>
                         </div>
 
                         <div class="col-2">
-                            <label for="hora_final" class="form-label">Hora Final</label>
+                            <label for="hora_final" class="form-label">Hora de Cierre</label>
                             <input type="time" class="form-control" id="hora_final" name="hora_final" required>
                         </div>
 
