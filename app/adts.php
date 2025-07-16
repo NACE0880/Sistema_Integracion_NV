@@ -116,9 +116,16 @@ class adts extends Model
         (!empty($infraestructura)) ? $response = $infraestructura: $response = (object)['KIT_SENALIZACION' => null,'ELECTRICIDAD' => null,'PINTURA_INTERIOR' => null,'PINTURA_EXTERIOR' => null,'OBSERVACIONES' => null];
         return $response;
     }
+
 // INTERNET
     public function linea(){
         return $this->belongsTo('\App\lineas',  'ID_ADT');
     }
 
+// USO BDT
+    public function usos($id){
+        $uso = usos::where('ID_ADT', $id)->first();
+        (!empty($uso)) ? $response = $uso: $response = (object)['ESTATUS_REGISTRO' => null,'ESTATUS_OFERTA' => null,'TIPO_USO' => null,'MAYORIA_POBLACION' => null,'HORA_INICIO' => null, 'HORA_FINAL' => null, 'USUARIOS_SEMANALES' => null, 'OBSERVACIONES' => null];
+        return $response;
+    }
 }

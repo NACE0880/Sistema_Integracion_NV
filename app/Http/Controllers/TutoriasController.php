@@ -12,6 +12,8 @@ use App\coordinadores;
 use App\equipamientos;
 use App\lineas;
 use App\mobiliarios;
+use App\infraestructuras;
+use App\usos;
 
 use DateTime;
 
@@ -206,15 +208,18 @@ class TutoriasController extends Controller
     }
 
     public function actualizarInfraestructuraForm(Request $request,adts $adt){
-        /*
-        $infrestructura = new infraestructuras;
-
-        $infrestructura->KIT_SENALIZACION = $request->input('kit_señalizacion');
         
-        $infrestructura->save();
+        $infraestructura = ['ID_ADT' => $adt->ID_ADT];
+        $actualizacionInfraestructura = 
+        [
+            'ID_ADT' => $adt->ID_ADT, 'KIT_SENALIZACION' => $request->input('kit_señalizacion'), 
+            'ELECTRICIDAD' => $request->input('electricidad'), 'PINTURA_INTERIOR' => $request->input('pintura_interior'),
+            'PINTURA_EXTERIOR' => $request->input('pintura_exterior'), 'OBSERVACIONES' => $request->input('observaciones')
+        ];
+        infraestructuras::updateOrCreate($infraestructura, $actualizacionInfraestructura);
 
-        return redirect()->route('panel.call.adt');*/
-        //return $request->all();
+        return redirect()->route('panel.llamada.adt', $adt);
+
     }
 
     public function actualizarMobiliarioForm(Request $request,adts $adt){
@@ -235,7 +240,19 @@ class TutoriasController extends Controller
 
     public function actualizarUsoBdtForm(Request $request,adts $adt){
 
-        return $request->all();
+        $uso = ['ID_ADT' => $adt->ID_ADT];
+        $actualizacionUso = 
+        [
+            'ID_ADT' => $adt->ID_ADT, 'ESTATUS_REGISTRO' => $request->input('estatus_registro'), 
+            'ESTATUS_OFERTA' => $request->input('estatus_curso'), 'TIPO_USO' => $request->input('tipo_uso'),
+            'MAYORIA_POBLACION' => $request->input('poblacion'), 'HORA_INICIO' => $request->input('hora_inicio'),
+            'HORA_FINAL' => $request->input('hora_final'), 'USUARIOS_SEMANALES' => $request->input('usuarios_semanales'),
+            'OBSERVACIONES' => $request->input('observaciones')
+        ];
+        usos::updateOrCreate($uso, $actualizacionUso);
+
+        return redirect()->route('panel.llamada.adt', $adt);
+
     }
 
     public function actualizarEquipamientoForm(Request $request, adts $adt){

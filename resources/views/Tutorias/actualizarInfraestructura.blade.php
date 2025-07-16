@@ -42,6 +42,7 @@
 
                         <div class="col-md-5">
                             <label for="kit_señalizacion" class="form-label">Estatus Kit Señalización</label>
+                            <input class="form-control mb-3" id="kit_señalizacion_previa" name="kit_señalizacion_previa" placeholder="{{ $adt->infraestructura($adt->ID_ADT)->KIT_SENALIZACION }}" readonly/>
                             <select id="kit_señalizacion" name="kit_señalizacion" class="form-select" required>
                                 <option value="">Selecciona...</option>
                                 <option value="Colocada">Colocada</option>
@@ -51,6 +52,7 @@
 
                         <div class="col-md-5">
                             <label for="electricidad" class="form-label">Electricidad</label>
+                            <input class="form-control mb-3" id="electricidad_historico_previa" name="electricidad_historico_previa" placeholder="{{ $adt->infraestructura($adt->ID_ADT)->ELECTRICIDAD }}" readonly/>
                             <select id="electricidad" name="electricidad" class="form-select" required>
                                 <option value="">Selecciona...</option>
                                 <option value="Funcional">Funcional</option>
@@ -65,6 +67,7 @@
 
                         <div class="col-md-5">
                             <label for="pintura_interior" class="form-label">Pintura Interior</label>
+                            <input class="form-control mb-3" id="pintura_interior_previa" name="pintura_interior_previa" placeholder="{{ $adt->infraestructura($adt->ID_ADT)->PINTURA_INTERIOR }}" readonly/>
                             <select id="pintura_interior" name="pintura_interior" class="form-select" required>
                                 <option value="">Selecciona...</option>
                                 <option value="Sin Cambios">Sin Cambios</option>
@@ -75,6 +78,7 @@
 
                         <div class="col-md-5">
                             <label for="pintura_exterior" class="form-label">Pintura Exterior</label>
+                            <input class="form-control mb-3" id="pintura_exterior_previa" name="pintura_exterior_previa" placeholder="{{ $adt->infraestructura($adt->ID_ADT)->PINTURA_EXTERIOR }}" readonly/>
                             <select id="pintura_exterior" name="pintura_exterior" class="form-select" required>
                                 <option value="">Selecciona...</option>
                                 <option value="Sin Cambios">Sin Cambios</option>
@@ -88,6 +92,7 @@
                     <div class="row g-3 justify-content-center">
                         <div class="col-6">
                             <label for="observaciones" class="form-label">Observaciones</label>
+                            <textarea class="form-control mb-3" id="observaciones_previas" name="observaciones_previas" rows="3" placeholder="{{ $adt->infraestructura($adt->ID_ADT)->OBSERVACIONES }}" readonly></textarea>
                             <textarea class="form-control" id="observaciones" name="observaciones" rows="3" maxlength="200" placeholder="Max 200 caracteres" required></textarea>
                         </div>
                     </div>
