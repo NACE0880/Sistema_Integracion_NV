@@ -38,55 +38,32 @@
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r1_nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="r1_nombre" name="r1_nombre" value="{{ $adt->responsableAula($adt->ID_ADT)->NOMBRE }}" disabled required>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r1_editcheck_nombre">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r1_editcheck_nombre" data-input="input#r1_nombre" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="r1_nombre" name="r1_nombre" value="{{ $adt->responsableAula($adt->ID_ADT)->NOMBRE }}" required>
                         </div>
 
                         <div class="col-4">
                             <label for="r1_cargo" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="r1_cargo" name="r1_cargo" value="{{ $adt->responsableAula($adt->ID_ADT)->CARGO }}" disabled required>
+                            <input type="text" class="form-control" id="r1_cargo" name="r1_cargo" value="{{ $adt->responsableAula($adt->ID_ADT)->CARGO }}" required>
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r1_editcheck_cargo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r1_editcheck_cargo" data-input="input#r1_cargo" onclick="revisarCheck(this)">
-                        </div>
                     </div>
 
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r1_telefono" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="r1_telefono" name="r1_telefono" value="{{ $adt->responsableAula($adt->ID_ADT)->TELEFONO }}" disabled required>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r1_editcheck_telefono">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r1_editcheck_telefono" data-input="input#r1_telefono" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="r1_telefono" name="r1_telefono" value="{{ $adt->responsableAula($adt->ID_ADT)->TELEFONO }}" required>
                         </div>
 
                         <div class="col-4">
                             <label for="r1_celular" class="form-label">Celular</label>
-                            <input type="text" class="form-control" id="r1_celular" name="r1_celular" value="{{ $adt->responsableAula($adt->ID_ADT)->CELULAR }}" disabled required>
+                            <input type="text" class="form-control" id="r1_celular" name="r1_celular" value="{{ $adt->responsableAula($adt->ID_ADT)->CELULAR }}" required>
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r1_editcheck_celular">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r1_editcheck_celular" data-input="input#r1_celular" onclick="revisarCheck(this)">
-                        </div>
                     </div>
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r1_correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="r1_correo" name="r1_correo" value="{{ $adt->responsableAula($adt->ID_ADT)->CORREO }}" disabled required>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r1_editcheck_correo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r1_editcheck_correo" data-input="input#r1_correo" onclick="revisarCheck(this)">
+                            <input type="email" class="form-control" id="r1_correo" name="r1_correo" value="{{ $adt->responsableAula($adt->ID_ADT)->CORREO }}" required>
                         </div>
                     </div>
                 </div>
@@ -97,56 +74,34 @@
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r2_nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="r2_nombre" name="r2_nombre" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->NOMBRE }}" disabled>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r2_editcheck_nombre">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r2_editcheck_nombre" data-input="input#r2_nombre" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="r2_nombre" name="r2_nombre" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->NOMBRE }}">
                         </div>
 
                         <div class="col-4">
                             <label for="r2_cargo" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="r2_cargo" name="r2_cargo" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CARGO }}" disabled>
+                            <input type="text" class="form-control" id="r2_cargo" name="r2_cargo" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CARGO }}">
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r2_editcheck_cargo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r2_editcheck_cargo" data-input="input#r2_cargo" onclick="revisarCheck(this)">
-                        </div>
                     </div>
 
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r2_telefono" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="r2_telefono" name="r2_telefono" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->TELEFONO }}" disabled>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r2_editcheck_telefono">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r2_editcheck_telefono" data-input="input#r2_telefono" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="r2_telefono" name="r2_telefono" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->TELEFONO }}">
                         </div>
 
                         <div class="col-4">
                             <label for="r2_celular" class="form-label">Celular</label>
-                            <input type="text" class="form-control" id="r2_celular" name="r2_celular" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CELULAR }}" disabled>
+                            <input type="text" class="form-control" id="r2_celular" name="r2_celular" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CELULAR }}">
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r2_editcheck_celular">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r2_editcheck_celular" data-input="input#r2_celular" onclick="revisarCheck(this)">
-                        </div>
                     </div>
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="r2_correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="r2_correo" name="r2_correo" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CORREO }}" disabled>
+                            <input type="email" class="form-control" id="r2_correo" name="r2_correo" value="{{ $adt->responsableAulaExtra($adt->ID_ADT)->CORREO }}">
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="r2_editcheck_correo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="r2_editcheck_correo" data-input="input#r2_correo" onclick="revisarCheck(this)">
-                        </div>
                     </div>
                 </div>
 
@@ -156,56 +111,34 @@
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="md_nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="md_nombre" name="md_nombre" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->NOMBRE }}" disabled required>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="md_editcheck_nombre">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="md_editcheck_nombre" data-input="input#md_nombre" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="md_nombre" name="md_nombre" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->NOMBRE }}" required>
                         </div>
 
                         <div class="col-4">
                             <label for="md_cargo" class="form-label">Cargo</label>
-                            <input type="text" class="form-control" id="md_cargo" name="md_cargo" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CARGO }}" disabled required>
+                            <input type="text" class="form-control" id="md_cargo" name="md_cargo" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CARGO }}" required>
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="md_editcheck_cargo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="md_editcheck_cargo" data-input="input#md_cargo" onclick="revisarCheck(this)">
-                        </div>
                     </div>
 
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="md_telefono" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="md_telefono" name="md_telefono" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->TELEFONO }}" disabled required>
-                        </div>
-
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="md_editcheck_telefono">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="md_editcheck_telefono" data-input="input#md_telefono" onclick="revisarCheck(this)">
+                            <input type="text" class="form-control" id="md_telefono" name="md_telefono" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->TELEFONO }}" required>
                         </div>
 
                         <div class="col-4">
                             <label for="md_celular" class="form-label">Celular</label>
-                            <input type="text" class="form-control" id="md_celular" name="md_celular" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CELULAR }}" disabled required>
+                            <input type="text" class="form-control" id="md_celular" name="md_celular" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CELULAR }}" required>
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="md_editcheck_celular">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="md_editcheck_celular" data-input="input#md_celular" onclick="revisarCheck(this)">
-                        </div>
                     </div>
                     <div class="row g-1">
                         <div class="col-4">
                             <label for="md_correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="md_correo" name="md_correo" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CORREO }}" disabled required>
+                            <input type="email" class="form-control" id="md_correo" name="md_correo" value="{{ $adt->contactoMunicipal($adt->ID_ADT)->CORREO }}" required>
                         </div>
 
-                        <div class="form-check form-switch col-2 mt-auto">
-                            <label class="form-check-label" for="md_editcheck_correo">Editar</label>
-                            <input class="form-check-input" type="checkbox" id="md_editcheck_correo" data-input="input#md_correo" onclick="revisarCheck(this)">
-                        </div>
                     </div>
                 </div>
 
@@ -219,19 +152,4 @@
                 </div>
             </form>
         </div>
-@endsection
-
-
-@section('js')
-
-<script>
-    //Habilitar Edición
-    function revisarCheck(checkBox){
-        var input = checkBox.getAttribute('data-input');
-        $(input).attr("disabled", !checkBox.checked);
-    }
-</script>
-
-
-
 @endsection
