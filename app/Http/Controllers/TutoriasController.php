@@ -14,6 +14,7 @@ use App\lineas;
 use App\mobiliarios;
 use App\infraestructuras;
 use App\usos;
+use App\contactos;
 
 use DateTime;
 
@@ -151,8 +152,40 @@ class TutoriasController extends Controller
 
     }
     // Contacto
-    public function actualizarContactoForm(Request $request, $adt){
-        return $request->all();
+    public function actualizarContactoForm(Request $request, adts $adt){
+        
+        $contacto = ['ID_ADT' => $adt->ID_ADT, 'TIPO' => 'RESPONSABLE AULA'];
+        $actualizacionContacto = 
+        [
+            'ID_ADT' => $adt->ID_ADT, 'NOMBRE' => $request->input('r1_nombre'), 
+            'CARGO' => $request->input('r1_cargo'), 'TELEFONO' => $request->input('r1_telefono'),
+            'CELULAR' => $request->input('r1_celular'), 'CORREO' => $request->input('r1_correo'),
+            'TIPO' => 'RESPONSABLE AULA'
+        ];
+        contactos::updateOrCreate($contacto, $actualizacionContacto);
+
+        $contactoExtra = ['ID_ADT' => $adt->ID_ADT, 'TIPO' => 'RESPONSABLE AULA EXTRA'];
+        $actualizacionContactoExtra = 
+        [
+            'ID_ADT' => $adt->ID_ADT, 'NOMBRE' => $request->input('r2_nombre'), 
+            'CARGO' => $request->input('r2_cargo'), 'TELEFONO' => $request->input('r2_telefono'),
+            'CELULAR' => $request->input('r2_celular'), 'CORREO' => $request->input('r2_correo'),
+            'TIPO' => 'RESPONSABLE AULA EXTRA'
+        ];
+        contactos::updateOrCreate($contactoExtra, $actualizacionContactoExtra);
+
+        $contactoMunicipal = ['ID_ADT' => $adt->ID_ADT, 'TIPO' => 'CONTACTO MUNICIPAL'];
+        $actualizacionContactoMunicipal = 
+        [
+            'ID_ADT' => $adt->ID_ADT, 'NOMBRE' => $request->input('md_nombre'), 
+            'CARGO' => $request->input('md_cargo'), 'TELEFONO' => $request->input('md_telefono'),
+            'CELULAR' => $request->input('md_celular'), 'CORREO' => $request->input('md_correo'),
+            'TIPO' => 'CONTACTO MUNICIPAL'
+        ];
+        contactos::updateOrCreate($contactoMunicipal, $actualizacionContactoMunicipal);
+
+        return redirect()->route('consultar.tutoria');
+        //return $request->all();
     }
 
     public function llamadaNoEfectivaForm(Request $request, adts $adt){
