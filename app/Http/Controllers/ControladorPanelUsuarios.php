@@ -23,6 +23,17 @@ class ControladorPanelUsuarios extends Controller
     }
 
     public function registrarUsuario(Request $request){
+        
+        $numeroMasAltoClaveBDT = User::where('usuario', 'like', 'BDT%')
+            ->selectRaw('MAX(CAST(SUBSTRING(usuario, 4) AS UNSIGNED)) as numeroClaveMasAltaBDT')
+            ->value('numeroClaveMasAltaBDT');
+        $nuevoNumeroClaveBDT = $numeroMasAltoClaveBDT ? $numeroMasAltoClaveBDT + 1 : 1;
+        $claveConsecutivaAUltimoRegistroBDT = 'BDT' . $nuevoNumeroClaveBDT;
+
+        User::create([
+            'usuario' => $claveConsecutivaAUltimoRegistroBDT
+        ]);
+
         return $request->all();
     }
 }

@@ -133,6 +133,9 @@
             @csrf
             <div class="input-field">
             <input id="usuario" type="text" class="form-control" name="usuario" value="{{ old('usuario') }}" required autofocus>
+            @if ($errors->has('usuario'))
+                <span class="text-danger">{{ $errors->first('usuario') }}</span>
+            @endif
             <label>Usuario</label>
         </div>
         <div class="input-field">
