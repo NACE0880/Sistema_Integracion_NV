@@ -22,8 +22,26 @@ class ControladorPanelUsuarios extends Controller
         return view('Usuarios.Inicio', compact('usuarios', 'casas', 'roles'));
     }
 
+    public function guardarTipoUserable(Request $request){
+
+        switch ($request->rol){
+            case 0:
+                $tipoUserable = \App\coordinadores;
+                break;
+            case 3:
+                $tipoUserable = \App\directores;
+                break;
+            case 4:
+                $tipoUserable = \App\tutores;
+                break;
+        }  
+        
+    }
+
     public function registrarUsuario(Request $request){
         
+        dd($request);
+
         $numeroMasAltoClaveBDT = User::where('usuario', 'like', 'BDT%')
             ->selectRaw('MAX(CAST(SUBSTRING(usuario, 4) AS UNSIGNED)) as numeroClaveMasAltaBDT')
             ->value('numeroClaveMasAltaBDT');
