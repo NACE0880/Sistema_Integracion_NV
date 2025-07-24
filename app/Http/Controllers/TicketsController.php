@@ -590,7 +590,7 @@ class TicketsController extends Controller
                 // $data['destinatario'] = $coordinador->NOMBRE;
                 // self::enviarNuevoTicket($data, $coordinador->CORREO);
 
-                $payload = "<b>NUEVO TICKET A VALIDAR</b>%0A".
+                $payload = "<b>NUEVO TICKET GENERADO</b>%0A".
                 $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
                 $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;
 
@@ -714,7 +714,7 @@ class TicketsController extends Controller
                 $telegram = new TelegramController();
 
                 foreach ($destinatarios['coordinadores-tel'] as $nombre => $chat_id) {
-                    $payload = "<b>NUEVO TICKET GENERADO - ".$ticket->FOLIO."</b>%0A".
+                    $payload = "<b>NUEVO TICKET VALIDADO - ".$ticket->FOLIO."</b>%0A".
                     $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
                     $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;
                     $telegram->sendText($chat_id, $payload);
