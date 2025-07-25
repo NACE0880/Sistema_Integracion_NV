@@ -16,42 +16,53 @@ class ControladorPanelUsuarios extends Controller
     }
 
     public function mostrarInicioUsuarios(){
+        
         $usuarios=User::all();
         $casas=casas::all();
         $roles=roles::all();
+
         return view('Usuarios.Inicio', compact('usuarios', 'casas', 'roles'));
     }
 
-    public function guardarTipoUserable(Request $request){
-
-        switch ($request->rol){
-            case 0:
-                $tipoUserable = \App\coordinadores;
-                break;
-            case 3:
-                $tipoUserable = \App\directores;
-                break;
-            case 4:
-                $tipoUserable = \App\tutores;
-                break;
-        }  
-        
-    }
-
-    public function registrarUsuario(Request $request){
-        
-        dd($request);
+    public function generarNuevaClaveUsuario(){
 
         $numeroMasAltoClaveBDT = User::where('usuario', 'like', 'BDT%')
             ->selectRaw('MAX(CAST(SUBSTRING(usuario, 4) AS UNSIGNED)) as numeroClaveMasAltaBDT')
             ->value('numeroClaveMasAltaBDT');
-        $nuevoNumeroClaveBDT = $numeroMasAltoClaveBDT ? $numeroMasAltoClaveBDT + 1 : 1;
-        $claveConsecutivaAUltimoRegistroBDT = 'BDT' . $nuevoNumeroClaveBDT;
+
+        return 'BDT' . ($numeroMasAltoClaveBDT ? $numeroMasAltoClaveBDT + 1 : 1);
+
+    }
+
+    public function generarNuevoUserable(Request $request){
+    
+        $roles = (array) $request->rol;
+
+        if (in_array('coordinador', $request->rol)){
+            $tipoUserAble = '\\App\\coordinadores';
+        }elseif (in_array('director', $request->rol)){
+            $tipoUserAble = '\\App\\directores';
+        }else {
+            $tipoUserAble = '\\App\\tutores';
+        }
+
+        $ultimoUserableId = User::where('userable_type', $tipoUserAble)->max('userable_id');
+
+        return [$tipoUserAble, $ultimoUserableId];
+
+    }
+
+    public function registrarUsuario(Request $request){
+
+        list($tipoUserAble, $ultimoUserableId) = $this->generarNuevoUserable($request);
+
+        dd($tipoUserAble, $ultimoUserableId);
 
         User::create([
-            'usuario' => $claveConsecutivaAUltimoRegistroBDT
+            'usuario' => $this->generarNuevaClaveUsuario(),
+            'userable_id' => $numeroMasAltoUserableId + 1,
+            'userable_type' => $tipoUserAble
         ]);
 
-        return $request->all();
     }
 }
