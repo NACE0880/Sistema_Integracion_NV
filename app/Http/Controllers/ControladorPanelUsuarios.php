@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Http\Request;
 
 use App\User;
+use App\coordinadores;
+use App\coordinadores_casas;
+use App\directores;
+use App\tutores;
 use App\casas;
 use App\roles;
 
@@ -56,13 +62,17 @@ class ControladorPanelUsuarios extends Controller
 
         list($tipoUserAble, $ultimoUserableId) = $this->generarNuevoUserable($request);
 
-        dd($tipoUserAble, $ultimoUserableId);
+        dd($request);
 
         User::create([
             'usuario' => $this->generarNuevaClaveUsuario(),
             'userable_id' => $numeroMasAltoUserableId + 1,
             'userable_type' => $tipoUserAble
         ]);
+
+
+
+        //Mail::to
 
     }
 }
