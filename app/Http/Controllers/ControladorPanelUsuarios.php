@@ -44,9 +44,9 @@ class ControladorPanelUsuarios extends Controller
     
         $roles = (array) $request->rol;
 
-        if (in_array('coordinador', $request->rol)){
+        if (in_array('coordinador', $roles)){
             $tipoUserAble = '\\App\\coordinadores';
-        }elseif (in_array('director', $request->rol)){
+        }elseif (in_array('director', $roles)){
             $tipoUserAble = '\\App\\directores';
         }else {
             $tipoUserAble = '\\App\\tutores';
@@ -60,17 +60,39 @@ class ControladorPanelUsuarios extends Controller
 
     public function registrarUsuario(Request $request){
 
+        $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
+        
+        $roles = (array) $request->rol;
         list($tipoUserAble, $ultimoUserableId) = $this->generarNuevoUserable($request);
-
+        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? '1' : '0';
+        
         dd($request);
 
-        User::create([
-            'usuario' => $this->generarNuevaClaveUsuario(),
-            'userable_id' => $numeroMasAltoUserableId + 1,
-            'userable_type' => $tipoUserAble
-        ]);
+        $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
+        $datosActualizacionTablaUsuario = 
+        [
+            'usuario' => $identificadorUsuario == null? $nuevaClaveUsuario : null,
+            'userable_id' => $identificadorUsuario == null ? $numeroMasAltoUserableId + 1 : null,
+            'userable_type' => $identificadorUsuario == null ? $tipoUserAble : null   
+        ];
+        User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
 
-
+        //quivoy
+        switch ($tipoUserAble){
+            case '\\App\\coordinadores':
+                $datosActualizacionTablaCoordinadores =
+                ([
+                    'NOMBRE' => $request->input('nombre'),
+                    'CORREO' => $request->input('correo'),
+                    'VALIDACION' => $digitoVerificadorValidacion
+                ]);
+                coordinadores_casas::create([
+                    'ID_COORDINADOR' => coordinadores::max('ID_COORDINADOR'),
+                    'ID_CASA' => casas::where('NOMBRE', $request->input('casa_coordinador'))->value('ID_CASA')
+                ]);
+                break;
+            
+        }
 
         //Mail::to
 
