@@ -64,20 +64,20 @@ class ControladorPanelUsuarios extends Controller
         
         $roles = (array) $request->rol;
         list($tipoUserAble, $ultimoUserableId) = $this->generarNuevoUserable($request);
-        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? '1' : '0';
+        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
         
         dd($request);
 
         $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
         $datosActualizacionTablaUsuario = 
         [
+            // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
             'usuario' => $identificadorUsuario == null? $nuevaClaveUsuario : null,
             'userable_id' => $identificadorUsuario == null ? $numeroMasAltoUserableId + 1 : null,
             'userable_type' => $identificadorUsuario == null ? $tipoUserAble : null   
         ];
         User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
 
-        //quivoy
         switch ($tipoUserAble){
             case '\\App\\coordinadores':
                 $datosActualizacionTablaCoordinadores =
@@ -86,15 +86,16 @@ class ControladorPanelUsuarios extends Controller
                     'CORREO' => $request->input('correo'),
                     'VALIDACION' => $digitoVerificadorValidacion
                 ]);
-                coordinadores_casas::create([
-                    'ID_COORDINADOR' => coordinadores::max('ID_COORDINADOR'),
-                    'ID_CASA' => casas::where('NOMBRE', $request->input('casa_coordinador'))->value('ID_CASA')
+                $datosActualizacionTablaCoordinadoresCasas = ([
+                    'ID_COORDINADOR' => $identificadorUsuario == null ? coordinadores::max('ID_COORDINADOR') : null,
+                    'ID_CASA' => $identificadorUsuario == null ? casas::where('NOMBRE', $request->input('casa_coordinador'))->value('ID_CASA') : null
                 ]);
                 break;
-            
+            case '\\App\\directores':
+                break;
+            case '\\App\\tutores':
+                break;
         }
-
-        //Mail::to
-
+    //Mail::to
     }
 }
