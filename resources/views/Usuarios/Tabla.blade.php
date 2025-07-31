@@ -1,9 +1,31 @@
+<!--<style>
+    .tabla-estilo-azul {
+        background-color: #e0eeffff;
+        color: black;
+    }
+
+    .tabla-estilo-azul th,
+    .tabla-estilo-azul td {
+        border-color: #ffffffff;
+        color: white;
+    }
+
+    .tabla-estilo-azul tbody tr:nth-child(odd) {
+        background-color: #7d96b7ff;
+    }
+
+    .tabla-estilo-azul tbody tr:hover {
+        background-color: #31465c;
+    }
+
+    esto va en la class class="table tabla-estilo-azul table-bordered table-sm table-hover col-md-6"
+</style>-->
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4 mt-2">Usuarios</h2>
         <div class="table-responsive">
-            <table id="ticketsTable" class="table table-striped table-bordered table-sm  table-hover" style="text-align:center;">
-                <thead class="thead-dark ">
+            <table id="ticketsTable" class="table" style="text-align:center;">
+                <thead class="table">
                     <tr>
                         <th class="dt-center">ID</th>
                         <th class="dt-center">USUARIO</th>
@@ -14,7 +36,14 @@
                         <?php if(substr($usuario->usuario, 0, 1)!='N'){ ?>
                             <tr>
                                 <td>
-                                    <a href="www.google.com.mx">{{ $usuario->usuario }}</a>
+                                    <a href="#" 
+                                    class="btn btn-outline-dark"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalGeneralUsuarios"
+                                    data_id="{{  $usuario->id  }}"
+                                    data-nombre="{{ $usuario->usuario }}">
+                                        {{ $usuario->usuario }}
+                                    </a>
                                 </td>
                                 <td>{{ $usuario->userable->NOMBRE }}</td>
                             </tr>
