@@ -32,51 +32,49 @@ class ControladorPanelUsuarios extends Controller
 
     public function generarNuevaClaveUsuario(){
 
-        $numeroMasAltoClaveBDT = User::where('usuario', 'like', 'BDT%')
-            ->selectRaw('MAX(CAST(SUBSTRING(usuario, 4) AS UNSIGNED)) as numeroClaveMasAltaBDT')
-            ->value('numeroClaveMasAltaBDT');
+        $numeroMasAltoClaveUsadaUsuario = User::where('usuario', 'like', 'BDT%')
+            ->selectRaw('MAX(CAST(SUBSTRING(usuario, 4) AS UNSIGNED)) as numeroClaveUsuarioMasAlta')
+            ->value('numeroClaveUsuarioMasAlta');
 
-        return 'BDT' . ($numeroMasAltoClaveBDT ? $numeroMasAltoClaveBDT + 1 : 1);
+        return 'BDT' . ($numeroMasAltoClaveUsadaUsuario ? $numeroMasAltoClaveUsadaUsuario + 1 : 1);
 
     }
 
-    public function generarNuevoUserable(Request $request){
+    public function guardarTipoUserableSeleccionado(Request $request){
     
         $roles = (array) $request->rol;
 
         if (in_array('coordinador', $roles)){
-            $tipoUserAble = '\\App\\coordinadores';
+            $tipoUserableSeleccionado = '\\App\\coordinadores';
         }elseif (in_array('director', $roles)){
-            $tipoUserAble = '\\App\\directores';
+            $tipoUserableSeleccionado = '\\App\\directores';
         }else {
-            $tipoUserAble = '\\App\\tutores';
+            $tipoUserableSeleccionado = '\\App\\tutores';
         }
 
-        $ultimoUserableId = User::where('userable_type', $tipoUserAble)->max('userable_id');
-
-        return [$tipoUserAble, $ultimoUserableId];
+        return $tipoUserableSeleccionado;
 
     }
 
     public function registrarUsuario(Request $request){
 
         $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
-        
-        $roles = (array) $request->rol;
-        list($tipoUserAble, $ultimoUserableId) = $this->generarNuevoUserable($request);
-        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
-        
-        dd($request);
 
+        $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
+        $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
         $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
         $datosActualizacionTablaUsuario = 
         [
             // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
             'usuario' => $identificadorUsuario == null? $nuevaClaveUsuario : null,
-            'userable_id' => $identificadorUsuario == null ? $numeroMasAltoUserableId + 1 : null,
-            'userable_type' => $identificadorUsuario == null ? $tipoUserAble : null   
+            'userable_id' => $identificadorUsuario == null ? $ultimoUserableIdUsado + 1 : null,
+            'userable_type' => $identificadorUsuario == null ? $tipoUserableSeleccionado : null   
         ];
+        dd($datosActualizacionTablaUsuario);
         User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
+
+        $roles = (array) $request->rol;
+        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
 
         switch ($tipoUserAble){
             case '\\App\\coordinadores':
