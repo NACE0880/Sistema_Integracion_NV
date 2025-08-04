@@ -54,4 +54,14 @@
         var modal = $(this);
         modal.find('.modal-title').text(titulo);     
     });
+
+    $(document).ready(function () {
+        $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
+            var botonNombreClaveUsuario = $(event.relatedTarget); 
+            var nombreClaveUsuario = botonNombreClaveUsuario.data('nombre-clave-usuario');
+
+            var modalActualizacionUsuarios = $(this);
+            modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
+        });
+    });
 </script>

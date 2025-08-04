@@ -14,7 +14,14 @@
                         <?php if(substr($usuario->usuario, 0, 1)!='N'){ ?>
                             <tr>
                                 <td>
-                                    <a href="www.google.com.mx">{{ $usuario->usuario }}</a>
+                                    <a href="#"
+                                    class="btn btn-link text-decoration-none"
+                                    data-toggle="modal"
+                                    data-target="#modalGeneralUsuarios"
+                                    data-nombre-clave-usuario="{{ $usuario->usuario }}"
+                                    >
+                                        {{ $usuario->usuario }}
+                                    </a>
                                 </td>
                                 <td>{{ $usuario->userable->NOMBRE }}</td>
                             </tr>

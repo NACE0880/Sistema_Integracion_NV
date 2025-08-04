@@ -58,6 +58,8 @@ class ControladorPanelUsuarios extends Controller
 
     public function registrarUsuario(Request $request){
 
+        dd($request);
+
         $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
 
         $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);

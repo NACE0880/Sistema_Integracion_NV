@@ -16,6 +16,7 @@
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-group col-md-8">
+                                <input type="hidden" name="nombre_clave_usuario" id="nombre_clave_usuario">
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="">
                             </div>
                         </div>
