@@ -147,7 +147,7 @@ class TutoriasController extends Controller
         // Notificar Encargados de Validacion
         foreach ($users as $user) {
             foreach ($user->permisos() as $permiso) {
-                //($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
+                ($permiso == 'validar cambio estatus adt') ? $telegram->sendButtons($user->userable->TELEGRAM, $payload) : false;
             }
         }
 
@@ -219,7 +219,7 @@ class TutoriasController extends Controller
         $llamada->EXPEDIENTE    = $request->input('expediente');       //self::cargaExpediente($request->file('expediente'));
 
         $llamada->save();
-        //($request->input('estatus_adt'))? self::validarCambiosEstatus($adt,$request->input('estatus_adt')): false;
+        ($request->input('estatus_adt'))? self::validarCambiosEstatus($adt,$request->input('estatus_adt')): false;
 
         return redirect()->route('consultar.tutoria');
     }
