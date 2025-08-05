@@ -89,13 +89,13 @@
 
                     <div class="row g-3 justify-content-center gap-5">
 
-                        <div class="col-2">
+                        <div class="col-3">
                             <label for="hora_inicio" class="form-label">Hora de Apertura</label>
                             <input class="form-control mb-3" id="hora_inicio_previa" name="hora_inicio_previa" placeholder="{{ $adt->usobdt($adt->ID_ADT)->HORA_INICIO }}" readonly/>
                             <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" required>
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-3">
                             <label for="hora_final" class="form-label">Hora de Cierre</label>
                             <input class="form-control mb-3" id="hora_final_previa" name="hora_final_previa" placeholder="{{ $adt->usobdt($adt->ID_ADT)->HORA_FINAL }}" readonly/>
                             <input type="time" class="form-control" id="hora_final" name="hora_final" required>
@@ -105,11 +105,6 @@
                             <label for="usuarios_semanales" class="form-label">Usuarios Semanales</label>
                             <input class="form-control mb-3" id="usuarios_semanales_previo" name="usuarios_semanales_previo" placeholder="{{ $adt->usobdt($adt->ID_ADT)->USUARIOS_SEMANALES }}" readonly/>
                             <input type="number" class="form-control" id="usuarios_semanales" name="usuarios_semanales" min="0"  step="1" value="1" required/>
-                        </div>
-
-                        <div class="col-2">
-                            <label for="pcc" class="form-label">PCC</label>
-                            <input type="number" class="form-control" id="pcc" name="pcc" min="0"  step="1" value="{{ $adt->PCC }}" required/>
                         </div>
 
                     </div>
