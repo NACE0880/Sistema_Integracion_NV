@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 // Dependencias de Excel
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\adtExport;
+use App\Exports\reporteGeneralTutorias;
 
 // Namespace para fechas
 use Carbon\Carbon;
@@ -330,6 +331,13 @@ class TutoriasController extends Controller
     public function exportReporte(adts $adt){
         $archivo = new adtExport($adt);
         $archivo->descargar();
+    }
+
+    public function exportarReporteGeneral(){
+
+        $reporteGeneralTutorias = new reporteGeneralTutorias();
+        $reporteGeneralTutorias->descargarReporteGeneralActual();
+
     }
 
     /* // CARGA/BAJA IMAGENES y OBTENCION NOMBRE

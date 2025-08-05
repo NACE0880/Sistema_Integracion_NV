@@ -91,6 +91,11 @@
                     @endforeach
                 </tbody>
             </table>
+            </br>
+            <form action=" {{ route('exportar.reporte.general.tutorias') }}" class="text-center">
+                @csrf
+                <button type="submit" class="btn btn-success">Descargar Reporte General</button>
+            </form>
         </div>
 
     </div>

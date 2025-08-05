@@ -80,7 +80,7 @@
                             <select id="poblacion" name="poblacion" class="form-select" required>
                                 <option value="">Selecciona...</option>
                                 <option value="Niños">Niños</option>
-                                <option value="Adolecentes">Adolecentes</option>
+                                <option value="Adolecentes">Adolescentes</option>
                                 <option value="Adultos">Adultos</option>
                             </select>
                         </div>
