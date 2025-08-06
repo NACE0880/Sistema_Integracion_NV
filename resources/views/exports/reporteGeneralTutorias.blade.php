@@ -2,17 +2,68 @@
   <thead>
     <tr>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Característica
+            Internet
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Cantidad
+            Infraestructura
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Señaléctica
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Equipamiento Inicial
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Equipamiento Funcional
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Equipamiento Dañado
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Equipamiento Faltante
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Equipamiento Baja
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Mobiliario Inicial
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Mobiliario Funcional
         </th>
     </tr>
   </thead>
   <tbody>
     <tr>
         <td>
-            Kit Señalización Colocada
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
+        </td>
+        <td>
+            Internet
         </td>
         <td>
             {{ $total['total_senalizacion_colocada'] }}
