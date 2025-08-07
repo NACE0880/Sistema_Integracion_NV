@@ -2,16 +2,37 @@
   <thead>
     <tr>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Internet
+            Señaléctica Colocada
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Infraestructura
+            Señaléctica Despegada
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Señaléctica
+            Electricidad Funcional
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Equipamiento Inicial
+            Electricidad Intermitente
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Electricidad Sin Servicio
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Interior Sin Cambios
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Interior Dañada
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Interior con Filtración
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Exterior Sin Cambios
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Exterior Dañada
+        </th>
+        <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
+            Pintura Exterior con Filtración
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
             Equipamiento Funcional
@@ -36,261 +57,55 @@
   <tbody>
     <tr>
         <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
-            Internet
-        </td>
-        <td>
             {{ $total['total_senalizacion_colocada'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Kit Señalización Despegada
         </td>
         <td>
             {{ $total['total_senalizacion_despegada'] }}
         </td>
-    </tr>
-    <tr>
-        <td>
-            Electricidad Funcional
-        </td>
         <td>
             {{ $total['total_electricidad_funcional'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Electricidad intermitente
         </td>
         <td>
             {{ $total['total_electricidad_intermitente'] }}
         </td>
-    </tr>
-    <tr>
-        <td>
-            Electricidad Sin Servicio
-        </td>
         <td>
             {{ $total['total_electricidad_sin_servicio'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Interior Sin cambios
         </td>
         <td>
             {{ $total['total_pintura_interior_sin_cambios'] }}
         </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Interior Dañado
-        </td>
         <td>
             {{ $total['total_pintura_interior_danado'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Interior Filtración
         </td>
         <td>
             {{ $total['total_pintura_interior_filtracion'] }}
         </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Exterior Sin Cambios
-        </td>
         <td>
             {{ $total['total_pintura_exterior_sin_cambios'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Exterior Dañados
         </td>
         <td>
             {{ $total['total_pintura_exterior_danado'] }}
         </td>
-    </tr>
-    <tr>
-        <td>
-            Pintura Exterior Filtración
-        </td>
         <td>
             {{ $total['total_pintura_exterior_filtracion'] }}
         </td>
-    </tr>
-    <tr>
         <td>
-            Tipo de Uso: Aula
+            {{ $total['total_equipamiento_funcional'] }}
         </td>
         <td>
-            {{ $total['total_tipo_uso_aula'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Tipo de Uso: Maestros
+            {{ $total['total_equipamiento_danado'] }}
         </td>
         <td>
-            {{ $total['total_tipo_uso_maestros'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Tipo de Uso: Navegación Libre
+            {{ $total['total_equipamiento_faltante'] }}
         </td>
         <td>
-            {{ $total['total_tipo_navegación_libre'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Mayoría de Población Niños
+            {{ $total['total_equipamiento_baja'] }}
         </td>
         <td>
-            {{ $total['total_mayoría_poblacion_ninos'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Mayoría de Población Adolescentes
+            {{ $total['total_mobiliario_funcional'] }}
         </td>
         <td>
-            {{ $total['total_mayoría_poblacion_adolescentes'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Mayoría de Población Adultos
-        </td>
-        <td>
-            {{ $total['total_mayoría_poblacion_adultos'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            PC Funcional
-        </td>
-        <td>
-            {{ $total['total_pc_funcional'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            PC Dañado
-        </td>
-        <td>
-            {{ $total['total_pc_danado'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            PC Faltante
-        </td>
-        <td>
-            {{ $total['total_pc_faltante'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            PC Baja
-        </td>
-        <td>
-            {{ $total['total_pc_baja'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Laptop Funcional
-        </td>
-        <td>
-            {{ $total['total_laptop_funcional'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Laptop Dañado
-        </td>
-        <td>
-            {{ $total['total_laptop_danado'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Laptop Faltante
-        </td>
-        <td>
-            {{ $total['total_laptop_faltante'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Laptop Baja
-        </td>
-        <td>
-            {{ $total['total_laptop_baja'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Netbook Funcional
-        </td>
-        <td>
-            {{ $total['total_netbook_funcional'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Netbook Dañado
-        </td>
-        <td>
-            {{ $total['total_netbook_danado'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Netbook Faltante
-        </td>
-        <td>
-            {{ $total['total_netbook_faltante'] }}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Netbook Baja
-        </td>
-        <td>
-            {{ $total['total_netbook_baja'] }}
+            {{ $total['total_mobiliario_danado'] }}
         </td>
     </tr>
   </tbody>
