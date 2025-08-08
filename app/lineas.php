@@ -31,4 +31,8 @@ class lineas extends Model
     protected $primaryKey = 'ID_LINEA';
     public $timestamps = false;
 
+    public function adts() {
+        return $this->belongsTo(\App\adts::class, 'ID_ADT', 'ID_ADT');
+    }
+
 }

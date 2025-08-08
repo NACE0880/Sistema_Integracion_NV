@@ -21,4 +21,8 @@ class mobiliarios extends Model
     protected $primaryKey = 'ID_MOBILIARIO';
     public $timestamps = false;
 
+    public function adts() {
+        return $this->belongsTo(\App\adts::class, 'ID_ADT', 'ID_ADT');
+    }
+
 }

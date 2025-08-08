@@ -100,7 +100,7 @@ class reporteGeneralTutorias {
 
             $excel->sheet('Detalle', function($sheet) {
 
-                $adtsAbiertos = Adt::with(['lineas', 'infraestructura', 'equipamientos', 'mobiliarios'])
+                $adtsAbiertos = adts::with(['lineas', 'infraestructuras', 'equipamientos', 'mobiliarios'])
                 ->where('ESTATUS_ACTUAL', 'ABIERTA')
                 ->get();
 
@@ -118,29 +118,34 @@ class reporteGeneralTutorias {
 
                     $datosPorAdt[$adt->ID_ADT] = [
 
-                        'internet_tecnologia' => $adt->lineas->TECNOLOGIA,
-                        'internet_semaforo' => $adt->lineas->SEMAFORO,
-                        'internet_observaciones' => $adt->lineas->OBSERVACIONES,
+                        'sede' => $adt->NOMBRE,
+                        'clave' => $adt->CLAVE_SITIO,
+                        'estado' => $adt->ESTADO,
+                        'tipo' => $adt->ESPECIFICAS,
 
-                        'señalizacion' => $adt->infraestructura->KIT_SENALIZACION,
-                        'electricidad' => $adt->infraestructura->ELECTRICIDAD,
-                        'pintura_interior' => $adt->infraestructura->PINTURA_INTERIOR,
-                        'pintura_exterior' => $adt->infraestructura->PINTURA_EXTERIOR,
+                        'internet_tecnologia' => optional($adt->lineas->first())->TECNOLOGIA ?? '-',
+                        'internet_semaforo' => optional($adt->lineas->first())->SEMAFORO ?? '-',
+                        'internet_observaciones' => optional($adt->lineas->first())->OBSERVACIONES ?? '-',
 
-                        'pc_funcional' => $equiposFuncionales->value('PC'),
-                        'pc_danado' => $equiposDanados->value('PC'),
-                        'pc_faltante' => $equiposFaltantes->value('PC'),
-                        'pc_baja' => $equiposBaja->value('PC'),
+                        'senalizacion' => optional($adt->infraestructuras->first())->KIT_SENALIZACION ?? '-',
+                        'electricidad' => optional($adt->infraestructuras->first())->ELECTRICIDAD ?? '-',
+                        'pintura_interior' => optional($adt->infraestructuras->first())->PINTURA_INTERIOR ?? '-',
+                        'pintura_exterior' => optional($adt->infraestructuras->first())->PINTURA_EXTERIOR ?? '-',
 
-                        'laptop_funcional' => $equiposFuncionales->value('LAPTOP'),
-                        'laptop_danado' => $equiposDanados->value('LAPTOP'),
-                        'laptop_faltante' => $equiposFaltantes->value('LAPTOP'),
-                        'laptop_baja' => $equiposBaja->value('LAPTOP'),
+                        'pc_funcional' => optional($equiposFuncionales->first())->PC ?? '-',
+                        'pc_danado' => optional($equiposDanados->first())->PC ?? '-',
+                        'pc_faltante' => optional($equiposFaltantes->first())->PC ?? '-',
+                        'pc_baja' => optional($equiposBaja->first())->PC ?? '-',
 
-                        'netbook_funcional' => $equiposFuncionales->value('NETBOOK'),
-                        'netbook_danado' => $equiposDanados->value('NETBOOK'),
-                        'netbook_faltante' => $equiposFaltantes->value('NETBOOK'),
-                        'netbook_baja' => $equiposBaja->value('NETBOOK'),
+                        'laptop_funcional' => optional($equiposFuncionales->first())->LAPTOP ?? '-',
+                        'laptop_danado' => optional($equiposDanados->first())->LAPTOP ?? '-',
+                        'laptop_faltante' => optional($equiposFaltantes->first())->LAPTOP ?? '-',
+                        'laptop_baja' => optional($equiposBaja->first())->LAPTOP ?? '-',
+
+                        'netbook_funcional' => optional($equiposFuncionales->first())->NETBOOK ?? '-',
+                        'netbook_danado' => optional($equiposDanados->first())->NETBOOK ?? '-',
+                        'netbook_faltante' => optional($equiposFaltantes->first())->NETBOOK ?? '-',
+                        'netbook_baja' => optional($equiposBaja->first())->NETBOOK ?? '-',
 
                         'mobiliario_funcional' => $mobiliarioFuncional,
                         'mobiliario_danado' => $mobiliarioInicial - $mobiliarioFuncional
@@ -151,7 +156,7 @@ class reporteGeneralTutorias {
 
                 $sheet->loadview('exports.reporteDetalladoTutorias', ['datosPorAdt' => $datosPorAdt]);
 
-                $sheet->getStyle('A1:B18' , $sheet->getHighestRow())->getAlignment()->setWrapText(true);
+                $sheet->getStyle('A1:A25' , $sheet->getHighestRow())->getAlignment()->setWrapText(true);
 
             });
             

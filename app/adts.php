@@ -117,7 +117,7 @@ class adts extends Model
         return $response;
     }
 
-// INTERNET
+// INTERNET línea dejada para evitar errores, puesto que todo el sistema se concibió con base en esta
     public function linea(){
         return $this->belongsTo('\App\lineas',  'ID_ADT');
     }
@@ -128,4 +128,21 @@ class adts extends Model
         (!empty($uso)) ? $response = $uso: $response = (object)['ESTATUS_REGISTRO' => null,'ESTATUS_OFERTA' => null,'TIPO_USO' => null,'MAYORIA_POBLACION' => null,'HORA_INICIO' => null, 'HORA_FINAL' => null, 'USUARIOS_SEMANALES' => null, 'OBSERVACIONES' => null];
         return $response;
     }
+
+    public function lineas() {
+        return $this->hasMany(\App\lineas::class, 'ID_ADT', 'ID_ADT');
+    }
+
+    public function infraestructuras() {
+        return $this->hasMany(\App\infraestructuras::class, 'ID_ADT', 'ID_ADT');
+    }
+
+    public function equipamientos() {
+        return $this->hasMany(\App\equipamientos::class, 'ID_ADT', 'ID_ADT');
+    }
+
+    public function mobiliarios() {
+        return $this->hasMany(\App\mobiliarios::class, 'ID_ADT', 'ID_ADT');
+    }
+
 }

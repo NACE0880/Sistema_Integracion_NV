@@ -19,4 +19,8 @@ class infraestructuras extends Model
     ];
     protected $primaryKey = 'ID_INFRAESTRUCTURA';
     public $timestamps = false;
+
+    public function adts() {
+        return $this->belongsTo(\App\adts::class, 'ID_ADT', 'ID_ADT');
+    }
 }
