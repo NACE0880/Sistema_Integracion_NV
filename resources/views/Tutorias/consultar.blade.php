@@ -91,13 +91,12 @@
                     @endforeach
                 </tbody>
             </table>
-            </br>
-            <form action=" {{ route('exportar.reporte.general.tutorias') }}" class="text-center">
-                @csrf
-                <button type="submit" class="btn btn-success">Descargar Reporte General</button>
-            </form>
+            <div class="d-flex justify-content-end mt-4">
+                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalReporte" data-bs-titulo="Nuevo Reporte">
+                    Generar Reporte
+                </button>
+            </div>
         </div>
-
     </div>
 
     {{-- MODAL HISTORICO --}}
@@ -110,7 +109,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive" id="table">
-
                     </div>
                 </div>
             </div>
@@ -156,6 +154,52 @@
         </div>
     </div>
 
+    <!-- MODAL DEL REPORTE -->
+    <div class="modal fade text-sm" id="modalReporte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" aria-modal="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Generar Reporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action=" {{ route('exportar.reporte.general.tutorias') }}" method="POST">
+                    @csrf
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="tipo_reporte_especifico">Tipo de Reporte</label>
+                            </div>
+                            <div class="form-group col-md-12 mt-2">
+                                <select class="form-control" id="tipo_reporte_especifico" name="tipo_reporte_especifico[]" multiple size="4">
+                                    <option value="" selected disabled></option>
+                                    @foreach ($adts->filter(function($adt) {return $adt->ESTATUS_ACTUAL == 'ABIERTA';})
+                                    ->pluck('ESPECIFICAS')->unique() as $estadoAdt)
+                                        <option value="{{ $estadoAdt }}">{{ $estadoAdt }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4 mt-2">
+                                <label for="tipo_reporte_por_estado">Estado</label>
+                            </div>
+                            <div class="form-group col-md-12 mt-2">
+                                <select class="form-control" id="tipo_reporte_por_estado" name="tipo_reporte_por_estado[]" multiple size="4">
+                                    <option value="" selected disabled></option>
+                                    @foreach ($adts->filter(function($adt) {return $adt->ESTATUS_ACTUAL == 'ABIERTA';})
+                                    ->pluck('ESTADO')->unique() as $estadoAdt)
+                                        <option value="{{ $estadoAdt }}">{{ $estadoAdt }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group d-flex justify-content-end mt-3 gap-2">
+                                <button type="submit" class="btn btn-outline-success">Descargar</button>
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -290,7 +334,13 @@
         }
     </script>
 
-
-
-
+    {{-- MODAL DEL REPORTE --}}
+    <script>
+        $('#modalReporte').on('show.bs.modal', function (event) {
+            var modal = $(this)
+            
+            modal.find('.modal-body #table');
+        });
+    </script>
+    
 @endsection

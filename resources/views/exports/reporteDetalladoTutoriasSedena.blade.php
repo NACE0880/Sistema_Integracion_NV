@@ -79,7 +79,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($datosPorAdt as $adt)
+        @foreach($datosPorAdtSedena as $adt)
             <tr>
                 <td>{{ $adt['sede'] ?? '-' }}</td>
                 <td>{{ $adt['clave'] ?? '-' }}</td>

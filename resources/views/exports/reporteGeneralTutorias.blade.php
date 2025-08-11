@@ -47,10 +47,10 @@
             Equipamiento Baja
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Mobiliario Inicial
+            Mobiliario Funcional|
         </th>
         <th valign='middle' align='center' style= "background-color: #44546a; color:#fffff;">
-            Mobiliario Funcional
+            Mobiliario Dañado
         </th>
     </tr>
   </thead>
