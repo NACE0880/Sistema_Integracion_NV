@@ -171,10 +171,10 @@
                             </div>
                             <div class="form-group col-md-12 mt-2">
                                 <select class="form-control" id="tipo_reporte_especifico" name="tipo_reporte_especifico[]" multiple size="4">
-                                    <option value="" selected disabled></option>
+                                    <option value="" selected></option>
                                     @foreach ($adts->filter(function($adt) {return $adt->ESTATUS_ACTUAL == 'ABIERTA';})
-                                    ->pluck('ESPECIFICAS')->unique() as $estadoAdt)
-                                        <option value="{{ $estadoAdt }}">{{ $estadoAdt }}</option>
+                                    ->pluck('ESPECIFICAS')->unique() as $tipoReporteAdt)
+                                        <option value="{{ $tipoReporteAdt }}">{{ $tipoReporteAdt }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -183,10 +183,10 @@
                             </div>
                             <div class="form-group col-md-12 mt-2">
                                 <select class="form-control" id="tipo_reporte_por_estado" name="tipo_reporte_por_estado[]" multiple size="4">
-                                    <option value="" selected disabled></option>
+                                    <option value="" selected></option>
                                     @foreach ($adts->filter(function($adt) {return $adt->ESTATUS_ACTUAL == 'ABIERTA';})
-                                    ->pluck('ESTADO')->unique() as $estadoAdt)
-                                        <option value="{{ $estadoAdt }}">{{ $estadoAdt }}</option>
+                                    ->pluck('ESTADO')->unique() as $estadoReporteAdt)
+                                        <option value="{{ $estadoReporteAdt }}">{{ $estadoReporteAdt }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -337,9 +337,7 @@
     {{-- MODAL DEL REPORTE --}}
     <script>
         $('#modalReporte').on('show.bs.modal', function (event) {
-            var modal = $(this)
-            
-            modal.find('.modal-body #table');
+            var modal = $(this);
         });
     </script>
     
