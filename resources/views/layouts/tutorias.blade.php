@@ -109,6 +109,14 @@
                 <a class="nav-link {{ Route::is('consultar.tutoria') ? 'active' : '' }}" href="{{ route('consultar.tutoria') }}"> <i class="fa-solid fa-house"></i> Entidades </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link"> <!--{{ Route::is('consultar.ticket') ? 'active' : '' }}" href="{{ route('consultar.ticket') }}"> -->
+                    <i class="fa-solid fa-chart-simple">
+                    </i> 
+                    Estado 
+                </a>
+            </li>
+
             {{-- USUARIO --}}
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
