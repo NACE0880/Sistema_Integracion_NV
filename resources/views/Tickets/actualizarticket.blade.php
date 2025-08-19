@@ -145,7 +145,7 @@
                         <label id="lbl_foto_obligatoria" for="foto_obligatoria" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
                         <br>
-                        <label for="foto_obligatoria" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 5MB </label>
+                        <label for="foto_obligatoria" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                     </div>
 
                     <div class="form-group col-md-4">
@@ -322,7 +322,7 @@
 
         function cambiarContenido(inputArchivo) {
             // Tamaño maximo del archivo
-            let maxSize = 5000000; //5mb -> 5,000,000
+            let maxSize = 2000000; //5mb -> 5,000,000
             //let maxSize = 300000;//300kb
 
             // Validamos el primer archivo únicamente
@@ -343,7 +343,7 @@
             }else{
                 inputArchivo.value = "";
                 labelArchivo.className = 'btn btn-outline-danger'
-                labelArchivo.innerHTML = "Adjuntar jpg,jpeg,png - 5Mb máximo";
+                labelArchivo.innerHTML = "Adjuntar jpg,jpeg,png - 2Mb máximo";
 
             }
         }

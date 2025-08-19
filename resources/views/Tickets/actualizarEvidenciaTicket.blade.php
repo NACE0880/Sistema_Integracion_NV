@@ -48,7 +48,7 @@
                                 <label id="lbl_foto_inicio" for="foto_inicio" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
                                 <br>
-                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 5MB </label>
+                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
 
                             <div class="form-group col-md-6">
@@ -58,7 +58,7 @@
                                 <label id="lbl_foto_fin" for="foto_fin" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
                                 <br>
-                                <label for="foto_fin" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 5MB </label>
+                                <label for="foto_fin" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
 
                         @else
@@ -69,7 +69,7 @@
                                 <label id="lbl_foto_inicio" for="foto_inicio" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
                                 <br>
-                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 5MB </label>
+                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
                         @endif
                     </div>
@@ -120,7 +120,7 @@
 
         function cambiarContenido(inputArchivo) {
             // Tamaño maximo del archivo
-            let maxSize = 5000000; //5mb -> 5,000,000
+            let maxSize = 2000000; //5mb -> 5,000,000
             //let maxSize = 300000;//300kb
 
             // Validamos el primer archivo únicamente
@@ -141,7 +141,7 @@
             }else{
                 inputArchivo.value = "";
                 labelArchivo.className = 'btn btn-outline-danger'
-                labelArchivo.innerHTML = "Adjuntar jpg,jpeg,png - 5Mb máximo";
+                labelArchivo.innerHTML = "Adjuntar jpg,jpeg,png - 2Mb máximo";
 
             }
         }
