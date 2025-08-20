@@ -144,24 +144,34 @@
                         <input id="foto_obligatoria" name="foto_obligatoria" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png"   required /> <br>
                         <label id="lbl_foto_obligatoria" for="foto_obligatoria" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
-                        <br>
-                        <label for="foto_obligatoria" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 text-center">
                         <label for="daño">Foto Evidencia Opcional</label>
 
                         <input id="foto_opcional_2" name="foto_opcional_2" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png" > <br>
                         <label for="foto_opcional_2" class="btn btn-outline-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 text-right">
                         <label for="daño">Foto Evidencia Opcional</label>
 
                         <input id="foto_opcional_3" name="foto_opcional_3" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png" > <br>
                         <label for="foto_opcional_3" class="btn btn-outline-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
                     </div>
                 </div>
+
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="foto_obligatoria" class="file-note text-center">
+                            Imagenes .jpg, .jpeg, .png, no mayores a 2MB. 
+                            Si el archivo es muy grande puede utilizar: 
+                            https://www.iloveimg.com/es/comprimir-imagen
+                        </label>
+                    </div>
+                </div>
+                <br>
 
                 <div class="form-row">
                     <div class="form-group col-md-6" style="align-items: center;">

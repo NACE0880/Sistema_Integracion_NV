@@ -47,8 +47,6 @@
                                 <input id="foto_inicio" name="foto_inicio" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png"   required /> <br>
                                 <label id="lbl_foto_inicio" for="foto_inicio" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
-                                <br>
-                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
 
                             <div class="form-group col-md-6">
@@ -57,8 +55,6 @@
                                 <input id="foto_fin" name="foto_fin" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png"   required /> <br>
                                 <label id="lbl_foto_fin" for="foto_fin" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
-                                <br>
-                                <label for="foto_fin" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
 
                         @else
@@ -68,11 +64,21 @@
                                 <input id="foto_inicio" name="foto_inicio" type="file" style="display: none" onchange="cambiarContenido(this)" accept=".jpg, .jpeg, .png"   required /> <br>
                                 <label id="lbl_foto_inicio" for="foto_inicio" class="btn btn-info" onmouseover="asignarNombre(this)">Adjuntar Evidencia</label>
 
-                                <br>
-                                <label for="foto_inicio" class="file-note">Imagenes .jpg, .jpeg, .png, no mayores a 2MB </label>
                             </div>
                         @endif
                     </div>
+
+                    <br>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="foto_inicio" class="file-note text-center">
+                                Imagenes .jpg, .jpeg, .png, no mayores a 2MB. 
+                                Si el archivo es muy grande puede utilizar: 
+                                https://www.iloveimg.com/es/comprimir-imagen
+                            </label>
+                        </div>
+                    </div>
+                    <br>
 
                     <div class="form-row">
 
