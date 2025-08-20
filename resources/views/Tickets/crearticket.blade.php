@@ -199,12 +199,17 @@
 
             <br>
             <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="foto_obligatoria" class="file-note text-center">
-                        Imagenes .jpg, .jpeg, .png, no mayores a 2MB. 
-                        Si el archivo es muy grande puede utilizar: 
-                        https://www.iloveimg.com/es/comprimir-imagen
-                    </label>
+                <div class="form-group col-md-12 text-center">
+                    <p class="file-note">
+                        <strong>
+                            Imágenes .jpg, .jpeg, .png, no mayores a 2MB. 
+                            Si el archivo es muy grande puede utilizar: 
+                        </strong>
+                        <br>
+                        <a href="https://www.iloveimg.com/es/comprimir-imagen" target="_blank" rel="noopener noreferrer">
+                            https://www.iloveimg.com/es/comprimir-imagen
+                        </a>
+                    </p>
                 </div>
             </div>
             <br>
