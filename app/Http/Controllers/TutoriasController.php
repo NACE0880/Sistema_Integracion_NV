@@ -340,9 +340,9 @@ class TutoriasController extends Controller
 
     }
 
-    public function consultarEstado(){
+    public function consultarEstatusBdt(){
 
-        return redirect()->route('consultar.estado.tutorias');
+        return view('Tutorias.consultarEstatusBdt');
 
     }
 

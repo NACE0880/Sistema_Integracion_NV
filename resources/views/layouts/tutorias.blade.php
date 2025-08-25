@@ -17,6 +17,13 @@
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
         .file-note{
             color: gray;
             font-style:italic;
@@ -105,14 +112,15 @@
     {{-- BARRA DE NAVEGACIÓN --}}
     @auth
         <ul class="nav nav-tabs justify-content-center">
+
             <li class="nav-item">
                 <a class="nav-link {{ Route::is('consultar.tutoria') ? 'active' : '' }}" href="{{ route('consultar.tutoria') }}"> <i class="fa-solid fa-house"></i> Entidades </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('consultar.estado.tutorias') ? 'active' : '' }}" href="{{ route('consultar.estado.tutorias') }}">
-                    <i class="fa-solid fa-chart-simple">
-                    </i> 
+                <a class="nav-link {{ Route::is('consultar.estatus.bdt.tutorias') ? 'active' : '' }}" href="{{ route('consultar.estatus.bdt.tutorias') }}">
+                <i class="fa-solid fa-chart-simple">
+                </i> 
                     Estado 
                 </a>
             </li>

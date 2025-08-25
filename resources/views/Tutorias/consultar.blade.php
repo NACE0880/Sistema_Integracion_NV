@@ -91,11 +91,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-end mt-4">
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalReporte" data-bs-titulo="Nuevo Reporte">
-                    Generar Reporte
-                </button>
-            </div>
         </div>
     </div>
 
