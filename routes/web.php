@@ -124,6 +124,7 @@ Route::group(['middleware'=>'XSS'], function() {
     Route::patch('tutorias/update/use/{adt}','TutoriasController@actualizarUsoBdtForm')->name('update.use.adt');
     Route::patch('tutorias/update/equipment/{adt}','TutoriasController@actualizarEquipamientoForm')->name('update.equipment.adt');
     Route::patch('tutorias/update/furniture/{adt}','TutoriasController@actualizarMobiliarioForm')->name('update.furniture.adt');
+    Route::post('tutorias/consultar/estado','TutoriasController@consultarEstado')->name('consultar.estado.tutorias');
 
     // Solicitud de Excel
     Route::get('/exportar/reporte/{adt}', 'TutoriasController@exportReporte')->name('exportar.reporte.adt');

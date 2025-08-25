@@ -110,7 +110,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link"> <!--{{ Route::is('consultar.ticket') ? 'active' : '' }}" href="{{ route('consultar.ticket') }}"> -->
+                <a class="nav-link {{ Route::is('consultar.estado.tutorias') ? 'active' : '' }}" href="{{ route('consultar.estado.tutorias') }}">
                     <i class="fa-solid fa-chart-simple">
                     </i> 
                     Estado 
