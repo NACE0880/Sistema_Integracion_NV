@@ -340,6 +340,12 @@ class TutoriasController extends Controller
 
     }
 
+    public function consultarEstado(){
+
+        return redirect()->route('consultar.estado.tutorias');
+
+    }
+
     /* // CARGA/BAJA IMAGENES y OBTENCION NOMBRE
     public function cargaVideoConferencia($file){
         if (is_null($file)){
