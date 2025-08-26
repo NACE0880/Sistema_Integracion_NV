@@ -62,72 +62,615 @@
                 </ul>
             </div>
 
-            <div class="tab-content" id="miTabContent">
+            <div class="tab-content mt-4" id="miTabContent">
                 <div class="tab-pane fade show active" id="tabBdtAbiertas" role="tabpanel" aria-labelledby="tab-bdt-abiertas">
-                    
-                    <h2>🌐 Internet</h2>
-                    
-                    <table>
-                        <tr><th colspan="6">INTERNET</th></tr>
-                        <tr><th>BDT</th><th>Proveedor</th><th>Velocidad Contratada</th><th>Velocidad Real</th><th>Tipo de Conexión</th><th>Observaciones</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>Telmex</td><td>100 Mbps</td><td>95 Mbps</td><td>Fibra óptica</td><td>Sin incidencias</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>Telmex</td><td>50 Mbps</td><td>48 Mbps</td><td>ADSL</td><td>Estable</td></tr>
+                    <table class="table">
+                        <thead class="bg-info">
+                            <tr>
+                                <th class="text-center" colspan="9">
+                                    95 ABIERTAS
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr class="table-info">
+                            <th class="text-center" colspan="5">
+                                95 Totales
+                            </th>
+                            <th class="text-center" colspan="2">
+                                Cerradas del mes
+                            </th>
+                            <th class="text-center" colspan="2">
+                                Abiertas del mes
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                92 Externas
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                3 Internas
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                        </tr>
+                        <tr class="table-info">
+                            <th class="text-center" colspan="9">
+                                1. Internet
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                86 BDT con 97 líneas paga la entidad (4 en cobre)
+                            </td>
+                            <td class="text-center" colspan="4">
+                                9 BDT con 19 líneas y 2 enlaces de paga Telmex
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                52 pesito
+                            </td>
+                            <td class="text-center" colspan="4">
+                                40 pesito
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Sin consumo
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Bajo
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Medio
+                            </td>
+                            <td class="text-center">
+                                Alto
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Heavy
+                            </td>
+                            <td class="text-center">
+                                Atípico
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                43
+                            </td>
+                            <td class="text-center" colspan="2">
+                                32
+                            </td>
+                            <td class="text-center">
+                                8
+                            </td>
+                            <td class="text-center" colspan="2">
+                                11
+                            </td>
+                            <td class="text-center">
+                                1
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                2. Equipamiento
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                Total del proyecto
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Abiertas Inicial
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Abiertas Funcional
+                            </td>
+                            <td class="text-center" colspan="3">
+                                % funcional contra inicial
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                45
+                            </td>
+                            <td class="text-center" colspan="2">
+                                27
+                            </td>
+                            <td class="text-center" colspan="2">
+                                114114
+                            </td>
+                            <td class="text-center" colspan="3">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                3. Mobiliario BDT Externas
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="vertical-align: middle;" colspan="2" rowspan="2">
+                                Total del proyecto
+                            </td>
+                            <td class="text-center" colspan="7">
+                                BDT Abiertas
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="4">
+                                Inicial
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Funcional
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                21165
+                            </td>
+                            <td class="text-center" colspan="4">
+                                3913
+                            </td>
+                            <td class="text-center" colspan="3">
+                                3893
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                4. Estatus convenio
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                Indeterminado
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Vencido
+                            </td>
+                            <td class="text-center" colspan="4">
+                                Vigente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                90
+                            </td>
+                            <td class="text-center" colspan="3">
+                                2
+                            </td>
+                            <td class="text-center" colspan="4">
+                                3<br>
+                                (Iztapalapa oct/2046)<br>
+                                (CT SEDENA jun/2027)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                5. Usuarios BDT
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                BDT's
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Resgistros
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Inscritos
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Constancias
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                50
+                            </td>
+                            <td class="text-center" colspan="2">
+                                27
+                            </td>
+                            <td class="text-center" colspan="3">
+                                100
+                            </td>
+                            <td class="text-center" colspan="3">
+                                200
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                6. Oferta educativa
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Nuevos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Talleres
+                            </td>
+                            <td class="text-center" colspan="3">
+                                En línea
+                            </td>
+                            <td class="text-center" colspan="3">
+                                En desarrollo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                3
+                            </td>
+                            <td class="text-center" colspan="2">
+                                447
+                            </td>
+                            <td class="text-center" colspan="3">
+                                393
+                            </td>
+                            <td class="text-center" colspan="3">
+                                53
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                7. Nuevas Solicitudes 2025 (21 recibidas)
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Solicitud BDT o donación de equipos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                9
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Solicitud BDT de reequipamiento
+                            </td>
+                            <td class="text-center" colspan="2">
+                                4
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Retiro de equipos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Otros (visitas a museo, acuario, etc.)
+                            </td>
+                            <td class="text-center" colspan="2">
+                                5
+                            </td>
+                        </tr>
                     </table>
 
-                    <h2>🖥 Equipamiento</h2>
-                    <table>
-                        <tr><th colspan="6">EQUIPAMIENTO</th></tr>
-                        <tr><th>BDT</th><th>Computadoras</th><th>Tabletas</th><th>Impresoras</th><th>Proyectores</th><th>Otros dispositivos</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>20</td><td>10</td><td>2</td><td>1</td><td>Scanner, bocinas</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>15</td><td>5</td><td>1</td><td>0</td><td>TV inteligente</td></tr>
-                    </table>
+                    
                     
                 </div>
                 <div class="tab-pane fade" id="tabBdtCerradas" role="tabpanel" aria-labelledby="ta-bdt-cerradas">
                     
-                    <h2>🪑 Mobiliario</h2>
-
-                    <table>
-                        <tr><th colspan="6">MOBILIARIO</th></tr>
-                        <tr><th>BDT</th><th>Mesas</th><th>Sillas</th><th>Estantes</th><th>Pizarras</th><th>Observaciones</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>10</td><td>25</td><td>3</td><td>2</td><td>Buen estado general</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>8</td><td>20</td><td>2</td><td>1</td><td>Requiere mantenimiento en estantes</td></tr>
+                    <table class="table">
+                        <thead class="bg-info">
+                            <tr>
+                                <th class="text-center" colspan="9">
+                                    95 ABIERTAS
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr class="table-info">
+                            <th class="text-center" colspan="5">
+                                95 Totales
+                            </th>
+                            <th class="text-center" colspan="2">
+                                Cerradas del mes
+                            </th>
+                            <th class="text-center" colspan="2">
+                                Abiertas del mes
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                92 Externas
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                3 Internas
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
+                            </td>
+                        </tr>
+                        <tr class="table-info">
+                            <th class="text-center" colspan="9">
+                                1. Internet
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                86 BDT con 97 líneas paga la entidad (4 en cobre)
+                            </td>
+                            <td class="text-center" colspan="4">
+                                9 BDT con 19 líneas y 2 enlaces de paga Telmex
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="5">
+                                52 pesito
+                            </td>
+                            <td class="text-center" colspan="4">
+                                40 pesito
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Sin consumo
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Bajo
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Medio
+                            </td>
+                            <td class="text-center">
+                                Alto
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Heavy
+                            </td>
+                            <td class="text-center">
+                                Atípico
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                -
+                            </td>
+                            <td class="text-center" colspan="2">
+                                43
+                            </td>
+                            <td class="text-center" colspan="2">
+                                32
+                            </td>
+                            <td class="text-center">
+                                8
+                            </td>
+                            <td class="text-center" colspan="2">
+                                11
+                            </td>
+                            <td class="text-center">
+                                1
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                2. Equipamiento
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                Total del proyecto
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Abiertas Inicial
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Abiertas Funcional
+                            </td>
+                            <td class="text-center" colspan="3">
+                                % funcional contra inicial
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                45
+                            </td>
+                            <td class="text-center" colspan="2">
+                                27
+                            </td>
+                            <td class="text-center" colspan="2">
+                                114114
+                            </td>
+                            <td class="text-center" colspan="3">
+                                0
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                3. Mobiliario BDT Externas
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="vertical-align: middle;" colspan="2" rowspan="2">
+                                Total del proyecto
+                            </td>
+                            <td class="text-center" colspan="7">
+                                BDT Abiertas
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="4">
+                                Inicial
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Funcional
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                21165
+                            </td>
+                            <td class="text-center" colspan="4">
+                                3913
+                            </td>
+                            <td class="text-center" colspan="3">
+                                3893
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                4. Estatus convenio
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                Indeterminado
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Vencido
+                            </td>
+                            <td class="text-center" colspan="4">
+                                Vigente
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                90
+                            </td>
+                            <td class="text-center" colspan="3">
+                                2
+                            </td>
+                            <td class="text-center" colspan="4">
+                                3<br>
+                                (Iztapalapa oct/2046)<br>
+                                (CT SEDENA jun/2027)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                5. Usuarios BDT
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                BDT's
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Resgistros
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Inscritos
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Constancias
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                50
+                            </td>
+                            <td class="text-center" colspan="2">
+                                27
+                            </td>
+                            <td class="text-center" colspan="3">
+                                100
+                            </td>
+                            <td class="text-center" colspan="3">
+                                200
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                6. Oferta educativa
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Nuevos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Talleres
+                            </td>
+                            <td class="text-center" colspan="3">
+                                En línea
+                            </td>
+                            <td class="text-center" colspan="3">
+                                En desarrollo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                3
+                            </td>
+                            <td class="text-center" colspan="2">
+                                447
+                            </td>
+                            <td class="text-center" colspan="3">
+                                393
+                            </td>
+                            <td class="text-center" colspan="3">
+                                53
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-info" colspan="9">
+                                7. Nuevas Solicitudes 2025 (21 recibidas)
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Solicitud BDT o donación de equipos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                9
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Solicitud BDT de reequipamiento
+                            </td>
+                            <td class="text-center" colspan="2">
+                                4
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Retiro de equipos
+                            </td>
+                            <td class="text-center" colspan="2">
+                                3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7"> 
+                                Otros (visitas a museo, acuario, etc.)
+                            </td>
+                            <td class="text-center" colspan="2">
+                                5
+                            </td>
+                        </tr>
                     </table>
-
-                    <h2>👥 Usuarios</h2>
-                    <table>
-                        <tr><th colspan="6">USUARIOS</th></tr>
-                        <tr><th>BDT</th><th>Usuarios Totales</th><th>Escolares</th><th>Docentes</th><th>Adultos Mayores</th><th>Otros</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>320</td><td>180</td><td>25</td><td>30</td><td>85</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>250</td><td>140</td><td>20</td><td>15</td><td>75</td></tr>
-                    </table>
-
-                    <h2>🤝 Convenios</h2>
-                    <table>
-                        <tr><th colspan="4">CONVENIOS</th></tr>
-                        <tr><th>BDT</th><th>Institución Aliada</th><th>Tipo de Convenio</th><th>Vigencia</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>SEP</td><td>Educativo</td><td>2023–2026</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>Gobierno Estatal</td><td>Infraestructura</td><td>2024–2027</td></tr>
-                    </table>
-
-                    <h2>🎨 Actividades</h2>
-                    <table>
-                        <tr><th colspan="5">ACTIVIDADES</th></tr>
-                        <tr><th>BDT</th><th>Tipo de Actividad</th><th>Frecuencia</th><th>Participantes</th><th>Observaciones</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>Taller de robótica</td><td>Semanal</td><td>25</td><td>Alta demanda, cupo limitado</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>Capacitación digital básica</td><td>Mensual</td><td>40</td><td>Dirigido a adultos mayores</td></tr>
-                    </table>
-
-                    <h2>🌍 Impacto Social</h2>
-                    <table>
-                        <tr><th colspan="4">IMPACTO SOCIAL</th></tr>
-                        <tr><th>BDT</th><th>Logros Destacados</th><th>Beneficiarios</th><th>Comentarios</th></tr>
-                        <tr><td>BDT Aldea Digital Iztapalapa</td><td>Reducción de brecha digital en jóvenes</td><td>+300</td><td>Reconocida por el municipio como modelo de inclusión</td></tr>
-                        <tr><td>BDT CT Saltillo</td><td>Capacitación laboral para adultos mayores</td><td>+200</td><td>Alianza con DIF para continuidad educativa</td></tr>
-                    </table>
-
                 </div>
-            </div>
 
             <div class="d-flex mt-5">
                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalReporte" data-bs-titulo="Nuevo Reporte">
