@@ -17,6 +17,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
         }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
         /*
         h2 {
             background-color: #004080;
@@ -55,6 +61,11 @@
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab-bdt-abiertas-internas" data-bs-toggle="tab" data-bs-target="#tabBdtAbiertasInternas" type="button" role="tab" aria-controls="tabBdtAbiertasInternas" aria-selected="true">
+                            Abiertas Internas
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tab-bdt-cerradas" data-bs-toggle="tab" data-bs-target="#tabBdtCerradas" type="button" role="tab" aria-controls="tabBdtCerradas" aria-selected="true">
                             Cerradas
                         </button>
@@ -62,6 +73,7 @@
                 </ul>
             </div>
 
+            <!-- Tabla BDT Abiertas Totales -->
             <div class="tab-content mt-4" id="miTabContent">
                 <div class="tab-pane fade show active" id="tabBdtAbiertas" role="tabpanel" aria-labelledby="tab-bdt-abiertas">
                     <table class="table">
@@ -646,7 +658,7 @@
                             </td>
                             <th class="table-light"></th>
                             <th class="text-center table-info">
-                                Mantenimientos:
+                                Manttos:
                             </th>
                             <th class="text-center table-info" colspan="3">
                                 Total:
@@ -675,7 +687,13 @@
 
                 </div>
 
-                <div class="tab-pane fade" id="tabBdtCerradas" role="tabpanel" aria-labelledby="ta-bdt-cerradas">
+                <!-- Tabla BDT Abiertas Totales -->
+                <div class="tab-pane fade" id="tabBdtAbiertasInternas" role="tabpanel" aria-labelledby="tab-bdt-abiertas-internas">
+                    <p>Hola</p>
+                </div>
+                
+                <!-- Tabla BDT Cerradas -->
+                <div class="tab-pane fade" id="tabBdtCerradas" role="tabpanel" aria-labelledby="tab-bdt-cerradas">
                     <table class="table">
                         <thead class="bg-secondary">
                             <tr>
@@ -988,6 +1006,7 @@
                         </tr>
                     </table>
                 </div>
+            </div>
 
             <div class="d-flex mt-5">
                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalReporte" data-bs-titulo="Nuevo Reporte">
