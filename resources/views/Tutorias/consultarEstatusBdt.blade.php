@@ -553,7 +553,7 @@
                             </td>
                             <td class="table-light"></td>
                             <th class="text-center table-info" colspan="9">
-                                5. Gasto mensual $306,106 / acumulado 2025 $1,735,528
+                                6. Gasto mensual $306,274 / acumulado 2025 $1,735,332
                             </th>
                         </tr>
                         <tr>
@@ -586,7 +586,7 @@
                                 -
                             </td>
                             <td class="text-center" colspan="2">
-                                $26,750,752
+                                $26,729.20
                             </td>
                             <td class="text-center" colspan="3">
                                 -
@@ -645,24 +645,24 @@
                                 5
                             </td>
                             <th class="table-light"></th>
-                            <td class="text-center db-info">
+                            <th class="text-center table-info">
                                 Mantenimientos:
-                            </td>
-                            <td class="text-center db-info" colspan="3">
+                            </th>
+                            <th class="text-center table-info" colspan="3">
                                 Total:
-                            </td>
+                            </th>
                             <td class="text-center" colspan="2">
-                                $138.420,36
+                                $138,420.36
                             </td>
-                            <td class="text-center db-info" colspan="2">
+                            <th class="text-center table-info" colspan="2">
                                 Ejercicio:
-                            </td>
-                            <td class="text-center db-info">
+                            </th>
+                            <th class="text-center table-info">
                                 -
-                            </td>
+                            </th>
                         </tr>
                         <tr>
-                            <th class="bg-dark text-white text-center" colspan="19">
+                            <th class="bg-secondary text-white text-center" colspan="19">
                                 Solicitudes relevantes del mes:
                             </th>
                         </tr>
@@ -677,65 +677,42 @@
 
                 <div class="tab-pane fade" id="tabBdtCerradas" role="tabpanel" aria-labelledby="ta-bdt-cerradas">
                     <table class="table">
-                        <thead class="bg-info">
+                        <thead class="bg-secondary">
                             <tr>
                                 <th class="text-center" colspan="9">
-                                    95 ABIERTAS
+                                    7 CERRADAS
                                 </th>
                             </tr>
                         </thead>
-                        <tr class="table-info">
-                            <th class="text-center" colspan="5">
-                                95 Totales
-                            </th>
-                            <th class="text-center" colspan="2">
-                                Cerradas del mes
-                            </th>
-                            <th class="text-center" colspan="2">
-                                Abiertas del mes
+                        <tr class="table-secondary">
+                            <th class="text-center" colspan="9">
+                                7 Internas
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="5">
-                                92 Externas
-                            </td>
-                            <td class="text-center" colspan="2">
-                                -
-                            </td>
-                            <td class="text-center" colspan="2">
-                                -
+                            <td class="text-center" colspan="9">
+                                BDT FCS Veracruz, CT Campeche, CT Cuautla, CT Saltillo, CT Tapachula y CT Tuxtla (se entregó CT Mérida a Aldeca)
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-center" colspan="5">
-                                3 Internas
-                            </td>
-                            <td class="text-center" colspan="2">
-                                -
-                            </td>
-                            <td class="text-center" colspan="2">
-                                -
-                            </td>
-                        </tr>
-                        <tr class="table-info">
+                        <tr class="table-secondary">
                             <th class="text-center" colspan="9">
                                 1. Internet
                             </th>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                86 BDT con 97 líneas paga la entidad (4 en cobre)
+                                7 Ct con 9 Infinitum y 4 de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                9 BDT con 19 líneas y 2 enlaces de paga Telmex
+                                0 enlace
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                52 pesito
+                                $4,389.35
                             </td>
                             <td class="text-center" colspan="4">
-                                40 pesito
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -748,14 +725,11 @@
                             <td class="text-center" colspan="2">
                                 Medio
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Alto
                             </td>
                             <td class="text-center" colspan="2">
                                 Heavy
-                            </td>
-                            <td class="text-center">
-                                Atípico
                             </td>
                         </tr>
                         <tr>
@@ -763,23 +737,20 @@
                                 -
                             </td>
                             <td class="text-center" colspan="2">
-                                43
+                                4
                             </td>
                             <td class="text-center" colspan="2">
-                                32
-                            </td>
-                            <td class="text-center">
-                                8
+                                2
                             </td>
                             <td class="text-center" colspan="2">
-                                11
-                            </td>
-                            <td class="text-center">
                                 1
+                            </td>
+                            <td class="text-center" colspan="2">
+                                -
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-info" colspan="9">
+                            <th class="text-center table-secondary" colspan="9">
                                 2. Equipamiento
                             </th>
                         </tr>
@@ -787,193 +758,233 @@
                             <td class="text-center" colspan="2">
                                 Total del proyecto
                             </td>
-                            <td class="text-center" colspan="2">
-                                Abiertas Inicial
-                            </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center" colspan="4">
                                 Abiertas Funcional
                             </td>
                             <td class="text-center" colspan="3">
-                                % funcional contra inicial
+                                Baja, Dañado, Obsoleto o Faltante
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                45
+                                1788
                             </td>
-                            <td class="text-center" colspan="2">
-                                27
-                            </td>
-                            <td class="text-center" colspan="2">
-                                114114
+                            <td class="text-center" colspan="4">
+                                440
                             </td>
                             <td class="text-center" colspan="3">
-                                0
+                                114114
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-info" colspan="9">
-                                3. Mobiliario BDT Externas
+                            <th class="text-center table-secondary" colspan="9">
+                                3. Mobiliario y gadgets
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center" style="vertical-align: middle;" colspan="2" rowspan="2">
-                                Total del proyecto
+                            <td class="text-center">
+                                Mesas
                             </td>
-                            <td class="text-center" colspan="7">
-                                BDT Abiertas
+                            <td class="text-center" colspan="5">
+                                Sillas, bancos y puff
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Libreros
+                            </td>
+                            <td class="text-center">
+                                Tv
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="4">
-                                Inicial
+                            <td class="text-center">
+                                479
                             </td>
-                            <td class="text-center" colspan="3">
-                                Funcional
+                            <td class="text-center" colspan="5">
+                                1,613
+                            </td>
+                            <td class="text-center" colspan="2">
+                                32
+                            </td>
+                            <td class="text-center">
+                                38
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                21165
+                                Archiveros y Lockers
                             </td>
-                            <td class="text-center" colspan="4">
-                                3913
+                            <td class="text-center" colspan="2">
+                                Racks
                             </td>
-                            <td class="text-center" colspan="3">
-                                3893
+                            <td class="text-center" colspan="5">
+                                Carrito Cargador
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-info" colspan="9">
+                            <td class="text-center" colspan="2">
+                                51
+                            </td>
+                            <td class="text-center" colspan="2">
+                                56
+                            </td>
+                            <td class="text-center" colspan="5">
+                                3
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-secondary" colspan="9">
                                 4. Estatus convenio
                             </th>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                Indeterminado
+                                Vigente
                             </td>
                             <td class="text-center" colspan="3">
                                 Vencido
                             </td>
                             <td class="text-center" colspan="4">
-                                Vigente
+                                Sin convenio
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                90
+                                6
                             </td>
                             <td class="text-center" colspan="3">
-                                2
+                                -
                             </td>
                             <td class="text-center" colspan="4">
-                                3<br>
-                                (Iztapalapa oct/2046)<br>
-                                (CT SEDENA jun/2027)
+                                1 (Veracruz)
+                                <br>
+                                Contrato (vigencia 31 de dic de 2025) Notificar continuidad
+                                <br>
+                                120 días antes
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-info" colspan="9">
-                                5. Usuarios BDT
+                            <th class="text-center table-secondary" colspan="9">
+                                5. Usuarios
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                BDT (7 Cerradas)
+                            </td>
+                            <td class="text-center" colspan="3">
+                                ene-jun 2025
+                            </td>
+                            <td class="text-center">
+                                543
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Del mes
+                            </td>
+                            <td class="text-center">
+                                30
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="2">
+                                FILIALES
+                            </td>
+                            <td class="text-center" colspan="3">
+                                ene-jun 2025
+                            </td>
+                            <td class="text-center">
+                                10750
+                            </td>
+                            <td class="text-center" colspan="2">
+                                Del mes
+                            </td>
+                            <td class="text-center">
+                                2433
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" colspan="9">
+                                SANBORNS, SEARS, Global Hitss, Sección Amarilla, TELCEL, Bienestar Social, SCITUM, RED UNO, Guarderías Telmex, INBURSA, TELESITES
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-secondary" colspan="9">
+                                6. Gasto mensual $378,357.95 / acumulado 2025 $ 2,346,651
                             </th>
                         </tr>
                         <tr>
                             <td class="text-center">
-                                BDT's
+                                Renta
                             </td>
                             <td class="text-center" colspan="2">
-                                Resgistros
+                                Aseo
                             </td>
                             <td class="text-center" colspan="3">
-                                Inscritos
+                                Luz
                             </td>
                             <td class="text-center" colspan="3">
-                                Constancias
+                                Vigilancia
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center">
-                                50
+                                $16,975.89
                             </td>
                             <td class="text-center" colspan="2">
-                                27
+                                $7,604.57
                             </td>
                             <td class="text-center" colspan="3">
-                                100
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                200
+                                $200,695.74
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-info" colspan="9">
-                                6. Oferta educativa
+                            <td class="text-center">
+                                Agua Potable
+                            </td>
+                            <td class="text-center" colspan="5">
+                                Nómina operación
+                            </td>
+                            <td class="text-center" colspan="3">
+                                Nómina total
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                $4,033.56
+                            </td>
+                            <td class="text-center" colspan="5">
+                                $207,064.19
+                            </td>
+                            <td class="text-center" colspan="3">
+                                $486,609.32
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center table-secondary" colspan="2">
+                                Mantenimientos:
+                            </th>
+                            <th class="text-center table-secondary" colspan="2">
+                                Total:
+                            </th>
+                            <td class="text-center" colspan="2">
+                                $2,219,655.77
+                            </td>
+                            <th class="text-center table-secondary" colspan="2">
+                                Ejercicio:
+                            </th>
+                            <td class="text-center">
+                                -
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="bg-secondary text-white text-center" colspan="9">
+                                Solicitudes relevantes del mes:
                             </th>
                         </tr>
-                        <tr>
-                            <td class="text-center">
-                                Nuevos
-                            </td>
-                            <td class="text-center" colspan="2">
-                                Talleres
-                            </td>
-                            <td class="text-center" colspan="3">
-                                En línea
-                            </td>
-                            <td class="text-center" colspan="3">
-                                En desarrollo
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                3
-                            </td>
-                            <td class="text-center" colspan="2">
-                                447
-                            </td>
-                            <td class="text-center" colspan="3">
-                                393
-                            </td>
-                            <td class="text-center" colspan="3">
-                                53
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="text-center table-info" colspan="9">
-                                7. Nuevas Solicitudes 2025 (21 recibidas)
-                            </th>
-                        </tr>
-                        <tr>
-                            <td colspan="7"> 
-                                Solicitud BDT o donación de equipos
-                            </td>
-                            <td class="text-center" colspan="2">
-                                9
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7"> 
-                                Solicitud BDT de reequipamiento
-                            </td>
-                            <td class="text-center" colspan="2">
-                                4
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7"> 
-                                Retiro de equipos
-                            </td>
-                            <td class="text-center" colspan="2">
-                                3
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="7"> 
-                                Otros (visitas a museo, acuario, etc.)
-                            </td>
-                            <td class="text-center" colspan="2">
-                                5
-                            </td>
+                        <tr class="table-secondary">
+                            <th class="text-center" colspan="9"></th>
                         </tr>
                     </table>
                 </div>
