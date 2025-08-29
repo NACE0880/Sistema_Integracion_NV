@@ -705,7 +705,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info">
-                                Manttos:
+                                Mantenimientos:
                             </th>
                             <th class="text-center table-info" colspan="3">
                                 Total:
