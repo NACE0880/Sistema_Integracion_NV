@@ -80,13 +80,13 @@
                         <thead class="bg-info">
                             <tr>
                                 <th class="text-center" colspan="9">
-                                    95 ABIERTAS
+                                    {{ $datosPorBdt['bdtsAbiertas'] ?? '-' }} ABIERTAS
                                 </th>
                             </tr>
                         </thead>
                         <tr class="table-info">
                             <th class="text-center" colspan="5">
-                                95 Totales
+                                {{ $datosPorBdt['bdtsAbiertas'] ?? '-' }} Totales
                             </th>
                             <th class="text-center" colspan="2">
                                 Cerradas del mes
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                92 Externas
+                                {{ $datosPorBdt['bdtsExternas'] ?? '-' }} Externas
                             </td>
                             <td class="text-center" colspan="2">
                                 -
@@ -108,7 +108,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                3 Internas
+                                {{ $datosPorBdt['bdtsInternas'] ?? '-' }} Internas
                             </td>
                             <td class="text-center" colspan="2">
                                 -

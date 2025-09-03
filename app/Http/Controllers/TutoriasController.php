@@ -342,7 +342,26 @@ class TutoriasController extends Controller
 
     public function consultarEstatusBdt(){
 
-        return view('Tutorias.consultarEstatusBdt');
+        $bdts = adts::with(['lineas', 'equipamientos', 'mobiliarios']);
+        $bdtsAbiertas = (clone $bdts)->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
+        $bdtsExternas = $bdtsAbiertas
+        ->whereIn('ESPECIFICAS', ['ENTIDADES', 'SEDENA', 'UNAM', 'GUARDERIA TELMEX', 'NO']);
+        $bdtsInternas = (clone $bdts)->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+
+
+        $datosPorBdt = [];
+
+        $datosPorBdt = [
+
+            'bdtsAbiertas' => $bdtsAbiertas->count(),
+            'bdtsExternas' => $bdtsExternas->count(),
+            'bdtsInternas' => $bdtsInternas->count()
+
+        ];
+
+        
+
+        return view('Tutorias.consultarEstatusBdt', compact('datosPorBdt'));
 
     }
 
