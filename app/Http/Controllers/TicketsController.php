@@ -1559,9 +1559,9 @@ class TicketsController extends Controller
             //Notificar TELEGRAM ($destinatario, data)
             /*$payload = "<b>NUEVO TICKET A GENERADO</b>%0A".
             $data['ticket']->CASA. " - ".$data['ticket']->AREA_RESPONSABLE. " - ".$data['ticket']->AFECCION;*/
-            $payload = "<b>NUEVO TICKET VALIDADO - REINCIDENCIA - ".$ticket->FOLIO."</b>%0A".
-            $ticket->CASA. " - ".$ticket->AREA_RESPONSABLE. " - ".
-            $ticket->AFECCION." - ".$ticket->SITIO." - ".$ticket->DAÑO." - ".$ticket->DETALLE;	
+            $payload = "<b>NUEVO TICKET VALIDADO - REINCIDENCIA - ".$data['ticket']->FOLIO."</b>%0A".
+            $data['ticket']->CASA. " - ".$data['ticket']->AREA_RESPONSABLE. " - ".
+            $data['ticket']->AFECCION." - ".$data['ticket']->SITIO." - ".$data['ticket']->DAÑO." - ".$data['ticket']->DETALLE;	
                         
             $telegram->sendText($telegramId, $payload);
         }
