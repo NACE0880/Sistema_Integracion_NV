@@ -342,24 +342,38 @@ class TutoriasController extends Controller
 
     public function consultarEstatusBdt(){
 
-        $bdts = adts::with(['lineas', 'equipamientos', 'mobiliarios']);
-        $bdtsAbiertas = (clone $bdts)->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
-        $bdtsExternas = $bdtsAbiertas
+        /*$bdts = adts::with(['lineas', 'equipamientos', 'mobiliarios'])->get();
+        $numeroBdtsAbiertas = $bdts->filter(fn($bdt) => in_array($bdt->ESTATUS_ACTUAL, ['ABIERTA', 'ABIERTA INTERNA']));
+        $numeroBdtsExternas = (clone $numeroBdtsAbiertas)
         ->whereIn('ESPECIFICAS', ['ENTIDADES', 'SEDENA', 'UNAM', 'GUARDERIA TELMEX', 'NO']);
-        $bdtsInternas = (clone $bdts)->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+        $numeroBdtsInternas = (clone $bdts)->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
 
+        $numeroBdtsConLinea = (clone $numeroBdtsAbiertas)->lineas->whereNotIn('LINEA', ['BAJA']);
 
         $datosPorBdt = [];
 
         $datosPorBdt = [
 
-            'bdtsAbiertas' => $bdtsAbiertas->count(),
-            'bdtsExternas' => $bdtsExternas->count(),
-            'bdtsInternas' => $bdtsInternas->count()
+            'bdtsAbiertas' => $numeroBdtsAbiertas
+            'bdtsExternas' => $numeroBdtsExternas->count(),
+            'bdtsInternas' => $numeroBdtsInternas->count(),
 
+            'numeroBdtsConLinea' => $numeroBdtsConLinea->count()
+
+        ];*/
+
+        $bdts = adts::with(['lineas', 'equipamientos', 'mobiliarios'])->get();
+
+        // Filtramos las BDTs abiertas
+        $bdtsAbiertas = $bdts->filter(function ($bdt) {
+            return in_array($bdt->ESTATUS_ACTUAL, ['ABIERTA', 'ABIERTA INTERNA']);
+        });
+
+
+        // Creamos el array con el conteo
+        $datosPorBdt = [
+            'bdtsAbiertas' => $bdtsAbiertas->count()
         ];
-
-        
 
         return view('Tutorias.consultarEstatusBdt', compact('datosPorBdt'));
 
