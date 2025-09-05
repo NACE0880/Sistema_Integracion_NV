@@ -342,23 +342,28 @@ class TutoriasController extends Controller
 
     public function consultarEstatusBdt(){
 
-        $bdtsAbiertas = adts::with(['lineas', 'equipamientos', 'mobiliarios'])
-        ->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
+        $bdtsAbiertas = adts::whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         $bdtsExternas = (clone $bdtsAbiertas)
         ->whereIn('ESPECIFICAS', ['ENTIDADES', 'SEDENA', 'UNAM', 'GUARDERIA TELMEX', 'NO']);
         $bdtsInternas = (clone $bdtsAbiertas)->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
-
-        $bdtsConLinea = (clone $bdtsAbiertas)->whereHas('lineas', function($colaDeConsulta) {
-            $colaDeConsulta->whereNotIn('LINEA', ['BAJA']);
+        $bdtsConLineaPagaEntidad = (clone $bdtsAbiertas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
         });
 
+        $lineasDeBdtsAbiertas = lineas::with('adts')
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
+        })
+        ->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
 
         // Creamos el array con el conteo
         $datosBdts = [
             'numeroBdtsAbiertas' => $bdtsAbiertas->count(),
             'numeroBdtsExternas' => $bdtsExternas->count(),
             'numeroBdtsInternas' => $bdtsInternas->count(),
-            'numeroBdtsConLinea' => $bdtsConLinea->count()
+            'numeroBdtsConLineaPagaEntidad' => $bdtsConLineaPagaEntidad->count(),
+            'numeroLineasDondePagaEntidad' => $lineasDeBdtsAbiertas->count()
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));
