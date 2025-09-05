@@ -80,13 +80,13 @@
                         <thead class="bg-info">
                             <tr>
                                 <th class="text-center" colspan="9">
-                                    {{ $datosPorBdt['bdtsAbiertas'] ?? '-' }} ABIERTAS
+                                    {{ $datosBdts['numeroBdtsAbiertas'] ?? '-' }} ABIERTAS
                                 </th>
                             </tr>
                         </thead>
                         <tr class="table-info">
                             <th class="text-center" colspan="5">
-                                {{ $datosPorBdt['bdtsAbiertas'] ?? '-' }} Totales
+                                {{ $datosBdts['numeroBdtsAbiertas'] ?? '-' }} Totales
                             </th>
                             <th class="text-center" colspan="2">
                                 Cerradas del mes
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosPorBdt['bdtsExternas'] ?? '-' }} Externas
+                                {{ $datosBdts['numeroBdtsExternas'] ?? '-' }} Externas
                             </td>
                             <td class="text-center" colspan="2">
                                 -
@@ -108,7 +108,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosPorBdt['bdtsInternas'] ?? '-' }} Internas
+                                {{ $datosBdts['numeroBdtsInternas'] ?? '-' }} Internas
                             </td>
                             <td class="text-center" colspan="2">
                                 -
@@ -124,7 +124,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                86 BDT con 97 líneas paga la entidad (4 en cobre)
+                                {{ $datosBdts['numeroBdtsConLinea'] ?? '-' }} BDT con 97 líneas paga la entidad (4 en cobre)
                             </td>
                             <td class="text-center" colspan="4">
                                 9 BDT con 19 líneas y 2 enlaces de paga Telmex
