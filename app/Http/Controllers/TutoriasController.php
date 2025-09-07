@@ -353,9 +353,10 @@ class TutoriasController extends Controller
 
         $lineasDeBdtsAbiertas = lineas::with('adts')
         ->whereHas('adts', function ($colaDeConsulta) {
-            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA']);
         })
         ->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
+        $lineasDeBdtsDeCobre = (clone $lineasDeBdtsAbiertas)->where('TECNOLOGIA', 'IPDSLAM');
 
         // Creamos el array con el conteo
         $datosBdts = [
@@ -363,7 +364,8 @@ class TutoriasController extends Controller
             'numeroBdtsExternas' => $bdtsExternas->count(),
             'numeroBdtsInternas' => $bdtsInternas->count(),
             'numeroBdtsConLineaPagaEntidad' => $bdtsConLineaPagaEntidad->count(),
-            'numeroLineasDondePagaEntidad' => $lineasDeBdtsAbiertas->count()
+            'numeroLineasDondePagaEntidad' => $lineasDeBdtsAbiertas->count(),
+            'numeroLineasDeCobre' => $lineasDeBdtsDeCobre->count()
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));
