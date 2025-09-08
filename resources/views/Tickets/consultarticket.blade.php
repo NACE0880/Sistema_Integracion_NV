@@ -23,7 +23,9 @@
             transition: 0.8s ease-in-out;
         }
 
-
+        div.dataTables_filter {
+            display: none;
+        }
     </style>
 
         {{-- Zoom 2 --}}
@@ -69,8 +71,6 @@
 
             box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.1);
         }
-
-
     </style>
 @endsection
 
