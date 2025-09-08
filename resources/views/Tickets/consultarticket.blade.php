@@ -307,6 +307,7 @@
     {{-- DATATABLE --}}
     <script>
         let tabla = new DataTable('#ticketsTable',{
+            ordering: false,
             lengthMenu: [
                 [5, 10, 15, -1],
                 [5, 10, 15, 'All']
@@ -334,6 +335,38 @@
                 }
 
         });
+
+        $('#ticketsTable thead th').each(function(index) {
+        // Opcional: excluir columnas con botones
+            if (index === 5 || index === 6) return;
+
+            const thStyles = window.getComputedStyle(this);
+
+            const $input = $('<input>', {
+                type: 'text',
+                placeholder: 'Filtrar...',
+                css: {
+                    width: '90%',
+                    fontSize: thStyles.fontSize,
+                    fontFamily: thStyles.fontFamily,
+                    color: thStyles.color,
+                    backgroundColor: thStyles.backgroundColor,
+                    border: '1px solid #ccc',
+                    padding: '2px',
+                    marginTop: '4px',
+                    boxSizing: 'border-box',
+                    borderRadius: '4px'
+                }
+            });
+
+            $(this).off('click'); // Evita que el click ordene la columna
+            $(this).append('<br>').append($input);
+
+            $input.on('keyup change', function() {
+                tabla.column(index).search(this.value).draw();
+            });
+        });
+
     </script>
 
     {{-- MODAL DETALLE --}}
