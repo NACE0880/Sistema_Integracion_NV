@@ -26,6 +26,13 @@
         div.dataTables_filter {
             display: none;
         }
+
+
+        #ticketsTable th {
+            vertical-align: top;
+        }
+</style>
+
     </style>
 
         {{-- Zoom 2 --}}
@@ -338,7 +345,7 @@
 
         $('#ticketsTable thead th').each(function(index) {
         // Opcional: excluir columnas con botones
-            if (index === 5 || index === 6) return;
+            if (index === 5 || index === 6 || index === 7) return;
 
             const thStyles = window.getComputedStyle(this);
 
