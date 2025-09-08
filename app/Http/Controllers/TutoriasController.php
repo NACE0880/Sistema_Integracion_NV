@@ -343,29 +343,43 @@ class TutoriasController extends Controller
     public function consultarEstatusBdt(){
 
         $bdtsAbiertas = adts::whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
-        $bdtsExternas = (clone $bdtsAbiertas)
-        ->whereIn('ESPECIFICAS', ['ENTIDADES', 'SEDENA', 'UNAM', 'GUARDERIA TELMEX', 'NO']);
-        $bdtsInternas = (clone $bdtsAbiertas)->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
-        $bdtsConLineaPagaEntidad = (clone $bdtsAbiertas)
+        $bdtsExternas = adts::where('ESTATUS_ACTUAL', 'ABIERTA');
+        $bdtsInternas = adts::where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+        $bdtsConLineasQuePagaEntidad = (clone $bdtsExternas)
         ->whereHas('lineas', function($colaDeConsulta) {
             $colaDeConsulta->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
         });
+        $bdtsConLineasQuePagaTelmex = (clone $bdtsExternas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
+        });
 
-        $lineasDeBdtsAbiertas = lineas::with('adts')
+        $lineasDeBdts = lineas::with('adts');
+        $lineasDeBdtsQuePagaEntidad = (clone $lineasDeBdts)
         ->whereHas('adts', function ($colaDeConsulta) {
-            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA']);
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
         })
         ->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
-        $lineasDeBdtsDeCobre = (clone $lineasDeBdtsAbiertas)->where('TECNOLOGIA', 'IPDSLAM');
+        $lineasDeBdtsDeCobre = (clone $lineasDeBdtsQuePagaEntidad)->where('TECNOLOGIA', 'IPDSLAM');
+        $lineasDeBdtsQuePagaTelmex = (clone $lineasDeBdts)
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        })
+        ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
+        $lineasDeBdtsQuePagaTelmexEnlace = (clone $lineasDeBdtsQuePagaTelmex)
+        ->where('TECNOLOGIA', 'ENLACE');
 
         // Creamos el array con el conteo
         $datosBdts = [
             'numeroBdtsAbiertas' => $bdtsAbiertas->count(),
             'numeroBdtsExternas' => $bdtsExternas->count(),
             'numeroBdtsInternas' => $bdtsInternas->count(),
-            'numeroBdtsConLineaPagaEntidad' => $bdtsConLineaPagaEntidad->count(),
-            'numeroLineasDondePagaEntidad' => $lineasDeBdtsAbiertas->count(),
-            'numeroLineasDeCobre' => $lineasDeBdtsDeCobre->count()
+            'numeroBdtsConLineasQuePagaEntidad' => $bdtsConLineasQuePagaEntidad->count(),
+            'numeroLineasQuePagaEntidad' => $lineasDeBdtsQuePagaEntidad->count(),
+            'numeroLineasDeCobre' => $lineasDeBdtsDeCobre->count(),
+            'numeroBdtsConLineasQuePagaTelmex' => $bdtsConLineasQuePagaTelmex->count(),
+            'numeroLineasQuePagaTelmex' => $lineasDeBdtsQuePagaTelmex->count(),
+            'numeroLineasQuePagaTelmexEnlace' => $lineasDeBdtsQuePagaTelmexEnlace->count()
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));

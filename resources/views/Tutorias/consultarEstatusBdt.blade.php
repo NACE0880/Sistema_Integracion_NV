@@ -124,10 +124,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosBdts['numeroBdtsConLineaPagaEntidad'] ?? '-' }} BDT con {{ $datosBdts['numeroLineasDondePagaEntidad'] }} líneas paga la entidad ({{ $datosBdts['numeroLineasDeCobre'] }} en cobre)
+                                {{ $datosBdts['numeroBdtsConLineasQuePagaEntidad'] ?? '-' }} BDT con {{ $datosBdts['numeroLineasQuePagaEntidad'] ?? '-' }} líneas paga la entidad ({{ $datosBdts['numeroLineasDeCobre'] ?? '-'}} en cobre)
                             </td>
                             <td class="text-center" colspan="4">
-                                9 BDT con 19 líneas y 2 enlaces de paga Telmex
+                                {{ $datosBdts['numeroBdtsConLineasQuePagaTelmex'] ?? '-'}} BDT con {{ $datosBdts['numeroLineasQuePagaTelmex'] ?? '-'}} líneas y {{ $datosBdts['numeroLineasQuePagaTelmexEnlace'] ?? '-' }} enlaces que paga Telmex
                             </td>
                         </tr>
                         <tr>
