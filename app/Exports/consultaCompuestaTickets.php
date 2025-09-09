@@ -38,11 +38,11 @@ class consultaCompuestaTickets {
     public function acumuladosSitio($historico_monto, $casa, $colecciones, $historicDateStart, $dateEnd){
         switch ($historico_monto) {
             case 'historico':
-                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, $dateEnd])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->count() - $colecciones['finalizados']->where('CASA', $casa)->count();
+                return tickets::where('FECHA_INICIO', '<',$historicDateStart)->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->count();
                 break;
 
             case 'monto':
-                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, $dateEnd])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->sum('COTIZACION') -  $colecciones['finalizados']->where('CASA', $casa)->sum('COTIZACION');
+                return tickets::where('FECHA_INICIO', '<',$historicDateStart)->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->sum('COTIZACION');
             break;
 
             default:
@@ -67,7 +67,7 @@ class consultaCompuestaTickets {
 
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
-                $pendientes_anteriores = tickets::where('FECHA_INICIO', '<', $this->dateStart)->where('ESTATUS_ACTUAL', 'PENDIENTE')
+                $pendientes_anteriores = tickets::where('FECHA_INICIO', '<', $historicDateStart)->where('ESTATUS_ACTUAL', 'PENDIENTE')
                 ->get()->groupBy('CASA');
                 $procesados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'EN PROCESO')->orderBy('ESTATUS_CASA', 'ASC')->get();
                 $finalizados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'FINALIZADO')->orderBy('ESTATUS_CASA', 'ASC')->get();

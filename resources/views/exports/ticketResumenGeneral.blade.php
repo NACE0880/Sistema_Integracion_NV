@@ -36,11 +36,11 @@
                 CANTIDAD ANTERIORES AL AÑO EN CURSO
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
-                COTIZADO<br>
+                AUTORIZADOS<br>
                 SITIO
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
-                AUTORIZADOS<br>
+                COTIZADO<br>
                 SITIO
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
@@ -88,10 +88,10 @@
                 {{ $pendientes_anteriores_data['aldea'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['aldea']['cotizados'] }}
+                {{ $pendientes_data['aldea']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['aldea']['autorizados'] }}
+                {{ $pendientes_data['aldea']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 ${{ $pendientes_data['aldea']['montoTotal'] }}
@@ -136,10 +136,10 @@
                 {{ $pendientes_anteriores_data['sedena'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['sedena']['cotizados'] }}
+                {{ $pendientes_data['sedena']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['sedena']['autorizados'] }}
+                {{ $pendientes_data['sedena']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 ${{ $pendientes_data['sedena']['montoTotal'] }}
@@ -184,10 +184,10 @@
                 {{ $pendientes_anteriores_data['semar'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['semar']['cotizados'] }}
+                {{ $pendientes_data['semar']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['semar']['autorizados'] }}
+                {{ $pendientes_data['semar']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 ${{ $pendientes_data['semar']['montoTotal'] }}
@@ -233,10 +233,10 @@
                 {{ $pendientes_anteriores_data['campeche'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['campeche']['cotizados'] }}
+                {{ $pendientes_data['campeche']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['campeche']['autorizados'] }}
+                {{ $pendientes_data['campeche']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 ${{ $pendientes_data['campeche']['montoTotal'] }}
@@ -281,10 +281,10 @@
                 {{ $pendientes_anteriores_data['cuautla'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['cuautla']['cotizados'] }}
+                {{ $pendientes_data['cuautla']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['cuautla']['autorizados'] }}
+                {{ $pendientes_data['cuautla']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 ${{ $pendientes_data['cuautla']['montoTotal'] }}
@@ -329,10 +329,10 @@
                 {{ $pendientes_anteriores_data['culiacan'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['culiacan']['cotizados'] }}
+                {{ $pendientes_data['culiacan']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['culiacan']['autorizados'] }}
+                {{ $pendientes_data['culiacan']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 ${{ $pendientes_data['culiacan']['montoTotal'] }}
@@ -377,10 +377,10 @@
                 {{ $pendientes_anteriores_data['saltillo'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['saltillo']['cotizados'] }}
+                {{ $pendientes_data['saltillo']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['saltillo']['autorizados'] }}
+                {{ $pendientes_data['saltillo']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 ${{ $pendientes_data['saltillo']['montoTotal'] }}
@@ -425,10 +425,10 @@
                 {{ $pendientes_anteriores_data['tapachula'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['tapachula']['cotizados'] }}
+                {{ $pendientes_data['tapachula']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['tapachula']['autorizados'] }}
+                {{ $pendientes_data['tapachula']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 ${{ $pendientes_data['tapachula']['montoTotal'] }}
@@ -473,10 +473,10 @@
                 {{ $pendientes_anteriores_data['tuxtla'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['tuxtla']['cotizados'] }}
+                {{ $pendientes_data['tuxtla']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
-                {{ $pendientes_data['tuxtla']['autorizados'] }}
+                {{ $pendientes_data['tuxtla']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 ${{ $pendientes_data['tuxtla']['montoTotal'] }}
@@ -521,10 +521,10 @@
                 {{ $pendientes_anteriores_data['veracruz'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['veracruz']['cotizados'] }}
+                {{ $pendientes_data['veracruz']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
-                {{ $pendientes_data['veracruz']['autorizados'] }}
+                {{ $pendientes_data['veracruz']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 ${{ $pendientes_data['veracruz']['montoTotal'] }}
@@ -569,10 +569,10 @@
                 {{ $totales_data['pendientes_anteriores']['cantidad'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
-                {{ $totales_data['pendientes']['cotizados'] }}
+                {{ $totales_data['pendientes']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
-                {{ $totales_data['pendientes']['autorizados'] }}
+                {{ $totales_data['pendientes']['cotizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
                 ${{ $totales_data['pendientes']['montoTotal'] }}
