@@ -132,10 +132,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                52 pesito
+                                {{ isset($datosBdts['montoDeLineasQuePagaEntidad']) ? '$' . number_format($datosBdts['montoDeLineasQuePagaEntidad'], 2) : '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                40 pesito
+                                {{ isset($datosBdts['montoDeLineasQuePagaTelmex']) ? '$' . number_format($datosBdts['montoDeLineasQuePagaTelmex'], 2) : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -160,22 +160,22 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                -
+                                {{ $datosBdts['numeroDeLineasConConsumoSinConsumo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                43
+                                {{ $datosBdts['numeroDeLineasConConsumoBajo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                32
+                                {{ $datosBdts['numeroDeLineasConConsumoMedio'] ?? '-' }}
                             </td>
                             <td class="text-center">
-                                8
+                                {{ $datosBdts['numeroDeLineasConConsumoAlto'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                11
+                                {{ $datosBdts['numeroDeLineasConConsumoHeavy'] ?? '-' }}
                             </td>
                             <td class="text-center">
-                                1
+                                {{ $datosBdts['numeroDeLineasConConsumoAtipico'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>

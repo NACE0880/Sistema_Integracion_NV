@@ -355,6 +355,10 @@ class TutoriasController extends Controller
         });
 
         $lineasDeBdts = lineas::with('adts');
+        $lineasDeBdtsAbiertas = (clone $lineasDeBdts)
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        });
         $lineasDeBdtsQuePagaEntidad = (clone $lineasDeBdts)
         ->whereHas('adts', function ($colaDeConsulta) {
             $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
@@ -368,6 +372,16 @@ class TutoriasController extends Controller
         ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
         $lineasDeBdtsQuePagaTelmexEnlace = (clone $lineasDeBdtsQuePagaTelmex)
         ->where('TECNOLOGIA', 'ENLACE');
+        $montoDeLineasQuePagaEntidad = $lineasDeBdtsQuePagaEntidad->sum('COSTO');
+        $montoDeLineasQuePagaTelmex = $lineasDeBdtsQuePagaTelmex->sum('COSTO');
+        $lineasDeConsumoSinConsumo = (clone $lineasDeBdtsAbiertas)->where(function ($colaDeConsulta) {
+            $colaDeConsulta->whereIn('SEMAFORO', ['-', 'NULO', 'NULL'])->orWhereNull('SEMAFORO');
+        });
+        $lineasDeConsumoBajo = (clone $lineasDeBdtsAbiertas)->where('SEMAFORO', 'BAJO');
+        $lineasDeConsumoMedio = (clone $lineasDeBdtsAbiertas)->where('SEMAFORO', 'MEDIO');
+        $lineasDeConsumoAlto = (clone $lineasDeBdtsAbiertas)->where('SEMAFORO', 'ALTO');
+        $lineasDeConsumoHeavy = (clone $lineasDeBdtsAbiertas)->where('SEMAFORO', 'HEAVY');
+        $lineasDeConsumoAtipico = (clone $lineasDeBdtsAbiertas)->where('SEMAFORO', 'ATIPICO');
 
         // Creamos el array con el conteo
         $datosBdts = [
@@ -379,7 +393,15 @@ class TutoriasController extends Controller
             'numeroLineasDeCobre' => $lineasDeBdtsDeCobre->count(),
             'numeroBdtsConLineasQuePagaTelmex' => $bdtsConLineasQuePagaTelmex->count(),
             'numeroLineasQuePagaTelmex' => $lineasDeBdtsQuePagaTelmex->count(),
-            'numeroLineasQuePagaTelmexEnlace' => $lineasDeBdtsQuePagaTelmexEnlace->count()
+            'numeroLineasQuePagaTelmexEnlace' => $lineasDeBdtsQuePagaTelmexEnlace->count(),
+            'montoDeLineasQuePagaEntidad' => $montoDeLineasQuePagaEntidad,
+            'montoDeLineasQuePagaTelmex' => $montoDeLineasQuePagaTelmex,
+            'numeroDeLineasConConsumoSinConsumo' => $lineasDeConsumoSinConsumo->count(),
+            'numeroDeLineasConConsumoBajo' => $lineasDeConsumoBajo->count(),
+            'numeroDeLineasConConsumoMedio' => $lineasDeConsumoMedio->count(),
+            'numeroDeLineasConConsumoAlto' => $lineasDeConsumoAlto->count(),
+            'numeroDeLineasConConsumoHeavy' => $lineasDeConsumoHeavy->count(),
+            'numeroDeLineasConConsumoAtipico' => $lineasDeConsumoAtipico->count(),
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));
