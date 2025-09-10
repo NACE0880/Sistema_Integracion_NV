@@ -199,16 +199,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                45
+                                {{ $datosBdts['cantidadDeEquipamientoBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                27
+                                {{ $datosBdts['cantidadDeEquipamientoInicialBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                114114
+                                {{ $datosBdts['cantidadDeEquipamientoFuncionaBdtsAbiertas'] ?? '-'}}
                             </td>
                             <td class="text-center" colspan="3">
-                                60%
+                                {{ isset($datosBdts['cantidadPorcentualCantidadEquipamientoFuncionalEntreEquipamientoFuncional']) ? number_format($datosBdts['cantidadPorcentualCantidadEquipamientoFuncionalEntreEquipamientoFuncional'], 2) . "%" : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -234,13 +234,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" style="vertical-align: middle;" colspan="2">
-                                21165
+                                {{ $datosBdts['cantidadDeMobiliarioBdtsAbiertas'] }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="4">
-                                3913
+                                {{ $datosBdts['cantidadDeMobiliarioInicialBdtsAbiertas'] }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="3">
-                                3893
+                                {{ $datosBdts['cantidadDeMobiliarioFuncionaBdtsAbiertas'] }}
                             </td>
                         </tr>
                         <tr>
@@ -261,15 +261,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                90
+                                {{ $datosBdts['numeroConveniosIndeterminadosBdtsAbiertas'] }}
                             </td>
                             <td class="text-center" colspan="3">
-                                2
+                                {{ $datosBdts['numeroConveniosVencidosBdtsAbiertas'] }}
                             </td>
                             <td class="text-center" colspan="4">
-                                3<br>
-                                (Iztapalapa oct/2046)<br>
-                                (CT SEDENA jun/2027)
+                                {{ $datosBdts['numeroConveniosVigentesBdtsAbiertas'] }}
                             </td>
                         </tr>
                         <tr>
@@ -282,7 +280,7 @@
                                 BDT's
                             </td>
                             <td class="text-center" colspan="2">
-                                Resgistros
+                                Registros
                             </td>
                             <td class="text-center" colspan="3">
                                 Inscritos
