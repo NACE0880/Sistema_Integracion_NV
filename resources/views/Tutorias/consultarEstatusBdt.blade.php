@@ -80,13 +80,13 @@
                         <thead class="bg-info">
                             <tr>
                                 <th class="text-center" colspan="9">
-                                    {{ $datosBdts['numeroBdtsAbiertas'] ?? '-' }} ABIERTAS
+                                    {{ $datosBdts['numeroAdtsAbiertas'] ?? '-' }} ABIERTAS
                                 </th>
                             </tr>
                         </thead>
                         <tr class="table-info">
                             <th class="text-center" colspan="5">
-                                {{ $datosBdts['numeroBdtsAbiertas'] ?? '-' }} Totales
+                                {{ $datosBdts['numeroAdtsAbiertas'] ?? '-' }} Totales
                             </th>
                             <th class="text-center" colspan="2">
                                 Cerradas del mes
@@ -97,7 +97,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosBdts['numeroBdtsExternas'] ?? '-' }} Externas
+                                {{ $datosBdts['numeroAdtsExternas'] ?? '-' }} Externas
                             </td>
                             <td class="text-center" colspan="2">
                                 -
@@ -108,7 +108,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosBdts['numeroBdtsInternas'] ?? '-' }} Internas
+                                {{ $datosBdts['numeroAdtsInternas'] ?? '-' }} Internas
                             </td>
                             <td class="text-center" colspan="2">
                                 -
@@ -124,18 +124,18 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosBdts['numeroBdtsConLineasQuePagaEntidad'] ?? '-' }} BDT con {{ $datosBdts['numeroLineasQuePagaEntidad'] ?? '-' }} líneas paga la entidad ({{ $datosBdts['numeroLineasDeCobre'] ?? '-'}} en cobre)
+                                {{ $datosBdts['numeroAdtsConLineasPagaEntidad'] ?? '-' }} BDT con {{ $datosBdts['numeroLineasPagaEntidad'] ?? '-' }} líneas paga la entidad ({{ $datosBdts['numeroLineasCobre'] ?? '-'}} en cobre)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosBdts['numeroBdtsConLineasQuePagaTelmex'] ?? '-'}} BDT con {{ $datosBdts['numeroLineasQuePagaTelmex'] ?? '-'}} líneas y {{ $datosBdts['numeroLineasQuePagaTelmexEnlace'] ?? '-' }} enlaces que paga Telmex
+                                {{ $datosBdts['numeroAdtsConLineasPagaTelmex'] ?? '-'}} BDT con {{ $datosBdts['numeroLineasPagaTelmex'] ?? '-'}} líneas y {{ $datosBdts['numeroLineasEnlaceQuePagaTelmex'] ?? '-' }} enlaces que paga Telmex
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ isset($datosBdts['montoDeLineasQuePagaEntidad']) ? '$' . number_format($datosBdts['montoDeLineasQuePagaEntidad'], 2) : '-' }}
+                                {{ isset($datosBdts['costoLineasPagaEntidad']) ? '$' . number_format($datosBdts['costoLineasPagaEntidad'], 2) : '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ isset($datosBdts['montoDeLineasQuePagaTelmex']) ? '$' . number_format($datosBdts['montoDeLineasQuePagaTelmex'], 2) : '-' }}
+                                {{ isset($datosBdts['costoLineasPagaTelmex']) ? '$' . number_format($datosBdts['costoLineasPagaTelmex'], 2) : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -160,22 +160,22 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                {{ $datosBdts['numeroDeLineasConConsumoSinConsumo'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoSinConsumo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['numeroDeLineasConConsumoBajo'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoBajo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['numeroDeLineasConConsumoMedio'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoMedio'] ?? '-' }}
                             </td>
                             <td class="text-center">
-                                {{ $datosBdts['numeroDeLineasConConsumoAlto'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoAlto'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['numeroDeLineasConConsumoHeavy'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoHeavy'] ?? '-' }}
                             </td>
                             <td class="text-center">
-                                {{ $datosBdts['numeroDeLineasConConsumoAtipico'] ?? '-' }}
+                                {{ $datosBdts['numeroLineasConsumoAtipico'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -199,7 +199,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['cantidadDeEquipamientoBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['cantidadEquipamientoAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
                                 {{ $datosBdts['cantidadDeEquipamientoInicialBdtsAbiertas'] ?? '-' }}
@@ -234,13 +234,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" style="vertical-align: middle;" colspan="2">
-                                {{ $datosBdts['cantidadDeMobiliarioBdtsAbiertas'] }}
+                                {{ $datosBdts['cantidadDeMobiliarioBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="4">
-                                {{ $datosBdts['cantidadDeMobiliarioInicialBdtsAbiertas'] }}
+                                {{ $datosBdts['cantidadDeMobiliarioInicialBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="3">
-                                {{ $datosBdts['cantidadDeMobiliarioFuncionaBdtsAbiertas'] }}
+                                {{ $datosBdts['cantidadDeMobiliarioFuncionaBdtsAbiertas'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -261,13 +261,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['numeroConveniosIndeterminadosBdtsAbiertas'] }}
+                                {{ $datosBdts['numeroConveniosIndeterminadosBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="3">
-                                {{ $datosBdts['numeroConveniosVencidosBdtsAbiertas'] }}
+                                {{ $datosBdts['numeroConveniosVencidosBdtsAbiertas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosBdts['numeroConveniosVigentesBdtsAbiertas'] }}
+                                {{ $datosBdts['numeroConveniosVigentesBdtsAbiertas'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
