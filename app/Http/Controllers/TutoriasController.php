@@ -342,7 +342,7 @@ class TutoriasController extends Controller
 
     public function consultarEstatusBdt(){
 
-        $adtsAbiertas = adts::with(['lineas', 'equipamientos', 'mobiliarios'])
+        $adtsAbiertas = adts::with(['lineas'])
         ->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         $adtsAbiertasExternas = (clone $adtsAbiertas)->whereIn('INICIATIVA', ['ADT', 'BDT MPAL']);
         $adtsAbiertasInternas = (clone $adtsAbiertas)->where('INICIATIVA', 'CASA TELMEX');
@@ -388,74 +388,72 @@ class TutoriasController extends Controller
         $lineasConsumoAtipico = (clone $lineasDeAdts)
         ->where('SEMAFORO', 'ATIPICO');
 
-        $equipamientoAdts = equipamientos::with('adts')->get();
+        $equipamientoAdts = equipamientos::with('adts');
         $totalEquipamientoAdts = 
-        $equipamientoAdts->sum('PC') +
-        $equipamientoAdts->sum('LAPTOP') +
-        $equipamientoAdts->sum('CLASSMATE') +
-        $equipamientoAdts->sum('XO'); 
-        /*$equipamientoInicialBdtsAbiertas = equipamientos::whereHas('adts', function($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        equipamientos::sum('PC') +
+        equipamientos::sum('LAPTOP') +
+        equipamientos::sum('CLASSMATE') +
+        equipamientos::sum('XO');
+        $equipamientoInicialAdts = equipamientos::whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
         ->where('TIPO', 'INICIAL')
         ->get();
-        $sumaEquipamientoInicialBdtsAbiertas = 
-        $equipamientoInicialBdtsAbiertas->sum('PC') + 
-        $equipamientoInicialBdtsAbiertas->sum('LAPTOP') + 
-        $equipamientoInicialBdtsAbiertas->sum('CLASSMATE') + 
-        $equipamientoInicialBdtsAbiertas->sum('XO');
-        $equipamientoFuncionalBdtsAbiertas = equipamientos::whereHas('adts', function($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        $totalEquipamientoInicialAdts =
+        $equipamientoInicialAdts->sum('PC') +
+        $equipamientoInicialAdts->sum('LAPTOP') +
+        $equipamientoInicialAdts->sum('CLASSMATE') +
+        $equipamientoInicialAdts->sum('XO');
+        $equipamientoFuncionalAdts = equipamientos::whereHas('adts', function($colaDeConsulta) {
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
         ->where('TIPO', 'FUNCIONAL')
         ->get();
-        $sumaEquipamientoFuncionalBdtsAbiertas = 
-        $equipamientoFuncionalBdtsAbiertas->sum('PC') + 
-        $equipamientoFuncionalBdtsAbiertas->sum('LAPTOP') + 
-        $equipamientoFuncionalBdtsAbiertas->sum('CLASSMATE') + 
-        $equipamientoFuncionalBdtsAbiertas->sum('XO');
-        $porcentajeEquipamientoFuncionalContraInicial = 
-        (100 * $sumaEquipamientoFuncionalBdtsAbiertas)
-        / $sumaEquipamientoInicialBdtsAbiertas;
-
-        $mobiliarioBdts = mobiliarios::with('adts')->get();
-        $sumaMobiliarioBdts = 
-        $mobiliarioBdts->sum('MESA_RECTANGULAR_GRANDE') + 
-        $mobiliarioBdts->sum('MESA_RECTANGULAR_MEDIANA') + 
-        $mobiliarioBdts->sum('MESA_CIRCULAR') + 
-        $mobiliarioBdts->sum('SILLAS') +
-        $mobiliarioBdts->sum('MUEBLE_RESGUARDO');
-        $mobiliarioInicialBdtsAbiertas = mobiliarios::whereHas('adts', function($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        $totalEquipamientoFuncionalAdts = 
+        $equipamientoFuncionalAdts->sum('PC') +
+        $equipamientoFuncionalAdts->sum('LAPTOP') +
+        $equipamientoFuncionalAdts->sum('CLASSMATE') +
+        $equipamientoFuncionalAdts->sum('XO');
+        $relacionPorcentualEquipamientoFuncionalEntreInicial = 
+        ($totalEquipamientoFuncionalAdts * 100) / ($totalEquipamientoInicialAdts);
+        
+        $mobiliarioAdts = mobiliarios::with('adts');
+        $totalMobiliarioAdts =
+        mobiliarios::sum('MESA_RECTANGULAR_GRANDE') +
+        mobiliarios::sum('MESA_RECTANGULAR_MEDIANA') +
+        mobiliarios::sum('MESA_CIRCULAR') +
+        mobiliarios::sum('SILLAS') +
+        mobiliarios::sum('MUEBLE_RESGUARDO');
+        $mobiliarioInicialAdts = mobiliarios::whereHas('adts', function($colaDeConsulta) {
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
         ->where('TIPO', 'INICIAL')
         ->get();
-        $sumaMobiliarioInicialBdtsAbiertas = 
-        $mobiliarioInicialBdtsAbiertas->sum('MESA_RECTANGULAR_GRANDE') + 
-        $mobiliarioInicialBdtsAbiertas->sum('MESA_RECTANGULAR_MEDIANA') + 
-        $mobiliarioInicialBdtsAbiertas->sum('MESA_CIRCULAR') + 
-        $mobiliarioInicialBdtsAbiertas->sum('SILLAS') + 
-        $mobiliarioInicialBdtsAbiertas->sum('MUEBLE_RESGUARDO');
-        $mobiliarioFuncionalBdtsAbiertas = mobiliarios::whereHas('adts', function($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA');
+        $totalMobiliarioInicialAdts =
+        $mobiliarioInicialAdts->sum('MESA_RECTANGULAR_GRANDE') +        
+        $mobiliarioInicialAdts->sum('MESA_RECTANGULAR_MEDIANA') +        
+        $mobiliarioInicialAdts->sum('MESA_CIRCULAR') +   
+        $mobiliarioInicialAdts->sum('SILLAS') +    
+        $mobiliarioInicialAdts->sum('MUEBLE_RESGUARDO');
+        $mobiliarioFuncionalAdts = mobiliarios::whereHas('adts', function($colaDeConsulta) {
+            $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
         ->where('TIPO', 'FUNCIONAL')
         ->get();
-        $sumaMobiliarioFuncionalBdtsAbiertas = 
-        $mobiliarioFuncionalBdtsAbiertas->sum('MESA_RECTANGULAR_GRANDE') + 
-        $mobiliarioFuncionalBdtsAbiertas->sum('MESA_RECTANGULAR_MEDIANA') + 
-        $mobiliarioFuncionalBdtsAbiertas->sum('MESA_CIRCULAR') + 
-        $mobiliarioFuncionalBdtsAbiertas->sum('SILLAS') + 
-        $mobiliarioFuncionalBdtsAbiertas->sum('MUEBLE_RESGUARDO');
-
-        $conveniosIndeterminadosBdtsAbiertas = 
-        (clone $bdtsExternas)->orWhereNull('FECHA_TERMINO_CONVENIO');
-        $conveniosVencidosBdtsAbiertas = 
-        (clone $bdtsExternas)->whereNotNull('FECHA_TERMINO_CONVENIO')
+        $totalMobiliarioFuncionalAdts =
+        $mobiliarioFuncionalAdts->sum('MESA_RECTANGULAR_GRANDE') +        
+        $mobiliarioFuncionalAdts->sum('MESA_RECTANGULAR_MEDIANA') +        
+        $mobiliarioFuncionalAdts->sum('MESA_CIRCULAR') +    
+        $mobiliarioFuncionalAdts->sum('SILLAS') +        
+        $mobiliarioFuncionalAdts->sum('MUEBLE_RESGUARDO');
+        $conveniosIndeterminadosAdts = 
+        (clone $adtsAbiertas)->whereNull('FECHA_TERMINO_CONVENIO');
+        $conveniosVencidosAdts = 
+        (clone $adtsAbiertas)->whereNotNull('FECHA_TERMINO_CONVENIO')
         ->where('FECHA_TERMINO_CONVENIO', '<', Carbon::now()->toDateString());
-        $conveniosVigentesBdtsAbiertas = 
-        (clone $bdtsExternas)->whereNotNull('FECHA_TERMINO_CONVENIO')
-        ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());*/
+        $conveniosVigentesAdts = 
+        (clone $adtsAbiertas)->whereNotNull('FECHA_TERMINO_CONVENIO')
+        ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());
 
         // Creamos el array con el conteo
         $datosBdts = [
@@ -477,16 +475,16 @@ class TutoriasController extends Controller
             'numeroLineasConsumoHeavy' => $lineasConsumoHeavy->count(),
             'numeroLineasConsumoAtipico' => $lineasConsumoAtipico->count(),
             'cantidadEquipamientoAdts' => $totalEquipamientoAdts,
-            /*'cantidadDeEquipamientoInicialBdtsAbiertas' => $sumaEquipamientoInicialBdtsAbiertas,
-            'cantidadDeEquipamientoFuncionaBdtsAbiertas' => $sumaEquipamientoFuncionalBdtsAbiertas,
-            'cantidadPorcentualCantidadEquipamientoFuncionalEntreEquipamientoFuncional' => 
-            $porcentajeEquipamientoFuncionalContraInicial,
-            'cantidadDeMobiliarioBdtsAbiertas' => $sumaMobiliarioBdts,
-            'cantidadDeMobiliarioInicialBdtsAbiertas' => $sumaMobiliarioInicialBdtsAbiertas,
-            'cantidadDeMobiliarioFuncionaBdtsAbiertas' => $sumaMobiliarioFuncionalBdtsAbiertas,
-            'numeroConveniosIndeterminadosBdtsAbiertas' => $conveniosIndeterminadosBdtsAbiertas->count(),
-            'numeroConveniosVencidosBdtsAbiertas' => $conveniosVencidosBdtsAbiertas->count(),
-            'numeroConveniosVigentesBdtsAbiertas' => $conveniosVigentesBdtsAbiertas->count(),*/
+            'cantidadEquipamientoInicialAdts' => $totalEquipamientoInicialAdts,
+            'cantidadEquipamientoFuncionalAdts' => $totalEquipamientoFuncionalAdts,
+            'cantidadRelacionPorcentualEquipamientoFuncionalEntreInicial' => 
+            $relacionPorcentualEquipamientoFuncionalEntreInicial,
+            'cantidadMobiliarioAdts' => $totalMobiliarioAdts,
+            'cantidadMobiliarioInicialAdts' => $totalMobiliarioInicialAdts,
+            'cantidadMobiliarioFuncionaAdts' => $totalMobiliarioFuncionalAdts,
+            'numeroConveniosIndeterminadosAdts' => $conveniosIndeterminadosAdts->count(),
+            'numeroConveniosVencidosAdts' => $conveniosVencidosAdts->count(),
+            'numeroConveniosVigentesAdts' => $conveniosVigentesAdts->count(),
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));

@@ -202,13 +202,13 @@
                                 {{ $datosBdts['cantidadEquipamientoAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['cantidadDeEquipamientoInicialBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['cantidadEquipamientoInicialAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['cantidadDeEquipamientoFuncionaBdtsAbiertas'] ?? '-'}}
+                                {{ $datosBdts['cantidadEquipamientoFuncionalAdts'] ?? '-'}}
                             </td>
                             <td class="text-center" colspan="3">
-                                {{ isset($datosBdts['cantidadPorcentualCantidadEquipamientoFuncionalEntreEquipamientoFuncional']) ? number_format($datosBdts['cantidadPorcentualCantidadEquipamientoFuncionalEntreEquipamientoFuncional'], 2) . "%" : '-' }}
+                                {{ isset($datosBdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicial']) ? number_format($datosBdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicial'], 2) . "%" : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -234,13 +234,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" style="vertical-align: middle;" colspan="2">
-                                {{ $datosBdts['cantidadDeMobiliarioBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['cantidadMobiliarioAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="4">
-                                {{ $datosBdts['cantidadDeMobiliarioInicialBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['cantidadMobiliarioInicialAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="3">
-                                {{ $datosBdts['cantidadDeMobiliarioFuncionaBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['cantidadMobiliarioFuncionaAdts'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -261,13 +261,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                {{ $datosBdts['numeroConveniosIndeterminadosBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['numeroConveniosIndeterminadosAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="3">
-                                {{ $datosBdts['numeroConveniosVencidosBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['numeroConveniosVencidosAdts'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosBdts['numeroConveniosVigentesBdtsAbiertas'] ?? '-' }}
+                                {{ $datosBdts['numeroConveniosVigentesAdts'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -291,16 +291,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                50
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                27
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                100
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                200
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -324,16 +324,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                3
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                447
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                393
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                53
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -346,7 +346,7 @@
                                 Solicitud BDT o donación de equipos
                             </td>
                             <td class="text-center" colspan="2">
-                                9
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -354,7 +354,7 @@
                                 Solicitud BDT de reequipamiento
                             </td>
                             <td class="text-center" colspan="2">
-                                4
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -362,7 +362,7 @@
                                 Retiro de equipos
                             </td>
                             <td class="text-center" colspan="2">
-                                3
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -370,21 +370,10 @@
                                 Otros (visitas a museo, acuario, etc.)
                             </td>
                             <td class="text-center" colspan="2">
-                                5
+                                -
                             </td>
                         </tr>
-                        <tr>
-                            <th class="bg-secondary text-white text-center" colspan="9">
-                                Solicitudes relevantes del mes:
-                            </th>
-                        </tr>
-                        <tr class="table-secondary">
-                            <th class="text-center" colspan="9">
-                                -
-                            </th>
-                        </tr>
                     </table>
-
                 </div>
 
                 <!-- Tabla BDT Abiertas Internas -->
