@@ -342,6 +342,7 @@ class TutoriasController extends Controller
 
     public function consultarEstatusBdt(){
 
+        //Abiertas
         $adtsAbiertas = adts::with(['lineas'])
         ->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         $adtsAbiertasExternas = (clone $adtsAbiertas)->whereIn('INICIATIVA', ['ADT', 'BDT MPAL']);
@@ -455,6 +456,56 @@ class TutoriasController extends Controller
         (clone $adtsAbiertas)->whereNotNull('FECHA_TERMINO_CONVENIO')
         ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());
 
+        //Abiertas internas Aquí ando)
+        $adtsInternasExternasConLineas = (clone $adtsAbiertasInternas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->where('LINEA', '<>', 'BAJA')->where('ENTORNO', 'EXTERNA');
+        });
+        $adtsInternasPropiasConLineas = (clone $adtsAbiertasInternas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->where('LINEA', '<>', 'BAJA')->where('ENTORNO', 'PROPIA');
+        });
+        $lineasDeAdtsInternasEnlace = lineas::with(['adts'])
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+        });
+        /*$lineasDeAdtsInternasExternas = lineas::with(['adts'])
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+        })
+        ->where('ENTORNO', 'EXTERNA');*/
+        $adtsInternasConLineasPagaEntidad = (clone $adtsInternasConLineas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
+        });
+        $lineasDeAdtsInternasPagaEntidad = (clone $lineasDeAdtsInternas)
+        ->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
+        $lineasDeAdtsCobreQuePagaEntidad = (clone $lineasDeAdtsInternasPagaEntidad)
+        ->where('TECNOLOGIA', 'IPDSLAM');
+        $adtsInternasConLineasPagaTelmex = (clone $adtsInternasConLineas)
+        ->whereHas('lineas', function($colaDeConsulta) {
+            $colaDeConsulta->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
+        });
+        $lineasDeAdtsInternasPagaTelmex = (clone $lineasDeAdtsInternas)
+        ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
+        $lineasDeAdtsInternasEnlaceQuePagaTelmex = (clone $lineasDeAdtsInternasPagaTelmex)
+        ->where('TECNOLOGIA', 'ENLACE');
+        $costoLineasAdtsInternasPagaEntidad = (clone $lineasDeAdtsInternasPagaEntidad)
+        ->sum('COSTO');
+        $costoLineasAdtsInternasPagaTelmex = (clone $lineasDeAdtsInternasPagaTelmex)
+        ->sum('COSTO');
+        $lineasAdtsInternasConsumoSinConsumo = (clone $lineasDeAdtsInternas)
+        ->whereIn('SEMAFORO', ['-', 'NULO', 'NULL'])->orWhereNull('SEMAFORO');
+        $lineasAdtsInternasConsumoBajo = (clone $lineasDeAdtsInternas)
+        ->where('SEMAFORO', 'BAJO');
+        $lineasAdtsInternasConsumoMedio = (clone $lineasDeAdtsInternas)
+        ->where('SEMAFORO', 'MEDIO');
+        $lineasAdtsInternasConsumoAlto = (clone $lineasDeAdtsInternas)
+        ->where('SEMAFORO', 'ALTO');
+        $lineasAdtsInternasConsumoHeavy = (clone $lineasDeAdtsInternas)
+        ->where('SEMAFORO', 'HEAVY');
+        $lineasAdtsInternasConsumoAtipico = (clone $lineasDeAdtsInternas)
+        ->where('SEMAFORO', 'ATIPICO');
         // Creamos el array con el conteo
         $datosBdts = [
             'numeroAdtsAbiertas' => $adtsAbiertas->count(),
@@ -485,6 +536,21 @@ class TutoriasController extends Controller
             'numeroConveniosIndeterminadosAdts' => $conveniosIndeterminadosAdts->count(),
             'numeroConveniosVencidosAdts' => $conveniosVencidosAdts->count(),
             'numeroConveniosVigentesAdts' => $conveniosVigentesAdts->count(),
+
+            'numeroAdtsInternasConLineasPagaEntidad' => $adtsInternasConLineasPagaEntidad->count(),
+            'numeroLineasAdtsInternasPagaEntidad' => $lineasDeAdtsInternasPagaEntidad->count(),
+            'numeroLineasAdtsInternasCobre' => $lineasDeAdtsInternasCobreQuePagaEntidad->count(),
+            'numeroAdtsInternasConLineasPagaTelmex' => $adtsInternasConLineasPagaTelmex->count(),
+            'numeroLineasAdtsInternasPagaTelmex' => $lineasDeAdtsInternasPagaTelmex->count(),
+            'numeroLineasAdtsInternasEnlaceQuePagaTelmex' => $lineasDeAdtsInternasEnlaceQuePagaTelmex->count(),
+            'costoLineasAdtsInternasPagaEntidad' => $costoLineasAdtsInternasPagaEntidad,
+            'costoLineasAdtsInternasPagaTelmex' => $costoLineasAdtsInternasPagaTelmex,
+            'numeroLineasAdtsInternasConsumoSinConsumo' => $lineasAdtsInternasConsumoSinConsumo->count(),
+            'numeroLineasAdtsInternasConsumoBajo' => $lineasAdtsInternasConsumoBajo->count(),
+            'numeroLineasAdtsInternasConsumoMedio' => $lineasAdtsInternasConsumoMedio->count(),
+            'numeroLineasAdtsInternasConsumoAlto' => $lineasAdtsInternasConsumoAlto->count(),
+            'numeroLineasAdtsInternasConsumoHeavy' => $lineasAdtsInternasConsumoHeavy->count(),
+            'numeroLineasAdtsInternasConsumoAtipico' => $lineasAdtsInternasConsumoAtipico->count(),
         ];
 
         return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));
