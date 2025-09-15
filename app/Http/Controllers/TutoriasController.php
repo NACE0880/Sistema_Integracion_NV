@@ -391,10 +391,10 @@ class TutoriasController extends Controller
 
         $equipamientoAdts = equipamientos::with('adts');
         $totalEquipamientoAdts = 
-        equipamientos::sum('PC') +
-        equipamientos::sum('LAPTOP') +
-        equipamientos::sum('CLASSMATE') +
-        equipamientos::sum('XO');
+        equipamientos::where('TIPO', 'INICIAL')->sum('PC') +
+        equipamientos::where('TIPO', 'INICIAL')->sum('LAPTOP') +
+        equipamientos::where('TIPO', 'INICIAL')->sum('CLASSMATE') +
+        equipamientos::where('TIPO', 'INICIAL')->sum('XO');
         $equipamientoInicialAdts = equipamientos::whereHas('adts', function ($colaDeConsulta) {
             $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
@@ -420,11 +420,11 @@ class TutoriasController extends Controller
         
         $mobiliarioAdts = mobiliarios::with('adts');
         $totalMobiliarioAdts =
-        mobiliarios::sum('MESA_RECTANGULAR_GRANDE') +
-        mobiliarios::sum('MESA_RECTANGULAR_MEDIANA') +
-        mobiliarios::sum('MESA_CIRCULAR') +
-        mobiliarios::sum('SILLAS') +
-        mobiliarios::sum('MUEBLE_RESGUARDO');
+        mobiliarios::where('TIPO', 'INICIAL')->sum('MESA_RECTANGULAR_GRANDE') +
+        mobiliarios::where('TIPO', 'INICIAL')->sum('MESA_RECTANGULAR_MEDIANA') +
+        mobiliarios::where('TIPO', 'INICIAL')->sum('MESA_CIRCULAR') +
+        mobiliarios::where('TIPO', 'INICIAL')->sum('SILLAS') +
+        mobiliarios::where('TIPO', 'INICIAL')->sum('MUEBLE_RESGUARDO');
         $mobiliarioInicialAdts = mobiliarios::whereHas('adts', function($colaDeConsulta) {
             $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         })
@@ -456,43 +456,38 @@ class TutoriasController extends Controller
         (clone $adtsAbiertas)->whereNotNull('FECHA_TERMINO_CONVENIO')
         ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());
 
-        //Abiertas internas Aquí ando)
-        $adtsInternasExternasConLineas = (clone $adtsAbiertasInternas)
+
+        $adtsInternasPropias = (clone $adtsAbiertasInternas)->where('ENTORNO', 'PROPIA');
+        $adtsInternasExternas = (clone $adtsAbiertasInternas)->where('ENTORNO', 'EXTERNA');
+
+        $adtsInternasExternasConLineas = (clone $adtsInternasExternas)
         ->whereHas('lineas', function($colaDeConsulta) {
-            $colaDeConsulta->where('LINEA', '<>', 'BAJA')->where('ENTORNO', 'EXTERNA');
+            $colaDeConsulta->where('LINEA', '<>', 'BAJA')
+            ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
         });
-        $adtsInternasPropiasConLineas = (clone $adtsAbiertasInternas)
+        $adtsInternasPropiasConLineas = (clone $adtsInternasPropias)
         ->whereHas('lineas', function($colaDeConsulta) {
-            $colaDeConsulta->where('LINEA', '<>', 'BAJA')->where('ENTORNO', 'PROPIA');
+            $colaDeConsulta->where('LINEA', '<>', 'BAJA')
+            ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
         });
-        $lineasDeAdtsInternasEnlace = lineas::with(['adts'])
+        $lineasDeAdtsInternas = lineas::with(['adts'])
         ->whereHas('adts', function ($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA')
+            ->where('INICIATIVA', 'CASA TELMEX');
         });
-        /*$lineasDeAdtsInternasExternas = lineas::with(['adts'])
+        $lineasDeAdtsInternasExternas = (clone $lineasDeAdtsInternas)
         ->whereHas('adts', function ($colaDeConsulta) {
-            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA');
-        })
-        ->where('ENTORNO', 'EXTERNA');*/
-        $adtsInternasConLineasPagaEntidad = (clone $adtsInternasConLineas)
-        ->whereHas('lineas', function($colaDeConsulta) {
-            $colaDeConsulta->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
+            $colaDeConsulta->where('ENTORNO', 'EXTERNA');
         });
-        $lineasDeAdtsInternasPagaEntidad = (clone $lineasDeAdtsInternas)
-        ->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
-        $lineasDeAdtsCobreQuePagaEntidad = (clone $lineasDeAdtsInternasPagaEntidad)
-        ->where('TECNOLOGIA', 'IPDSLAM');
-        $adtsInternasConLineasPagaTelmex = (clone $adtsInternasConLineas)
-        ->whereHas('lineas', function($colaDeConsulta) {
-            $colaDeConsulta->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
+        $lineasDeAdtsInternasPropias = (clone $lineasDeAdtsInternas)
+        ->whereHas('adts', function ($colaDeConsulta) {
+            $colaDeConsulta->where('ENTORNO', 'PROPIA');
         });
-        $lineasDeAdtsInternasPagaTelmex = (clone $lineasDeAdtsInternas)
-        ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM']);
-        $lineasDeAdtsInternasEnlaceQuePagaTelmex = (clone $lineasDeAdtsInternasPagaTelmex)
-        ->where('TECNOLOGIA', 'ENLACE');
-        $costoLineasAdtsInternasPagaEntidad = (clone $lineasDeAdtsInternasPagaEntidad)
+        $costoLineasAdtsInternasExternasPagaTelmex = (clone $lineasDeAdtsInternasExternas)
+        ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM'])
         ->sum('COSTO');
-        $costoLineasAdtsInternasPagaTelmex = (clone $lineasDeAdtsInternasPagaTelmex)
+        $costoLineasAdtsInternasPropiasPagaTelmex = (clone $lineasDeAdtsInternasPropias)
+        ->whereIn('PAGA', ['TELMEX CT', 'TELMEX BDT EXTERNAS', 'FUNDACION CARLOS SLIM'])
         ->sum('COSTO');
         $lineasAdtsInternasConsumoSinConsumo = (clone $lineasDeAdtsInternas)
         ->whereIn('SEMAFORO', ['-', 'NULO', 'NULL'])->orWhereNull('SEMAFORO');
@@ -506,8 +501,55 @@ class TutoriasController extends Controller
         ->where('SEMAFORO', 'HEAVY');
         $lineasAdtsInternasConsumoAtipico = (clone $lineasDeAdtsInternas)
         ->where('SEMAFORO', 'ATIPICO');
+
+        $equipamientoAdtsInternas = equipamientos::with('adts')
+        ->whereHas('adts', function($colaDeConsulta) {
+            $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA')
+            ->where('INICIATIVA', 'CASA TELMEX');
+        });
+        $totalEquipamientoAdtsInternas = 
+        (clone $equipamientoAdtsInternas)->where('TIPO', 'INICIAL')->sum('PC') +
+        (clone $equipamientoAdtsInternas)->where('TIPO', 'INICIAL')->sum('CLASSMATE') +
+        (clone $equipamientoAdtsInternas)->where('TIPO', 'INICIAL')->sum('LAPTOP') +
+        (clone $equipamientoAdtsInternas)->where('TIPO', 'INICIAL')->sum('XO');
+        $equipamientoInicialAdtsInternas = (clone $equipamientoAdtsInternas)
+        ->where('TIPO', 'INICIAL')
+        ->get();
+        $equipamientoFuncionalAdtsInternas = (clone $equipamientoAdtsInternas)
+        ->where('TIPO', 'FUNCIONAL')
+        ->get();
+        $totalEquipamientoFuncionalAdtsInternas = 
+        $equipamientoFuncionalAdtsInternas->sum('PC') +
+        $equipamientoFuncionalAdtsInternas->sum('LAPTOP') +
+        $equipamientoFuncionalAdtsInternas->sum('CLASSMATE') +
+        $equipamientoFuncionalAdtsInternas->sum('XO');
+        $totalEquipamientoInicialAdtsInternas =
+        $equipamientoInicialAdtsInternas->sum('PC') +
+        $equipamientoInicialAdtsInternas->sum('LAPTOP') +
+        $equipamientoInicialAdtsInternas->sum('CLASSMATE') +
+        $equipamientoInicialAdtsInternas->sum('XO');
+        $totalEquipamientoBDOFAdtsInternas =
+        ($equipamientoInicialAdtsInternas->sum('PC') 
+        - $equipamientoFuncionalAdtsInternas->sum('PC')) +
+        ($equipamientoInicialAdtsInternas->sum('LAPTOP') 
+        - $equipamientoFuncionalAdtsInternas->sum('LAPTOP')) +
+        ($equipamientoInicialAdtsInternas->sum('CLASSMATE') 
+        - $equipamientoFuncionalAdtsInternas->sum('CLASSMATE')) +
+        ($equipamientoInicialAdtsInternas->sum('XO')
+        - $equipamientoFuncionalAdtsInternas->sum('XO'));
+        $relacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas = 
+        ($totalEquipamientoFuncionalAdtsInternas * 100) / ($totalEquipamientoInicialAdtsInternas);
+
+        $conveniosIndeterminadosAdtsInternas = 
+        (clone $adtsAbiertasInternas)->whereNull('FECHA_TERMINO_CONVENIO');
+        $conveniosVencidosAdtsInternas = 
+        (clone $adtsAbiertasInternas)->whereNotNull('FECHA_TERMINO_CONVENIO')
+        ->where('FECHA_TERMINO_CONVENIO', '<', Carbon::now()->toDateString());
+        $conveniosVigentesAdtsInternas = 
+        (clone $adtsAbiertasInternas)->whereNotNull('FECHA_TERMINO_CONVENIO')
+        ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());
         // Creamos el array con el conteo
-        $datosBdts = [
+        $datosAdts = [
             'numeroAdtsAbiertas' => $adtsAbiertas->count(),
             'numeroAdtsExternas' => $adtsAbiertasExternas->count(),
             'numeroAdtsInternas' => $adtsAbiertasInternas->count(),
@@ -537,23 +579,31 @@ class TutoriasController extends Controller
             'numeroConveniosVencidosAdts' => $conveniosVencidosAdts->count(),
             'numeroConveniosVigentesAdts' => $conveniosVigentesAdts->count(),
 
-            'numeroAdtsInternasConLineasPagaEntidad' => $adtsInternasConLineasPagaEntidad->count(),
-            'numeroLineasAdtsInternasPagaEntidad' => $lineasDeAdtsInternasPagaEntidad->count(),
-            'numeroLineasAdtsInternasCobre' => $lineasDeAdtsInternasCobreQuePagaEntidad->count(),
-            'numeroAdtsInternasConLineasPagaTelmex' => $adtsInternasConLineasPagaTelmex->count(),
-            'numeroLineasAdtsInternasPagaTelmex' => $lineasDeAdtsInternasPagaTelmex->count(),
-            'numeroLineasAdtsInternasEnlaceQuePagaTelmex' => $lineasDeAdtsInternasEnlaceQuePagaTelmex->count(),
-            'costoLineasAdtsInternasPagaEntidad' => $costoLineasAdtsInternasPagaEntidad,
-            'costoLineasAdtsInternasPagaTelmex' => $costoLineasAdtsInternasPagaTelmex,
+            'numeroAdtsInternasPropias' => $adtsInternasPropias->count(),
+            'numeroAdtsInternasExternas' => $adtsInternasExternas->count(),
+            'numeroLineasAdtsInternasExternas' => $adtsInternasExternasConLineas->count(),
+            'numeroLineasAdtsInternasPropias' => $adtsInternasPropiasConLineas->count(),
+            'costoLineasAdtsInternasExternasPagaTelmex' 
+            => $costoLineasAdtsInternasExternasPagaTelmex,
+            'costoLineasAdtsInternasPropiasPagaTelmex' 
+            => $costoLineasAdtsInternasPropiasPagaTelmex,
             'numeroLineasAdtsInternasConsumoSinConsumo' => $lineasAdtsInternasConsumoSinConsumo->count(),
             'numeroLineasAdtsInternasConsumoBajo' => $lineasAdtsInternasConsumoBajo->count(),
             'numeroLineasAdtsInternasConsumoMedio' => $lineasAdtsInternasConsumoMedio->count(),
             'numeroLineasAdtsInternasConsumoAlto' => $lineasAdtsInternasConsumoAlto->count(),
             'numeroLineasAdtsInternasConsumoHeavy' => $lineasAdtsInternasConsumoHeavy->count(),
             'numeroLineasAdtsInternasConsumoAtipico' => $lineasAdtsInternasConsumoAtipico->count(),
+            'cantidadEquipamientoAdtsInternas' => $totalEquipamientoAdtsInternas,
+            'cantidadEquipamientoFuncionalAdtsInternas' => $totalEquipamientoFuncionalAdtsInternas,
+            'cantidadEquipamientoBDOFAdtsInternas' => $totalEquipamientoBDOFAdtsInternas,
+            'cantidadRelacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas' 
+            => $relacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas,
+            'numeroConveniosIndeterminadosAdtsInternas' => $conveniosIndeterminadosAdtsInternas->count(),
+            'numeroConveniosVencidosAdtsInternas' => $conveniosVencidosAdtsInternas->count(),
+            'numeroConveniosVigentesAdtsInternas' => $conveniosVigentesAdtsInternas->count()
         ];
 
-        return view('Tutorias.consultarEstatusBdt', compact('datosBdts'));
+        return view('Tutorias.consultarEstatusBdt', compact('datosAdts'));
 
     }
 
