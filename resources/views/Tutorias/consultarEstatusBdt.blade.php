@@ -67,13 +67,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tab-bdt-cerradas" data-bs-toggle="tab" data-bs-target="#tabBdtCerradas" type="button" role="tab" aria-controls="tabBdtCerradas" aria-selected="true">
-                            Cerradas
+                            Cerradas Internas
                         </button>
                     </li>
                 </ul>
             </div>
 
-            <!-- Tabla BDT Abiertas Totales -->
+            <!-- Tabla ADT Abiertas Totales -->
             <div class="tab-content mt-4" id="miTabContent">
                 <div class="tab-pane fade show active" id="tabBdtAbiertas" role="tabpanel" aria-labelledby="tab-bdt-abiertas">
                     <table class="table">
@@ -213,7 +213,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                3. Mobiliario BDT Externas
+                                3. Mobiliario
                             </th>
                         </tr>
                         <tr>
@@ -268,6 +268,11 @@
                             </td>
                             <td class="text-center" colspan="4">
                                 {{ $datosAdts['numeroConveniosVigentesAdts'] ?? '-' }}
+                                @foreach($datosAdts['conveniosVigentesAdts'] as $convenioVigenteAdt)
+                                    <br>
+                                    ({{ $convenioVigenteAdt->NOMBRE }} / 
+                                    {{ $convenioVigenteAdt->FECHA_TERMINO_CONVENIO }}) 
+                                @endforeach
                             </td>
                         </tr>
                         <tr>
@@ -338,7 +343,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                7. Nuevas Solicitudes 2025 (21 recibidas)
+                                7. Nuevas Solicitudes 2025 (- recibidas)
                             </th>
                         </tr>
                         <tr>
@@ -376,7 +381,7 @@
                     </table>
                 </div>
 
-                <!-- Tabla BDT Abiertas Internas -->
+                <!-- Tabla ADT Abiertas Internas -->
                 <div class="tab-pane fade" id="tabBdtAbiertasInternas" role="tabpanel" aria-labelledby="tab-bdt-abiertas-internas">
                     <table class="table">
                         <thead class="bg-info">
@@ -388,12 +393,20 @@
                         </thead>
                         <tr>
                             <td class="text-center" colspan="9">
-                                {{ $datosAdts['numeroAdtsInternasPropias' ?? '-'] }} con personal interno (Aldea Digital Iztapalapa)
+                                {{ $datosAdts['numeroAdtsInternasPropias' ?? '-'] }} con personal interno
+                                @foreach($datosAdts['adtsInternasPropias'] as $adtInternaPropia)
+                                    <br>
+                                    ({{ $adtInternaPropia->NOMBRE }})
+                                @endforeach
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="9">
-                                {{ $datosAdts['numeroAdtsInternasExternas'] ?? '-' }} con personal externo (CT Sedena y CT Semar)
+                                {{ $datosAdts['numeroAdtsInternasExternas'] ?? '-' }} con personal externo
+                                @foreach($datosAdts['adtsInternasExternas'] as $adtInternaExterna)
+                                    <br>
+                                    ({{ $adtInternaExterna->NOMBRE }})
+                                @endforeach
                             </td>
                         </tr>
                         <tr class="table-info">
@@ -406,7 +419,7 @@
                                 {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con - infinitum y - de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con - enlace y - de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con - enlaces y - de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -564,10 +577,11 @@
                             </td>
                             <td class="text-center" colspan="4">
                                 {{ $datosAdts['numeroConveniosVigentesAdtsInternas'] ?? '-' }}
-                                <br>
-                                (Iztapalapa oct/2046)
-                                <br>
-                                (CT SEDENA jun/2027)
+                                @foreach($datosAdts['conveniosVigentesAdtsInternas'] as $convenioVigenteAdtInterna)
+                                    <br>
+                                    ({{ $convenioVigenteAdtInterna->NOMBRE }} / 
+                                    {{ $convenioVigenteAdtInterna->FECHA_TERMINO_CONVENIO }}) 
+                                @endforeach
                             </td>
                         </tr>
                         <tr>
@@ -591,49 +605,21 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="4">
-                                Aldea Digital Iztapalapa
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                53,495
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                14,219
+                                -
                             </td>
                             <td class="text-center">
-                                26%
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center" colspan="4">
-                                CT Sedena
-                            </td>
-                            <td class="text-center" colspan="2">
-                                53,495
-                            </td>
-                            <td class="text-center" colspan="2">
-                                14,219
-                            </td>
-                            <td class="text-center">
-                                26%
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center" colspan="4">
-                                CT Semar
-                            </td>
-                            <td class="text-center" colspan="2">
-                                53,495
-                            </td>
-                            <td class="text-center" colspan="2">
-                                14,219
-                            </td>
-                            <td class="text-center">
-                                26%
+                                -
                             </td>
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                6. Gasto mensual $306,274 / acumulado 2025 $1,735,332
+                                6. Gasto mensual $- / acumulado 2025 $-
                             </th>
                         </tr>
                         <tr>
@@ -655,7 +641,7 @@
                                 -
                             </td>
                             <td class="text-center" colspan="2">
-                                $26,729.20
+                                -
                             </td>
                             <td class="text-center" colspan="3">
                                 -
@@ -700,7 +686,7 @@
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
-                                $138,420.36
+                                -
                             </td>
                             <th class="text-center table-info" colspan="2">
                                 Ejercicio:
@@ -722,24 +708,21 @@
                     </table>
                 </div>
                 
-                <!-- Tabla BDT Cerradas -->
+                <!-- Tabla ADT Cerradas Internas -->
                 <div class="tab-pane fade" id="tabBdtCerradas" role="tabpanel" aria-labelledby="tab-bdt-cerradas">
                     <table class="table">
                         <thead class="bg-secondary">
                             <tr>
                                 <th class="text-center" colspan="9">
-                                    7 CERRADAS
+                                    {{ $datosAdts['numeroAdtsCerradasInternas'] ?? '-' }} Internas
                                 </th>
                             </tr>
                         </thead>
-                        <tr class="table-secondary">
-                            <th class="text-center" colspan="9">
-                                7 Internas
-                            </th>
-                        </tr>
                         <tr>
                             <td class="text-center" colspan="9">
-                                BDT FCS Veracruz, CT Campeche, CT Cuautla, CT Saltillo, CT Tapachula y CT Tuxtla (se entregó CT Mérida a Aldeca)
+                                @foreach($datosAdts['adtsCerradasInternas'] as $adtCerradaInterna)
+                                    {{ $adtCerradaInterna->NOMBRE }}@if(!$loop->last), @endif
+                                @endforeach
                             </td>
                         </tr>
                         <tr class="table-secondary">
@@ -749,18 +732,18 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                7 Ct con 9 Infinitum y 4 de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con - infinitum y - de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                0 enlace
+                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con - enlaces y - de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                $4,389.35
+                                {{ $datosAdts['costoLineasAdtsInternasExternasCerradasPagaTelmex'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                -
+                                {{ isset($datosAdts['costoLineasAdtsInternasPropiasCerradasPagaTelmex']) ? '$' . number_format($datosAdts['costoLineasAdtsInternasPropiasCerradasPagaTelmex'], 2) : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -782,19 +765,19 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                -
+                                {{ $datosAdts['numeroLineasAdtsInternasCerradasConsumoSinConsumo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                4
+                                {{ $datosAdts['numeroLineasAdtsInternasCerradasConsumoBajo'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                2
+                                {{ $datosAdts['numeroLineasAdtsInternasCerradasConsumoMedio'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                1
+                                {{ $datosAdts['numeroLineasAdtsInternasCerradasConsumoAlto'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                -
+                                {{ $datosAdts['numeroLineasAdtsInternasCerradasConsumoHeavy'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -815,13 +798,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                1788
+                                {{ $datosAdts['cantidadEquipamientoAdtsInternasCerradas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                440
+                                {{ $datosAdts['cantidadEquipamientoFuncionalAdtsInternasCerradas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="3">
-                                114114
+                                {{ $datosAdts['cantidadEquipamientoBDOFAdtsInternasCerradas'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -845,16 +828,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                479
+                                -
                             </td>
                             <td class="text-center" colspan="5">
-                                1,613
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                32
+                                -
                             </td>
                             <td class="text-center">
-                                38
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -870,13 +853,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                51
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                56
+                                -
                             </td>
                             <td class="text-center" colspan="5">
-                                3
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -897,17 +880,18 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                6
+                                {{ $datosAdts['numeroConveniosVigentesAdtsInternasCerradas'] ?? '-' }}
+                                @foreach($datosAdts['conveniosVigentesAdtsInternasCerradas'] as $convenioVigenteAdtInternaCerrada)
+                                    <br>
+                                    ({{ $convenioVigenteAdtInternaCerrada->NOMBRE }} / 
+                                    {{ $convenioVigenteAdtInternaCerrada->FECHA_TERMINO_CONVENIO }}) 
+                                @endforeach
                             </td>
                             <td class="text-center" colspan="3">
-                                -
+                                {{ $datosAdts['numeroConveniosVencidosAdtsInternasCerradas'] ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                1 (Veracruz)
-                                <br>
-                                Contrato (vigencia 31 de dic de 2025) Notificar continuidad
-                                <br>
-                                120 días antes
+                                {{ $datosAdts['numeroConveniosIndeterminadosAdtsInternasCerradas'] ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -923,13 +907,13 @@
                                 ene-jun 2025
                             </td>
                             <td class="text-center">
-                                543
+                                -
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
                             <td class="text-center">
-                                30
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -940,13 +924,13 @@
                                 ene-jun 2025
                             </td>
                             <td class="text-center">
-                                10750
+                                -
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
                             <td class="text-center">
-                                2433
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -956,7 +940,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-secondary" colspan="9">
-                                6. Gasto mensual $378,357.95 / acumulado 2025 $ 2,346,651
+                                6. Gasto mensual $- / acumulado 2025 $-
                             </th>
                         </tr>
                         <tr>
@@ -975,16 +959,16 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                $16,975.89
+                                -
                             </td>
                             <td class="text-center" colspan="2">
-                                $7,604.57
+                                -
                             </td>
                             <td class="text-center" colspan="3">
                                 -
                             </td>
                             <td class="text-center" colspan="3">
-                                $200,695.74
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -1000,13 +984,13 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                $4,033.56
+                                -
                             </td>
                             <td class="text-center" colspan="5">
-                                $207,064.19
+                                -
                             </td>
                             <td class="text-center" colspan="3">
-                                $486,609.32
+                                -
                             </td>
                         </tr>
                         <tr>
@@ -1017,7 +1001,7 @@
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
-                                $2,219,655.77
+                                -
                             </td>
                             <th class="text-center table-secondary" colspan="2">
                                 Ejercicio:
