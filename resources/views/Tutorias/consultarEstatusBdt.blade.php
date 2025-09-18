@@ -395,10 +395,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con - infinitum y - de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <span style="background-color: red;">-</span> infinitum y <span style="background-color: red;">-</span> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con - enlaces y - de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <span style="background-color: red;">-</span> enlaces y <span style="background-color: red;">-</span> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -711,10 +711,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con - infinitum y - de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con <span style="background-color: red;">-</span> infinitum y <span style="background-color: red;">-</span> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con - enlaces y - de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con <span style="background-color: red;">-</span> enlaces y <span style="background-color: red;">-</span> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -880,7 +880,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                BDT (7 Cerradas)
+                                BDT ({{ $datosAdts['numeroAdtsCerradasInternas'] ?? '-' }} Cerradas)
                             </td>
                             <td class="text-center" colspan="3">
                                 ene-jun 2025
