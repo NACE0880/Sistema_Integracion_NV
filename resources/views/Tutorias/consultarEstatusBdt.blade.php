@@ -23,27 +23,6 @@
             table-layout: fixed;
         }
 
-        /*
-        h2 {
-            background-color: #004080;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #e0e0e0;
-        }*/
-
     </style>
 @endsection
 
@@ -99,10 +78,10 @@
                             <td class="text-center" colspan="5">
                                 {{ $datosAdts['numeroAdtsExternas'] ?? '-' }} Externas
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -110,10 +89,10 @@
                             <td class="text-center" colspan="5">
                                 {{ $datosAdts['numeroAdtsInternas'] ?? '-' }} Internas
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -295,16 +274,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -328,16 +307,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -350,7 +329,7 @@
                             <td colspan="7"> 
                                 Solicitud BDT o donación de equipos
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -358,7 +337,7 @@
                             <td colspan="7"> 
                                 Solicitud BDT de reequipamiento
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -366,7 +345,7 @@
                             <td colspan="7"> 
                                 Retiro de equipos
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -374,7 +353,7 @@
                             <td colspan="7"> 
                                 Otros (visitas a museo, acuario, etc.)
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -424,10 +403,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ isset($datosAdts['costoLineasAdtsInternasExternasPagaTelmex']) ? '$' . number_format($datosAdts['costoLineasAdtsInternasExternasPagaTelmex'], 2) : '-' }} pesos
+                                {{ isset($datosAdts['costoLineasAdtsInternasExternasPagaTelmex']) ? '$' . number_format($datosAdts['costoLineasAdtsInternasExternasPagaTelmex'], 2) : '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ isset($datosAdts['costoLineasAdtsInternasPropiasPagaTelmex']) ? '$' . number_format($datosAdts['costoLineasAdtsInternasPropiasPagaTelmex'], 2) : '-' }} pesos
+                                {{ isset($datosAdts['costoLineasAdtsInternasPropiasPagaTelmex']) ? '$' . number_format($datosAdts['costoLineasAdtsInternasPropiasPagaTelmex'], 2) : '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -517,16 +496,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center bg-danger" colspan="5">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
@@ -542,13 +521,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="4">
+                            <td class="text-center bg-danger" colspan="4">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -604,16 +583,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="4">
+                            <td class="text-center bg-danger" colspan="4">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
@@ -637,16 +616,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -665,16 +644,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -685,13 +664,13 @@
                             <th class="text-center table-info" colspan="3">
                                 Total:
                             </th>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                             <th class="text-center table-info" colspan="2">
                                 Ejercicio:
                             </th>
-                            <th class="text-center table-info">
+                            <th class="text-center bg-danger"><!-- eliminé table-info (color celda)-->
                                 -
                             </th>
                         </tr>
@@ -827,16 +806,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center bg-danger" colspan="5">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
@@ -852,13 +831,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center bg-danger" colspan="5">
                                 -
                             </td>
                         </tr>
@@ -906,13 +885,13 @@
                             <td class="text-center" colspan="3">
                                 ene-jun 2025
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
@@ -923,13 +902,13 @@
                             <td class="text-center" colspan="3">
                                 ene-jun 2025
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
@@ -958,16 +937,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -983,13 +962,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center bg-danger" colspan="5">
                                 -
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center bg-danger" colspan="3">
                                 -
                             </td>
                         </tr>
@@ -1000,13 +979,13 @@
                             <th class="text-center table-secondary" colspan="2">
                                 Total:
                             </th>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center bg-danger" colspan="2">
                                 -
                             </td>
                             <th class="text-center table-secondary" colspan="2">
                                 Ejercicio:
                             </th>
-                            <td class="text-center">
+                            <td class="text-center bg-danger">
                                 -
                             </td>
                         </tr>
