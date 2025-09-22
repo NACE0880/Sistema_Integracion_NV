@@ -60,9 +60,9 @@ class consultaCompuestaTickets {
                 // $this->dateStart = Carbon::now()->startOfMonth();
                 // $this->dateEnd = Carbon::now();
 
-                $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                $index = (date("n",strtotime($this->dateStart)));
                 $mesCorte = $meses[$index];
 
 
@@ -299,9 +299,9 @@ class consultaCompuestaTickets {
             $excel->sheet('Resumen Sedena', function($sheet)  {
                 $historicDateStart = Carbon::now()->startOfYear();
 
-                $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                $index = (date("n",strtotime($this->dateStart)));
                 $mesCorte = $meses[$index];
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -400,9 +400,9 @@ class consultaCompuestaTickets {
             $excel->sheet('Resumen Semar', function($sheet)  {
                 $historicDateStart = Carbon::now()->startOfYear();
 
-                $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                $index = (date("n",strtotime($this->dateStart)));
                 $mesCorte = $meses[$index];
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -510,9 +510,9 @@ class consultaCompuestaTickets {
             $excel->sheet('Resumen Sedena', function($sheet)  {
                 $historicDateStart = Carbon::now()->startOfYear();
 
-                $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                $index = (date("n",strtotime($this->dateStart)));
                 $mesCorte = $meses[$index];
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -620,9 +620,9 @@ class consultaCompuestaTickets {
             $excel->sheet('Resumen Semar', function($sheet)  {
                 $historicDateStart = Carbon::now()->startOfYear();
 
-                $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                $index = (date("n",strtotime($this->dateStart)));
                 $mesCorte = $meses[$index];
 
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -731,9 +731,9 @@ class consultaCompuestaTickets {
                     // $this->dateStart = Carbon::now()->startOfMonth();
                     // $this->dateEnd = Carbon::now();
 
-                    $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                    $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                    $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                    $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                    $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                    $index = (date("n",strtotime($this->dateStart)));
                     $mesCorte = $meses[$index];
 
 
@@ -950,9 +950,9 @@ class consultaCompuestaTickets {
                 $excel->sheet('Resumen Sedena', function($sheet)  {
                     $historicDateStart = Carbon::now()->startOfYear();
 
-                    $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                    $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                    $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                    $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                    $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                    $index = (date("n",strtotime($this->dateStart)));
                     $mesCorte = $meses[$index];
 
                     $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
@@ -1059,9 +1059,9 @@ class consultaCompuestaTickets {
                 $excel->sheet('Resumen Semar', function($sheet)  {
                     $historicDateStart = Carbon::now()->startOfYear();
 
-                    $meses = array("ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
-                    $mesAcumulado = $meses[($historicDateStart->format('n')) - 1];
-                    $index = (((date("n",strtotime($this->dateEnd))) - 2)==-1) ? (date("n",strtotime($this->dateEnd))) - 1: (date("n",strtotime($this->dateEnd))) - 2;
+                    $meses = array("jijí","ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE");
+                    $mesAcumulado = $meses[($historicDateStart->format('n'))];
+                    $index = (date("n",strtotime($this->dateStart)));
                     $mesCorte = $meses[$index];
 
                     $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
