@@ -36,6 +36,9 @@
                 CANTIDAD ANTERIORES AL AÑO EN CURSO
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
+                CANTIDAD HASTA LA FECHA
+            </td>
+            <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
                 AUTORIZADOS<br>
                 SITIO
             </td>
@@ -88,6 +91,9 @@
                 {{ $pendientes_anteriores_data['aldea'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
+                {{ $pendientes_historicos_data['aldea'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['aldea']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
@@ -136,6 +142,9 @@
                 {{ $pendientes_anteriores_data['sedena'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
+                {{ $pendientes_historicos_data['sedena'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 {{ $pendientes_data['sedena']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
@@ -182,6 +191,9 @@
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_anteriores_data['semar'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
+                {{ $pendientes_historicos_data['semar'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['semar']['autorizados'] }}
@@ -233,6 +245,9 @@
                 {{ $pendientes_anteriores_data['campeche'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
+                {{ $pendientes_historicos_data['campeche'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 {{ $pendientes_data['campeche']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
@@ -279,6 +294,9 @@
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_anteriores_data['cuautla'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
+                {{ $pendientes_historicos_data['cuautla'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['cuautla']['autorizados'] }}
@@ -329,6 +347,9 @@
                 {{ $pendientes_anteriores_data['culiacan'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
+                {{ $pendientes_historicos_data['culiacan'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 {{ $pendientes_data['culiacan']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
@@ -375,6 +396,9 @@
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_anteriores_data['saltillo'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
+                {{ $pendientes_historicos_data['saltillo'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['saltillo']['autorizados'] }}
@@ -425,6 +449,9 @@
                 {{ $pendientes_anteriores_data['tapachula'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
+                {{ $pendientes_historicos_data['tapachula'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 {{ $pendientes_data['tapachula']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
@@ -471,6 +498,9 @@
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_anteriores_data['tuxtla'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
+                {{ $pendientes_historicos_data['tuxtla'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #eeeee4;"  align='center' >
                 {{ $pendientes_data['tuxtla']['autorizados'] }}
@@ -521,6 +551,9 @@
                 {{ $pendientes_anteriores_data['veracruz'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
+                {{ $pendientes_historicos_data['veracruz'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
                 {{ $pendientes_data['veracruz']['autorizados'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #ffffff;"  align='center' >
@@ -567,6 +600,9 @@
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
                 {{ $totales_data['pendientes_anteriores']['cantidad'] }}
+            </td>
+            <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
+                {{ $totales_data['pendientes_historicos']['cantidad'] }}
             </td>
             <td  valign='middle' style="border-bottom: solid; background-color: #bdf7af;"  align='center' >
                 {{ $totales_data['pendientes']['autorizados'] }}

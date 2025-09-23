@@ -102,6 +102,28 @@ class consultaCompuestaTickets {
                     'semar'     => $pendientes_anteriores->get('Semar', collect())->count(),
                 ];
 
+                $pendientes_historicos_data = [
+                    'aldea'     => $pendientes_historicos->get('Iztapalapa', collect())->count(),
+
+                    'campeche'  => $pendientes_historicos->get('Campeche', collect())->count(),
+
+                    'cuautla'   => $pendientes_historicos->get('Cuautla', collect())->count(),
+
+                    'culiacan'  => $pendientes_historicos->get('Culiacán', collect())->count(),
+
+                    'saltillo'  => $pendientes_historicos->get('Saltillo', collect())->count(),
+
+                    'tapachula' => $pendientes_historicos->get('Tapachula', collect())->count(),
+
+                    'tuxtla'    => $pendientes_historicos->get('Tuxtla', collect())->count(),
+
+                    'veracruz'  => $pendientes_historicos->get('Veracruz', collect())->count(),
+
+                    'sedena'    => $pendientes_historicos->get('Sedena', collect())->count(),
+
+                    'semar'     => $pendientes_historicos->get('Semar', collect())->count(),
+                ];
+
                 $pendientes_data = [
                     'aldea'     => self::resumenSitio($pendientes, 'Iztapalapa'),
 
@@ -220,6 +242,9 @@ class consultaCompuestaTickets {
                         'cantidad' => $pendientes_anteriores->map->count()->sum(),
 
                     ],
+                    'pendientes_historicos' => [
+                        'cantidad' => $pendientes_historicos->map->count()->sum(),
+                    ],
                     'pendientes' => [
                         'cantidad'      => $pendientes->count(),
                         'cotizados'     => $pendientes->where('ESTATUS_COTIZACION', 'SI')->count(),
@@ -252,6 +277,7 @@ class consultaCompuestaTickets {
 
                 $sheet->loadView('exports.ticketResumenGeneral', [
                     'pendientes_anteriores_data' => $pendientes_anteriores_data,
+                    'pendientes_historicos_data' => $pendientes_historicos_data,
                     'pendientes_data'   => $pendientes_data,
                     'procesados_data'   => $procesados_data,
                     'finalizados_data'  => $finalizados_data,
