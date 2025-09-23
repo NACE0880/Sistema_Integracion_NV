@@ -69,6 +69,8 @@ class consultaCompuestaTickets {
                 $pendientes = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->orderBy('ESTATUS_CASA', 'ASC')->get();
                 $pendientes_anteriores = tickets::where('FECHA_INICIO', '<', $historicDateStart)->where('ESTATUS_ACTUAL', 'PENDIENTE')
                 ->get()->groupBy('CASA');
+                $pendientes_historicos = tickets::whereBetween('FECHA_INICIO', ['2020-10-01', $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')
+                ->get()->groupBy('CASA');
                 $procesados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'EN PROCESO')->orderBy('ESTATUS_CASA', 'ASC')->get();
                 $finalizados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'FINALIZADO')->orderBy('ESTATUS_CASA', 'ASC')->get();
 
