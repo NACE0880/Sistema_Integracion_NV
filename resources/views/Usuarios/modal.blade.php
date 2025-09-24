@@ -15,6 +15,7 @@
                             <div class="form-group col-md-4">
                                 <label for="nombre">Nombre</label>
                             </div>
+                            <!-- Input escondido para enviar la clave de usuario seleccionada al modificar usuario -->
                             <div class="form-group col-md-8">
                                 <input type="hidden" name="nombre_clave_usuario" id="nombre_clave_usuario">
                                 <input type="text" class="form-control" id="nombre" name="nombre" value="">

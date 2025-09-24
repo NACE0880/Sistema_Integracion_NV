@@ -72,13 +72,13 @@ class ControladorPanelUsuarios extends Controller
             'userable_id' => $identificadorUsuario == null ? $ultimoUserableIdUsado + 1 : null,
             'userable_type' => $identificadorUsuario == null ? $tipoUserableSeleccionado : null   
         ];
-        dd($datosActualizacionTablaUsuario);
+        //dd($datosActualizacionTablaUsuario);
         User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
 
         $roles = (array) $request->rol;
         $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
 
-        switch ($tipoUserAble){
+        switch ($tipoUserableSeleccionado){
             case '\\App\\coordinadores':
                 $datosActualizacionTablaCoordinadores =
                 ([

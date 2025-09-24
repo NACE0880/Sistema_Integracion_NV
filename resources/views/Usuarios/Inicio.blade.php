@@ -61,6 +61,7 @@
             var nombreClaveUsuario = botonNombreClaveUsuario.data('nombre-clave-usuario');
 
             var modalActualizacionUsuarios = $(this);
+            //Se envía la clave de usuario seleccionada en un input escondido
             modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
         });
     });
