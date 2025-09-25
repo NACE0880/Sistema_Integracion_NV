@@ -40,6 +40,7 @@
                                     class="btn btn-link text-decoration-none"
                                     data-toggle="modal"
                                     data-target="#modalGeneralUsuarios"
+                                    data-titulo="{{ $usuario->userable->NOMBRE }}"
                                     data-nombre-clave-usuario="{{ $usuario->usuario }}"
                                     >
                                         {{ $usuario->usuario }}

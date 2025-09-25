@@ -48,21 +48,24 @@
     </body>
 </html>
 <script>
-    $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);         
-        var titulo = button.data('titulo');          
-        var modal = $(this);
-        modal.find('.modal-title').text(titulo);     
-    });
-
     $(document).ready(function () {
         $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
-            var botonNombreClaveUsuario = $(event.relatedTarget); 
-            var nombreClaveUsuario = botonNombreClaveUsuario.data('nombre-clave-usuario');
-
+            var evento = $(event.relatedTarget);
             var modalActualizacionUsuarios = $(this);
-            //Se envía la clave de usuario seleccionada en un input escondido
-            modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
+
+            var tituloDelEvento = evento.data('titulo');
+            modalActualizacionUsuarios.find('.modal-title').text(tituloDelEvento);
+
+            var nombreClaveUsuario = evento.data('nombre-clave-usuario');
+            if(nombreClaveUsuario) {
+                //Se envía la clave de usuario seleccionada en un input escondido
+                modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
+                modalActualizacionUsuarios.find('#nombre').prop('disabled', true);
+                modalActualizacionUsuarios.find('#correo').prop('disabled', true);
+            } else {
+                modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
+                modalActualizacionUsuarios.find('#correo').prop('disabled', false);
+            }
         });
     });
 </script>

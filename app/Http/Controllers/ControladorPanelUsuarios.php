@@ -60,15 +60,18 @@ class ControladorPanelUsuarios extends Controller
 
         dd($request);
 
+        //Registrar nuevo usuario
         $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
+
+        $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
 
         $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
         $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
-        $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
+        
         $datosActualizacionTablaUsuario = 
         [
             // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
-            'usuario' => $identificadorUsuario == null? $nuevaClaveUsuario : null,
+            'usuario' => $identificadorUsuario == null ? $nuevaClaveUsuario : null,
             'userable_id' => $identificadorUsuario == null ? $ultimoUserableIdUsado + 1 : null,
             'userable_type' => $identificadorUsuario == null ? $tipoUserableSeleccionado : null   
         ];
