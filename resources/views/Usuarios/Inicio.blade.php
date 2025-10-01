@@ -62,10 +62,38 @@
                 modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
                 modalActualizacionUsuarios.find('#nombre').prop('disabled', true);
                 modalActualizacionUsuarios.find('#correo').prop('disabled', true);
+                modalActualizacionUsuarios.find('#botonRegistrar').hide();
+                modalActualizacionUsuarios.find('#botonModificar').show();
             } else {
                 modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
                 modalActualizacionUsuarios.find('#correo').prop('disabled', false);
+                modalActualizacionUsuarios.find('#botonModificar').hide();
+                modalActualizacionUsuarios.find('#botonRegistrar').show();
             }
+
+            //Generar la ruta del modal dinámicamente
+            $('#botonRegistrar').on('click', function () {
+                $('#formularioModalUsuarios').attr('action', '{{ route("usuarios.registro") }}');
+                //$('#formularioModalUsuarios').find('input[name="_method"]').remove();
+            });
+
+            $('#botonModificar').on('click', function () {
+                $('#formularioModalUsuarios').attr('action', '/usuarios/inicio/modificacion' + nombreClaveUsuario);
+
+                /*if ($('#formularioModalUsuarios').find('input[name="_method"]').length === 0) {
+                    $('#formularioModalUsuarios').append('<input type="hidden" name="_method" value="PUT">');
+                }*/
+            });
+            
+        });
+
+        $('#modalGeneralUsuarios').on('hidden.bs.modal', function () {
+            var modalActualizacionUsuarios = $(this);
+            modalActualizacionUsuarios.find('#nombre_clave_usuario').val('');
+            modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
+            modalActualizacionUsuarios.find('#correo').prop('disabled', false);
+            modalActualizacionUsuarios.find('#botonModificar').hide();
+            modalActualizacionUsuarios.find('#botonRegistrar').show();
         });
     });
 </script>

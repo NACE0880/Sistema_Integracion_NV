@@ -63,10 +63,69 @@ class ControladorPanelUsuarios extends Controller
         //Registrar nuevo usuario
         $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
 
+        //$identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
+
+        $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
+        $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
+
+        $roles = (array) $request->rol;
+        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
+        
+        $datosActualizacionTablaUsuario = 
+        [
+            // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
+            'usuario' => $nuevaClaveUsuario,
+            'password' => bcrypt($request->input('contrasena')),
+            'userable_id' => $ultimoUserableIdUsado + 1,
+            'userable_type' => $tipoUserableSeleccionado   
+        ];
+        dd($datosActualizacionTablaUsuario);
+        User::create($datosActualizacionTablaUsuario);
+
+        switch ($tipoUserableSeleccionado){
+            case '\\App\\coordinadores':
+                $datosActualizacionTablaCoordinadores =
+                ([
+                    'NOMBRE' => $request->input('nombre'),
+                    'CORREO' => $request->input('correo'),
+                    'VALIDACION' => $digitoVerificadorValidacion
+                ]);
+                $datosActualizacionTablaCoordinadoresCasas = ([
+                    'ID_COORDINADOR' => $identificadorUsuario == null ? coordinadores::max('ID_COORDINADOR') : null,
+                    'ID_CASA' => $identificadorUsuario == null ? casas::where('NOMBRE', $request->input('casa_coordinador'))->value('ID_CASA') : null
+                ]);
+                break;
+            case '\\App\\directores':
+                break;
+            case '\\App\\tutores':
+                break;
+        }
+    //Mail::to
+    }
+
+    public function modificarUsuario(Request $request){
+
+        dd($request);
+
+        switch ($request->input('accion')) {
+            case 'registrar':
+                // lógica de registro
+                break;
+            case 'modificar':
+                // lógica de modificación
+                break;
+        }
+
+        //Registrar nuevo usuario
+        $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
+
         $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
 
         $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
         $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
+
+        $roles = (array) $request->rol;
+        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
         
         $datosActualizacionTablaUsuario = 
         [
@@ -77,9 +136,6 @@ class ControladorPanelUsuarios extends Controller
         ];
         //dd($datosActualizacionTablaUsuario);
         User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
-
-        $roles = (array) $request->rol;
-        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
 
         switch ($tipoUserableSeleccionado){
             case '\\App\\coordinadores':

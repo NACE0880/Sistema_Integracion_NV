@@ -2,23 +2,20 @@
     <div class="modal fade" id="modalGeneralUsuarios" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form action="{{ route('usuarios.registro') }}" method="POST">
-                @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="label"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="label"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioModalUsuarios" method="POST">
+                        @csrf
+                        <!-- Input escondido para enviar la clave de usuario seleccionada al modificar usuario -->
+                        <input type="hidden" id="nombre_clave_usuario" name="nombre_clave_usuario">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="nombre">Nombre</label>
-                            </div>
-                            <!-- Input escondido para enviar la clave de usuario seleccionada al modificar usuario -->
-                            <div class="form-group col-md-8">
-                                <input type="hidden" name="nombre_clave_usuario" id="nombre_clave_usuario">
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="">
                             </div>
                         </div>
                         <div class="form-row">
@@ -27,6 +24,22 @@
                             </div>
                             <div class="form-group col-md-8">
                                 <input type="text" class="form-control" id="correo" name="correo" value="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="telegram">Telegram</label>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="text" class="form-control" id="telegram" name="telegram" value="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="contrasena">Contraseña</label>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena" value="">
                             </div>
                         </div>  
                         <div class="form-row">
@@ -59,12 +72,13 @@
                         </div>
                         <div class="form-row mt-4">
                             <div class="col-12 text-right">
-                                <button type="submit" class="btn btn-outline-success">Registrar</button>
-                                <button id="botonCancelar" name="botonCancelar" type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                                <button id="botonRegistrar" name="botonRegistrar" type="submit" class="btn btn-outline-success">Registrar</button>
+                                <button id="botonModificar" name="botonModificar" type="submit" class="btn btn-outline-warning">Modificar</button>
+                                <button id="botonCancelar" type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
