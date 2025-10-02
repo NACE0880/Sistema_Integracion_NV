@@ -17,13 +17,16 @@
                             <div class="form-group col-md-4">
                                 <label for="nombre">Nombre</label>
                             </div>
+                            <div class="form-group col-md-8">
+                                <input type="text" class="form-control" id="nombre" name="nombre">
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="form-group col-md-8">
-                                <input type="text" class="form-control" id="correo" name="correo" value="">
+                                <input type="text" class="form-control" id="correo" name="correo">
                             </div>
                         </div>
                         <div class="form-row">
@@ -31,7 +34,7 @@
                                 <label for="telegram">Telegram</label>
                             </div>
                             <div class="form-group col-md-8">
-                                <input type="text" class="form-control" id="telegram" name="telegram" value="">
+                                <input type="text" class="form-control" id="telegram" name="telegram">
                             </div>
                         </div>
                         <div class="form-row">
@@ -39,7 +42,7 @@
                                 <label for="contrasena">Contraseña</label>
                             </div>
                             <div class="form-group col-md-8">
-                                <input type="text" class="form-control" id="contrasena" name="contrasena" value="">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena" disabled>
                             </div>
                         </div>  
                         <div class="form-row">

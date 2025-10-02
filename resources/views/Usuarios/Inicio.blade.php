@@ -47,7 +47,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </body>
 </html>
-<script>
+<!--<script>
     $(document).ready(function () {
         $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
             var evento = $(event.relatedTarget);
@@ -78,7 +78,8 @@
             });
 
             $('#botonModificar').on('click', function () {
-                $('#formularioModalUsuarios').attr('action', '/usuarios/inicio/modificacion' + nombreClaveUsuario);
+                var baseUrl = @json(url('/usuarios/inicio/modificacion'));
+                $('#formularioModalUsuarios').attr('action', baseUrl + '/' + nombreClaveUsuario);
 
                 /*if ($('#formularioModalUsuarios').find('input[name="_method"]').length === 0) {
                     $('#formularioModalUsuarios').append('<input type="hidden" name="_method" value="PUT">');
@@ -96,4 +97,49 @@
             modalActualizacionUsuarios.find('#botonRegistrar').show();
         });
     });
+</script>-->
+<script>
+    $(document).ready(function () {
+        let nombreClaveUsuario = '';
+        const baseUrl = @json(url('/usuarios/inicio/modificacion'));
+
+        $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
+            const evento = $(event.relatedTarget);
+            const modalActualizacionUsuarios = $(this);
+
+            const tituloDelEvento = evento.data('titulo');
+            const correoDelEvento = evento.data('correo');
+            nombreClaveUsuario = evento.data('nombre-clave-usuario') || '';
+
+            modalActualizacionUsuarios.find('.modal-title').text(tituloDelEvento);
+            modalActualizacionUsuarios.find('#correo').val(correoDelEvento);
+            modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
+
+            const existenciaNombreClaveUsuario = !!nombreClaveUsuario;
+            //modalActualizacionUsuarios.find('#nombre').prop('disabled', existenciaNombreClaveUsuario);
+            //modalActualizacionUsuarios.find('#correo').prop('disabled', existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
+        });
+
+        $('#modalGeneralUsuarios').on('hidden.bs.modal', function () {
+            const modalActualizacionUsuarios = $(this);
+            nombreClaveUsuario = '';
+
+            modalActualizacionUsuarios.find('#nombre_clave_usuario').val('');
+            //modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
+            //modalActualizacionUsuarios.find('#correo').prop('disabled', false);
+            modalActualizacionUsuarios.find('#botonModificar').hide();
+            modalActualizacionUsuarios.find('#botonRegistrar').show();
+        });
+
+        $('#botonRegistrar').on('click', function () {
+            $('#formularioModalUsuarios').attr('action', '{{ route("usuarios.registro") }}');
+        });
+
+        $('#botonModificar').on('click', function () {
+            $('#formularioModalUsuarios').attr('action', baseUrl + '/' + nombreClaveUsuario);
+        });
+    });
 </script>
+

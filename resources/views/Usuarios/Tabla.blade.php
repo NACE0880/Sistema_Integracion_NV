@@ -41,6 +41,9 @@
                                     data-toggle="modal"
                                     data-target="#modalGeneralUsuarios"
                                     data-titulo="{{ $usuario->userable->NOMBRE }}"
+                                    data-nombre="{{ $usuario->NOMBRE }}"
+                                    data-correo="{{ $usuario->userable->CORREO ?? ''}}"
+                                    data-telegram-coordinador="{{ $usuario->userable->TELEGRAM ?? ''}}"
                                     data-nombre-clave-usuario="{{ $usuario->usuario }}"
                                     >
                                         {{ $usuario->usuario }}
