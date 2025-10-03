@@ -11,108 +11,108 @@
         <!-- Bootstrap CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     </head>
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .campo-wrapper {
+            position: relative;
+        }
+
+        .campo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 2;
+        }
+
+        .campo-wrapper input { 
+            position: relative; 
+            z-index: 1; 
+        }
+    </style>
     <body>
-        @auth
-        <ul class="nav nav-tabs justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link {{ Route::is('usuarios.inicio') ? 'active' : '' }}" href="{{ route('usuarios.inicio') }}"> <i class="fa-solid fa-house"></i> Usuarios </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                    {{ Auth::user()->userable->NOMBRE }} <span class="caret"></span>
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('home') }}">
-                            Menu
+        <div class="container mt-2 mb-2">
+            @auth
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('usuarios.inicio') ? 'active' : '' }}" href="{{ route('usuarios.inicio') }}"> <i class="fa-solid fa-house"></i> Usuarios </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        {{ Auth::user()->userable->NOMBRE }} <span class="caret"></span>
                     </a>
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Cerrar Sesión
-                    </a>
-                </div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </li>
-        </ul>
-        @endauth
-        @include('Usuarios.Tabla')
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalGeneralUsuarios" data-titulo="Nuevo Usuario">
-            Registrar Usuario
-        </button>
-        @include('Usuarios.modal')
-        <!-- Bootstrap JS and dependencies -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('home') }}">
+                                Menu
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            Cerrar Sesión
+                        </a>
+                    </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+            @endauth
+            @include('Usuarios.Tabla')
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalGeneralUsuarios" data-titulo="Nuevo Usuario">
+                    Registrar Usuario
+                </button>
+            </div>
+            @include('Usuarios.modal')
+            <!-- Bootstrap JS and dependencies -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        </div>
     </body>
 </html>
-<!--<script>
-    $(document).ready(function () {
-        $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
-            var evento = $(event.relatedTarget);
-            var modalActualizacionUsuarios = $(this);
-
-            var tituloDelEvento = evento.data('titulo');
-            modalActualizacionUsuarios.find('.modal-title').text(tituloDelEvento);
-
-            var nombreClaveUsuario = evento.data('nombre-clave-usuario');
-            if(nombreClaveUsuario) {
-                //Se envía la clave de usuario seleccionada en un input escondido
-                modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
-                modalActualizacionUsuarios.find('#nombre').prop('disabled', true);
-                modalActualizacionUsuarios.find('#correo').prop('disabled', true);
-                modalActualizacionUsuarios.find('#botonRegistrar').hide();
-                modalActualizacionUsuarios.find('#botonModificar').show();
-            } else {
-                modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
-                modalActualizacionUsuarios.find('#correo').prop('disabled', false);
-                modalActualizacionUsuarios.find('#botonModificar').hide();
-                modalActualizacionUsuarios.find('#botonRegistrar').show();
-            }
-
-            //Generar la ruta del modal dinámicamente
-            $('#botonRegistrar').on('click', function () {
-                $('#formularioModalUsuarios').attr('action', '{{ route("usuarios.registro") }}');
-                //$('#formularioModalUsuarios').find('input[name="_method"]').remove();
-            });
-
-            $('#botonModificar').on('click', function () {
-                var baseUrl = @json(url('/usuarios/inicio/modificacion'));
-                $('#formularioModalUsuarios').attr('action', baseUrl + '/' + nombreClaveUsuario);
-
-                /*if ($('#formularioModalUsuarios').find('input[name="_method"]').length === 0) {
-                    $('#formularioModalUsuarios').append('<input type="hidden" name="_method" value="PUT">');
-                }*/
-            });
-            
-        });
-
-        $('#modalGeneralUsuarios').on('hidden.bs.modal', function () {
-            var modalActualizacionUsuarios = $(this);
-            modalActualizacionUsuarios.find('#nombre_clave_usuario').val('');
-            modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
-            modalActualizacionUsuarios.find('#correo').prop('disabled', false);
-            modalActualizacionUsuarios.find('#botonModificar').hide();
-            modalActualizacionUsuarios.find('#botonRegistrar').show();
-        });
-    });
-</script>-->
 <script>
     $(document).ready(function () {
         let nombreClaveUsuario = '';
         const baseUrl = @json(url('/usuarios/inicio/modificacion'));
 
+        $('.campo-wrapper').on('click', function () {
+            const nombreCampoSeleccionado = $(this).data('campo');
+            const campoSeleccionado = $(nombreCampoSeleccionado);
+
+            if (campoSeleccionado.prop('disabled')) {
+                campoSeleccionado.prop('disabled', false).focus();
+            }
+        });
+
         $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
             const evento = $(event.relatedTarget);
             const modalActualizacionUsuarios = $(this);
+            const tipoDeEventoLink = evento.is('a');
 
             const tituloDelEvento = evento.data('titulo');
+            const nombreDelEvento = evento.data('nombre');
             const correoDelEvento = evento.data('correo');
+            const telegramDelEvento = evento.data('telegram-coordinador');
             nombreClaveUsuario = evento.data('nombre-clave-usuario') || '';
 
+            modalActualizacionUsuarios.find('#grupo_campos_casa_director').hide();
+
+            if (tipoDeEventoLink) {
+                modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', true);
+            }
+
             modalActualizacionUsuarios.find('.modal-title').text(tituloDelEvento);
+            modalActualizacionUsuarios.find('#nombre').val(nombreDelEvento);
             modalActualizacionUsuarios.find('#correo').val(correoDelEvento);
+            modalActualizacionUsuarios.find('#telegram').val(telegramDelEvento);
             modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
 
             const existenciaNombreClaveUsuario = !!nombreClaveUsuario;
@@ -120,6 +120,17 @@
             //modalActualizacionUsuarios.find('#correo').prop('disabled', existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
+        });
+
+        $('#rol').on('change', function () {
+            const valoresRolesSeleccionados = $(this).val();
+            const grupoCamposCasaCoordinador = $('#grupo_campos_casa_director');
+
+            if (Array.isArray(valoresRolesSeleccionados) && valoresRolesSeleccionados.includes('director')) {
+                grupoCamposCasaCoordinador.show();
+            } else {
+                grupoCamposCasaCoordinador.hide();
+            }
         });
 
         $('#modalGeneralUsuarios').on('hidden.bs.modal', function () {
@@ -131,6 +142,7 @@
             //modalActualizacionUsuarios.find('#correo').prop('disabled', false);
             modalActualizacionUsuarios.find('#botonModificar').hide();
             modalActualizacionUsuarios.find('#botonRegistrar').show();
+            modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', false);
         });
 
         $('#botonRegistrar').on('click', function () {

@@ -22,8 +22,8 @@
 </style>-->
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-4 mt-2">Usuarios</h2>
-        <div class="table-responsive">
+        <h2 class="text-center mb-5 mt-2">Usuarios</h2>
+        <div class="table-responsive mb-1">
             <table id="ticketsTable" class="table" style="text-align:center;">
                 <thead class="table">
                     <tr>
@@ -41,7 +41,7 @@
                                     data-toggle="modal"
                                     data-target="#modalGeneralUsuarios"
                                     data-titulo="{{ $usuario->userable->NOMBRE }}"
-                                    data-nombre="{{ $usuario->NOMBRE }}"
+                                    data-nombre="{{ $usuario->userable->NOMBRE }}"
                                     data-correo="{{ $usuario->userable->CORREO ?? ''}}"
                                     data-telegram-coordinador="{{ $usuario->userable->TELEGRAM ?? ''}}"
                                     data-nombre-clave-usuario="{{ $usuario->usuario }}"

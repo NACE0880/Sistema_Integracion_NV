@@ -17,7 +17,7 @@
                             <div class="form-group col-md-4">
                                 <label for="nombre">Nombre</label>
                             </div>
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-8 campo-wrapper" data-campo="#nombre">
                                 <input type="text" class="form-control" id="nombre" name="nombre">
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                             <div class="form-group col-md-4">
                                 <label for="correo">Correo</label>
                             </div>
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-8 campo-wrapper" data-campo="#correo">
                                 <input type="text" class="form-control" id="correo" name="correo">
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="form-group col-md-4">
                                 <label for="telegram">Telegram</label>
                             </div>
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-8 campo-wrapper" data-campo="#telegram">
                                 <input type="text" class="form-control" id="telegram" name="telegram">
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                             <div class="form-group col-md-4">
                                 <label for="contrasena">Contraseña</label>
                             </div>
-                            <div class="form-group col-md-8">
-                                <input type="text" class="form-control" id="contrasena" name="contrasena" disabled>
+                            <div class="form-group col-md-8 campo-wrapper" data-campo="#contrasena">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena">
                             </div>
                         </div>  
                         <div class="form-row">
@@ -59,7 +59,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div id="grupo_campos_casa_director" class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="casa_director">Casa</label>
                             </div>
