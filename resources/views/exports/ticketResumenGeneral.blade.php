@@ -3,7 +3,7 @@
         <tr>
 
             <th colspan="1" valign='middle' align='center' bgcolor='#ffffff'></th>
-            <th colspan="5" style=" color: #000000; background-color: #76b5c5;" valign='middle' align='center' bgcolor='#76b5c5'>
+            <th colspan="6" style=" color: #000000; background-color: #76b5c5;" valign='middle' align='center' bgcolor='#76b5c5'>
                 PENDIENTE A REALIZAR
             </th>
             <th colspan="1" style=" color: #000000; background-color: #ffa500;" valign='middle' align='center' bgcolor='#ffa500'>
@@ -36,7 +36,7 @@
                 CANTIDAD ANTERIORES AL AÑO EN CURSO
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
-                CANTIDAD HASTA LA FECHA
+                CANTIDAD ANTES DEL CORTE
             </td>
             <td width="15" valign='middle' align='center' bgcolor='#ffffff' style= "background-color: #ffffff;">
                 AUTORIZADOS<br>
