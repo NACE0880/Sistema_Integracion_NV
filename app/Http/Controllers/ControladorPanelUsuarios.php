@@ -68,87 +68,63 @@ class ControladorPanelUsuarios extends Controller
         $roles = (array) $request->rol;
         $digitoVerificadorValidacion = in_array('gestor validacion tickets', $roles) ? 1 : 0;
 
-        switch ($tipoUserableSeleccionado){
-            case '\\App\\coordinadores':
-                $coordinador = coordinadores::create([
-                    'NOMBRE' => $request->input('nombre'),
-                    'TELEGRAM' => $request->input('telegram'),
-                    'CORREO' => $request->input('correo'),
-                    'VALIDACION' => $digitoVerificadorValidacion,
+        $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
+
+        User::create([
+            // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
+            'usuario' => $nuevaClaveUsuario,
+            'password' => bcrypt($request->input('contrasena')),
+            'userable_id' => $ultimoUserableIdUsado + 1,
+            'userable_type' => $tipoUserableSeleccionado   
+        ]);
+
+        $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
+
+        //Datos para actualizacion en tabla usuarios_roles
+        foreach ($roles as $rol) {
+            usuarios_roles::create([
+                'ID_USUARIO' => $identificadorUsuario,
+                'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
+            ]);
+        }
+
+        if ($tipoUserableSeleccionado == '\\App\\coordinadores'){
+            $coordinador = coordinadores::create([
+                'NOMBRE' => $request->input('nombre'),
+                'TELEGRAM' => $request->input('telegram'),
+                'CORREO' => $request->input('correo'),
+                'VALIDACION' => $digitoVerificadorValidacion,
+            ]);
+            //Datos para actualizacion en tabla coordinadores_casas
+            foreach ($casas as $casa) {
+                coordinadores_casas::create([
+                    'ID_COORDINADOR' => $coordinador->ID_COORDINADOR,
+                    'ID_CASA' => $casa->ID_CASA,
                 ]);
-                $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
-                User::create([
-                    // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
-                    'usuario' => $nuevaClaveUsuario,
-                    'password' => bcrypt($request->input('contrasena')),
-                    'userable_id' => $ultimoUserableIdUsado + 1,
-                    'userable_type' => $tipoUserableSeleccionado   
-                ]);
-                $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
-                //Datos para actualizacion en tabla usuarios_roles
-                foreach ($roles as $rol) {
-                    usuarios_roles::create([
-                        'ID_USUARIO' => $identificadorUsuario,
-                        'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                    ]);
-                }
-                //Datos para actualizacion en tabla coordinadores_casas
-                foreach ($casas as $casa) {
-                    coordinadores_casas::create([
-                        'ID_COORDINADOR' => $coordinador->ID_COORDINADOR,
-                        'ID_CASA' => $casa->ID_CASA,
-                    ]);
-                }
-                break;
-            case '\\App\\directores':
-                $datosActualizacionTablaDirectores =
-                ([
-                    'ID_CASA' => $request->input('casa_director'),
-                    'NOMBRE' => $request->input('nombre'),
-                    'CORREO' => $request->input('correo'),
-                ]);
-                directores::create($datosActualizacionTablaDirectores);
-                $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
-                User::create([
-                    // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
-                    'usuario' => $nuevaClaveUsuario,
-                    'password' => bcrypt($request->input('contrasena')),
-                    'userable_id' => $ultimoUserableIdUsado + 1,
-                    'userable_type' => $tipoUserableSeleccionado   
-                ]);
-                $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
-                //Datos para actualizacion en tabla usuarios_roles
-                foreach ($roles as $rol) {
-                    usuarios_roles::create([
-                        'ID_USUARIO' => $identificadorUsuario,
-                        'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                    ]);
-                }
-                break;
-            case '\\App\\tutores':
-                $datosActualizacionTablaTutores =
-                ([
-                    'NOMBRE' => $request->input('nombre'),
-                    'CORREO' => $request->input('correo'),
-                ]);
-                tutores::create($datosActualizacionTablaTutores);
-                $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
-                User::create([
-                    // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
-                    'usuario' => $nuevaClaveUsuario,
-                    'password' => bcrypt($request->input('contrasena')),
-                    'userable_id' => $ultimoUserableIdUsado + 1,
-                    'userable_type' => $tipoUserableSeleccionado   
-                ]);
-                $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
-                //Datos para actualizacion en tabla usuarios_roles
-                foreach ($roles as $rol) {
-                    usuarios_roles::create([
-                        'ID_USUARIO' => $identificadorUsuario,
-                        'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                    ]);
-                }
-                break;
+            }
+        } 
+        
+        if ($tipoUserableSeleccionado == '\\App\\directores' || in_array('director', $roles)){
+            $datosActualizacionTablaDirectores =
+            ([
+                'ID_CASA' => casas::where('NOMBRE', $request->input('casa_director'))->first()->ID_CASA,
+                'NOMBRE' => $request->input('nombre'),
+                'CORREO' => $request->input('correo'),
+            ]);
+            directores::create($datosActualizacionTablaDirectores);
+            //Datos para actualizacion en tabla usuarios_roles
+        } 
+        
+        if ($tipoUserableSeleccionado == '\\App\\tutores' || in_array('tutor', $roles)){
+            $datosActualizacionTablaTutores =
+            ([
+                'NOMBRE' => $request->input('nombre'),
+                'CORREO' => $request->input('correo'),
+            ]);
+            tutores::create($datosActualizacionTablaTutores);
+            //Datos para actualizacion en tabla usuarios_roles
+            foreach ($roles as $rol) {
+            }
         }
 
         return redirect()->route('usuarios.inicio');
