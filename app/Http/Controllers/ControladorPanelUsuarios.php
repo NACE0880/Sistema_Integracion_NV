@@ -130,21 +130,20 @@ class ControladorPanelUsuarios extends Controller
         return redirect()->route('usuarios.inicio');
     }
 
-    /*public function modificarUsuario(Request $request){
+    public function modificarUsuario(Request $request){
 
         dd($request);
 
-        switch ($request->input('accion')) {
+        /*switch ($request->input('accion')) {
             case 'registrar':
                 // lógica de registro
                 break;
             case 'modificar':
                 // lógica de modificación
                 break;
-        }
+        }*/
 
-        //Registrar nuevo usuario
-        $nuevaClaveUsuario = $this->generarNuevaClaveUsuario();
+        $claveUsuario = $this->generarNuevaClaveUsuario();
 
         $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
 
@@ -183,5 +182,5 @@ class ControladorPanelUsuarios extends Controller
                 break;
         }
     //Mail::to
-    }*/
+    }
 }
