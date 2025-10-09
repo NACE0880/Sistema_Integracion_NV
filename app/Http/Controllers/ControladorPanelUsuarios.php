@@ -134,53 +134,123 @@ class ControladorPanelUsuarios extends Controller
 
         dd($request);
 
-        /*switch ($request->input('accion')) {
-            case 'registrar':
-                // lógica de registro
-                break;
-            case 'modificar':
-                // lógica de modificación
-                break;
-        }*/
+        $casas = casas::all();
 
-        $claveUsuario = $this->generarNuevaClaveUsuario();
+        $claveUsuario = $request->input("nombre_clave_usuario");
 
-        $identificadorUsuario = User::where('usuario', $nuevaClaveUsuario)->value('id');
+        $identificadorUsuario = User::where('usuario', $claveUsuario)->value('id');
 
-        $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
-        $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
+        $cargoUsuario = substr(User::where('usuario', $claveUsuario)->value('userable_type'), 5);
+
+        $identificadorUserableUsuario = User::where('usuario', $claveUsuario)->value('userable_id');
 
         $roles = (array) $request->rol;
-        $digitoVerificadorValidacion = in_array($roles) == 'gestor validacion tickets' ? 1 : 0;
-        
-        $datosActualizacionTablaUsuario = 
-        [
-            // Se comprueba si existe el identificador usuario para crear una nueva entrada o actualizar una existente.
-            'usuario' => $identificadorUsuario == null ? $nuevaClaveUsuario : null,
-            'userable_id' => $identificadorUsuario == null ? $ultimoUserableIdUsado + 1 : null,
-            'userable_type' => $identificadorUsuario == null ? $tipoUserableSeleccionado : null   
-        ];
-        //dd($datosActualizacionTablaUsuario);
-        User::updateOrCreate($identificadorUsuario, array_filter($datosActualizacionTablaUsuario));
+        $digitoVerificadorValidacion = in_array('gestor validacion tickets', $roles) ? 1 : 0;
 
-        switch ($tipoUserableSeleccionado){
-            case '\\App\\coordinadores':
-                $datosActualizacionTablaCoordinadores =
-                ([
-                    'NOMBRE' => $request->input('nombre'),
-                    'CORREO' => $request->input('correo'),
-                    'VALIDACION' => $digitoVerificadorValidacion
-                ]);
-                $datosActualizacionTablaCoordinadoresCasas = ([
-                    'ID_COORDINADOR' => $identificadorUsuario == null ? coordinadores::max('ID_COORDINADOR') : null,
-                    'ID_CASA' => $identificadorUsuario == null ? casas::where('NOMBRE', $request->input('casa_coordinador'))->value('ID_CASA') : null
-                ]);
-                break;
-            case '\\App\\directores':
-                break;
-            case '\\App\\tutores':
-                break;
+        usuarios_roles::where('ID_USUARIO', $identificadorUsuario)->delete();
+
+        if ($cargoUsuario == "coordinadores"){
+            coordinadores::where('ID_COORDINADOR', $identificadorUserableUsuario)->delete();
         }
-    //Mail::to
+
+        if ($cargoUsuario == "directores"){
+            directores::where('ID_DIRECTOR', $identificadorUserableUsuario)->delete();
+        }
+
+        if ($cargoUsuario == "tutores"){
+            tutores::where('ID_TUTOR', $identificadorUserableUsuario)->delete();
+        }
+
+        $datosUsuarioAModificar = [];
+
+        if ($request->filled('contrasena')) {
+            $datosUsuarioAModificar['password'] = bcrypt($request->input('contrasena'));
+        }
+
+        if (in_array('coordinador', $roles)) {
+            $datosUsuarioAModificar['userable_type'] = '\\App\\coordinadores';
+        }
+        if (in_array('director', $roles)) {
+            $datosUsuarioAModificar['userable_type'] = '\\App\\directores';
+        } 
+        if (in_array('tutores', $roles)) {
+            $datosUsuarioAModificar['userable_type'] = '\\App\\tutores';
+        }
+
+        User::where('usuario', $claveUsuario)->update($datosUsuarioAModificar);
+
+        foreach ($roles as $rol) {
+            usuarios_roles::create([
+                'ID_USUARIO' => $identificadorUsuario,
+                'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
+            ]);
+        }
+
+        if (in_array('coordinador', $roles)){
+            $datosUsuarioAModificar = [];
+
+            if ($request->filled('nombre')) {
+                $datosUsuarioAModificar['NOMBRE'] = $request->input('nombre');
+            }
+
+            if ($request->filled('telegram')) {
+                $datosUsuarioAModificar['TELEGRAM'] = $request->input('telegram');
+            }
+
+            if ($request->filled('correo')) {
+                $datosUsuarioAModificar['CORREO'] = $request->input('correo');
+            }
+
+            if (!empty($digitoVerificadorValidacion)) {
+                $datosUsuarioAModificar['VALIDACION'] = $digitoVerificadorValidacion;
+            }
+
+            if (!empty($datosUsuarioAModificar)) {
+                coordinadores::where('ID_COORDINADOR', $identificadorUserableUsuario)->update($datosUsuarioAModificar);
+            }
+            
+            foreach ($casas as $casa) {
+                coordinadores_casas::create([
+                    'ID_COORDINADOR' => $identificadorUserableUsuario,
+                    'ID_CASA' => $casa->ID_CASA,
+                ]);
+            }
+        } 
+        
+        if (in_array('director', $roles)){
+            $datosUsuarioAModificar = [];
+
+            if ($request->filled('nombre')) {
+                $datosUsuarioAModificar['NOMBRE'] = $request->input('nombre');
+            }
+
+            if ($request->filled('correo')) {
+                $datosUsuarioAModificar['CORREO'] = $request->input('correo');
+            }
+
+            if ($request->filled('casa_director')) {
+                $datosUsuarioAModificar['ID_CASA'] = casas::where('NOMBRE', $request->input('casa_director'))->first()->ID_CASA;
+            }
+
+            if (!empty($datosUsuarioAModificar)) {
+                directores::where('ID_COORDINADOR', $identificadorUserableUsuario)->update($datosUsuarioAModificar);
+            }
+        } 
+        
+        if (in_array('tutor', $roles)){
+            $datosUsuarioAModificar = [];
+
+            if ($request->filled('nombre')) {
+                $datosUsuarioAModificar['NOMBRE'] = $request->input('nombre');
+            }
+
+            if ($request->filled('correo')) {
+                $datosUsuarioAModificar['CORREO'] = $request->input('correo');
+            }
+
+            if (!empty($datosUsuarioAModificar)) {
+                tutores::where('ID_TUTOR', $identificadorUserableUsuario)->update($datosUsuarioAModificar);
+            }
+        }
     }
 }
