@@ -17,6 +17,11 @@ use App\usuarios_roles;
 
 class ControladorPanelUsuarios extends Controller
 {
+
+    const COORDINADOR = "\\App\\Coordinadores";
+    const DIRECTOR = "\\App\\Directores";
+    const TUTOR = "\\App\\Tutores";
+
     public function __construct()
     {
 
@@ -59,8 +64,52 @@ class ControladorPanelUsuarios extends Controller
 
     public function registrarUsuario(Request $request){
 
-        //dd($request);
+        dd($request);
+
         $casas = casas::all();
+        $roles = (array) $request->rol;
+
+        if (in_array('coordinador', $roles)){
+
+            $datosActualizacionTablaCoordinadores = [];
+
+            if ($request->filled('nombre')){
+                $datosActualizacionTablaCoordinadores['NOMBRE'] = $request->input('nombre');
+            }
+            if ($request->filled('telegram')){
+                $datosActualizacionTablaCoordinadores['TELEGRAM'] = $request->input('telegram');
+            }
+            if ($request->filled('correo')){
+                $datosActualizacionTablaCoordinadores['CORREO'] = $request->input('correo');
+            }
+            if (in_array('gestor validacion tickets', $roles)){
+                $datosActualizacionTablaCoordinadores['VALIDACION'] = 1;
+            }
+
+            $coordinador = coordinadores::updateOrCreate($datosActualizacionTablaCoordinadores);
+
+            $datosActualizacionTablaUsuarios = [];  
+
+            if ($request->filled('contrasena')){
+                $datosActualizacionTablaUsuarios['password'] = bcrypt($request->input('contrasena'));
+            }
+            $datosActualizacionTablaUsuarios['userable_id'] = $coordinador->ID_COORDINADOR;
+            $datosActualizacionTablaUsuarios['userable_type'] = COORDINADOR;
+
+            $usuario = User::updateOrCreate($datosActualizacionTablaUsuarios);
+
+            $usuario->usuario = 'BDT' . $usuario_id;
+            $usuario->save();
+
+            foreach ($casas as $casa) {
+                coordinadores_casas::create([
+                    'ID_COORDINADOR' => $coordinador->ID_COORDINADOR,
+                    'ID_CASA' => $casa->ID_CASA,
+                ]);
+            }
+        }
+
+        //dd($request);
 
         $tipoUserableSeleccionado = $this->guardarTipoUserableSeleccionado($request);
         $ultimoUserableIdUsado = User::where('userable_type', $tipoUserableSeleccionado)->max('userable_id');
@@ -122,9 +171,6 @@ class ControladorPanelUsuarios extends Controller
                 'CORREO' => $request->input('correo'),
             ]);
             tutores::create($datosActualizacionTablaTutores);
-            //Datos para actualizacion en tabla usuarios_roles
-            foreach ($roles as $rol) {
-            }
         }
 
         return redirect()->route('usuarios.inicio');
@@ -132,7 +178,7 @@ class ControladorPanelUsuarios extends Controller
 
     public function modificarUsuario(Request $request){
 
-        dd($request);
+        //dd($request);
 
         $casas = casas::all();
 
@@ -233,7 +279,7 @@ class ControladorPanelUsuarios extends Controller
             }
 
             if (!empty($datosUsuarioAModificar)) {
-                directores::where('ID_COORDINADOR', $identificadorUserableUsuario)->update($datosUsuarioAModificar);
+                directores::where('ID_DIRECTOR', $identificadorUserableUsuario)->update($datosUsuarioAModificar);
             }
         } 
         
