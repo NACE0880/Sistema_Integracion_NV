@@ -103,6 +103,7 @@
             const telegramDelEvento = evento.data('telegram-coordinador');
             nombreClaveUsuario = evento.data('nombre-clave-usuario') || '';
 
+            modalActualizacionUsuarios.find('#grupo_campos_telegram').hide();
             modalActualizacionUsuarios.find('#grupo_campos_casa_director').hide();
 
             if (tipoDeEventoLink) {
@@ -124,7 +125,14 @@
 
         $('#rol').on('change', function () {
             const valoresRolesSeleccionados = $(this).val();
+            const grupoCamposTelegram = $('#grupo_campos_telegram');
             const grupoCamposCasaCoordinador = $('#grupo_campos_casa_director');
+
+            if (Array.isArray(valoresRolesSeleccionados) && valoresRolesSeleccionados.includes('coordinador')) {
+                grupoCamposTelegram.show();
+            } else {
+                grupoCamposTelegram.hide();
+            }
 
             if (Array.isArray(valoresRolesSeleccionados) && valoresRolesSeleccionados.includes('director')) {
                 grupoCamposCasaCoordinador.show();
@@ -145,11 +153,55 @@
             modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', false);
         });
 
-        $('#botonRegistrar').on('click', function () {
+        $('#contrasena').on('input', function () {
+            const valorCampo = $(this).val();
+            const limpiar = valorCampo.replace(/[^a-zA-Z0-9]/g, '');
+            if (valorCampo !== limpiar) {
+                $(this).val(limpiar);
+            }
+        });
+
+        $('#botonRegistrar').on('click', function (e) {
+            const camposVisiblesHabilitados = $('#formularioModalUsuarios input[type="text"]:visible:enabled, #formularioModalUsuarios input[type="tel"]:visible:enabled');
+            let camposVacios =[];
+
+            camposVisiblesHabilitados.each(function () {
+                if (!$(this).val().trim()) {
+                    camposVacios.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+
+            if (camposVacios.length > 0) {
+                e.preventDefault();
+                alert('Por favor rellene todos los campos requeridos.');
+                return;
+            }
+
             $('#formularioModalUsuarios').attr('action', '{{ route("usuarios.registro") }}');
         });
 
-        $('#botonModificar').on('click', function () {
+        $('#botonModificar').on('click', function (e) {
+            const camposVisiblesHabilitados = $('#formularioModalUsuarios input[type="text"]:visible:enabled, #formularioModalUsuarios input[type="tel"]:visible:enabled');
+            let camposVacios =[];
+
+            camposVisiblesHabilitados.each(function () {
+                if (!$(this).val().trim()) {
+                    camposVacios.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+
+            if (camposVacios.length > 0) {
+                e.preventDefault();
+                alert('Por favor rellene todos los campos requeridos.');
+                return;
+            }
+
+            if (camposVacios.length == 0){
+                e.preventDefault();
+                alert('No hay nada que modificar.');
+                return;
+            }
+
             $('#formularioModalUsuarios').attr('action', baseUrl + '/' + nombreClaveUsuario);
         });
     });

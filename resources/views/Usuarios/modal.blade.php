@@ -29,12 +29,12 @@
                                 <input type="text" class="form-control" id="correo" name="correo">
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div id="grupo_campos_telegram" class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="telegram">Telegram</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#telegram">
-                                <input type="text" class="form-control" id="telegram" name="telegram">
+                                <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="10">
                             </div>
                         </div>
                         <div class="form-row">
@@ -42,7 +42,7 @@
                                 <label for="contrasena">Contraseña</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#contrasena">
-                                <input type="text" class="form-control" id="contrasena" name="contrasena">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena" maxlength="8">
                             </div>
                         </div>  
                         <div class="form-row">
