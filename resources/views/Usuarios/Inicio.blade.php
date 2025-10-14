@@ -182,6 +182,13 @@
 
         $('#botonModificar').on('click', function (e) {
             const camposVisiblesHabilitados = $('#formularioModalUsuarios input[type="text"]:visible:enabled, #formularioModalUsuarios input[type="tel"]:visible:enabled');
+
+            if (camposVisiblesHabilitados.length === 0) {
+                e.preventDefault();
+                alert('No hay nada que modificar.');
+                return;
+            }
+
             let camposVacios =[];
 
             camposVisiblesHabilitados.each(function () {
@@ -193,12 +200,6 @@
             if (camposVacios.length > 0) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
-                return;
-            }
-
-            if (camposVacios.length == 0){
-                e.preventDefault();
-                alert('No hay nada que modificar.');
                 return;
             }
 
