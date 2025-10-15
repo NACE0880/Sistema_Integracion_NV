@@ -77,7 +77,8 @@
                             <div class="col-12 text-right">
                                 <button id="botonRegistrar" name="botonRegistrar" type="submit" class="btn btn-outline-success">Registrar</button>
                                 <button id="botonModificar" name="botonModificar" type="submit" class="btn btn-outline-warning">Modificar</button>
-                                <button id="botonCancelar" type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                                <button id="botonEliminar" name="botonEliminar" type="submit" class="btn btn-outline-danger">Eliminar</button>
+                                <button id="botonCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </form>

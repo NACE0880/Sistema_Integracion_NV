@@ -289,12 +289,21 @@ class ControladorPanelUsuarios extends Controller
         }
     }
 
-    public function inhabilitarUsuario(Request $request){
-        $claveUsuario = $request->nombre_clave_usuario;
-        $datosActualizarTablaUsuario = [
-            'usuario' => 'N' . $claveUsuario,
-            'password' => bcrypt('NoDisponible'),
-        ];
-        User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
+    public function eliminarUsuario(Request $request){
+        DB::beginTransaction();
+        try{
+            $claveUsuario = $request->nombre_clave_usuario;
+            $datosActualizarTablaUsuario = [
+                'usuario' => 'N' . $claveUsuario,
+                'password' => bcrypt('NoDisponible'),
+            ];
+            User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
+            DB::commit();
+            return redirect()->route('usuarios.inicio');
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd('Entró al catch', $e->getMessage());
+            return back()->with('error', 'Error al modificar usuario: ' . $e->getMessage());
+        }
     }
 }

@@ -81,7 +81,8 @@
 <script>
     $(document).ready(function () {
         let nombreClaveUsuario = '';
-        const baseUrl = @json(url('/usuarios/inicio/modificacion'));
+        const baseUrlModificacion = @json(url('/usuarios/inicio/modificacion'));
+        const baseUrlEliminacion = @json(url('/usuarios/inicio/eliminacion'));
 
         $('.campo-wrapper').on('click', function () {
             const nombreCampoSeleccionado = $(this).data('campo');
@@ -121,6 +122,7 @@
             //modalActualizacionUsuarios.find('#correo').prop('disabled', existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
         });
 
         $('#rol').on('change', function () {
@@ -148,8 +150,9 @@
             modalActualizacionUsuarios.find('#nombre_clave_usuario').val('');
             //modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
             //modalActualizacionUsuarios.find('#correo').prop('disabled', false);
-            modalActualizacionUsuarios.find('#botonModificar').hide();
             modalActualizacionUsuarios.find('#botonRegistrar').show();
+            modalActualizacionUsuarios.find('#botonModificar').hide();
+            modalActualizacionUsuarios.find('#botonEliminar').hide();
             modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', false);
         });
 
@@ -203,7 +206,11 @@
                 return;
             }
 
-            $('#formularioModalUsuarios').attr('action', baseUrl + '/' + nombreClaveUsuario);
+            $('#formularioModalUsuarios').attr('action', baseUrlModificacion + '/' + nombreClaveUsuario);
+        });
+
+        $('#botonEliminar').on('click', function (e) {
+            $('#formularioModalUsuarios').attr('action', baseUrlEliminacion + '/' + nombreClaveUsuario);
         });
     });
 </script>
