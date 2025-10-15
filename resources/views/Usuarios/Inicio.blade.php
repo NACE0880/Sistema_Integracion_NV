@@ -37,6 +37,10 @@
             position: relative; 
             z-index: 1; 
         }
+
+        .campo-wrapper.activo::after {
+            display: none;
+        }   
     </style>
     <body>
         <div class="container mt-2 mb-2">
@@ -84,13 +88,32 @@
         const baseUrlModificacion = @json(url('/usuarios/inicio/modificacion'));
         const baseUrlEliminacion = @json(url('/usuarios/inicio/eliminacion'));
 
-        $('.campo-wrapper').on('click', function () {
+        $('.campo-wrapper').on('click', function (e) {
+            e.stopPropagation();
+
+            const wrapper = $(this);
             const nombreCampoSeleccionado = $(this).data('campo');
             const campoSeleccionado = $(nombreCampoSeleccionado);
 
             if (campoSeleccionado.prop('disabled')) {
                 campoSeleccionado.prop('disabled', false).focus();
+                wrapper.addClass('activo');
             }
+        });
+
+        $(document).on('click', function () {
+            $('.campo-wrapper.activo').each(function () {
+                const wrapper = $(this);
+                const nombreCampoSeleccionado = $wrapper.data('campo');
+                const campo = $(nombreCampoSeleccionado);
+
+                campo.prop('disabled', true);
+                wrapper.removeClass('activo');
+            });
+        });
+
+        $('.campo-wrapper input').on('click', function (e) {
+            e.stopPropagation();
         });
 
         $('#modalGeneralUsuarios').on('show.bs.modal', function (event) {
@@ -123,6 +146,9 @@
             modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#opcionesConCargos').toggle(!existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#opcionesSinCargos').toggle(existenciaNombreClaveUsuario);
         });
 
         $('#rol').on('change', function () {
@@ -154,6 +180,8 @@
             modalActualizacionUsuarios.find('#botonModificar').hide();
             modalActualizacionUsuarios.find('#botonEliminar').hide();
             modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', false);
+            modalActualizacionUsuarios.find('#opcionesConCargo').show();
+            modalActualizacionUsuarios.find('#opcionesSinCargo').hide();
         });
 
         $('#contrasena').on('input', function () {

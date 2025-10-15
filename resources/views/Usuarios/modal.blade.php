@@ -49,12 +49,26 @@
                             <div class="form-group col-md-4">
                                 <label for="rol">Rol</label>
                             </div>
-                            <div class="form-group col-md-8">
+                            <div id="opcionesConCargos" class="form-group col-md-8">
                                 <select class="form-control" id="rol" name="rol[]" multiple size="4">
                                     <option value="" selected disabled>
                                     </option>
                                     @foreach($roles as $rol)
                                         <option value="{{ $rol->NOMBRE }}">{{ $rol->NOMBRE }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div id="opcionesSinCargos" class="form-group col-md-8">
+                                <select class="form-control" id="rol" name="rol[]" multiple size="4">
+                                    <option value="" selected disabled>
+                                    </option>
+                                    @php
+                                        $cargosExcluidos = ['coordinador', 'director'];
+                                    @endphp
+                                    @foreach($roles as $rol)
+                                        @if(!in_array($rol->NOMBRE, $cargosExcluidos))
+                                            <option value="{{ $rol->NOMBRE }}">{{ $rol->NOMBRE }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
