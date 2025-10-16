@@ -126,6 +126,7 @@
             const correoDelEvento = evento.data('correo');
             const telegramDelEvento = evento.data('telegram-coordinador');
             nombreClaveUsuario = evento.data('nombre-clave-usuario') || '';
+            cargoUsuarioSeleccionado = evento.data('cargo-usuario') || '';
 
             modalActualizacionUsuarios.find('#grupo_campos_telegram').hide();
             modalActualizacionUsuarios.find('#grupo_campos_casa_director').hide();
@@ -149,12 +150,19 @@
             modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#opcionesConCargos').toggle(!existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#opcionesSinCargos').toggle(existenciaNombreClaveUsuario);
+
+            if (cargoUsuarioSeleccionado === "coordinadores" || cargoUsuarioSeleccionado === "tutores") {
+                console.log(cargoUsuarioSeleccionado);
+                $('#rolSinCargos option[value="tutor"]').hide();
+            } else {
+                $('#rolSinCargos option[value="tutor"]').show(); // por si se reabre con otro cargo
+            }
         });
 
-        $('#rol').on('change', function () {
+        $('#rolConCargos').on('change', function () {
             const valoresRolesSeleccionados = $(this).val();
             const grupoCamposTelegram = $('#grupo_campos_telegram');
-            const grupoCamposCasaCoordinador = $('#grupo_campos_casa_director');
+            const grupoCamposCasaDirector = $('#grupo_campos_casa_director');
 
             if (Array.isArray(valoresRolesSeleccionados) && valoresRolesSeleccionados.includes('coordinador')) {
                 grupoCamposTelegram.show();
@@ -163,9 +171,9 @@
             }
 
             if (Array.isArray(valoresRolesSeleccionados) && valoresRolesSeleccionados.includes('director')) {
-                grupoCamposCasaCoordinador.show();
+                grupoCamposCasaDirector.show();
             } else {
-                grupoCamposCasaCoordinador.hide();
+                grupoCamposCasaDirector.hide();
             }
         });
 

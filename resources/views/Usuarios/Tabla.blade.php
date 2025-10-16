@@ -45,6 +45,7 @@
                                     data-correo="{{ $usuario->userable->CORREO ?? ''}}"
                                     data-telegram-coordinador="{{ $usuario->userable->TELEGRAM ?? ''}}"
                                     data-nombre-clave-usuario="{{ $usuario->usuario }}"
+                                    data-cargo-usuario="{{ class_basename($usuario->userable_type) }}"
                                     >
                                         {{ $usuario->usuario }}
                                     </a>

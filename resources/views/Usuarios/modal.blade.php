@@ -50,7 +50,7 @@
                                 <label for="rol">Rol</label>
                             </div>
                             <div id="opcionesConCargos" class="form-group col-md-8">
-                                <select class="form-control" id="rol" name="rol[]" multiple size="4">
+                                <select class="form-control" id="rolConCargos" name="rolConCargos[]" multiple size="4">
                                     <option value="" selected disabled>
                                     </option>
                                     @foreach($roles as $rol)
@@ -59,7 +59,7 @@
                                 </select>
                             </div>
                             <div id="opcionesSinCargos" class="form-group col-md-8">
-                                <select class="form-control" id="rol" name="rol[]" multiple size="4">
+                                <select class="form-control" id="rolSinCargos" name="rolSinCargos[]" multiple size="4">
                                     <option value="" selected disabled>
                                     </option>
                                     @php
