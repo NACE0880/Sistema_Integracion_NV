@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 class TelegramController extends Controller
 {
     public function __construct() {
-        $this->token = \Config::get('services.telegram-bot-token');
+        $this->token = \Config::get('services.telegram.token');
     }
 
     // NOTIFICACIONES TELEGRAM

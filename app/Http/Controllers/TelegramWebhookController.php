@@ -9,7 +9,7 @@ use App\adts;
 class TelegramWebhookController extends Controller
 {
     public function __construct() {
-        $this->token = \Config::get('services.telegram-bot-token');
+        $this->token = \Config::get('services.telegram.token');
     }
     public function handleWebhook(Request $request)
     {
