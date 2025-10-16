@@ -201,16 +201,39 @@
         });
 
         $('#botonRegistrar').on('click', function (e) {
-            const camposVisiblesHabilitados = $('#formularioModalUsuarios input[type="text"]:visible:enabled, #formularioModalUsuarios input[type="tel"]:visible:enabled');
-            let camposVacios =[];
+            const camposTextoVisiblesHabilitados = $(
+                '#formularioModalUsuarios input[type="text"]:visible:enabled,' + 
+                '#formularioModalUsuarios input[type="tel"]:visible:enabled'
+            );
+            const camposSeleccionadoresVisiblesHabilitados = $(
+                '#formularioModalUsuarios select:visible:enabled'
+            );
+            let nombreCamposLlenosTexto = [];
+            let nombreCamposLlenosSelect = [];
 
-            camposVisiblesHabilitados.each(function () {
-                if (!$(this).val().trim()) {
-                    camposVacios.push($(this).attr('name') || 'campo sin nombre');
+            console.log(camposTextoVisiblesHabilitados);
+
+            camposTextoVisiblesHabilitados.each(function () {
+                if ($(this).val().trim()) {
+                    console.log('entró test');
+                    nombreCamposLlenosTexto.push($(this).attr('name') || 'campo sin nombre');
                 }
             });
 
-            if (camposVacios.length > 0) {
+            camposSeleccionadoresVisiblesHabilitados.each(function () {
+                const valor = $(this).val();
+                const existenciaPropiedadMultiple = $(this).prop('multiple');
+                console.log(valor);
+
+                if ((existenciaPropiedadMultiple && Array.isArray(valor) && valor.length > 0) ||
+                (!existenciaPropiedadMultiple && valor !== '0' && valor !== null)) {
+                    console.log('entró selec');
+                    nombreCamposLlenosSelect.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+
+            if (camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length || 
+            camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
                 return;
@@ -220,23 +243,40 @@
         });
 
         $('#botonModificar').on('click', function (e) {
-            const camposVisiblesHabilitados = $('#formularioModalUsuarios input[type="text"]:visible:enabled, #formularioModalUsuarios input[type="tel"]:visible:enabled');
+            const camposTextoVisiblesHabilitados = $(
+                '#formularioModalUsuarios input[type="text"]:visible:enabled,' + 
+                '#formularioModalUsuarios input[type="tel"]:visible:enabled'
+            );
+            const camposSeleccionadoresVisiblesHabilitados = $(
+                '#formularioModalUsuarios select:visible:enabled'
+            );
+            let nombreCamposLlenosTexto = [];
+            let nombreCamposLlenosSelect = [];
 
-            if (camposVisiblesHabilitados.length === 0) {
-                e.preventDefault();
-                alert('No hay nada que modificar.');
-                return;
-            }
+            console.log(camposTextoVisiblesHabilitados);
 
-            let camposVacios =[];
-
-            camposVisiblesHabilitados.each(function () {
-                if (!$(this).val().trim()) {
-                    camposVacios.push($(this).attr('name') || 'campo sin nombre');
+            camposTextoVisiblesHabilitados.each(function () {
+                if ($(this).val().trim()) {
+                    console.log('entró test');
+                    nombreCamposLlenosTexto.push($(this).attr('name') || 'campo sin nombre');
                 }
             });
 
-            if (camposVacios.length > 0) {
+            camposSeleccionadoresVisiblesHabilitados.each(function () {
+                const valor = $(this).val();
+                const existenciaPropiedadMultiple = $(this).prop('multiple');
+                console.log(valor);
+
+                if ((existenciaPropiedadMultiple && Array.isArray(valor) && valor.length > 0) ||
+                (!existenciaPropiedadMultiple && valor !== '0' && valor)) {
+                    console.log('entró selec');
+                    nombreCamposLlenosSelect.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+
+            if ((camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length || 
+            camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) || 
+            (nombreCamposLlenosTexto.length === 0 && nombreCamposLlenosSelect.length === 0)) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
                 return;
