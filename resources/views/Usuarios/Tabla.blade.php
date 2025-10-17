@@ -22,7 +22,7 @@
 </style>-->
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-5 mt-2">Usuarios</h2>
+        <!--<h2 class="text-center mb-5 mt-2">Usuarios</h2>-->
         <div class="table-responsive mb-1">
             <table id="ticketsTable" class="table" style="text-align:center;">
                 <thead class="table">

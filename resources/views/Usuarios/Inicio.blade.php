@@ -69,8 +69,8 @@
             </ul>
             @endauth
             @include('Usuarios.Tabla')
-            <div class="col-12 text-center">
-                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalGeneralUsuarios" data-titulo="Nuevo Usuario">
+            <div class="col-12 text-center mt-4">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalGeneralUsuarios" data-titulo="Nuevo Usuario">
                     Registrar Usuario
                 </button>
             </div>
