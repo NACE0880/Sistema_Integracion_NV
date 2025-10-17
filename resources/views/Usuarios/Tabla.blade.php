@@ -29,6 +29,7 @@
                     <tr>
                         <th class="dt-center">ID</th>
                         <th class="dt-center">USUARIO</th>
+                        <th class="dt-center">ROLES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,11 @@
                                     </a>
                                 </td>
                                 <td>{{ $usuario->userable->NOMBRE }}</td>
+                                <td>
+                                    @foreach($usuario->roles as $rol)
+                                        {{ $rol->NOMBRE }}<br>
+                                    @endforeach
+                                </td>
                             </tr>
                         <?php } ?>
                     @endforeach

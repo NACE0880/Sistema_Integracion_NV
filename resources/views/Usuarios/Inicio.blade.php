@@ -104,7 +104,7 @@
         $(document).on('click', function () {
             $('.campo-wrapper.activo').each(function () {
                 const wrapper = $(this);
-                const nombreCampoSeleccionado = $wrapper.data('campo');
+                const nombreCampoSeleccionado = wrapper.data('campo');
                 const campo = $(nombreCampoSeleccionado);
 
                 campo.prop('disabled', true);
@@ -157,6 +157,14 @@
             } else {
                 $('#rolSinCargos option[value="tutor"]').show(); // por si se reabre con otro cargo
             }
+            
+            if (cargoUsuarioSeleccionado === "coordinadores") {
+                modalActualizacionUsuarios.find('#grupo_campos_telegram').show();
+            }
+
+            if (cargoUsuarioSeleccionado === "directores") {
+                modalActualizacionUsuarios.find('#grupo_campos_casa_director').show();
+            }
         });
 
         $('#rolConCargos').on('change', function () {
@@ -181,9 +189,7 @@
             const modalActualizacionUsuarios = $(this);
             nombreClaveUsuario = '';
 
-            modalActualizacionUsuarios.find('#nombre_clave_usuario').val('');
-            //modalActualizacionUsuarios.find('#nombre').prop('disabled', false);
-            //modalActualizacionUsuarios.find('#correo').prop('disabled', false);
+            document.getElementById('formularioModalUsuarios').reset();
             modalActualizacionUsuarios.find('#botonRegistrar').show();
             modalActualizacionUsuarios.find('#botonModificar').hide();
             modalActualizacionUsuarios.find('#botonEliminar').hide();

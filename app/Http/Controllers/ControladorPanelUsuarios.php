@@ -235,7 +235,7 @@ class ControladorPanelUsuarios extends Controller
                     $usuario->update($datosActualizarTablaUsuario);
 
                     if (($request)->has('rol') && !empty($request->rol)){
-                        usuarios_roles::where('ID_USUARIO', $usuario->id)->delete();
+                        usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 4)->delete();
 
                         foreach ($roles as $rol) {
                             usuarios_roles::create([
