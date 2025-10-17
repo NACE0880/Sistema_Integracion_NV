@@ -34,7 +34,7 @@
                                 <label for="telegram">Telegram</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#telegram">
-                                <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="10">
+                                <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="9">
                             </div>
                         </div>
                         <div class="form-row">
