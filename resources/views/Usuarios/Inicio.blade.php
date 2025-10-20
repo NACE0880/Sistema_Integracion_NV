@@ -40,7 +40,11 @@
 
         .campo-wrapper.activo::after {
             display: none;
-        }   
+        }
+
+        .nombre_clave_usuario {
+            pointer-eventes: none;
+        }
     </style>
     <body>
         <div class="container mt-2 mb-2">
