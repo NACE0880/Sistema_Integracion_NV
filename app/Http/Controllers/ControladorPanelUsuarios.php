@@ -38,7 +38,7 @@ class ControladorPanelUsuarios extends Controller
     }
 
     public function registrarUsuario(Request $request){
-        $roles = (array) $request->rol;
+        $roles = (array) $request->rolConCargos;
         DB::beginTransaction();
 
         try{
@@ -162,7 +162,7 @@ class ControladorPanelUsuarios extends Controller
     }
 
     public function modificarUsuario(Request $request){
-        $roles = (array) $request->rol;
+        $roles = (array) $request->rolSinCargos;
         $claveUsuario = $request->input("nombre_clave_usuario");
         $cargoAnteriorUsuario = substr(User::where('usuario', $claveUsuario)->value('userable_type'), 5);
         $identificadorUserableAnteriorUsuario = User::where('usuario', $claveUsuario)->value('userable_id');
@@ -173,7 +173,7 @@ class ControladorPanelUsuarios extends Controller
                 $datosActualizarTablaCargo = [];
                 $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "Coordinadores"){
+                if ($cargoAnteriorUsuario == "coordinadores"){
                     if ($request->filled('nombre')){
                         $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
                     }
@@ -197,7 +197,7 @@ class ControladorPanelUsuarios extends Controller
                     $usuario = User::where('usuario', $claveUsuario)->first();
                     $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rol') && !empty($request->rol)){
+                    if (($request)->has('rolSinCargos') && !empty($roles)){
                         usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 1)->delete();
 
                         foreach ($roles as $rol) {
@@ -213,7 +213,7 @@ class ControladorPanelUsuarios extends Controller
                 $datosActualizarTablaCargo = [];
                 $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "Directores"){
+                if ($cargoAnteriorUsuario == "directores"){
                     if ($request->filled('nombre')){
                         $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
                     }
@@ -234,7 +234,7 @@ class ControladorPanelUsuarios extends Controller
                     $usuario = User::where('usuario', $claveUsuario)->first();
                     $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rol') && !empty($request->rol)){
+                    if (($request)->has('rolSinCargos') && !empty($roles)){
                         usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 4)->delete();
 
                         foreach ($roles as $rol) {
@@ -250,7 +250,7 @@ class ControladorPanelUsuarios extends Controller
                 $datosActualizarTablaCargo = [];
                 $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "Tutores"){
+                if ($cargoAnteriorUsuario == "tutores"){
                     if ($request->filled('nombre')){
                         $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
                     }
@@ -268,7 +268,7 @@ class ControladorPanelUsuarios extends Controller
                     $usuario = User::where('usuario', $claveUsuario)->first();
                     $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rol') && !empty($request->rol)){
+                    if (($request)->has('rolSinCargo') && !empty($roles)){
                         usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 5)->delete();
 
                         foreach ($roles as $rol) {
