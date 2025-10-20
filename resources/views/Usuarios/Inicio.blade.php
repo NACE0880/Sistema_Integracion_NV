@@ -43,7 +43,7 @@
         }
 
         .nombre_clave_usuario {
-            pointer-eventes: none;
+            pointer-events: none;
         }
     </style>
     <body>
