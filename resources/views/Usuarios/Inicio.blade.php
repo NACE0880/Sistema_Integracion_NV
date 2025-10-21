@@ -89,6 +89,9 @@
 <script>
     $(document).ready(function () {
         let nombreClaveUsuario = '';
+        let nombreDelEvento = '';
+        let correoDelEvento = '';
+        let telegramDelEvento = '';
         const baseUrlModificacion = @json(url('/usuarios/inicio/modificacion'));
         const baseUrlEliminacion = @json(url('/usuarios/inicio/eliminacion'));
 
@@ -105,7 +108,7 @@
             }
         });
 
-        $(document).on('click', function () {
+        /*$(document).on('click', function () {
             $('.campo-wrapper.activo').each(function () {
                 const wrapper = $(this);
                 const nombreCampoSeleccionado = wrapper.data('campo');
@@ -114,7 +117,7 @@
                 campo.prop('disabled', true);
                 wrapper.removeClass('activo');
             });
-        });
+        });*/
 
         $('.campo-wrapper input').on('click', function (e) {
             e.stopPropagation();
@@ -126,9 +129,9 @@
             const tipoDeEventoLink = evento.is('a');
 
             const tituloDelEvento = evento.data('titulo');
-            const nombreDelEvento = evento.data('nombre');
-            const correoDelEvento = evento.data('correo');
-            const telegramDelEvento = evento.data('telegram-coordinador');
+            nombreDelEvento = evento.data('nombre');
+            correoDelEvento = evento.data('correo');
+            telegramDelEvento = evento.data('telegram-coordinador');
             nombreClaveUsuario = evento.data('nombre-clave-usuario') || '';
             const cargoUsuarioSeleccionado = evento.data('cargo-usuario') || '';
 
@@ -210,24 +213,16 @@
         });
 
         $('#botonRegistrar').on('click', function (e) {
-            const camposTextoVisiblesHabilitados = $(
-                '#formularioModalUsuarios input[type="text"]:visible:enabled,' + 
-                '#formularioModalUsuarios input[type="tel"]:visible:enabled'
-            );
+            const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
+            const valorAlRegistrarNombre = modalActualizacionUsuarios.find('#nombre').val();
+            const valorAlRegistrarCorreo = modalActualizacionUsuarios.find('#correo').val();
+            const valorAlRegistrarTelegram = modalActualizacionUsuarios.find('#telegram').val();
+            const valorAlRegistrarContrasena = modalActualizacionUsuarios.find('#contrasena').val();
+
             const camposSeleccionadoresVisiblesHabilitados = $(
                 '#formularioModalUsuarios select:visible:enabled'
             );
-            let nombreCamposLlenosTexto = [];
             let nombreCamposLlenosSelect = [];
-
-            console.log(camposTextoVisiblesHabilitados);
-
-            camposTextoVisiblesHabilitados.each(function () {
-                if ($(this).val().trim()) {
-                    console.log('entró test');
-                    nombreCamposLlenosTexto.push($(this).attr('name') || 'campo sin nombre');
-                }
-            });
 
             camposSeleccionadoresVisiblesHabilitados.each(function () {
                 const valor = $(this).val();
@@ -241,7 +236,10 @@
                 }
             });
 
-            if (camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length || 
+            if ((!valorAlRegistrarNombre || valorAlRegistrarNombre.trim() === '') ||
+            (!valorAlRegistrarCorreo || valorAlRegistrarCorreo.trim() === '') ||
+            (!valorAlRegistrarContrasena || valorAlRegistrarContrasena.trim() === '') ||
+            (!valorAlRegistrarTelegram || valorAlRegistrarTelegram.trim() === '') || 
             camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
@@ -252,24 +250,28 @@
         });
 
         $('#botonModificar').on('click', function (e) {
-            const camposTextoVisiblesHabilitados = $(
+            const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
+            const valorAlModificarNombre = modalActualizacionUsuarios.find('#nombre').val();
+            const valorAlModificarCorreo = modalActualizacionUsuarios.find('#correo').val();
+            const valorAlModificarTelegram = modalActualizacionUsuarios.find('#telegram').val();
+            const valorAlModificarContrasena = modalActualizacionUsuarios.find('#contrasena').val();
+
+            /*const camposTextoVisiblesHabilitados = $(
                 '#formularioModalUsuarios input[type="text"]:visible:enabled,' + 
                 '#formularioModalUsuarios input[type="tel"]:visible:enabled'
-            );
+            );*/
             const camposSeleccionadoresVisiblesHabilitados = $(
                 '#formularioModalUsuarios select:visible:enabled'
             );
-            let nombreCamposLlenosTexto = [];
+            //let nombreCamposLlenosTexto = [];
             let nombreCamposLlenosSelect = [];
 
-            console.log(camposTextoVisiblesHabilitados);
-
-            camposTextoVisiblesHabilitados.each(function () {
+            /*camposTextoVisiblesHabilitados.each(function () {
                 if ($(this).val().trim()) {
                     console.log('entró test');
                     nombreCamposLlenosTexto.push($(this).attr('name') || 'campo sin nombre');
                 }
-            });
+            });*/
 
             camposSeleccionadoresVisiblesHabilitados.each(function () {
                 const valor = $(this).val();
@@ -283,9 +285,14 @@
                 }
             });
 
-            if ((camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length || 
+            if (nombreDelEvento === valorAlModificarNombre ||
+            correoDelEvento === valorAlModificarCorreo ||
+            (!valorAlRegistrarContrasena || valorAlRegistrarContrasena.trim() === '') ||
+            telegramDelEvento === valorAlModificarTelegram ||
+            (/*camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length ||*/ 
             camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) || 
-            (nombreCamposLlenosTexto.length === 0 && nombreCamposLlenosSelect.length === 0)) {
+            (/*nombreCamposLlenosTexto.length === 0 &&*/ nombreCamposLlenosSelect.length === 0)) {
+                console.log(nombreDelEvento, valorAlModificarNombre);
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
                 return;

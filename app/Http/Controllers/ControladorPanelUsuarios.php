@@ -42,6 +42,7 @@ class ControladorPanelUsuarios extends Controller
         DB::beginTransaction();
 
         try{
+            dd($request);
             if (in_array('coordinador', $roles)) {
                 $datosActualizarTablaCargo = [];
 
@@ -169,6 +170,7 @@ class ControladorPanelUsuarios extends Controller
         DB::beginTransaction();
 
         try{
+            dd($request);
             //if (in_array('coordinador', $roles)) {
                 $datosActualizarTablaCargo = [];
                 $datosActualizarTablaUsuario = [];
