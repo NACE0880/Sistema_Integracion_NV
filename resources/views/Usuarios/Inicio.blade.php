@@ -158,10 +158,9 @@
             modalActualizacionUsuarios.find('#opcionesSinCargos').toggle(existenciaNombreClaveUsuario);
 
             if (cargoUsuarioSeleccionado === "coordinadores" || cargoUsuarioSeleccionado === "tutores") {
-                console.log(cargoUsuarioSeleccionado);
                 $('#rolSinCargos option[value="tutor"]').hide();
             } else {
-                $('#rolSinCargos option[value="tutor"]').show(); // por si se reabre con otro cargo
+                $('#rolSinCargos option[value="tutor"]').show();
             }
             
             if (cargoUsuarioSeleccionado === "coordinadores") {
@@ -219,28 +218,35 @@
             const valorAlRegistrarTelegram = modalActualizacionUsuarios.find('#telegram').val();
             const valorAlRegistrarContrasena = modalActualizacionUsuarios.find('#contrasena').val();
 
+            const camposTelefonoVisiblesHabilitados = $(
+                '#formularioModalUsuarios input[type="tel"]:visible:enabled'
+            );
             const camposSeleccionadoresVisiblesHabilitados = $(
                 '#formularioModalUsuarios select:visible:enabled'
             );
             let nombreCamposLlenosSelect = [];
+            let nombreCamposLlenosSelectMultiple = [];
 
             camposSeleccionadoresVisiblesHabilitados.each(function () {
-                const valor = $(this).val();
-                const existenciaPropiedadMultiple = $(this).prop('multiple');
-                console.log(valor);
+                const campo = $(this);
 
-                if ((existenciaPropiedadMultiple && Array.isArray(valor) && valor.length > 0) ||
-                (!existenciaPropiedadMultiple && valor !== '0' && valor !== null)) {
-                    console.log('entró selec');
+                if (!campo.prop('multiple') && campo[0].selectedIndex) {
                     nombreCamposLlenosSelect.push($(this).attr('name') || 'campo sin nombre');
                 }
-            });
 
-            if ((!valorAlRegistrarNombre || valorAlRegistrarNombre.trim() === '') ||
+                if (campo.prop('multiple') && campo.val() && campo.val().length > 0) {
+                    nombreCamposLlenosSelectMultiple.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+            
+            if (
+            (!valorAlRegistrarNombre || valorAlRegistrarNombre.trim() === '') ||
             (!valorAlRegistrarCorreo || valorAlRegistrarCorreo.trim() === '') ||
             (!valorAlRegistrarContrasena || valorAlRegistrarContrasena.trim() === '') ||
-            (!valorAlRegistrarTelegram || valorAlRegistrarTelegram.trim() === '') || 
-            camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) {
+            ((!valorAlRegistrarTelegram || valorAlRegistrarTelegram === '') && (camposTelefonoVisiblesHabilitados.is('[name="telegram"]'))) || 
+            (nombreCamposLlenosSelect.length === 0 && camposSeleccionadoresVisiblesHabilitados.length > 1) || 
+            nombreCamposLlenosSelectMultiple.length === 0
+            ) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
                 return;
@@ -256,43 +262,33 @@
             const valorAlModificarTelegram = modalActualizacionUsuarios.find('#telegram').val();
             const valorAlModificarContrasena = modalActualizacionUsuarios.find('#contrasena').val();
 
-            /*const camposTextoVisiblesHabilitados = $(
-                '#formularioModalUsuarios input[type="text"]:visible:enabled,' + 
-                '#formularioModalUsuarios input[type="tel"]:visible:enabled'
-            );*/
             const camposSeleccionadoresVisiblesHabilitados = $(
                 '#formularioModalUsuarios select:visible:enabled'
             );
-            //let nombreCamposLlenosTexto = [];
+            
             let nombreCamposLlenosSelect = [];
-
-            /*camposTextoVisiblesHabilitados.each(function () {
-                if ($(this).val().trim()) {
-                    console.log('entró test');
-                    nombreCamposLlenosTexto.push($(this).attr('name') || 'campo sin nombre');
-                }
-            });*/
+            let nombreCamposLlenosSelectMultiple = [];
 
             camposSeleccionadoresVisiblesHabilitados.each(function () {
-                const valor = $(this).val();
-                const existenciaPropiedadMultiple = $(this).prop('multiple');
-                console.log(valor);
+                const campo = $(this);
 
-                if ((existenciaPropiedadMultiple && Array.isArray(valor) && valor.length > 0) ||
-                (!existenciaPropiedadMultiple && valor !== '0' && valor)) {
-                    console.log('entró selec');
+                if (!campo.prop('multiple') && campo[0].selectedIndex) {
                     nombreCamposLlenosSelect.push($(this).attr('name') || 'campo sin nombre');
                 }
-            });
 
-            if (nombreDelEvento === valorAlModificarNombre ||
-            correoDelEvento === valorAlModificarCorreo ||
-            (!valorAlRegistrarContrasena || valorAlRegistrarContrasena.trim() === '') ||
-            telegramDelEvento === valorAlModificarTelegram ||
-            (/*camposTextoVisiblesHabilitados.length > nombreCamposLlenosTexto.length ||*/ 
-            camposSeleccionadoresVisiblesHabilitados.length > nombreCamposLlenosSelect.length) || 
-            (/*nombreCamposLlenosTexto.length === 0 &&*/ nombreCamposLlenosSelect.length === 0)) {
-                console.log(nombreDelEvento, valorAlModificarNombre);
+                if (campo.prop('multiple') && campo.val() && campo.val().length > 0) {
+                    nombreCamposLlenosSelectMultiple.push($(this).attr('name') || 'campo sin nombre');
+                }
+            });
+            
+            if (
+            nombreDelEvento === valorAlModificarNombre && 
+            correoDelEvento === valorAlModificarCorreo &&
+            (!valorAlModificarContrasena || valorAlModificarContrasena.trim() === '') &&
+            (String(telegramDelEvento) === valorAlModificarTelegram) && 
+            nombreCamposLlenosSelect.length === 0 && 
+            nombreCamposLlenosSelectMultiple.length === 0
+            ) {
                 e.preventDefault();
                 alert('Por favor rellene todos los campos requeridos.');
                 return;
