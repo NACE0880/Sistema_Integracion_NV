@@ -19,9 +19,9 @@ use App\usuarios_roles;
 class ControladorPanelUsuarios extends Controller
 {
 
-    const COORDINADOR = "\\App\\Coordinadores";
-    const DIRECTOR = "\\App\\Directores";
-    const TUTOR = "\\App\\Tutores";
+    const COORDINADOR = "\\App\\coordinadores";
+    const DIRECTOR = "\\App\\directores";
+    const TUTOR = "\\App\\tutores";
 
     public function __construct()
     {
@@ -171,117 +171,115 @@ class ControladorPanelUsuarios extends Controller
 
         try{
             dd($request);
-            //if (in_array('coordinador', $roles)) {
-                $datosActualizarTablaCargo = [];
-                $datosActualizarTablaUsuario = [];
+            
+            $datosActualizarTablaCargo = [];
+            $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "coordinadores"){
-                    if ($request->filled('nombre')){
-                        $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
-                    }
-                    if ($request->filled('telegram')){
-                        $datosActualizarTablaCargo['TELEGRAM'] = $request->input('telegram');
-                    }
-                    if ($request->filled('correo')){
-                        $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
-                    }
-                    if (in_array('gestor validacion tickets', $roles)){
-                        $datosActualizarTablaCargo['VALIDACION'] = 1;
-                    }
+            if ($cargoAnteriorUsuario == "coordinadores"){
+                if ($request->filled('nombre')){
+                    $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
+                }
+                if ($request->filled('telegram')){
+                    $datosActualizarTablaCargo['TELEGRAM'] = $request->input('telegram');
+                }
+                if ($request->filled('correo')){
+                    $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
+                }
+                if (in_array('gestor validacion tickets', $roles)){
+                    $datosActualizarTablaCargo['VALIDACION'] = 1;
+                }
 
-                    if ($request->filled('contrasena')){
-                        $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
-                    }
-                    
-                    $coordinador = coordinadores::where('ID_COORDINADOR', $identificadorUserableAnteriorUsuario)->first();
-                    $coordinador->update($datosActualizarTablaCargo);
+                if ($request->filled('contrasena')){
+                    $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
+                }
+                
+                $coordinador = coordinadores::where('ID_COORDINADOR', $identificadorUserableAnteriorUsuario)->first();
+                $coordinador->update($datosActualizarTablaCargo);
 
-                    $usuario = User::where('usuario', $claveUsuario)->first();
-                    $usuario->update($datosActualizarTablaUsuario);
+                $usuario = User::where('usuario', $claveUsuario)->first();
+                $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rolSinCargos') && !empty($roles)){
-                        usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 1)->delete();
+                if (($request)->has('rolSinCargos') && !empty($roles)){
+                    usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 1)->delete();
 
-                        foreach ($roles as $rol) {
-                            usuarios_roles::create([
-                                'ID_USUARIO' => $usuario->id,
-                                'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                            ]);
-                        }
+                    foreach ($roles as $rol) {
+                        usuarios_roles::create([
+                            'ID_USUARIO' => $usuario->id,
+                            'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
+                        ]);
                     }
                 }
-            //}
-            //if (in_array('director', $roles)) {
-                $datosActualizarTablaCargo = [];
-                $datosActualizarTablaUsuario = [];
+            }
+            
+            $datosActualizarTablaCargo = [];
+            $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "directores"){
-                    if ($request->filled('nombre')){
-                        $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
-                    }
-                    if ($request->filled('correo')){
-                        $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
-                    }
-                    if (($request)->has('casa_director') && !empty($request->casa_director)){
-                        $datosActualizarTablaCargo['ID_CASA'] = casas::where('NOMBRE', $request->input('casa_director'))->first()->ID_CASA;
-                    }
+            if ($cargoAnteriorUsuario == "directores"){
+                if ($request->filled('nombre')){
+                    $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
+                }
+                if ($request->filled('correo')){
+                    $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
+                }
+                if (($request)->has('casa_director') && !empty($request->casa_director)){
+                    $datosActualizarTablaCargo['ID_CASA'] = casas::where('NOMBRE', $request->input('casa_director'))->first()->ID_CASA;
+                }
 
-                    if ($request->filled('contrasena')){
-                        $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
-                    }
-                    
-                    $director = directores::where('ID_DIRECTOR', $identificadorUserableAnteriorUsuario)->first();
-                    $director->update($datosActualizarTablaCargo);
+                if ($request->filled('contrasena')){
+                    $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
+                }
+                
+                $director = directores::where('ID_DIRECTOR', $identificadorUserableAnteriorUsuario)->first();
+                $director->update($datosActualizarTablaCargo);
 
-                    $usuario = User::where('usuario', $claveUsuario)->first();
-                    $usuario->update($datosActualizarTablaUsuario);
+                $usuario = User::where('usuario', $claveUsuario)->first();
+                $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rolSinCargos') && !empty($roles)){
-                        usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 4)->delete();
+                if (($request)->has('rolSinCargos') && !empty($roles)){
+                    usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 4)->delete();
 
-                        foreach ($roles as $rol) {
-                            usuarios_roles::create([
-                                'ID_USUARIO' => $usuario->id,
-                                'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                            ]);
-                        }
+                    foreach ($roles as $rol) {
+                        usuarios_roles::create([
+                            'ID_USUARIO' => $usuario->id,
+                            'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
+                        ]);
                     }
                 }
-            //}
-            //if (in_array('tutor', $roles)) {
-                $datosActualizarTablaCargo = [];
-                $datosActualizarTablaUsuario = [];
+            }
+            
+            $datosActualizarTablaCargo = [];
+            $datosActualizarTablaUsuario = [];
 
-                if ($cargoAnteriorUsuario == "tutores"){
-                    if ($request->filled('nombre')){
-                        $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
-                    }
-                    if ($request->filled('correo')){
-                        $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
-                    }
+            if ($cargoAnteriorUsuario == "tutores"){
+                if ($request->filled('nombre')){
+                    $datosActualizarTablaCargo['NOMBRE'] = $request->input('nombre');
+                }
+                if ($request->filled('correo')){
+                    $datosActualizarTablaCargo['CORREO'] = $request->input('correo');
+                }
 
-                    if ($request->filled('contrasena')){
-                        $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
-                    }
-                    
-                    $tutor = tutores::where('ID_TUTOR', $identificadorUserableAnteriorUsuario)->first();
-                    $tutor->update($datosActualizarTablaCargo);
+                if ($request->filled('contrasena')){
+                    $datosActualizarTablaUsuario['password'] = bcrypt($request->input('contrasena'));
+                }
+                
+                $tutor = tutores::where('ID_TUTOR', $identificadorUserableAnteriorUsuario)->first();
+                $tutor->update($datosActualizarTablaCargo);
 
-                    $usuario = User::where('usuario', $claveUsuario)->first();
-                    $usuario->update($datosActualizarTablaUsuario);
+                $usuario = User::where('usuario', $claveUsuario)->first();
+                $usuario->update($datosActualizarTablaUsuario);
 
-                    if (($request)->has('rolSinCargo') && !empty($roles)){
-                        usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 5)->delete();
+                if (($request)->has('rolSinCargo') && !empty($roles)){
+                    usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 5)->delete();
 
-                        foreach ($roles as $rol) {
-                            usuarios_roles::create([
-                                'ID_USUARIO' => $usuario->id,
-                                'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
-                            ]);
-                        }
+                    foreach ($roles as $rol) {
+                        usuarios_roles::create([
+                            'ID_USUARIO' => $usuario->id,
+                            'ID_ROL' => roles::where('NOMBRE', $rol)->first()->ID_ROL,
+                        ]);
                     }
                 }
-            //}
+            }
+            
             DB::commit();
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {

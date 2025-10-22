@@ -104,20 +104,10 @@
 
             if (campoSeleccionado.prop('disabled')) {
                 campoSeleccionado.prop('disabled', false).focus();
-                wrapper.addClass('activo');
             }
+
+            wrapper.addClass('activo');
         });
-
-        /*$(document).on('click', function () {
-            $('.campo-wrapper.activo').each(function () {
-                const wrapper = $(this);
-                const nombreCampoSeleccionado = wrapper.data('campo');
-                const campo = $(nombreCampoSeleccionado);
-
-                campo.prop('disabled', true);
-                wrapper.removeClass('activo');
-            });
-        });*/
 
         $('.campo-wrapper input').on('click', function (e) {
             e.stopPropagation();
@@ -149,8 +139,7 @@
             modalActualizacionUsuarios.find('#nombre_clave_usuario').val(nombreClaveUsuario);
 
             const existenciaNombreClaveUsuario = !!nombreClaveUsuario;
-            //modalActualizacionUsuarios.find('#nombre').prop('disabled', existenciaNombreClaveUsuario);
-            //modalActualizacionUsuarios.find('#correo').prop('disabled', existenciaNombreClaveUsuario);
+
             modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
@@ -194,6 +183,7 @@
             const modalActualizacionUsuarios = $(this);
             nombreClaveUsuario = '';
 
+            $('.campo-wrapper').removeClass('activo');
             document.getElementById('formularioModalUsuarios').reset();
             modalActualizacionUsuarios.find('#botonRegistrar').show();
             modalActualizacionUsuarios.find('#botonModificar').hide();
@@ -290,7 +280,7 @@
             nombreCamposLlenosSelectMultiple.length === 0
             ) {
                 e.preventDefault();
-                alert('Por favor rellene todos los campos requeridos.');
+                alert('Modifique algún campo primero.');
                 return;
             }
 
