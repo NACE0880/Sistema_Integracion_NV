@@ -31,10 +31,10 @@
                         </div>
                         <div id="grupo_campos_telegram" class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="telegram">Telegram</label>
+                                <label for="telegram">Identificador Telegram</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#telegram">
-                                <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="9">
+                                <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="15">
                             </div>
                         </div>
                         <div class="form-row">

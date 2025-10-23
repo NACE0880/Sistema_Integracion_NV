@@ -265,7 +265,7 @@ class ControladorPanelUsuarios extends Controller
                 $usuario = User::where('usuario', $claveUsuario)->first();
                 $usuario->update($datosActualizarTablaUsuario);
 
-                if (($request)->has('rolSinCargo') && !empty($roles)){
+                if (($request)->has('rolSinCargos') && !empty($roles)){
                     usuarios_roles::where('ID_USUARIO', $usuario->id)->where('ID_ROL', '!=', 5)->delete();
 
                     foreach ($roles as $rol) {
