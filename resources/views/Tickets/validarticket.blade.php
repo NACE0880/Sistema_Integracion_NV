@@ -162,7 +162,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="actualizar_prioridad">Actualizar Prioridad (se muestra seleccionada la actual)</label>
+                        <label for="actualizar_prioridad">Actualizar Prioridad (se muestra prioridad actual)</label>
                         <select id="actualizar_prioridad"  name="actualizar_prioridad" class="form-control" required>
                             <option value="{{ $ticket->PRIORIDAD }}">{{ $ticket->PRIORIDAD }}</option>
 
