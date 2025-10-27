@@ -93,8 +93,7 @@ class consultaCompuestaTicketsPendientes {
                                 ])->get(),*/
 
                     'tickets' => tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])
-                    ->where('ESTATUS_COTIZACION', '<>', 'NO')
-                    ->get()
+                    ->where('ESTATUS_COTIZACION', '<>', 'NO')->get()
 
                 ]);
 
