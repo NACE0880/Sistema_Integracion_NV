@@ -37,11 +37,13 @@ class consultaCompuestaTicketsPendientes {
 
             $excel->sheet('Resumen', function($sheet)  {
 
-                $tickets = tickets::where([
+                /*$tickets = tickets::where([
                     ['ESTATUS_ACTUAL', 'PENDIENTE'],
-                    ['ESTATUS_ACTUAL', 'EN PROCESO'],
                     ['ESTATUS_COTIZACION','<>' ,'NO'],
-                ])->get();
+                ])->get();*/
+
+                $tickets = tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])
+                ->where('ESTATUS_COTIZACION', '<>', 'NO')->get();
 
                 $pendientes_data = [
                     'aldea'     => self::resumenSitio($tickets, 'Iztapalapa'),
@@ -85,10 +87,15 @@ class consultaCompuestaTicketsPendientes {
 
                 $sheet->loadView('exports.tickets', [
 
-                    'tickets' => tickets::where([
+                    /*'tickets' => tickets::where([
                                     ['ESTATUS_ACTUAL', 'PENDIENTE'],
                                     ['ESTATUS_COTIZACION','<>' ,'NO'],
-                                ])->get(),
+                                ])->get(),*/
+
+                    'tickets' => tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])
+                    ->where('ESTATUS_COTIZACION', '<>', 'NO')
+                    ->get()
+
                 ]);
 
             });
