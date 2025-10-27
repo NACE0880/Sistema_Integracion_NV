@@ -162,9 +162,9 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="actualizar_prioridad">Actualizar Prioridad</label>
+                        <label for="actualizar_prioridad">Actualizar Prioridad (se muestra seleccionada la actual)</label>
                         <select id="actualizar_prioridad"  name="actualizar_prioridad" class="form-control" required>
-                            <option value="{{ $ticket->PRIORIDAD }}">Última opción seleccionada: {{ $ticket->PRIORIDAD }}</option>
+                            <option value="{{ $ticket->PRIORIDAD }}">{{ $ticket->PRIORIDAD }}</option>
 
                             @foreach ($prioridades as $prioridad)
                                 <option value="{{ $prioridad->NOMBRE }}"> {{ $prioridad->NOMBRE }}</option>
