@@ -22,6 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('userable_type');
 
             $table->rememberToken();
+
+            $table->string('google2fa_secret')->nullable();
+            $table->boolean('google2fa_enabled')->default(false);
+
         });
     }
 
