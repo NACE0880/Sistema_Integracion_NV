@@ -16,6 +16,8 @@ use App\casas;
 use App\roles;
 use App\usuarios_roles;
 
+use PragmaRX\Google2FA\Google2FA;
+
 class ControladorPanelUsuarios extends Controller
 {
 
@@ -60,6 +62,9 @@ class ControladorPanelUsuarios extends Controller
 
                 $coordinador = coordinadores::create($datosActualizarTablaCargo);
 
+                $google2fa = new Google2FA();
+                $claveSecreta2fa = $google2fa->generateSecretKey();
+
                 $datosActualizarTablaUsuario = [];
 
                 $datosActualizarTablaUsuario = [
@@ -67,6 +72,7 @@ class ControladorPanelUsuarios extends Controller
                     'password' => bcrypt($request->input('contrasena')),
                     'userable_id' => $coordinador->ID_COORDINADOR,
                     'userable_type' => self::COORDINADOR,
+                    'google2fa_secret' => $claveSecreta2fa,
                 ];
                 
                 $usuario = User::create($datosActualizarTablaUsuario);
@@ -101,6 +107,9 @@ class ControladorPanelUsuarios extends Controller
 
                 $director = directores::create($datosActualizarTablaCargo);
 
+                $google2fa = new Google2FA();
+                $claveSecreta2fa = $google2fa->generateSecretKey();
+
                 $datosActualizarTablaUsuario = [];
 
                 $datosActualizarTablaUsuario = [
@@ -108,6 +117,7 @@ class ControladorPanelUsuarios extends Controller
                     'password' => bcrypt($request->input('contrasena')),
                     'userable_id' => $director->ID_DIRECTOR,
                     'userable_type' => self::DIRECTOR,
+                    'google2fa_secret' => $claveSecreta2fa,
                 ];
                 
                 $usuario = User::create($datosActualizarTablaUsuario);
@@ -132,6 +142,9 @@ class ControladorPanelUsuarios extends Controller
 
                 $tutor = tutores::create($datosActualizarTablaCargo);
 
+                $google2fa = new Google2FA();
+                $claveSecreta2fa = $google2fa->generateSecretKey();
+
                 $datosActualizarTablaUsuario = [];
 
                 $datosActualizarTablaUsuario = [
@@ -139,6 +152,7 @@ class ControladorPanelUsuarios extends Controller
                     'password' => bcrypt($request->input('contrasena')),
                     'userable_id' => $tutor->ID_TUTOR,
                     'userable_type' => self::TUTOR,
+                    'google2fa_secret' => $claveSecreta2fa,
                 ];
                 
                 $usuario = User::create($datosActualizarTablaUsuario);
@@ -293,6 +307,8 @@ class ControladorPanelUsuarios extends Controller
             $datosActualizarTablaUsuario = [
                 'usuario' => 'N' . $claveUsuario,
                 'password' => bcrypt('NoDisponible'),
+                'google2fa_secret' => null,
+                'google2fa_enabled' => 0,
             ];
             User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
             DB::commit();
