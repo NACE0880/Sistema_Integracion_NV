@@ -71,6 +71,12 @@ class consultaCompuestaTickets {
                 ->get()->groupBy('CASA');
                 $pendientes_historicos = tickets::whereBetween('FECHA_INICIO', [$historicDateStart, $this->dateStart])->where('ESTATUS_ACTUAL', 'PENDIENTE')
                 ->get()->groupBy('CASA');
+                $autorizados = tickets::whereBetween('FECHA_INICIO', ['2020-10-01', $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->where('ESTATUS_AUTORIZACION', 'SI')
+                ->get()->groupBy('CASA');
+                $cotizados = tickets::whereBetween('FECHA_INICIO', ['2020-10-01', $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')->get()->groupBy('CASA');
+                $pendientes_totales = tickets::whereBetween('FECHA_INICIO', ['2020-10-01', $this->dateEnd])->where('ESTATUS_ACTUAL', 'PENDIENTE')
+                ->get()->groupBy('CASA');
+                $procesados_totales = tickets::whereBetween('FECHA_INICIO', ['2020-10-01', $this->dateEnd])->where('ESTATUS_ACTUAL', 'EN PROCESO')->get()->groupBy('CASA');
                 $procesados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'EN PROCESO')->orderBy('ESTATUS_CASA', 'ASC')->get();
                 $finalizados = tickets::whereBetween('FECHA_INICIO', [$this->dateStart, $this->dateEnd])->where('ESTATUS_ACTUAL', 'FINALIZADO')->orderBy('ESTATUS_CASA', 'ASC')->get();
 
@@ -146,7 +152,95 @@ class consultaCompuestaTickets {
                     'semar'     => self::resumenSitio($pendientes, 'Semar'),
                 ];
 
-                $procesados_data = [
+                $autorizados_data = [
+                    'aldea'     => $autorizados->get('Iztapalapa', collect())->count(),
+
+                    'campeche'  => $autorizados->get('Campeche', collect())->count(),
+
+                    'cuautla'   => $autorizados->get('Cuautla', collect())->count(),
+
+                    'culiacan'  => $autorizados->get('Culiacán', collect())->count(),
+
+                    'saltillo'  => $autorizados->get('Saltillo', collect())->count(),
+
+                    'tapachula' => $autorizados->get('Tapachula', collect())->count(),
+
+                    'tuxtla'    => $autorizados->get('Tuxtla', collect())->count(),
+
+                    'veracruz'  => $autorizados->get('Veracruz', collect())->count(),
+
+                    'sedena'    => $autorizados->get('Sedena', collect())->count(),
+
+                    'semar'     => $autorizados->get('Semar', collect())->count(),
+                ];
+
+                $cotizados_data = [
+                    'aldea'     => $cotizados->get('Iztapalapa', collect())->count(),
+
+                    'campeche'  => $cotizados->get('Campeche', collect())->count(),
+
+                    'cuautla'   => $cotizados->get('Cuautla', collect())->count(),
+
+                    'culiacan'  => $cotizados->get('Culiacán', collect())->count(),
+
+                    'saltillo'  => $cotizados->get('Saltillo', collect())->count(),
+
+                    'tapachula' => $cotizados->get('Tapachula', collect())->count(),
+
+                    'tuxtla'    => $cotizados->get('Tuxtla', collect())->count(),
+
+                    'veracruz'  => $cotizados->get('Veracruz', collect())->count(),
+
+                    'sedena'    => $cotizados->get('Sedena', collect())->count(),
+
+                    'semar'     => $cotizados->get('Semar', collect())->count(),
+                ];
+
+                $pendientes_totales_data = [
+                    'aldea'     => $pendientes_totales->get('Iztapalapa', collect())->sum('COTIZACION'),
+
+                    'campeche'  => $pendientes_totales->get('Campeche', collect())->sum('COTIZACION'),
+
+                    'cuautla'   => $pendientes_totales->get('Cuautla', collect())->sum('COTIZACION'),
+
+                    'culiacan'  => $pendientes_totales->get('Culiacán', collect())->sum('COTIZACION'),
+
+                    'saltillo'  => $pendientes_totales->get('Saltillo', collect())->sum('COTIZACION'),
+
+                    'tapachula' => $pendientes_totales->get('Tapachula', collect())->sum('COTIZACION'),
+
+                    'tuxtla'    => $pendientes_totales->get('Tuxtla', collect())->sum('COTIZACION'),
+
+                    'veracruz'  => $pendientes_totales->get('Veracruz', collect())->sum('COTIZACION'),
+
+                    'sedena'    => $pendientes_totales->get('Sedena', collect())->sum('COTIZACION'),
+
+                    'semar'     => $pendientes_totales->get('Semar', collect())->sum('COTIZACION'),
+                ];
+
+                $procesados_totales_data = [
+                    'aldea'     => $procesados_totales->get('Iztapalapa', collect())->count(),
+
+                    'campeche'  => $procesados_totales->get('Campeche', collect())->count(),
+
+                    'cuautla'   => $procesados_totales->get('Cuautla', collect())->count(),
+
+                    'culiacan'  => $procesados_totales->get('Culiacán', collect())->count(),
+
+                    'saltillo'  => $procesados_totales->get('Saltillo', collect())->count(),
+
+                    'tapachula' => $procesados_totales->get('Tapachula', collect())->count(),
+
+                    'tuxtla'    => $procesados_totales->get('Tuxtla', collect())->count(),
+
+                    'veracruz'  => $procesados_totales->get('Veracruz', collect())->count(),
+
+                    'sedena'    => $procesados_totales->get('Sedena', collect())->count(),
+
+                    'semar'     => $procesados_totales->get('Semar', collect())->count(),
+                ];
+                
+                /*$procesados_data = [
                     'aldea'     => self::resumenSitio($procesados, 'Iztapalapa'),
 
                     'campeche'  => self::resumenSitio($procesados, 'Campeche'),
@@ -166,7 +260,7 @@ class consultaCompuestaTickets {
                     'sedena'    => self::resumenSitio($procesados, 'Sedena'),
 
                     'semar'     => self::resumenSitio($procesados, 'Semar'),
-                ];
+                ];*/
 
                 $finalizados_data = [
                     'aldea'     => self::resumenSitio($finalizados, 'Iztapalapa'),
@@ -242,17 +336,26 @@ class consultaCompuestaTickets {
                         'cantidad' => $pendientes_anteriores->map->count()->sum(),
 
                     ],
+
                     'pendientes_historicos' => [
                         'cantidad' => $pendientes_historicos->map->count()->sum(),
                     ],
+
                     'pendientes' => [
                         'cantidad'      => $pendientes->count(),
                         'cotizados'     => $pendientes->where('ESTATUS_COTIZACION', 'SI')->count(),
                         'autorizados'   => $pendientes->where('ESTATUS_AUTORIZACION', 'SI')->count(),
                         'montoTotal'    => $pendientes->sum('COTIZACION'),
                     ],
+
+                    'autorizados' => $autorizados->map->count()->sum(),
+
+                    'cotizados' => $cotizados->map->count()->sum(),
+
+                    'pendientes_totales' => $pendientes_totales->map->sum('COTIZACION')->sum(), 
+                
                     'procesados' => [
-                        'cantidad'      => $procesados->count(),
+                        'cantidad'      => $procesados_totales->map->count()->sum(),
                     ],
 
                     'finalizados' => [
@@ -266,7 +369,7 @@ class consultaCompuestaTickets {
                         'monto'         => array_sum($acumulados_data['monto']),
                     ]
                 ];
-
+                
                 // $sheet->setStyle(array(
                 //     'font' => array(
                 //         'name'      =>  'Calibri',
@@ -279,7 +382,10 @@ class consultaCompuestaTickets {
                     'pendientes_anteriores_data' => $pendientes_anteriores_data,
                     'pendientes_historicos_data' => $pendientes_historicos_data,
                     'pendientes_data'   => $pendientes_data,
-                    'procesados_data'   => $procesados_data,
+                    'autorizados_data'  => $autorizados_data,
+                    'cotizados_data'    => $cotizados_data,
+                    'pendientes_totales_data' => $pendientes_totales_data,
+                    'procesados_totales_data'   => $procesados_totales_data,
                     'finalizados_data'  => $finalizados_data,
                     'acumulados_data'   => $acumulados_data,
                     'totales_data'      => $totales_data,

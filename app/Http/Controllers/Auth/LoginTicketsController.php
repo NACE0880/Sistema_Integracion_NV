@@ -48,7 +48,8 @@ class LoginTicketsController extends Controller
             'usuario'       => $request->input('usuario'),
             'password'      => $request->input('password'),
         ], $request->remember) ){
-            return self::autentificador2FA($usuario);
+            //return self::autentificador2FA($usuario);
+            return redirect()->intended(route('home'));
         }
 
 
