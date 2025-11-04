@@ -42,8 +42,7 @@ class consultaCompuestaTicketsPendientes {
                     ['ESTATUS_COTIZACION','<>' ,'NO'],
                 ])->get();*/
 
-                $tickets = tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])
-                ->where('ESTATUS_COTIZACION', '<>', 'NO')->get();
+                $tickets = tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])->get();
 
                 $pendientes_data = [
                     'aldea'     => self::resumenSitio($tickets, 'Iztapalapa'),
@@ -92,8 +91,7 @@ class consultaCompuestaTicketsPendientes {
                                     ['ESTATUS_COTIZACION','<>' ,'NO'],
                                 ])->get(),*/
 
-                    'tickets' => tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])
-                    ->where('ESTATUS_COTIZACION', '<>', 'NO')->get()
+                    'tickets' => tickets::whereIn('ESTATUS_ACTUAL', ['PENDIENTE', 'EN PROCESO'])->get(),
 
                 ]);
 
