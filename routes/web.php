@@ -159,6 +159,8 @@ Route::middleware('auth')->group(function () {
 Route::prefix('loginTickets')->group(function(){
     Route::get('/', 'Auth\LoginTicketsController@mostrarLogin')->name('login.tickets');
     Route::post('/', 'Auth\LoginTicketsController@login')->name('login.tickets.submit');
+    //2FA
+    Route::post('/verificar2FA', 'Auth\LoginTicketsController@verificar2FA')->name('login.verificar.2FA');
 });
 
 Auth::routes();

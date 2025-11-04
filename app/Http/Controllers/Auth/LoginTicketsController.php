@@ -48,8 +48,8 @@ class LoginTicketsController extends Controller
             'usuario'       => $request->input('usuario'),
             'password'      => $request->input('password'),
         ], $request->remember) ){
-            //return self::autentificador2FA($usuario);
-            return redirect()->intended(route('home'));
+            return self::autentificador2FA($usuario);
+            //return redirect()->intended(route('home'));
         }
 
 
@@ -60,11 +60,19 @@ class LoginTicketsController extends Controller
 
     public function autentificador2FA($usuario) {
         session(['2fa:user:id' => $usuario->id]);
+        session(['2fa:user:momentodecerradodesesion' => now()]);
         Auth::logout(); // Para evitar acceso sin 2FA
 
         $google2fa = new Google2FA();
+
+        //Generar clave si no existe
+        if (empty($usuario->google2fa_secret)) {
+            $usuario->google2fa_secret = $google2fa->generateSecretKey();
+            $usuario->save();
+        }
+
         $urlDeGoogle2fa = $google2fa->getQRCodeUrl(
-            'Sistema Integraciòn Telmex',
+            'SistemaIntegraciónTelmex',
             $usuario->userable->CORREO,
             $usuario->google2fa_secret
         );
@@ -78,11 +86,12 @@ class LoginTicketsController extends Controller
 
         $codigoQr = $generadorQr->writeString($urlDeGoogle2fa);
 
-        return redirect()->route('ruta para activar');
+        return view('auth.pantallaVerificacionDeDosPasos', compact('codigoQr'));
     }
 
     public function verificar2FA(Request $request) {
-        $codigoParaVerificar2FA = $request->codigo;
+        $codigoParaVerificar2FAArray = $request->input('codigoParaVerificar2FA');
+        $codigoParaVerificar2FA = implode('', $codigoParaVerificar2FAArray);
         $google2fa = new Google2FA();
         $usuario = User::find(session('2fa:user:id'));
         $validacion2FA = $google2fa->verifyKey($usuario->google2fa_secret, $codigoParaVerificar2FA);
@@ -91,6 +100,10 @@ class LoginTicketsController extends Controller
             if (!$usuario->google2fa_enabled) {
                 $usuario->google2fa_enabled = true;
                 $usuario->save();
+            }
+
+            if (now()->diffInMinutes(session('2fa:user:momentodecerradodesesion')) > 5) {
+                return redirect()->route('login.tickets')->withErrors(['codigo' => 'Sesión de 2FA expirada']);
             }
 
             Auth::login($usuario);
