@@ -40,7 +40,7 @@ class LoginTicketsController extends Controller
         $usuario = User::where('usuario', $request->usuario)->first();
 
         if (!$usuario || empty($usuario->password)) {
-            return redirect()->back()->withErrors(['usuario' => 'Credenciales inválidas']);
+            return redirect()->back()->withErrors(['usuario' => 'El usuario no existe aún']);
         }
 
         // Redirecccion en caso de usuario director
@@ -54,7 +54,10 @@ class LoginTicketsController extends Controller
 
 
         // Redirecccion en caso de credenciales erroneas
-        return redirect()->back()->withInput($request->only('usuario'));
+        return redirect()->back()
+        ->withErrors(['usuario' => 'Credenciales erróneas'])
+        ->withInput($request->only('usuario'));
+
         // return $request->all();
     }
 
@@ -103,13 +106,13 @@ class LoginTicketsController extends Controller
             }
 
             if (now()->diffInMinutes(session('2fa:user:momentodecerradodesesion')) > 5) {
-                return redirect()->route('login.tickets')->withErrors(['codigo' => 'Sesión de 2FA expirada']);
+                return redirect()->route('login.tickets')->withErrors(['usuario' => 'Sesión de 2FA expirada']);
             }
 
             Auth::login($usuario);
             return redirect()->intended(route('home'));
         }
 
-        return redirect()->back()->withErrors(['codigo' => 'Código inválido']);
+        return redirect()->back()->withErrors(['usuario' => 'Código 2FA inválido']);
     }
 }
