@@ -28,7 +28,7 @@ class consultaCompuestaTickets {
             'cantidad'      => $coleccion->where('CASA', $casa)->count(),
             'cotizados'     => $coleccion->where('CASA', $casa)->where('ESTATUS_COTIZACION', 'SI')->count(),
             'autorizados'   => $coleccion->where('CASA', $casa)->where('ESTATUS_AUTORIZACION', 'SI')->count(),
-            'montoTotal'    => $coleccion->where('CASA', $casa)->sum('COTIZACION'),
+            'montoTotal'    => $coleccion->where('CASA', $casa)->where('ESTATUS_PAGO', 'SI')->sum('COTIZACION'),
             'pagados'       => $coleccion->where('CASA', $casa)->where('ESTATUS_PAGO', 'SI')->count(),
         ];
 
@@ -38,11 +38,11 @@ class consultaCompuestaTickets {
     public function acumuladosSitio($historico_monto, $casa, $colecciones, $historicDateStart, $dateStart){
         switch ($historico_monto) {
             case 'historico':
-                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, Carbon::parse($dateStart)->subDay()])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->count();
+                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, Carbon::parse($dateStart)->subDay()])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('ESTATUS_PAGO', 'SI')->where('CASA', $casa)->count();
                 break;
 
             case 'monto':
-                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, Carbon::parse($dateStart)->subday()])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('CASA', $casa)->sum('COTIZACION');
+                return tickets::whereBetween('FECHA_INICIO', [$historicDateStart, Carbon::parse($dateStart)->subday()])->where('ESTATUS_ACTUAL', 'FINALIZADO')->where('ESTATUS_PAGO', 'SI')->where('CASA', $casa)->sum('COTIZACION');
             break;
 
             default:
@@ -345,7 +345,7 @@ class consultaCompuestaTickets {
                         'cantidad'      => $pendientes->count(),
                         'cotizados'     => $pendientes->where('ESTATUS_COTIZACION', 'SI')->count(),
                         'autorizados'   => $pendientes->where('ESTATUS_AUTORIZACION', 'SI')->count(),
-                        'montoTotal'    => $pendientes->sum('COTIZACION'),
+                        'montoTotal'    => $pendientes->where('ESTATUS_PAGO', 'SI')->sum('COTIZACION'),
                     ],
 
                     'autorizados' => $autorizados->map->count()->sum(),

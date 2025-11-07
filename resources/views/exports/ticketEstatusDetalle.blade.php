@@ -18,13 +18,13 @@
                 <b>GERENTE</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>INICIO</b>
+                <b>FECHA INICIO</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>COTIZACION</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>COMPROMISO</b>
+                <b>FECHA COMPROMISO</b>
             </th>
             <th  width="40" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>DETALLE</b>
@@ -52,7 +52,7 @@
                     {{ $ticket->FECHA_COMPROMISO }}
                 </td>
                 <td  height="55" colspan="1"  style=" border-top: solid; border-bottom: solid; color: #000000; background-color: #ffffff;" valign='middle'  bgcolor='#FFFFFF'>
-                    {{ $ticket->DETALLE }}<br>
+                    {{ $ticket->DETALLE }}
                 </td>
             </tr>
         @endforeach
@@ -75,13 +75,13 @@
                 <b>GERENTE</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>INICIO</b>
+                <b>FECHA INICIO</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>COTIZACION</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>COMPROMISO</b>
+                <b>FECHA COMPROMISO</b>
             </th>
             <th  width="40" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>DETALLE</b>
@@ -109,7 +109,7 @@
                     {{ $ticket->FECHA_COMPROMISO }}
                 </td>
                 <td  height="55" colspan="1"  style=" border-top: solid; border-bottom: solid; color: #000000; background-color: #ffffff;" valign='middle'  bgcolor='#FFFFFF'>
-                    {{ $ticket->DETALLE }}<br>
+                    {{ $ticket->DETALLE }}
                 </td>
             </tr>
         @endforeach
@@ -132,13 +132,13 @@
                 <b>GERENTE</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>INICIO</b>
+                <b>FECHA INICIO</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>COTIZACION</b>
             </th>
             <th  width="20" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
-                <b>FECHA<br>FIN</b>
+                <b>FECHA FIN</b>
             </th>
             <th  width="40" style=" border-bottom: solid; background-color: #FFFFFF;" valign='middle' align='center' bgcolor='#FFFFFF'>
                 <b>DETALLE</b>
@@ -166,7 +166,7 @@
                     {{ $ticket->FECHA_FIN }}
                 </td>
                 <td  height="55" colspan="1"  style=" border-top: solid; border-bottom: solid; color: #000000 ; background-color: #ffffff;" valign='middle'  bgcolor='#FFFFFF'>
-                    {{ $ticket->DETALLE }}<br>
+                    {{ $ticket->DETALLE }}
                 </td>
             </tr>
         @endforeach
