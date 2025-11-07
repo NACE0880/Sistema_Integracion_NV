@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -17,6 +19,8 @@ use App\roles;
 use App\usuarios_roles;
 
 use PragmaRX\Google2FA\Google2FA;
+
+use App\Http\Controllers\TelegramController;
 
 class ControladorPanelUsuarios extends Controller
 {
@@ -167,6 +171,8 @@ class ControladorPanelUsuarios extends Controller
                 }
             }
             DB::commit();
+            $mensaje = ', fue agregado al proyecto por: ';
+            self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e){
             DB::rollback();
@@ -292,6 +298,8 @@ class ControladorPanelUsuarios extends Controller
             }
             
             DB::commit();
+            $mensaje = ', de este usuario se ha realizado una modificación por: ';
+            self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
             DB::rollback();
@@ -304,6 +312,7 @@ class ControladorPanelUsuarios extends Controller
         DB::beginTransaction();
         try{
             $claveUsuario = $request->nombre_clave_usuario;
+            $usuario = User::where('usuario', $claveUsuario)->first();
             $datosActualizarTablaUsuario = [
                 'usuario' => 'N' . $claveUsuario,
                 'password' => bcrypt('NoDisponible'),
@@ -312,6 +321,8 @@ class ControladorPanelUsuarios extends Controller
             ];
             User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
             DB::commit();
+            $mensaje = ', ha sido dado de baja por: ';
+            self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
             DB::rollback();
@@ -319,4 +330,22 @@ class ControladorPanelUsuarios extends Controller
             return back()->with('error', 'Error al modificar usuario: ' . $e->getMessage());
         }
     }
+
+    public function notificarCoordinadores($mensaje, $usuarioRegistrado) {
+        $telegram = new TelegramController();
+        $usuarioConSesionIniciada = Auth::user();
+
+        $coordinadores = User::with('userable')
+            ->where('userable_type', '\\App\\coordinadores')
+            ->get();
+
+        foreach ($coordinadores as $usuario) {
+            if ($usuario->userable && !empty($usuario->userable->TELEGRAM)) {
+                $chat_id = $usuario->userable->TELEGRAM;
+                $payload = $usuarioRegistrado->userable->NOMBRE . $mensaje . "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>";
+                $telegram->sendText($chat_id, $payload);
+            }
+        }
+    }
+
 }
