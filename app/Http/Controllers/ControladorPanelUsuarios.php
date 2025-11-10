@@ -171,7 +171,7 @@ class ControladorPanelUsuarios extends Controller
                 }
             }
             DB::commit();
-            $mensaje = ', fue agregado al proyecto por: ';
+            $mensaje = ', fue agregado al sistema por: ';
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e){
