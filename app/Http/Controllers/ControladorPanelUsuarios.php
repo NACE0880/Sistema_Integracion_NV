@@ -191,6 +191,7 @@ class ControladorPanelUsuarios extends Controller
         try{
             $datosActualizarTablaCargo = [];
             $datosActualizarTablaUsuario = [];
+            $nombresDeCampoRequest = ['nombre', 'telegram', 'correo', 'casa_director'];
 
             if ($cargoAnteriorUsuario == "coordinadores"){
                 if ($request->filled('nombre')){
@@ -298,7 +299,18 @@ class ControladorPanelUsuarios extends Controller
             }
             
             DB::commit();
-            $mensaje = ', de este usuario se ha realizado una modificación por: ';
+            
+            if ($request->has('nombre')){
+                $mensajeModificacion = $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
+            } elseif($request->has('telegram')){
+                $mensajeModificacion = $telegramAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
+            } elseif($request->has('correo')){
+                $mensajeModificacion = $correoAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
+            } elseif($request-has('director_casa')){
+                $mensajeModificacion = $casaAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
+            }
+            
+            $mensaje = ' modificó \n' . $mensajeModificacion . "\n a el usuario de: ";
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
@@ -342,7 +354,7 @@ class ControladorPanelUsuarios extends Controller
         foreach ($coordinadores as $usuario) {
             if ($usuario->userable && !empty($usuario->userable->TELEGRAM)) {
                 $chat_id = $usuario->userable->TELEGRAM;
-                $payload = $usuarioRegistrado->userable->NOMBRE . $mensaje . "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>";
+                $payload = "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>" . $mensaje . $usuarioRegistrado->userable->NOMBRE;
                 $telegram->sendText($chat_id, $payload);
             }
         }
