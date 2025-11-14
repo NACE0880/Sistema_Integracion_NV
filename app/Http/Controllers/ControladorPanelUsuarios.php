@@ -17,6 +17,7 @@ use App\tutores;
 use App\casas;
 use App\roles;
 use App\usuarios_roles;
+use App\ModificacionTablaUsuario;
 
 use PragmaRX\Google2FA\Google2FA;
 
@@ -170,6 +171,11 @@ class ControladorPanelUsuarios extends Controller
                     ]);
                 }
             }
+            $usuarioConSesionIniciada = Auth::user();
+            ModificacionTablaUsuario::create([
+                'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
+                'MODIFICACION' => 'Registro de: ' . $request->input('nombre'),
+            ]);
             DB::commit();
             $mensaje = ', agregó al sistema a: ';
             self::notificarCoordinadores($mensaje, $usuario);
@@ -337,6 +343,7 @@ class ControladorPanelUsuarios extends Controller
         try{
             $claveUsuario = $request->nombre_clave_usuario;
             $usuario = User::where('usuario', $claveUsuario)->first();
+            $nombreUsuario = $usuario->userable->NOMBRE;
             $datosActualizarTablaUsuario = [
                 'usuario' => 'N' . $claveUsuario,
                 'password' => bcrypt('NoDisponible'),
@@ -344,6 +351,11 @@ class ControladorPanelUsuarios extends Controller
                 'google2fa_enabled' => 0,
             ];
             User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
+            $usuarioConSesionIniciada = Auth::user();
+            ModificacionTablaUsuario::create([
+                'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
+                'MODIFICACION' => 'Eliminación de: ' . $nombreUsuario,
+            ]);
             DB::commit();
             $mensaje = ', eliminó del sistema a: ';
             self::notificarCoordinadores($mensaje, $usuario);
