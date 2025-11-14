@@ -171,7 +171,7 @@ class ControladorPanelUsuarios extends Controller
                 }
             }
             DB::commit();
-            $mensaje = ', fue agregado al sistema por: ';
+            $mensaje = ', agregó al sistema a: ';
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e){
@@ -186,12 +186,17 @@ class ControladorPanelUsuarios extends Controller
         $claveUsuario = $request->input("nombre_clave_usuario");
         $cargoAnteriorUsuario = substr(User::where('usuario', $claveUsuario)->value('userable_type'), 5);
         $identificadorUserableAnteriorUsuario = User::where('usuario', $claveUsuario)->value('userable_id');
+        $usuario = User::where('usuario', $claveUsuario)->first();
+        $nombreAnteriorUsuario = $usuario->userable->NOMBRE;
+        $correoAnteriorUsuario = $usuario->userable->CORREO;
+        $telegramAnteriorUsuario = $usuario->userable->TELEGRAM ? $usuario->userable->TELEGRAM : '-';
+        $casaAnteriorUsuario = $usuario->userable->ID_CASA ? casas::where('ID_CASA', $usuario->userable->ID_CASA)->Value('NOMBRE') : '-';
+        
         DB::beginTransaction();
 
         try{
             $datosActualizarTablaCargo = [];
             $datosActualizarTablaUsuario = [];
-            $nombresDeCampoRequest = ['nombre', 'telegram', 'correo', 'casa_director'];
 
             if ($cargoAnteriorUsuario == "coordinadores"){
                 if ($request->filled('nombre')){
@@ -300,17 +305,24 @@ class ControladorPanelUsuarios extends Controller
             
             DB::commit();
             
+            $mensajeModificacion = '';
             if ($request->has('nombre')){
-                $mensajeModificacion = $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
-            } elseif($request->has('telegram')){
-                $mensajeModificacion = $telegramAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
-            } elseif($request->has('correo')){
-                $mensajeModificacion = $correoAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
-            } elseif($request-has('director_casa')){
-                $mensajeModificacion = $casaAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
+                $mensajeModificacion .= "%0A" . $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "%0A";
+            } 
+            if($request->has('telegram')){
+                $mensajeModificacion .= "%0A" . $telegramAnteriorUsuario . ' -> ' . $request->input('telegram') . "%0A";
+            } 
+            if($request->has('correo')){
+                $mensajeModificacion .= "%0A" . $correoAnteriorUsuario . ' -> ' . $request->input('correo') . "%0A";
+            } 
+            if($request->has('casa_director')){
+                $mensajeModificacion .= "%0A" . $casaAnteriorUsuario . ' -> ' . $request->input('casa_director') . "%0A";
             }
-            
-            $mensaje = ' modificó \n' . $mensajeModificacion . "\n a el usuario de: ";
+            if($mensajeModificacion){
+                $mensaje = ' modificó: ' . $mensajeModificacion . "del usuario de: ";
+            } else{
+                $mensaje = ' realizó una modificación al usuario: ';
+            }
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
@@ -333,7 +345,7 @@ class ControladorPanelUsuarios extends Controller
             ];
             User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
             DB::commit();
-            $mensaje = ', ha sido dado de baja por: ';
+            $mensaje = ', eliminó del sistema a: ';
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
@@ -354,7 +366,7 @@ class ControladorPanelUsuarios extends Controller
         foreach ($coordinadores as $usuario) {
             if ($usuario->userable && !empty($usuario->userable->TELEGRAM)) {
                 $chat_id = $usuario->userable->TELEGRAM;
-                $payload = "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>" . $mensaje . $usuarioRegistrado->userable->NOMBRE;
+                $payload = "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>{$mensaje}{$usuarioRegistrado->userable->NOMBRE}";
                 $telegram->sendText($chat_id, $payload);
             }
         }
