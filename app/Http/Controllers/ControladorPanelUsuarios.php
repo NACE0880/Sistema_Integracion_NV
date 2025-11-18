@@ -327,10 +327,11 @@ class ControladorPanelUsuarios extends Controller
             } else{
                 $mensaje = ' realizó una modificación al usuario: ';
             }
+            $mensajeModificacionBase = str_replace("%0A", "\n", $mensajeModificacion);
             $usuarioConSesionIniciada = Auth::user();
             ModificacionTablaUsuario::create([
                 'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
-                'MODIFICACION' => $mensajeModificacion,
+                'MODIFICACION' => $mensajeModificacionBase,
             ]);
             DB::commit();
             
