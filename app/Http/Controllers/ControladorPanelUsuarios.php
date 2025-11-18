@@ -309,8 +309,6 @@ class ControladorPanelUsuarios extends Controller
                 }
             }
             
-            DB::commit();
-            
             $mensajeModificacion = '';
             if ($request->has('nombre')){
                 $mensajeModificacion .= "%0A" . $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "%0A";
@@ -325,10 +323,17 @@ class ControladorPanelUsuarios extends Controller
                 $mensajeModificacion .= "%0A" . $casaAnteriorUsuario . ' -> ' . $request->input('casa_director') . "%0A";
             }
             if($mensajeModificacion){
-                $mensaje = ' modificó: ' . $mensajeModificacion . "del usuario de: ";
+                $mensaje = ' modificó: ' . "%0A" . $mensajeModificacion . "%0A" . "del usuario de: ";
             } else{
                 $mensaje = ' realizó una modificación al usuario: ';
             }
+            $usuarioConSesionIniciada = Auth::user();
+            ModificacionTablaUsuario::create([
+                'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
+                'MODIFICACION' => $mensajeModificacion,
+            ]);
+            DB::commit();
+            
             self::notificarCoordinadores($mensaje, $usuario);
             return redirect()->route('usuarios.inicio');
         } catch (\Exception $e) {
@@ -350,7 +355,12 @@ class ControladorPanelUsuarios extends Controller
                 'google2fa_secret' => null,
                 'google2fa_enabled' => 0,
             ];
+            $datosActualizarTablaCargo = [
+                'TELEGRAM' => '100000000000001',
+                'CORREO' => 'no-disponible@example.com',
+            ];
             User::where('usuario', $claveUsuario)->update($datosActualizarTablaUsuario);
+            $usuario->userable->update($datosActualizarTablaCargo);
             $usuarioConSesionIniciada = Auth::user();
             ModificacionTablaUsuario::create([
                 'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
