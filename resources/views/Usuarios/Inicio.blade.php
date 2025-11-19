@@ -45,6 +45,10 @@
         .nombre_clave_usuario {
             pointer-events: none;
         }
+
+        .linea-advertencia-gruesa {
+            border-bottom: 2px solid #dc3545;
+        }
     </style>
     <body>
         <div class="container mt-2 mb-2">
@@ -141,6 +145,8 @@
             const existenciaNombreClaveUsuario = !!nombreClaveUsuario;
 
             modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#advertencia').toggle(existenciaNombreClaveUsuario);
+            modalActualizacionUsuarios.find('#lineaAdvertencia').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
             modalActualizacionUsuarios.find('#opcionesConCargos').toggle(!existenciaNombreClaveUsuario);
@@ -186,11 +192,13 @@
             $('.campo-wrapper').removeClass('activo');
             document.getElementById('formularioModalUsuarios').reset();
             modalActualizacionUsuarios.find('#botonRegistrar').show();
+            modalActualizacionUsuarios.find('#advertencia').hide();
+            modalActualizacionUsuarios.find('#lineaAdvertencia').hide();
             modalActualizacionUsuarios.find('#botonModificar').hide();
             modalActualizacionUsuarios.find('#botonEliminar').hide();
             modalActualizacionUsuarios.find('#nombre, #correo, #telegram, #contrasena').prop('disabled', false);
-            modalActualizacionUsuarios.find('#opcionesConCargo').show();
-            modalActualizacionUsuarios.find('#opcionesSinCargo').hide();
+            modalActualizacionUsuarios.find('#opcionesConCargos').show();
+            modalActualizacionUsuarios.find('#opcionesSinCargos').hide();
         });
 
         $('#contrasena').on('input', function () {

@@ -88,13 +88,21 @@
                             </div>
                         </div>
                         <div class="form-row mt-4">
-                            <div class="col-12 text-right">
-                                <button id="botonRegistrar" name="botonRegistrar" type="submit" class="btn btn-outline-success">Registrar</button>
-                                <button id="botonModificar" name="botonModificar" type="submit" class="btn btn-outline-warning">Modificar</button>
-                                <button id="botonEliminar" name="botonEliminar" type="submit" class="btn btn-outline-danger">Eliminar</button>
-                                <button id="botonCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <div class="col d-flex align-items-center">
+                                <div class="d-flex align-items-center flex-grow-1">
+                                    <div id="advertencia" name="advertencia" class="mr-3 btn btn-danger">
+                                        ELIMINAR UN USUARIO, NO SE PUEDE REVERTIR
+                                    </div>
+                                    <div id="lineaAdvertencia" name="lineaAdvertencia" class="flex-grow-1 linea-advertencia-gruesa"></div>
+                                </div>
+                                <div class="ml-3 d-flex">
+                                    <button id="botonRegistrar" name="botonRegistrar" type="submit" class="btn btn-outline-success mr-2">Registrar</button>
+                                    <button id="botonModificar" name="botonModificar" type="submit" class="btn btn-outline-warning mr-2">Modificar</button>
+                                    <button id="botonEliminar" name="botonEliminar" type="submit" class="btn btn-outline-danger mr-2">Eliminar</button>
+                                    <button id="botonCancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                </div>
                             </div>
-                        </div>
+                        </div>      
                     </form>
                 </div>
             </div>
