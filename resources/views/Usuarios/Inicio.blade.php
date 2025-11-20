@@ -144,13 +144,23 @@
 
             const existenciaNombreClaveUsuario = !!nombreClaveUsuario;
 
-            modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#advertencia').toggle(existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#lineaAdvertencia').toggle(existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#opcionesConCargos').toggle(!existenciaNombreClaveUsuario);
-            modalActualizacionUsuarios.find('#opcionesSinCargos').toggle(existenciaNombreClaveUsuario);
+            if (nombreClaveUsuario.startsWith('N')){
+                modalActualizacionUsuarios.find('#botonRegistrar').hide();
+                modalActualizacionUsuarios.find('#advertencia').hide();
+                modalActualizacionUsuarios.find('#lineaAdvertencia').hide();
+                modalActualizacionUsuarios.find('#botonModificar').hide();
+                modalActualizacionUsuarios.find('#botonEliminar').hide();
+                modalActualizacionUsuarios.find('#opcionesConCargos').hide();
+                modalActualizacionUsuarios.find('#opcionesSinCargos').hide();
+            } else {
+                modalActualizacionUsuarios.find('#botonRegistrar').toggle(!existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#advertencia').toggle(existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#lineaAdvertencia').toggle(existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#botonModificar').toggle(existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#botonEliminar').toggle(existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#opcionesConCargos').toggle(!existenciaNombreClaveUsuario);
+                modalActualizacionUsuarios.find('#opcionesSinCargos').toggle(existenciaNombreClaveUsuario);
+            }
 
             if (cargoUsuarioSeleccionado === "coordinadores" || cargoUsuarioSeleccionado === "tutores") {
                 $('#rolSinCargos option[value="tutor"]').hide();
@@ -298,6 +308,10 @@
         $('#botonEliminar').on('click', function (e) {
             $('#formularioModalUsuarios').attr('action', baseUrlEliminacion + '/' + nombreClaveUsuario);
         });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     });
 </script>
 

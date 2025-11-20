@@ -34,31 +34,36 @@
                 </thead>
                 <tbody>
                     @foreach ($usuarios as $usuario)
-                        <?php if(substr($usuario->usuario, 0, 1)!='N'){ ?>
-                            <tr>
-                                <td>
-                                    <a href="#"
-                                    class="btn btn-link text-decoration-none"
-                                    data-toggle="modal"
-                                    data-target="#modalGeneralUsuarios"
-                                    data-titulo="{{ $usuario->userable->NOMBRE }}"
-                                    data-nombre="{{ $usuario->userable->NOMBRE }}"
-                                    data-correo="{{ $usuario->userable->CORREO ?? ''}}"
-                                    data-telegram-coordinador="{{ $usuario->userable->TELEGRAM ?? ''}}"
-                                    data-nombre-clave-usuario="{{ $usuario->usuario }}"
-                                    data-cargo-usuario="{{ class_basename($usuario->userable_type) }}"
-                                    >
-                                        {{ $usuario->usuario }}
-                                    </a>
-                                </td>
-                                <td>{{ $usuario->userable->NOMBRE }}</td>
-                                <td>
-                                    @foreach($usuario->roles as $rol)
-                                        {{ $rol->NOMBRE }}<br>
-                                    @endforeach
-                                </td>
-                            </tr>
-                        <?php } ?>
+                        <tr 
+                            @if(\Illuminate\Support\Str::startsWith($usuario->usuario, 'N')) 
+                                class="table-danger"
+                                data-toggle="tooltip" 
+                                data-placement="top" 
+                                title="Este usuario está inactivo" 
+                            @endif
+                        >
+                            <td>
+                                <a href="#"
+                                class="btn btn-link text-decoration-none"
+                                data-toggle="modal"
+                                data-target="#modalGeneralUsuarios"
+                                data-titulo="{{ $usuario->userable->NOMBRE }}"
+                                data-nombre="{{ $usuario->userable->NOMBRE }}"
+                                data-correo="{{ $usuario->userable->CORREO ?? ''}}"
+                                data-telegram-coordinador="{{ $usuario->userable->TELEGRAM ?? ''}}"
+                                data-nombre-clave-usuario="{{ $usuario->usuario }}"
+                                data-cargo-usuario="{{ class_basename($usuario->userable_type) }}"
+                                >
+                                    {{ $usuario->usuario }}
+                                </a>
+                            </td>
+                            <td>{{ $usuario->userable->NOMBRE }}</td>
+                            <td>
+                                @foreach($usuario->roles as $rol)
+                                    {{ $rol->NOMBRE }}<br>
+                                @endforeach
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
