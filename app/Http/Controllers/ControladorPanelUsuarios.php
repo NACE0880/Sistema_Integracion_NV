@@ -44,6 +44,13 @@ class ControladorPanelUsuarios extends Controller
         return view('Usuarios.Inicio', compact('usuarios', 'casas', 'roles'));
     }
 
+    public function mostrarRegistroModificaciones(){
+        
+        $modificaciones = ModificacionTablaUsuario::all();
+
+        return view('Usuarios.TablaRegistros', compact('modificaciones'));
+    }
+
     public function registrarUsuario(Request $request){
         $roles = (array) $request->rolConCargos;
         DB::beginTransaction();
@@ -311,27 +318,27 @@ class ControladorPanelUsuarios extends Controller
             
             $mensajeModificacion = '';
             if ($request->has('nombre')){
-                $mensajeModificacion .= "%0A" . $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "%0A";
+                $mensajeModificacion .= "\n" . $nombreAnteriorUsuario . ' -> ' . $request->input('nombre') . "\n";
             } 
             if($request->has('telegram')){
-                $mensajeModificacion .= "%0A" . $telegramAnteriorUsuario . ' -> ' . $request->input('telegram') . "%0A";
+                $mensajeModificacion .= "\n" . $telegramAnteriorUsuario . ' -> ' . $request->input('telegram') . "\n";
             } 
             if($request->has('correo')){
-                $mensajeModificacion .= "%0A" . $correoAnteriorUsuario . ' -> ' . $request->input('correo') . "%0A";
+                $mensajeModificacion .= "\n" . $correoAnteriorUsuario . ' -> ' . $request->input('correo') . "\n";
             } 
             if($request->has('casa_director')){
-                $mensajeModificacion .= "%0A" . $casaAnteriorUsuario . ' -> ' . $request->input('casa_director') . "%0A";
+                $mensajeModificacion .= "\n" . $casaAnteriorUsuario . ' -> ' . $request->input('casa_director') . "\n";
             }
             if($mensajeModificacion){
-                $mensaje = ' modificó: ' . "%0A" . $mensajeModificacion . "%0A" . "del usuario de: ";
+                $mensaje = ' modificó: ' . "\n" . $mensajeModificacion . "\n" . "del usuario de: ";
             } else{
                 $mensaje = ' realizó una modificación al usuario: ';
             }
-            $mensajeModificacionBase = trim(str_replace("%0A", "\n", $mensajeModificacion), "\n");
+            //$mensajeModificacionBase = ;
             $usuarioConSesionIniciada = Auth::user();
             ModificacionTablaUsuario::create([
                 'NOMBRE' => $usuarioConSesionIniciada->userable->NOMBRE,
-                'MODIFICACION' => $mensajeModificacionBase,
+                'MODIFICACION' => trim($mensajeModificacion, "\n"),
             ]);
             DB::commit();
             
@@ -390,7 +397,11 @@ class ControladorPanelUsuarios extends Controller
             if ($usuario->userable && !empty($usuario->userable->TELEGRAM)) {
                 $chat_id = $usuario->userable->TELEGRAM;
                 $payload = "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>{$mensaje}{$usuarioRegistrado->userable->NOMBRE}";
-                $telegram->sendText($chat_id, $payload);
+                try {
+                    $telegram->sendText($chat_id, $payload, ['parse_mode' => 'HTML']);
+                } catch (\Exception $e) {
+                    \Log::error('Error enviando a Telegram: ' . $e->getMessage());
+                }
             }
         }
     }

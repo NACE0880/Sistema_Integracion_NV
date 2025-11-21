@@ -171,3 +171,4 @@ Route::get('/usuarios/inicio', 'ControladorPanelUsuarios@mostrarInicioUsuarios')
 Route::post('/usuarios/inicio/registro', 'ControladorPanelUsuarios@registrarUsuario')->name('usuarios.registro');
 Route::post('/usuarios/inicio/modificacion/{nombreClaveUsuario}', 'ControladorPanelUsuarios@modificarUsuario')->name('usuarios.modificacion');
 Route::post('/usuarios/inicio/eliminacion/{nombreClaveUsuario}', 'ControladorPanelUsuarios@eliminarUsuario')->name('usuarios.eliminacion');
+Route::get('/usuarios/inicio/registro/modificacion/usuarios', 'ControladorPanelUsuarios@mostrarRegistroModificaciones')->name('usuarios.registro.modificacion');

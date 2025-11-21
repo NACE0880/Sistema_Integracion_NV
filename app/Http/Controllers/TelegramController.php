@@ -14,7 +14,7 @@ class TelegramController extends Controller
 
     // NOTIFICACIONES TELEGRAM
     // Mensaje Simple
-    public function sendText($chat_id, $payload){
+    /*public function sendText($chat_id, $payload){
 
         $curl = curl_init();
 
@@ -33,7 +33,37 @@ class TelegramController extends Controller
 
         curl_close($curl);
 
+    }*/
+
+    public function sendText($chat_id, $payload)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.telegram.org/bot'.$this->token.'/sendMessage',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => [
+                'chat_id' => $chat_id,
+                'text' => $payload,
+                'parse_mode' => 'HTML',
+                'disable_web_page_preview' => true,
+            ],
+        ));
+
+        $response = curl_exec($curl);
+
+        if ($response === false) {
+            \Log::error('Error cURL: ' . curl_error($curl));
+        } else {
+            \Log::info('Respuesta Telegram: ' . $response);
+        }
+
+        curl_close($curl);
+
+        return $response;
     }
+
 
     // Documentos Adjuntos
     public function sendDocument($chat_id, $ruta){
