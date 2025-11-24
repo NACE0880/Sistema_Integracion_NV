@@ -64,7 +64,7 @@
                             <div class="qr-wrapper">
                                 {!! $codigoQr !!}
                             </div>
-                            <br>
+                            <p class="font-weight-light mb-4">Si ya habías escaneado el código QR, no tienes que volverlo a hacer.</p>
                             <h2 class="text-info">Autentificación de Dos factores</h2>
                             <p class="mb-4">Ingresa el código de 6 dígitos que GoogleAuthenticator genera.</p>
                             <form action="{{ route('login.verificar.2FA') }}" method="POST">
@@ -89,7 +89,6 @@
                                         <input id="numero2FA6" type="text" class="form-control text-lg text-center" name="codigoParaVerificar2FA[]" maxlength="1" placeholder="_" aria-label="input2FA6" required>
                                     </div>
                                 </div>
-                                <p class="font-weight-light mb-4">Si ya habías escaneado el código QR, no tienes que volverlo a hacer.</p>
                                 <div class="text-center">
                                     <button type="submit" class="btn bg-info btn-lg my-4" aria-label="Continuar con el proceso">Continuar</button>
                                     <a href="{{ route('login.tickets') }}" class="btn btn-secondary btn-lg my-4">Cancelar</a>
