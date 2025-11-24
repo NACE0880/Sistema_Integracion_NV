@@ -344,7 +344,6 @@
         });
 
         $('#ticketsTable thead th').each(function(index) {
-        // Opcional: excluir columnas con botones
             if (index === 5 || index === 6 || index === 7) return;
 
             const thStyles = window.getComputedStyle(this);
@@ -366,7 +365,7 @@
                 }
             });
 
-            $(this).off('click'); // Evita que el click ordene la columna
+            $(this).off('click');
             $(this).append('<br>').append($input);
 
             $input.on('keyup change', function() {
