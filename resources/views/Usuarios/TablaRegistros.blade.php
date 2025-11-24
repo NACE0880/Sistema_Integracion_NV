@@ -84,14 +84,18 @@
                 $.fn.dataTable.ext.search.push(function(settings, data) {
                     let min = $from.val();
                     let max = $to.val();
-                    let fecha = data[2]; // columna 3 (index 2)
+                    let fechaStr = data[2]; // columna 3 (index 2)
 
-                    if (!fecha) return true;
+                    if (!fechaStr) return true;
 
-                    let f = new Date(fecha);
+                    // Parsear la fecha de la tabla (YYYY-MM-DD HH:mm:ss)
+                    let f = new Date(fechaStr);
 
-                    if ((min === "" || f >= new Date(min)) &&
-                        (max === "" || f <= new Date(max))) {
+                    // Parsear los inputs del calendarito
+                    let fMin = min ? new Date(min + " 00:00:00") : null;
+                    let fMax = max ? new Date(max + " 23:59:59") : null;
+
+                    if ((!fMin || f >= fMin) && (!fMax || f <= fMax)) {
                         return true;
                     }
                     return false;
