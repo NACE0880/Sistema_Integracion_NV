@@ -113,6 +113,6 @@ class LoginTicketsController extends Controller
             return redirect()->intended(route('home'));
         }
 
-        return redirect()->back()->withErrors(['usuario' => 'Código 2FA inválido']);
+        return redirect()->back()->withErrors(['usuario' => 'Código inválido']);
     }
 }
