@@ -137,7 +137,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tickets/creacion','TicketsController@crearTickets')->name('crear.tickets');
     Route::get('/tickets/consultar','TicketsController@consultarTickets')->name('consultar.ticket');
     Route::get('/tickets/reporte','TicketsController@generaReporteTickets')->name('reporte.ticket');
-    Route::get('/tickets/pesonal/modificar','TicketsController@modificarPersonal')->name('modificar.personal');
+    Route::get('/tickets/personal/modificar','TicketsController@modificarPersonal')->name('modificar.personal');
     Route::get('/tickets/consultar/pago','TicketsController@consultarTicketsPago')->name('consultar.ticket.pago');
     Route::get('/tickets/consultar/pasados','TicketsController@consultarTicketsPasados')->name('consultar.ticket.pasado');
 
