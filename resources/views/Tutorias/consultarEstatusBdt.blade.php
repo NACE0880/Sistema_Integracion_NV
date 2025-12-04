@@ -272,30 +272,30 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
-                                BDT's (<input type="text" id="usuariosBdtsRegistraron" name="usuariosBdtsRegistraron" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsRegistraron'] ?? '-' }}">)
+                            <td class="text-center" colspan="3">
+                                BDT's (<input type="text" class="d-inline-block w-auto" id="usuariosBdtsRegistraron" name="usuariosBdtsRegistraron" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsRegistraron'] ?? '-' }}">)
                             </td>
                             <td class="text-center" colspan="2">
                                 Registros
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 Inscritos
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 Constancias
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="3">
                                 <input type="text" id="usuariosBdtsTotales" name="usuariosBdtsTotales" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsTotales'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 <input type="text" id="usuariosBdtsRegistrados" name="usuariosBdtsRegistrados" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsRegistrados'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="usuariosBdtsInscritos" name="usuariosBdtsInscritos" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsInscritos'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="usuariosBdtsConstancias" name="usuariosBdtsConstancias" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsConstancias'] ?? '-' }}">
                             </td>
                         </tr>
@@ -896,13 +896,13 @@
                                 @endphp
                                 ene-{{ $mes }} 2025
                             </td>
-                            <td class="text-center bg-danger">
+                            <td class="text-center">
                                 <input type="text" id="numeroUsuariosDelAnioBdts" name="numeroUsuariosDelAnioBdts" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelAnioBdts'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
-                            <td class="text-center bg-danger">
+                            <td class="text-center">
                                 <input type="text" id="numeroUsuariosDelMesBdts" name="numeroUsuariosDelMesBdts" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelMesBdts'] ?? '-' }}">
                             </td>
                         </tr>
@@ -913,13 +913,13 @@
                             <td class="text-center" colspan="3">
                                 ene-{{ $mes }} 2025
                             </td>
-                            <td class="text-center bg-danger">
+                            <td class="text-center">
                                 <input type="text" id="numeroUsuariosDelAnioFiliales" name="numeroUsuariosDelAnioFiliales" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelAnioFiliales'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
-                            <td class="text-center bg-danger">
+                            <td class="text-center">
                                 <input type="text" id="numeroUsuariosDelMesFiliales" name="numeroUsuariosDelMesFiliales" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelMesFiliales'] ?? '-' }}">
                             </td>
                         </tr>
@@ -1023,5 +1023,26 @@
         </div>
 
     </body>
+
+@endsection
+
+@section('js')
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function() {
+                
+                const inputs = document.querySelectorAll("input[data-capturar]");
+
+                
+                inputs.forEach(input => input.disabled = true);
+
+                
+                @if(in_array("15", $UsersServices->permisos()))
+                    inputs.forEach(input => input.disabled = false);
+                @endif
+            });
+
+        </script>
 
 @endsection
