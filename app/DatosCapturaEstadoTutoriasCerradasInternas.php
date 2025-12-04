@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatosCapturaEstadoTutoriasCerradasInternas extends Model
 {
-    protected $table = 'datos_captura_estado_tutorias_abiertas';
+    protected $table = 'datos_captura_estado_tutorias_cerradas_internas';
     protected $primaryKey = 'id';
     protected $fillable = [
             'INTERNET_PROMEDIO_INTERNAS',
@@ -24,6 +24,10 @@ class DatosCapturaEstadoTutoriasCerradasInternas extends Model
             'MOBILIARIO_RACKS',
             'MOBILIARIO_CARRITO_CARGADOR',
             'USUARIOS_ACUMULADO',
+            'NUMERO_USUARIOS_DEL_ANIO_BDTS',
+            'NUMERO_USUARIOS_DEL_MES_BDTS',
+            'NUMERO_USUARIOS_DEL_ANIO_FILIALES',
+            'NUMERO_USUARIOS_DEL_MES_FILIALES',
             'GASTO_MENSUAL_ACUMULADO',
             'GASTO_MENSUAL',
             'GASTO_MENSUAL_RENTA',

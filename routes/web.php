@@ -152,6 +152,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tutoria/actualizar/equipamiento/{adt}','TutoriasController@actualizarEquipamiento')->name('actualizar.equipamiento.adt');
     Route::get('/tutoria/actualizar/mobiliario/{adt}','TutoriasController@actualizarMobiliario')->name('actualizar.mobiliario.adt');
     Route::get('/tutoria/consultar/estatus','TutoriasController@consultarEstatusBdt')->name('consultar.estatus.bdt.tutorias');
+    Route::get('/tutoria/capturar/estatus','TutoriasController@capturarDatosEstatus')->name('capturar.datos.estatus.tutorias');
 
 });
 

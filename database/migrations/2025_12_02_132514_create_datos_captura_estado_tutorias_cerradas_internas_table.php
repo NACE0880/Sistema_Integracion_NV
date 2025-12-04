@@ -30,6 +30,10 @@ class CreateDatosCapturaEstadoTutoriasCerradasInternasTable extends Migration
             $table->integer('MOBILIARIO_RACKS');
             $table->integer('MOBILIARIO_CARRITO_CARGADOR');
             $table->integer('USUARIOS_ACUMULADO');
+		    $table->integer('NUMERO_USUARIOS_DEL_ANIO_BDTS');
+            $table->integer('NUMERO_USUARIOS_DEL_MES_BDTS');
+            $table->integer('NUMERO_USUARIOS_DEL_ANIO_FILIALES');
+            $table->integer('NUMERO_USUARIOS_DEL_MES_FILIALES');
             $table->decimal('GASTO_MENSUAL_ACUMULADO', 20, 2);
             $table->decimal('GASTO_MENSUAL', 20, 2);
             $table->decimal('GASTO_MENSUAL_RENTA', 20, 2);
