@@ -748,6 +748,98 @@ class TutoriasController extends Controller
 
     }
 
+    public function registrarDatosEstatus(Request $request) {
+
+        $datosRegistrarTablaAbiertas = [
+
+            'INTERNET_PROMEDIO_ABIERTAS' => $request->input('internetPromedioAbiertas'), 
+            'INTERNET_BAJO_ABIERTAS' => $request->input('internetBajoAbiertas'),
+            'INTERNET_ALTO_ABIERTAS' => $request->input('internetAltoAbiertas'),
+            'USUARIOS_BDTS_ACUMULADOS' => $request->input('usuariosBdtsAcumulados'),
+            'USUARIOS_BDTS_REGISTRARON' => $request->input('usuariosBdtsRegistraron'),
+            'USUARIOS_BDTS_TOTALES' => $request->input('usuariosBdtsTotales'),
+            'USUARIOS_BDTS_REGISTRADOS' => $request->input('usuariosBdtsRegistrados'),
+            'USUARIOS_BDTS_INSCRITOS' => $request->input('usuariosBdtsInscritos'),
+            'USUARIOS_BDTS_CONSTANCIAS' => $request->input('usuariosBdtsConstancias'),
+            'OFERTA_EDUCATIVA_NUEVOS_TALLERES' => $request->input('ofertaEducativaNuevosTalleres'),
+            'OFERTA_EDUCATIVA_TALLERES' => $request->input('ofertaEducativaTalleres'),
+            'OFERTA_EDUCATIVA_EN_LINEA' => $request->input('ofertaEducativaEnLinea'),
+            'OFERTA_EDUCATIVA_TALLERES_EN_DESARROLLO' => $request->input('ofertaEducativaTalleresEnDesarrollo'),
+            'SOLICITUDES_RECIBIDAS' => $request->input('solicitudesRecibidas'),
+            'SOLICITUD_BDT' => $request->input('solicitudBdt'),
+            'SOLICITUD_REEQUIPAMIENTO' => $request->input('solicitudReequipamiento'),
+            'SOLICITUD_RETIRO' => $request->input('solicitudRetiro'),
+            'SOLICITUD_OTROS' => $request->input('solicitudOtros'),
+
+        ];
+
+        $datosRegistrarTablaAbiertas = [
+
+            'INTERNET_PROMEDIO_INTERNAS' => $request->input('internetPromedioInternas'),
+            'INTERNET_BAJO_INTERNAS' => $request->input('internetBajoInternas'),
+            'INTERNET_ALTO_INTERNAS' => $request->input('internetAltoInternas'),
+            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $request->input('internetInfinitumPersonalInterno'),
+            'INTERNET_VOZ_PERSONAL_INTERNO' => $request->input('internetVozPersonalInterno'),
+            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $request->input('internetEnlacePersonalExterno'),
+            'INTERNET_VOZ_PERSONAL_EXTERNO' => $request->input('internetVozPersonalExterno'),
+            'MOBILIARIO_MESAS' => $request->input('mobiliarioMesas'),
+            'MOBILIARIO_SILLAS' => $request->input('mobiliarioSillas'),
+            'MOBILIARIO_LIBREROS' => $request->input('mobiliarioLibreros'),
+            'MOBILIARIO_TV' => $request->input('mobiliarioTv'),
+            'MOBILIARIO_ARCHIVEROS' => $request->input('mobiliarioArchiveros'),
+            'MOBILIARIO_RACKS' => $request->input('mobiliarioRacks'),
+            'MOBILIARIO_CARRITO_CARGADOR' => $request->input('mobiliarioCarritoCargador'),
+            'USUARIOS_ACUMULADO' => $request->input('usuariosAcumulado'),
+            'GASTO_MENSUAL_ACUMULADO' => $request->input('gastoMensualAcumulado'),
+            'GASTO_MENSUAL' => $request->input('gastoMensual'),
+            'GASTO_MENSUAL_RENTA' => $request->input('gastoMensualRenta'),
+            'GASTO_MENSUAL_ASEO' => $request->input('gastoMensualAseo'),
+            'GASTO_MENSUAL_LUZ' => $request->input('gastoMensualLuz'),
+            'GASTO_MENSUAL_VIGILANCIA' => $request->input('gastoMensualVigilancia'),
+            'GASTO_AGUA_POTABLE' => $request->input('gastoAguaPotable'),
+            'GASTO_NOMINA_OPERACION' => $request->input('gastoNominaOperacion'),
+            'GASTO_NOMINA_GERENCIA' => $request->input('gastoNominaGerencia'),
+            'GASTO_MANTENIMIENTOS_TOTAL' => $request->input('gastoMantenimientosTotal'),
+            'GASTO_MANTENIMIENTOS_EJERCIDO' => $request->input('gastoMantenimientosEjercido'),
+
+        ];
+
+        $datosRegistrarTablaAbiertas = [
+            
+            'INTERNET_PROMEDIO_INTERNAS' => $request->input('internetPromedioInternas'),
+            'INTERNET_BAJO_INTERNAS' => $request->input('internetBajoInternas'),
+            'INTERNET_ALTO_INTERNAS' => $request->input('internetAltoInternas'),
+            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $request->input('internetInfinitumPersonalInterno'),
+            'INTERNET_VOZ_PERSONAL_INTERNO' => $request->input('internetVozPersonalInterno'),
+            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $request->input('internetEnlacePersonalExterno'),
+            'INTERNET_VOZ_PERSONAL_EXTERNO' => $request->input('internetVozPersonalExterno'),
+            'MOBILIARIO_MESAS' => $request->input('mobiliarioMesas'),
+            'MOBILIARIO_SILLAS' => $request->input('mobiliarioSillas'),
+            'MOBILIARIO_LIBREROS' => $request->input('mobiliarioLibreros'),
+            'MOBILIARIO_TV' => $request->input('mobiliarioTv'),
+            'MOBILIARIO_ARCHIVEROS' => $request->input('mobiliarioArchiveros'),
+            'MOBILIARIO_RACKS' => $request->input('mobiliarioRacks'),
+            'MOBILIARIO_CARRITO_CARGADOR' => $request->input('mobiliarioCarritoCargador'),
+            'USUARIOS_ACUMULADO' => $request->input('usuariosAcumulado'),
+            'NUMERO_USUARIOS_DEL_ANIO_BDTS' => $request->input('numeroUsuariosDelAnioBdts'),
+            'NUMERO_USUARIOS_DEL_MES_BDTS' => $request->input('numeroUsuariosDelMesBdts'),
+            'NUMERO_USUARIOS_DEL_ANIO_FILIALES' => $request->input('numeroUsuariosDelAnioFiliales'),
+            'NUMERO_USUARIOS_DEL_MES_FILIALES' => $request->input('numeroUsuariosDelMesFiliales'),
+            'GASTO_MENSUAL_ACUMULADO' => $request->input('gastoMensualAcumulado'),
+            'GASTO_MENSUAL' => $request->input('gastoMensual'),
+            'GASTO_MENSUAL_RENTA' => $request->input('gastoMensualRenta'),
+            'GASTO_MENSUAL_ASEO' => $request->input('gastoMensualAseo'),
+            'GASTO_MENSUAL_LUZ' => $request->input('gastoMensualLuz'),
+            'GASTO_MENSUAL_VIGILANCIA' => $request->input('gastoMensualVigilancia'),
+            'GASTO_AGUA_POTABLE' => $request->input('gastoAguaPotable'),
+            'GASTO_NOMINA_OPERACION' => $request->input('gastoNominaOperacion'),
+            'GASTO_NOMINA_GERENCIA' => $request->input('gastoNominaGerencia'),
+            'GASTO_MANTENIMIENTOS_TOTAL' => $request->input('gastoMantenimientosTotal'),
+            'GASTO_MANTENIMIENTOS_EJERCIDO' => $request->input('gastoMantenimientosEjercido'),
+        ];
+
+    }
+
     /* // CARGA/BAJA IMAGENES y OBTENCION NOMBRE
     public function cargaVideoConferencia($file){
         if (is_null($file)){

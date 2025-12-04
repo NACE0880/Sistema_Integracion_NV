@@ -23,6 +23,18 @@
             table-layout: fixed;
         }
 
+        input {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #212529;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+        }
+
     </style>
 @endsection
 
@@ -256,7 +268,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                5. Usuarios BDT (acumulado: <input type="text" id="usuariosBdtsAcumulados" name="usuariosBdtsAcumulados" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsAcumulados'] ?? '-' }}">) y Plataforma
+                                5. Usuarios BDT (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosBdtsAcumulados" name="usuariosBdtsAcumulados" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsAcumulados'] ?? '-' }}">) y Plataforma
                             </th>
                         </tr>
                         <tr>
@@ -293,13 +305,13 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Nuevos
                             </td>
                             <td class="text-center" colspan="2">
                                 Talleres
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 En línea
                             </td>
                             <td class="text-center" colspan="3">
@@ -307,13 +319,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="ofertaEducativaNuevosTalleres" name="ofertaEducativaNuevosTalleres" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaNuevosTalleres'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 <input type="text" id="ofertaEducativaTalleres" name="ofertaEducativaTalleres" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaTalleres'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="ofertaEducativaEnLinea" name="ofertaEducativaEnLinea" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaEnLinea'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
@@ -322,7 +334,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                7. Nuevas Solicitudes 2025 (<input type="text" id="solicitudesRecibidas" name="solicitudesRecibidas" data-capturar value="{{ $datosQueSeCapturan['solicitudesRecibidas'] ?? '-' }}"> recibidas)
+                                7. Nuevas Solicitudes 2025 (<input type="text" class="d-inline-block w-auto" id="solicitudesRecibidas" name="solicitudesRecibidas" data-capturar value="{{ $datosQueSeCapturan['solicitudesRecibidas'] ?? '-' }}"> recibidas)
                             </th>
                         </tr>
                         <tr>
@@ -395,10 +407,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <input type="text" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInterno'] ?? '-' }}"> infinitum y <input type="text" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInterno'] ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInterno'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input id="internetVozPersonalExterno" name="internetVozPersonalExterno" value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input id="internetVozPersonalExterno" class="d-inline-block w-auto" name="internetVozPersonalExterno" value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -482,30 +494,30 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Mesas
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="2">
                                 Sillas, bancos y puff
                             </td>
                             <td class="text-center" colspan="2">
                                 Libreros
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" colspan="3">
                                 Tv
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="mobiliarioMesas" name="mobiliarioMesas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioMesas'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="mobiliarioSillas" name="mobiliarioSillas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioSillas'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 <input type="text" id="mobiliarioLibreros" name="mobiliarioLibreros" data-capturar value="{{ $datosQueSeCapturan['mobiliarioLibreros'] ?? '-' }}">
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" colspan="3" >
                                 <input type="text" id="mobiliarioTv" name="mobiliarioTv" data-capturar value="{{ $datosQueSeCapturan['mobiliarioTv'] ?? '-' }}">
                             </td>
                         </tr>
@@ -565,7 +577,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                5. Usuarios (acumulado: <input type="text" id="usuariosAcumulado" name="usuariosAcumulado" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumulado'] ?? '-' }}">)
+                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumulado" name="usuariosAcumulado" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumulado'] ?? '-' }}">)
                             </th>
                         </tr>
                         <tr>
@@ -598,17 +610,17 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                6. Gasto mensual $<input type="text" id="gastoMensual" name="gastoMensual" data-capturar value="{{ $datosQueSeCapturan['gastoMensual'] ?? '-' }}"> / acumulado 2025 $<input type="text" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumulado'] ?? '-' }}">
+                                6. Gasto mensual $<input type="text" class="d-inline-block w-auto" id="gastoMensual" name="gastoMensual" data-capturar value="{{ $datosQueSeCapturan['gastoMensual'] ?? '-' }}"> / acumulado 2025 $<input type="text" class="d-inline-block w-auto" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumulado'] ?? '-' }}">
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Renta
                             </td>
                             <td class="text-center" colspan="2">
                                 Aseo
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 Luz
                             </td>
                             <td class="text-center" colspan="3">
@@ -616,13 +628,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="gastoMensualRenta" name="gastoMensualRenta" data-capturar value="{{ $datosQueSeCapturan['gastoMensualRenta'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 <input type="text" id="gastoMensualAseo" name="gastoMensualAseo" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAseo'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="gastoMensualLuz" name="gastoMensualLuz" data-capturar value="{{ $datosQueSeCapturan['gastoMensualLuz'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
@@ -630,10 +642,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Agua Potable
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="4">
                                 Nòmina Operaciòn
                             </td>
                             <td class="text-center" colspan="3">
@@ -641,10 +653,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 <input type="text" id="gastoAguaPotable" name="gastoAguaPotable" data-capturar value="{{ $datosQueSeCapturan['gastoAguaPotable'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="4">
                                 <input type="text" id="gastoNominaOperacion" name="gastoNominaOperacion" data-capturar value="{{ $datosQueSeCapturan['gastoNominaOperacion'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
@@ -655,7 +667,7 @@
                             <th class="text-center table-info">
                                 Mantenimientos:
                             </th>
-                            <th class="text-center table-info" colspan="3">
+                            <th class="text-center table-info" colspan="2">
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
@@ -664,7 +676,7 @@
                             <th class="text-center table-info" colspan="2">
                                 Ejercido:
                             </th>
-                            <th class="text-center"><!-- eliminé table-info (color celda)-->
+                            <th class="text-center" colspan="2"><!-- eliminé table-info (color celda)-->
                                 <input type="text" id="gastoMantenimientosEjercido" name="gastoMantenimientosEjercido" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosEjercido'] ?? '-' }}">
                             </th>
                         </tr>
@@ -705,10 +717,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5"><!--En producción seguirá siendo datos que se capturan pero las variables dentro del array al final tendrán C-->
-                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con <input type="text" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInterno'] ?? '-' }}"> infinitum y <input type="text" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInternoC" name="internetInfinitumPersonalInternoC" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInternoC'] ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInternoC" name="internetVozPersonalInternoC" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInternoC'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con <input type="text" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input type="text" id="internetVozPersonalExterno" name="internetVozPersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExternoC" name="internetEnlacePersonalExternoC" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExternoC'] ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExternoC" name="internetVozPersonalExternoC" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalExternoC'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -786,53 +798,53 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Mesas
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="2">
                                 Sillas, bancos y puff
                             </td>
                             <td class="text-center" colspan="2">
                                 Libreros
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" colspan="3">
                                 Tv
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
-                                <input type="text" id="mobiliarioMesas" name="mobiliarioMesas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioMesas'] ?? '-' }}">
-                            </td>
-                            <td class="text-center" colspan="5">
-                                <input type="text" id="mobiliarioSillas" name="mobiliarioSillas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioSillas'] ?? '-' }}">
+                            <td class="text-center" colspan="2">
+                                <input type="text" id="mobiliarioMesasC" name="mobiliarioMesasC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioMesasC'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioLibreros" name="mobiliarioLibreros" data-capturar value="{{ $datosQueSeCapturan['mobiliarioLibreros'] ?? '-' }}">
+                                <input type="text" id="mobiliarioSillasC" name="mobiliarioSillasC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioSillasC'] ?? '-' }}">
                             </td>
-                            <td class="text-center">
-                                <input type="text" id="mobiliarioTv" name="mobiliarioTv" data-capturar value="{{ $datosQueSeCapturan['mobiliarioTv'] ?? '-' }}">
+                            <td class="text-center" colspan="2">
+                                <input type="text" id="mobiliarioLibrerosC" name="mobiliarioLibrerosC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioLibrerosC'] ?? '-' }}">
+                            </td>
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="mobiliarioTvC" name="mobiliarioTvC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioTvC'] ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center" colspan="3">
                                 Archiveros y Lockers
                             </td>
-                            <td class="text-center" colspan="2">
+                            <td class="text-center" colspan="3">
                                 Racks
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="3">
                                 Carrito Cargador
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioArchiveros" name="mobiliarioArchiveros" data-capturar value="{{ $datosQueSeCapturan['mobiliarioArchiveros'] ?? '-' }}">
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="mobiliarioArchiverosC" name="mobiliarioArchiverosC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioArchiverosC'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioRacks" name="mobiliarioRacks" data-capturar value="{{ $datosQueSeCapturan['mobiliarioRacks'] ?? '-' }}">
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="mobiliarioRacksC" name="mobiliarioRacksC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioRacksC'] ?? '-' }}">
                             </td>
-                            <td class="text-center" colspan="5">
-                                <input type="text" id="mobiliarioCarritoCargador" name="mobiliarioCarritoCargador" data-capturar value="{{ $datosQueSeCapturan['mobiliarioCarritoCargador'] ?? '-' }}">
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="mobiliarioCarritoCargadorC" name="mobiliarioCarritoCargadorC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioCarritoCargadorC'] ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -869,7 +881,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-secondary" colspan="9">
-                                5. Usuarios (acumulado: <input type="text" id="usuariosAcumulado" name="usuariosAcumulado" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumulado'] ?? '-' }}">)
+                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumuladoC" name="usuariosAcumuladoC" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumuladoC'] ?? '-' }}">)
                             </th>
                         </tr>
                         <tr>
@@ -918,17 +930,17 @@
                         </tr>
                         <tr>
                             <th class="text-center table-secondary" colspan="9">
-                                6. Gasto mensual $<input type="text" id="gastoMensual" name="gastoMensual" data-capturar value="{{ $datosQueSeCapturan['gastoMensual'] ?? '-' }}"> / acumulado 2025 $<input type="text" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumulado'] ?? '-' }}">
+                                6. Gasto mensual $<input type="text" class="d-inline-block w-auto" id="gastoMensualC" name="gastoMensualC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualC'] ?? '-' }}"> / acumulado 2025 $<input type="text" class="d-inline-block w-auto" id="gastoMensualAcumuladoC" name="gastoMensualAcumuladoC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumuladoC'] ?? '-' }}">
                             </th>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="2">
                                 Renta
                             </td>
                             <td class="text-center" colspan="2">
                                 Aseo
                             </td>
-                            <td class="text-center" colspan="3">
+                            <td class="text-center" colspan="2">
                                 Luz
                             </td>
                             <td class="text-center" colspan="3">
@@ -936,24 +948,24 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
-                                <input type="text" id="gastoMensualRenta" name="gastoMensualRenta" data-capturar value="{{ $datosQueSeCapturan['gastoMensualRenta'] ?? '-' }}">
+                            <td class="text-center" colspan="2">
+                                <input type="text" id="gastoMensualRentaC" name="gastoMensualRentaC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualRentaC'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualAseo" name="gastoMensualAseo" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAseo'] ?? '-' }}">
+                                <input type="text" id="gastoMensualAseoC" name="gastoMensualAseoC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAseoC'] ?? '-' }}">
+                            </td>
+                            <td class="text-center" colspan="2">
+                                <input type="text" id="gastoMensualLuzC" name="gastoMensualLuzC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualLuzC'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoMensualLuz" name="gastoMensualLuz" data-capturar value="{{ $datosQueSeCapturan['gastoMensualLuz'] ?? '-' }}">
-                            </td>
-                            <td class="text-center" colspan="3">
-                                <input type="text" id="gastoMensualVigilancia" name="gastoMensualVigilancia" data-capturar value="{{ $datosQueSeCapturan['gastoMensualVigilancia'] ?? '-' }}">
+                                <input type="text" id="gastoMensualVigilanciaC" name="gastoMensualVigilanciaC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualVigilanciaC'] ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
+                            <td class="text-center" colspan="3">
                                 Agua Potable
                             </td>
-                            <td class="text-center" colspan="5">
+                            <td class="text-center" colspan="3">
                                 Nómina operación
                             </td>
                             <td class="text-center" colspan="3">
@@ -961,31 +973,31 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">
-                                <input type="text" id="gastoAguaPotable" name="gastoAguaPotable" data-capturar value="{{ $datosQueSeCapturan['gastoAguaPotable'] ?? '-' }}">
-                            </td>
-                            <td class="text-center" colspan="5">
-                                <input type="text" id="gastoNominaOperacion" name="gastoNominaOperacion" data-capturar value="{{ $datosQueSeCapturan['gastoNominaOperacion'] ?? '-' }}">
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="gastoAguaPotableC" name="gastoAguaPotableC" data-capturar value="{{ $datosQueSeCapturan['gastoAguaPotableC'] ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoNominaGerencia" name="gastoNominaGerencia" data-capturar value="{{ $datosQueSeCapturan['gastoNominaGerencia'] ?? '-' }}">
+                                <input type="text" id="gastoNominaOperacionC" name="gastoNominaOperacionC" data-capturar value="{{ $datosQueSeCapturan['gastoNominaOperacionC'] ?? '-' }}">
+                            </td>
+                            <td class="text-center" colspan="3">
+                                <input type="text" id="gastoNominaGerenciaC" name="gastoNominaGerenciaC" data-capturar value="{{ $datosQueSeCapturan['gastoNominaGerenciaC'] ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
-                            <th class="text-center table-secondary" colspan="2">
+                            <th class="text-center table-secondary">
                                 Mantenimientos:
                             </th>
                             <th class="text-center table-secondary" colspan="2">
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMantenimientosTotal" name="gastoMantenimientosTotal" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosTotal'] ?? '-' }}">
+                                <input type="text" id="gastoMantenimientosTotalC" name="gastoMantenimientosTotalC" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosTotalC'] ?? '-' }}">
                             </td>
                             <th class="text-center table-secondary" colspan="2">
                                 Ejercido:
                             </th>
-                            <td class="text-center">
-                                <input type="text" id="gastoMantenimientosEjercido" name="gastoMantenimientosEjercido" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosEjercido'] ?? '-' }}">
+                            <td class="text-center" colspan="2">
+                                <input type="text" id="gastoMantenimientosEjercidoC" name="gastoMantenimientosEjercidoC" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosEjercidoC'] ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
