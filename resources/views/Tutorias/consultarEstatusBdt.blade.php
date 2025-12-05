@@ -1015,8 +1015,8 @@
             </div>
 
             <div class="d-flex mt-5">
-                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalReporte" data-bs-titulo="Nuevo Reporte">
-                    Generar Reporte
+                <button id="botonGuardar" name="botonGuardar" class="btn btn-outline-info">
+                    Guardar
                 </button>
             </div>
             
@@ -1043,6 +1043,46 @@
                 @endif
             });
 
+            document.getElementById('botonGuardar').addEventListener('click', function() {
+
+                let validacion = true;
+                
+                document.querySelectorAll('[data-capturar]').forEach(input => {
+                    if (!input.value.trim()) {
+                    validacion = false;
+                    input.classList.add('error');
+                    }
+                });
+
+                if (!validacion) {
+                    alert('Por favor llena todos los campos obligatorios');
+                    return;
+                }
+
+                const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                const datos = {};
+                const url = "{{ route('registrar.datos.estatus.tutorias') }}";
+
+                document.querySelectorAll('input[data-capturar]').forEach(input => {
+                    datos[input.id] = input.value;
+                });
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "{{ route('consultar.estatus.bdt.tutorias') }}";
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+            });
         </script>
 
 @endsection

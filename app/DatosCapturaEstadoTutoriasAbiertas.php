@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatosCapturaEstadoTutoriasAbiertas extends Model
 {
+    public $timestamps = false;
     protected $table = 'datos_captura_estado_tutorias_abiertas';
     protected $primaryKey = 'id';
     protected $fillable = [
-            'INTERNET_PROMEDIO_ABIERTAS',
-            'INTERNET_BAJO_ABIERTAS',
-            'INTERNET_ALTO_ABIERTAS',
             'USUARIOS_BDTS_ACUMULADOS',
             'USUARIOS_BDTS_REGISTRARON',
             'USUARIOS_BDTS_TOTALES',

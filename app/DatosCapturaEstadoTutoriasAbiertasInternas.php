@@ -9,9 +9,6 @@ class DatosCapturaEstadoTutoriasAbiertasInternas extends Model
     protected $table = 'datos_captura_estado_tutorias_abiertas_internas';
     protected $primaryKey = 'id';
     protected $fillable = [
-            'INTERNET_PROMEDIO_INTERNAS',
-            'INTERNET_BAJO_INTERNAS',
-            'INTERNET_ALTO_INTERNAS',
             'INTERNET_INFINITUM_PERSONAL_INTERNO',
             'INTERNET_VOZ_PERSONAL_INTERNO',
             'INTERNET_ENLACE_PERSONAL_EXTERNO',
