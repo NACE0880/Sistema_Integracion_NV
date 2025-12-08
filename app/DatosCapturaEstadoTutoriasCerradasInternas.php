@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DatosCapturaEstadoTutoriasCerradasInternas extends Model
 {
+    public $timestamps = false;
     protected $table = 'datos_captura_estado_tutorias_cerradas_internas';
     protected $primaryKey = 'id';
     protected $fillable = [

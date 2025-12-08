@@ -16,6 +16,8 @@ use App\infraestructuras;
 use App\usos;
 use App\contactos;
 use App\DatosCapturaEstadoTutoriasAbiertas;
+use App\DatosCapturaEstadoTutoriasAbiertasInternas;
+use App\DatosCapturaEstadoTutoriasCerradasInternas;
 
 use DateTime;
 
@@ -359,6 +361,10 @@ class TutoriasController extends Controller
         ->whereHas('adts', function ($colaDeConsulta) {
             $colaDeConsulta->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         });
+        $consumoInternetLineasAbiertas = (clone $lineasDeAdts)
+        ->avg('GB_RECIBIDO');
+        $consumoInternetLineasMayorAbiertas = (clone $lineasDeAdts)
+        ->where('GB_RECIBIDO', '>', 110);
         $adtsConLineasPagaEntidad = (clone $adtsConLineas)
         ->whereHas('lineas', function($colaDeConsulta) {
             $colaDeConsulta->where('PAGA', 'INSTITUCIÓN / GOBIERNO');
@@ -481,6 +487,10 @@ class TutoriasController extends Controller
             $colaDeConsulta->where('ESTATUS_ACTUAL', 'ABIERTA INTERNA')
             ->where('INICIATIVA', 'CASA TELMEX');
         });
+        $consumoInternetLineasAdtsInternas = (clone $lineasDeAdtsInternas)
+        ->avg('GB_RECIBIDO');
+        $consumoInternetLineasMayorAdtsInternas = (clone $lineasDeAdtsInternas)
+        ->where('GB_RECIBIDO', '>', 110);
         $lineasDeAdtsInternasExternas = (clone $lineasDeAdtsInternas)
         ->whereHas('adts', function ($colaDeConsulta) {
             $colaDeConsulta->where('ENTORNO', 'EXTERNA');
@@ -574,6 +584,10 @@ class TutoriasController extends Controller
             $colaDeConsulta->where('ESTATUS_ACTUAL', 'CERRADA INTERNAS')
             ->where('INICIATIVA', 'CASA TELMEX');
         });
+        $consumoInternetLineasAdtsInternasCerradas = (clone $lineasDeAdtsInternasCerradas)
+        ->avg('GB_RECIBIDO');
+        $consumoInternetLineasMayorAdtsInternasCerradas = (clone $lineasDeAdtsInternasCerradas)
+        ->where('GB_RECIBIDO', '>', 110);
         $lineasDeAdtsInternasExternasCerradas = (clone $lineasDeAdtsInternasCerradas)
         ->whereHas('adts', function ($colaDeConsulta) {
             $colaDeConsulta->where('ENTORNO', 'EXTERNA');
@@ -646,13 +660,13 @@ class TutoriasController extends Controller
         (clone $adtsCerradasInternas)->whereNotNull('FECHA_TERMINO_CONVENIO')
         ->where('FECHA_TERMINO_CONVENIO', '>=', Carbon::now()->toDateString());
 
-
-        // Creamos el array con el conteo
         $datosAdts = [
             //Datos Abiertas Totales
             'numeroAdtsAbiertas' => $adtsAbiertas->count(),
             'numeroAdtsExternas' => $adtsAbiertasExternas->count(),
             'numeroAdtsInternas' => $adtsAbiertasInternas->count(),
+            'consumoInternetLineasAbiertas' => $consumoInternetLineasAbiertas,
+            'consumoInternetLineasMayorAbiertas' => $consumoInternetLineasMayorAbiertas->count(),
             'numeroAdtsCerradasInternas' => $adtsCerradasInternas->count(),
             'numeroAdtsConLineasPagaEntidad' => $adtsConLineasPagaEntidad->count(),
             'numeroLineasPagaEntidad' => $lineasDeAdtsPagaEntidad->count(),
@@ -685,6 +699,8 @@ class TutoriasController extends Controller
             'adtsInternasPropias' => $adtsInternasPropias->get(),
             'numeroAdtsInternasPropias' => $numeroAdtsInternasPropias,
             'adtsInternasExternas' => $adtsInternasExternas->get(),
+            'consumoInternetLineasAdtsInternas' => $consumoInternetLineasAdtsInternas,
+            'consumoInternetLineasMayorAdtsInternas' => $consumoInternetLineasMayorAdtsInternas->count(),
             'numeroAdtsInternasExternas' => $numeroAdtsInternasExternas,
             'numeroLineasAdtsInternasExternas' => $adtsInternasExternasConLineas->count(),
             'numeroLineasAdtsInternasPropias' => $adtsInternasPropiasConLineas->count(),
@@ -710,6 +726,8 @@ class TutoriasController extends Controller
 
             //Datos Cerradas Internas
             'adtsCerradasInternas' => $adtsCerradasInternas->get(),
+            'consumoInternetLineasAdtsInternasCerradas' => $consumoInternetLineasAdtsInternasCerradas,
+            'consumoInternetLineasMayorAdtsInternasCerradas' => $consumoInternetLineasMayorAdtsInternasCerradas->count(),
             'numeroLineasAdtsInternasExternasCerradas' => 
             $adtsInternasExternasCerradasConLineas->count(),
             'numeroLineasAdtsInternasPropiasCerradas' => 
@@ -745,100 +763,191 @@ class TutoriasController extends Controller
             $conveniosIndeterminadosAdtsInternasCerradas->count()
         ];
 
-        return view('Tutorias.consultarEstatusBdt', compact('datosAdts'));
+        $datosQueSeCapturan = [
+
+            //BDTS Abiertas
+            'usuariosBdtsAcumulados' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_ACUMULADOS'),
+            'usuariosBdtsRegistraron' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_REGISTRARON'),
+            'usuariosBdtsTotales' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_TOTALES'),
+            'usuariosBdtsRegistrados' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_REGISTRADOS'),
+            'usuariosBdtsInscritos' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_INSCRITOS'),
+            'usuariosBdtsConstancias' => DatosCapturaEstadoTutoriasAbiertas::value('USUARIOS_BDTS_CONSTANCIAS'),
+            'ofertaEducativaNuevosTalleres' => DatosCapturaEstadoTutoriasAbiertas::value('OFERTA_EDUCATIVA_NUEVOS_TALLERES'),
+            'ofertaEducativaTalleres' => DatosCapturaEstadoTutoriasAbiertas::value('OFERTA_EDUCATIVA_TALLERES'),
+            'ofertaEducativaEnLinea' => DatosCapturaEstadoTutoriasAbiertas::value('OFERTA_EDUCATIVA_EN_LINEA'),
+            'ofertaEducativaTalleresEnDesarrollo' => DatosCapturaEstadoTutoriasAbiertas::value('OFERTA_EDUCATIVA_TALLERES_EN_DESARROLLO'),
+            'solicitudesRecibidas' => DatosCapturaEstadoTutoriasAbiertas::value('SOLICITUDES_RECIBIDAS'),
+            'solicitudBdt' => DatosCapturaEstadoTutoriasAbiertas::value('SOLICITUD_BDT'),
+            'solicitudReequipamiento' => DatosCapturaEstadoTutoriasAbiertas::value('SOLICITUD_REEQUIPAMIENTO'),
+            'solicitudRetiro' => DatosCapturaEstadoTutoriasAbiertas::value('SOLICITUD_RETIRO'),
+            'solicitudOtros' => DatosCapturaEstadoTutoriasAbiertas::value('SOLICITUD_OTROS'),
+
+            //BDTS Abiertas Internas
+            'internetInfinitumPersonalInterno'  => DatosCapturaEstadoTutoriasAbiertasInternas::value('INTERNET_INFINITUM_PERSONAL_INTERNO'),
+            'internetVozPersonalInterno' => DatosCapturaEstadoTutoriasAbiertasInternas::value('INTERNET_VOZ_PERSONAL_INTERNO'),
+            'internetEnlacePersonalExterno'=> DatosCapturaEstadoTutoriasAbiertasInternas::value('INTERNET_ENLACE_PERSONAL_EXTERNO'),
+            'internetVozPersonalExterno' => DatosCapturaEstadoTutoriasAbiertasInternas::value('INTERNET_VOZ_PERSONAL_EXTERNO'),
+            'mobiliarioMesas' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_MESAS'),
+            'mobiliarioSillas' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_SILLAS'),
+            'mobiliarioLibreros' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_LIBREROS'),
+            'mobiliarioTv' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_TV'),
+            'mobiliarioArchiveros' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_ARCHIVEROS'),
+            'mobiliarioRacks' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_RACKS'),
+            'mobiliarioCarritoCargador' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_CARRITO_CARGADOR'),
+            'usuariosAcumulado' => DatosCapturaEstadoTutoriasAbiertasInternas::value('USUARIOS_ACUMULADO'),
+            'gastoMensualAcumulado' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_ACUMULADO'),
+            'gastoMensual' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL'),
+            'gastoMensualRenta' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_RENTA'),
+            'gastoMensualAseo' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_ASEO'),
+            'gastoMensualLuz' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_LUZ'),
+            'gastoMensualVigilancia' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_VIGILANCIA'),
+            'gastoAguaPotable' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_AGUA_POTABLE'),
+            'gastoNominaOperacion' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_NOMINA_OPERACION'),
+            'gastoNominaGerencia' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_NOMINA_GERENCIA'),
+            'gastoMantenimientosTotal' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MANTENIMIENTOS_TOTAL'),
+            'gastoMantenimientosEjercido' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MANTENIMIENTOS_EJERCIDO'),
+
+            //BDTS CERRADAS INTERNAS
+            'internetInfinitumPersonalInternoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('INTERNET_INFINITUM_PERSONAL_INTERNO'),
+            'internetVozPersonalInternoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('INTERNET_VOZ_PERSONAL_INTERNO'),
+            'internetEnlacePersonalExternoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('INTERNET_ENLACE_PERSONAL_EXTERNO'),
+            'internetVozPersonalExternoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('INTERNET_VOZ_PERSONAL_EXTERNO'),
+            'mobiliarioMesasC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_MESAS'),
+            'mobiliarioSillasC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_SILLAS'),
+            'mobiliarioLibrerosC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_LIBREROS'),
+            'mobiliarioTvC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_TV'),
+            'mobiliarioArchiverosC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_ARCHIVEROS'),
+            'mobiliarioRacksC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_RACKS'),
+            'mobiliarioCarritoCargadorC' => DatosCapturaEstadoTutoriasCerradasInternas::value('MOBILIARIO_CARRITO_CARGADOR'),
+            'usuariosAcumuladoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('USUARIOS_ACUMULADO'),
+            'numeroUsuariosDelAnioBdts' => DatosCapturaEstadoTutoriasCerradasInternas::value('NUMERO_USUARIOS_DEL_ANIO_BDTS'),
+            'numeroUsuariosDelMesBdts' => DatosCapturaEstadoTutoriasCerradasInternas::value('NUMERO_USUARIOS_DEL_MES_BDTS'),
+            'numeroUsuariosDelAnioFiliales' => DatosCapturaEstadoTutoriasCerradasInternas::value('NUMERO_USUARIOS_DEL_ANIO_FILIALES'),
+            'numeroUsuariosDelMesFiliales' => DatosCapturaEstadoTutoriasCerradasInternas::value('NUMERO_USUARIOS_DEL_MES_FILIALES'),
+            'gastoMensualAcumuladoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL_ACUMULADO'),
+            'gastoMensualC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL'),
+            'gastoMensualRentaC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL_RENTA'),
+            'gastoMensualAseoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL_ASEO'),
+            'gastoMensualLuzC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL_LUZ'),
+            'gastoMensualVigilanciaC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MENSUAL_VIGILANCIA'),
+            'gastoAguaPotableC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_AGUA_POTABLE'),
+            'gastoNominaOperacionC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_NOMINA_OPERACION'),
+            'gastoNominaGerenciaC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_NOMINA_GERENCIA'),
+            'gastoMantenimientosTotalC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MANTENIMIENTOS_TOTAL'),
+            'gastoMantenimientosEjercidoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MANTENIMIENTOS_EJERCIDO'),
+
+        ];
+
+        return view('Tutorias.consultarEstatusBdt', compact('datosAdts', 'datosQueSeCapturan'));
 
     }
 
     public function registrarDatosEstatus(Request $request) {
 
+        $datosRequest = $request->all();
+
+        foreach ($datosRequest as $dato => $valor) {
+            $valorLimpio = str_replace(['$', ','], '', $valor);
+
+            if (str_contains($dato, 'gasto')) {
+                $datosRequest[$dato] = (float) $valorLimpio;
+            } else {
+                $datosRequest[$dato] = (int) $valorLimpio;
+            }
+        }
+
         $datosRegistrarTablaAbiertas = [
 
-            'USUARIOS_BDTS_ACUMULADOS' => $request->input('usuariosBdtsAcumulados'),
-            'USUARIOS_BDTS_REGISTRARON' => $request->input('usuariosBdtsRegistraron'),
-            'USUARIOS_BDTS_TOTALES' => $request->input('usuariosBdtsTotales'),
-            'USUARIOS_BDTS_REGISTRADOS' => $request->input('usuariosBdtsRegistrados'),
-            'USUARIOS_BDTS_INSCRITOS' => $request->input('usuariosBdtsInscritos'),
-            'USUARIOS_BDTS_CONSTANCIAS' => $request->input('usuariosBdtsConstancias'),
-            'OFERTA_EDUCATIVA_NUEVOS_TALLERES' => $request->input('ofertaEducativaNuevosTalleres'),
-            'OFERTA_EDUCATIVA_TALLERES' => $request->input('ofertaEducativaTalleres'),
-            'OFERTA_EDUCATIVA_EN_LINEA' => $request->input('ofertaEducativaEnLinea'),
-            'OFERTA_EDUCATIVA_TALLERES_EN_DESARROLLO' => $request->input('ofertaEducativaTalleresEnDesarrollo'),
-            'SOLICITUDES_RECIBIDAS' => $request->input('solicitudesRecibidas'),
-            'SOLICITUD_BDT' => $request->input('solicitudBdt'),
-            'SOLICITUD_REEQUIPAMIENTO' => $request->input('solicitudReequipamiento'),
-            'SOLICITUD_RETIRO' => $request->input('solicitudRetiro'),
-            'SOLICITUD_OTROS' => $request->input('solicitudOtros'),
+            'USUARIOS_BDTS_ACUMULADOS' => $datosRequest['usuariosBdtsAcumulados'],
+            'USUARIOS_BDTS_REGISTRARON' => $datosRequest['usuariosBdtsRegistraron'],
+            'USUARIOS_BDTS_TOTALES' => $datosRequest['usuariosBdtsTotales'],
+            'USUARIOS_BDTS_REGISTRADOS' => $datosRequest['usuariosBdtsRegistrados'],
+            'USUARIOS_BDTS_INSCRITOS' => $datosRequest['usuariosBdtsInscritos'],
+            'USUARIOS_BDTS_CONSTANCIAS' => $datosRequest['usuariosBdtsConstancias'],
+            'OFERTA_EDUCATIVA_NUEVOS_TALLERES' => $datosRequest['ofertaEducativaNuevosTalleres'],
+            'OFERTA_EDUCATIVA_TALLERES' => $datosRequest['ofertaEducativaTalleres'],
+            'OFERTA_EDUCATIVA_EN_LINEA' => $datosRequest['ofertaEducativaEnLinea'],
+            'OFERTA_EDUCATIVA_TALLERES_EN_DESARROLLO' => $datosRequest['ofertaEducativaTalleresEnDesarrollo'],
+            'SOLICITUDES_RECIBIDAS' => $datosRequest['solicitudesRecibidas'],
+            'SOLICITUD_BDT' => $datosRequest['solicitudBdt'],
+            'SOLICITUD_REEQUIPAMIENTO' => $datosRequest['solicitudReequipamiento'],
+            'SOLICITUD_RETIRO' => $datosRequest['solicitudRetiro'],
+            'SOLICITUD_OTROS' => $datosRequest['solicitudOtros'],
 
         ];
 
-        /*$datosRegistrarTablaAbiertasInternas = [
+        $datosRegistrarTablaAbiertasInternas = [
 
-            'INTERNET_PROMEDIO_INTERNAS' => $request->input('internetPromedioInternas'),
-            'INTERNET_BAJO_INTERNAS' => $request->input('internetBajoInternas'),
-            'INTERNET_ALTO_INTERNAS' => $request->input('internetAltoInternas'),
-            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $request->input('internetInfinitumPersonalInterno'),
-            'INTERNET_VOZ_PERSONAL_INTERNO' => $request->input('internetVozPersonalInterno'),
-            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $request->input('internetEnlacePersonalExterno'),
-            'INTERNET_VOZ_PERSONAL_EXTERNO' => $request->input('internetVozPersonalExterno'),
-            'MOBILIARIO_MESAS' => $request->input('mobiliarioMesas'),
-            'MOBILIARIO_SILLAS' => $request->input('mobiliarioSillas'),
-            'MOBILIARIO_LIBREROS' => $request->input('mobiliarioLibreros'),
-            'MOBILIARIO_TV' => $request->input('mobiliarioTv'),
-            'MOBILIARIO_ARCHIVEROS' => $request->input('mobiliarioArchiveros'),
-            'MOBILIARIO_RACKS' => $request->input('mobiliarioRacks'),
-            'MOBILIARIO_CARRITO_CARGADOR' => $request->input('mobiliarioCarritoCargador'),
-            'USUARIOS_ACUMULADO' => $request->input('usuariosAcumulado'),
-            'GASTO_MENSUAL_ACUMULADO' => $request->input('gastoMensualAcumulado'),
-            'GASTO_MENSUAL' => $request->input('gastoMensual'),
-            'GASTO_MENSUAL_RENTA' => $request->input('gastoMensualRenta'),
-            'GASTO_MENSUAL_ASEO' => $request->input('gastoMensualAseo'),
-            'GASTO_MENSUAL_LUZ' => $request->input('gastoMensualLuz'),
-            'GASTO_MENSUAL_VIGILANCIA' => $request->input('gastoMensualVigilancia'),
-            'GASTO_AGUA_POTABLE' => $request->input('gastoAguaPotable'),
-            'GASTO_NOMINA_OPERACION' => $request->input('gastoNominaOperacion'),
-            'GASTO_NOMINA_GERENCIA' => $request->input('gastoNominaGerencia'),
-            'GASTO_MANTENIMIENTOS_TOTAL' => $request->input('gastoMantenimientosTotal'),
-            'GASTO_MANTENIMIENTOS_EJERCIDO' => $request->input('gastoMantenimientosEjercido'),
+            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $datosRequest['internetInfinitumPersonalInterno'],
+            'INTERNET_VOZ_PERSONAL_INTERNO' => $datosRequest['internetVozPersonalInterno'],
+            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $datosRequest['internetEnlacePersonalExterno'],
+            'INTERNET_VOZ_PERSONAL_EXTERNO' => $datosRequest['internetVozPersonalExterno'],
+            'MOBILIARIO_MESAS' => $datosRequest['mobiliarioMesas'],
+            'MOBILIARIO_SILLAS' => $datosRequest['mobiliarioSillas'],
+            'MOBILIARIO_LIBREROS' => $datosRequest['mobiliarioLibreros'],
+            'MOBILIARIO_TV' => $datosRequest['mobiliarioTv'],
+            'MOBILIARIO_ARCHIVEROS' => $datosRequest['mobiliarioArchiveros'],
+            'MOBILIARIO_RACKS' => $datosRequest['mobiliarioRacks'],
+            'MOBILIARIO_CARRITO_CARGADOR' => $datosRequest['mobiliarioCarritoCargador'],
+            'USUARIOS_ACUMULADO' => $datosRequest['usuariosAcumulado'],
+            'GASTO_MENSUAL_ACUMULADO' => $datosRequest['gastoMensualAcumulado'],
+            'GASTO_MENSUAL' => $datosRequest['gastoMensual'],
+            'GASTO_MENSUAL_RENTA' => $datosRequest['gastoMensualRenta'],
+            'GASTO_MENSUAL_ASEO' => $datosRequest['gastoMensualAseo'],
+            'GASTO_MENSUAL_LUZ' => $datosRequest['gastoMensualLuz'],
+            'GASTO_MENSUAL_VIGILANCIA' => $datosRequest['gastoMensualVigilancia'],
+            'GASTO_AGUA_POTABLE' => $datosRequest['gastoAguaPotable'],
+            'GASTO_NOMINA_OPERACION' => $datosRequest['gastoNominaOperacion'],
+            'GASTO_NOMINA_GERENCIA' => $datosRequest['gastoNominaGerencia'],
+            'GASTO_MANTENIMIENTOS_TOTAL' => $datosRequest['gastoMantenimientosTotal'],
+            'GASTO_MANTENIMIENTOS_EJERCIDO' => $datosRequest['gastoMantenimientosEjercido'],
 
         ];
 
         $datosRegistrarTablaCerradasInternas = [
             
-            'INTERNET_PROMEDIO_INTERNAS' => $request->input('internetPromedioInternasC'),
-            'INTERNET_BAJO_INTERNAS' => $request->input('internetBajoInternasC'),
-            'INTERNET_ALTO_INTERNAS' => $request->input('internetAltoInternasC'),
-            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $request->input('internetInfinitumPersonalInternoC'),
-            'INTERNET_VOZ_PERSONAL_INTERNO' => $request->input('internetVozPersonalInternoC'),
-            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $request->input('internetEnlacePersonalExternoC'),
-            'INTERNET_VOZ_PERSONAL_EXTERNO' => $request->input('internetVozPersonalExternoC'),
-            'MOBILIARIO_MESAS' => $request->input('mobiliarioMesasC'),
-            'MOBILIARIO_SILLAS' => $request->input('mobiliarioSillasC'),
-            'MOBILIARIO_LIBREROS' => $request->input('mobiliarioLibrerosC'),
-            'MOBILIARIO_TV' => $request->input('mobiliarioTvC'),
-            'MOBILIARIO_ARCHIVEROS' => $request->input('mobiliarioArchiverosC'),
-            'MOBILIARIO_RACKS' => $request->input('mobiliarioRacksC'),
-            'MOBILIARIO_CARRITO_CARGADOR' => $request->input('mobiliarioCarritoCargadorC'),
-            'USUARIOS_ACUMULADO' => $request->input('usuariosAcumuladoC'),
-            'NUMERO_USUARIOS_DEL_ANIO_BDTS' => $request->input('numeroUsuariosDelAnioBdtsC'),
-            'NUMERO_USUARIOS_DEL_MES_BDTS' => $request->input('numeroUsuariosDelMesBdtsC'),
-            'NUMERO_USUARIOS_DEL_ANIO_FILIALES' => $request->input('numeroUsuariosDelAnioFilialesC'),
-            'NUMERO_USUARIOS_DEL_MES_FILIALES' => $request->input('numeroUsuariosDelMesFilialesC'),
-            'GASTO_MENSUAL_ACUMULADO' => $request->input('gastoMensualAcumuladoC'),
-            'GASTO_MENSUAL' => $request->input('gastoMensualC'),
-            'GASTO_MENSUAL_RENTA' => $request->input('gastoMensualRentaC'),
-            'GASTO_MENSUAL_ASEO' => $request->input('gastoMensualAseoC'),
-            'GASTO_MENSUAL_LUZ' => $request->input('gastoMensualLuzC'),
-            'GASTO_MENSUAL_VIGILANCIA' => $request->input('gastoMensualVigilanciaC'),
-            'GASTO_AGUA_POTABLE' => $request->input('gastoAguaPotableC'),
-            'GASTO_NOMINA_OPERACION' => $request->input('gastoNominaOperacionC'),
-            'GASTO_NOMINA_GERENCIA' => $request->input('gastoNominaGerenciaC'),
-            'GASTO_MANTENIMIENTOS_TOTAL' => $request->input('gastoMantenimientosTotalC'),
-            'GASTO_MANTENIMIENTOS_EJERCIDO' => $request->input('gastoMantenimientosEjercidoC'),
-        ];*/
+            'INTERNET_INFINITUM_PERSONAL_INTERNO' => $datosRequest['internetInfinitumPersonalInternoC'],
+            'INTERNET_VOZ_PERSONAL_INTERNO' => $datosRequest['internetVozPersonalInternoC'],
+            'INTERNET_ENLACE_PERSONAL_EXTERNO' => $datosRequest['internetEnlacePersonalExternoC'],
+            'INTERNET_VOZ_PERSONAL_EXTERNO' => $datosRequest['internetVozPersonalExternoC'],
+            'MOBILIARIO_MESAS' => $datosRequest['mobiliarioMesasC'],
+            'MOBILIARIO_SILLAS' => $datosRequest['mobiliarioSillasC'],
+            'MOBILIARIO_LIBREROS' => $datosRequest['mobiliarioLibrerosC'],
+            'MOBILIARIO_TV' => $datosRequest['mobiliarioTvC'],
+            'MOBILIARIO_ARCHIVEROS' => $datosRequest['mobiliarioArchiverosC'],
+            'MOBILIARIO_RACKS' => $datosRequest['mobiliarioRacksC'],
+            'MOBILIARIO_CARRITO_CARGADOR' => $datosRequest['mobiliarioCarritoCargadorC'],
+            'USUARIOS_ACUMULADO' => $datosRequest['usuariosAcumuladoC'],
+            'NUMERO_USUARIOS_DEL_ANIO_BDTS' => $datosRequest['numeroUsuariosDelAnioBdts'],
+            'NUMERO_USUARIOS_DEL_MES_BDTS' => $datosRequest['numeroUsuariosDelMesBdts'],
+            'NUMERO_USUARIOS_DEL_ANIO_FILIALES' => $datosRequest['numeroUsuariosDelAnioFiliales'],
+            'NUMERO_USUARIOS_DEL_MES_FILIALES' => $datosRequest['numeroUsuariosDelMesFiliales'],
+            'GASTO_MENSUAL_ACUMULADO' => $datosRequest['gastoMensualAcumuladoC'],
+            'GASTO_MENSUAL' => $datosRequest['gastoMensualC'],
+            'GASTO_MENSUAL_RENTA' => $datosRequest['gastoMensualRentaC'],
+            'GASTO_MENSUAL_ASEO' => $datosRequest['gastoMensualAseoC'],
+            'GASTO_MENSUAL_LUZ' => $datosRequest['gastoMensualLuzC'],
+            'GASTO_MENSUAL_VIGILANCIA' => $datosRequest['gastoMensualVigilanciaC'],
+            'GASTO_AGUA_POTABLE' => $datosRequest['gastoAguaPotableC'],
+            'GASTO_NOMINA_OPERACION' => $datosRequest['gastoNominaOperacionC'],
+            'GASTO_NOMINA_GERENCIA' => $datosRequest['gastoNominaGerenciaC'],
+            'GASTO_MANTENIMIENTOS_TOTAL' => $datosRequest['gastoMantenimientosTotalC'],
+            'GASTO_MANTENIMIENTOS_EJERCIDO' => $datosRequest['gastoMantenimientosEjercidoC'],
+        ];
 
         DatosCapturaEstadoTutoriasAbiertas::updateOrCreate(
             ['id' => 1],
             $datosRegistrarTablaAbiertas 
+        );
+
+        DatosCapturaEstadoTutoriasAbiertasInternas::updateOrCreate(
+            ['id' => 1],
+            $datosRegistrarTablaAbiertasInternas
+        );
+
+        DatosCapturaEstadoTutoriasCerradasInternas::updateOrCreate(
+            ['id' => 1],
+            $datosRegistrarTablaCerradasInternas
         );
 
         return response()->json([

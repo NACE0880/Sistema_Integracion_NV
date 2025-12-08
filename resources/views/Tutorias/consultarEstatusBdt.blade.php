@@ -110,7 +110,7 @@
                         </tr>
                         <tr class="table-info">
                             <th class="text-center" colspan="9">
-                                1. Internet (uso promedio del mes: {{ $datosQueSeCapturan['internetPromedioAbiertas'] ?? '-' }} GB, {{ $datosQueSeCapturan['internetBajoAbiertas'] ?? '-' }} &gt; {{ $datosQueSeCapturan['internetAltoAbiertas'] ?? '-' }} GB)
+                                1. Internet (uso promedio del mes: {{ number_format($datosAdts['consumoInternetLineasAbiertas'], 2) ?? '-' }} GB, {{ $datosAdts['consumoInternetLineasMayorAbiertas'] ?? '-' }} &gt; 110 GB)
                             </th>
                         </tr>
                         <tr>
@@ -402,7 +402,7 @@
                         </tr>
                         <tr class="table-info">
                             <th class="text-center" colspan="9">
-                                1. Internet (uso promedio del mes: {{ $datosQueSeCapturan['internetPromedioInternas'] ?? '-' }} GB, {{ $datosQueSeCapturan['internetBajoInternas'] ?? '-' }} &gt; {{ $datosQueSeCapturan['internetAltoInternas'] ?? '-' }} GB)
+                                1. Internet (uso promedio del mes: {{ number_format($datosAdts['consumoInternetLineasAdtsInternas'], 2) ?? '-' }} GB, {{ $datosAdts['consumoInternetLineasMayorAdtsInternas'] ?? '-' }} &gt; 110 GB)
                             </th>
                         </tr>
                         <tr>
@@ -410,7 +410,7 @@
                                 {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInterno'] ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInterno'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input id="internetVozPersonalExterno" class="d-inline-block w-auto" name="internetVozPersonalExterno" value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExterno" name="internetVozPersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -610,7 +610,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                6. Gasto mensual $<input type="text" class="d-inline-block w-auto" id="gastoMensual" name="gastoMensual" data-capturar value="{{ $datosQueSeCapturan['gastoMensual'] ?? '-' }}"> / acumulado 2025 $<input type="text" class="d-inline-block w-auto" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumulado'] ?? '-' }}">
+                                6. Gasto mensual <input type="text" class="d-inline-block w-auto" id="gastoMensual" name="gastoMensual" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensual'], 2, '.', ',') ?? '-' }}"> / acumulado 2025 <input type="text" class="d-inline-block w-auto" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAcumulado'], 2, '.', ',') ?? '-' }}">
                             </th>
                         </tr>
                         <tr>
@@ -629,16 +629,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualRenta" name="gastoMensualRenta" data-capturar value="{{ $datosQueSeCapturan['gastoMensualRenta'] ?? '-' }}">
+                                <input type="text" id="gastoMensualRenta" name="gastoMensualRenta" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualRenta'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualAseo" name="gastoMensualAseo" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAseo'] ?? '-' }}">
+                                <input type="text" id="gastoMensualAseo" name="gastoMensualAseo" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAseo'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualLuz" name="gastoMensualLuz" data-capturar value="{{ $datosQueSeCapturan['gastoMensualLuz'] ?? '-' }}">
+                                <input type="text" id="gastoMensualLuz" name="gastoMensualLuz" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualLuz'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoMensualVigilancia" name="gastoMensualVigilancia" data-capturar value="{{ $datosQueSeCapturan['gastoMensualVigilancia'] ?? '-' }}">
+                                <input type="text" id="gastoMensualVigilancia" name="gastoMensualVigilancia" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualVigilancia'], 2, '.', ',') ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -654,13 +654,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoAguaPotable" name="gastoAguaPotable" data-capturar value="{{ $datosQueSeCapturan['gastoAguaPotable'] ?? '-' }}">
+                                <input type="text" id="gastoAguaPotable" name="gastoAguaPotable" data-capturar value="${{ number_format($datosQueSeCapturan['gastoAguaPotable'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="4">
-                                <input type="text" id="gastoNominaOperacion" name="gastoNominaOperacion" data-capturar value="{{ $datosQueSeCapturan['gastoNominaOperacion'] ?? '-' }}">
+                                <input type="text" id="gastoNominaOperacion" name="gastoNominaOperacion" data-capturar value="${{ number_format($datosQueSeCapturan['gastoNominaOperacion'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoNominaGerencia" name="gastoNominaGerencia" data-capturar value="{{ $datosQueSeCapturan['gastoNominaGerencia'] ?? '-' }}">
+                                <input type="text" id="gastoNominaGerencia" name="gastoNominaGerencia" data-capturar value="${{ number_format($datosQueSeCapturan['gastoNominaGerencia'], 2, '.', ',') ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -671,13 +671,13 @@
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMantenimientosTotal" name="gastoMantenimientosTotal" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosTotal'] ?? '-' }}">
+                                <input type="text" id="gastoMantenimientosTotal" name="gastoMantenimientosTotal" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMantenimientosTotal'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <th class="text-center table-info" colspan="2">
                                 Ejercido:
                             </th>
                             <th class="text-center" colspan="2"><!-- eliminé table-info (color celda)-->
-                                <input type="text" id="gastoMantenimientosEjercido" name="gastoMantenimientosEjercido" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosEjercido'] ?? '-' }}">
+                                <input type="text" id="gastoMantenimientosEjercido" name="gastoMantenimientosEjercido" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMantenimientosEjercido'], 2, '.', ',') ?? '-' }}">
                             </th>
                         </tr>
                         <tr>
@@ -712,7 +712,7 @@
                         </tr>
                         <tr class="table-secondary">
                             <th class="text-center" colspan="9">
-                                1. Internet (uso promedio del mes: {{ $datosQueSeCapturan['internetPromedioInternas'] ?? '-' }} GB, {{ $datosQueSeCapturan['internetBajoInternas'] ?? '-' }} &gt; {{ $datosQueSeCapturan['internetAltoInternas'] ?? '-' }} GB)
+                                1. Internet (uso promedio del mes: {{ number_format($datosAdts['consumoInternetLineasAdtsInternasCerradas'], 2) ?? '-' }} GB, {{ $datosAdts['consumoInternetLineasMayorAdtsInternasCerradas'] ?? '-' }} &gt; 110 GB)
                             </th>
                         </tr>
                         <tr>
@@ -930,7 +930,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-secondary" colspan="9">
-                                6. Gasto mensual $<input type="text" class="d-inline-block w-auto" id="gastoMensualC" name="gastoMensualC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualC'] ?? '-' }}"> / acumulado 2025 $<input type="text" class="d-inline-block w-auto" id="gastoMensualAcumuladoC" name="gastoMensualAcumuladoC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAcumuladoC'] ?? '-' }}">
+                                6. Gasto mensual <input type="text" class="d-inline-block w-auto" id="gastoMensualC" name="gastoMensualC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualC'], 2, '.', ',') ?? '-' }}"> / acumulado 2025 <input type="text" class="d-inline-block w-auto" id="gastoMensualAcumuladoC" name="gastoMensualAcumuladoC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAcumuladoC'], 2, '.', ',') ?? '-' }}">
                             </th>
                         </tr>
                         <tr>
@@ -949,16 +949,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualRentaC" name="gastoMensualRentaC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualRentaC'] ?? '-' }}">
+                                <input type="text" id="gastoMensualRentaC" name="gastoMensualRentaC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualRentaC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualAseoC" name="gastoMensualAseoC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualAseoC'] ?? '-' }}">
+                                <input type="text" id="gastoMensualAseoC" name="gastoMensualAseoC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAseoC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMensualLuzC" name="gastoMensualLuzC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualLuzC'] ?? '-' }}">
+                                <input type="text" id="gastoMensualLuzC" name="gastoMensualLuzC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualLuzC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoMensualVigilanciaC" name="gastoMensualVigilanciaC" data-capturar value="{{ $datosQueSeCapturan['gastoMensualVigilanciaC'] ?? '-' }}">
+                                <input type="text" id="gastoMensualVigilanciaC" name="gastoMensualVigilanciaC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualVigilanciaC'], 2, '.', ',') ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -974,13 +974,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoAguaPotableC" name="gastoAguaPotableC" data-capturar value="{{ $datosQueSeCapturan['gastoAguaPotableC'] ?? '-' }}">
+                                <input type="text" id="gastoAguaPotableC" name="gastoAguaPotableC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoAguaPotableC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoNominaOperacionC" name="gastoNominaOperacionC" data-capturar value="{{ $datosQueSeCapturan['gastoNominaOperacionC'] ?? '-' }}">
+                                <input type="text" id="gastoNominaOperacionC" name="gastoNominaOperacionC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoNominaOperacionC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="gastoNominaGerenciaC" name="gastoNominaGerenciaC" data-capturar value="{{ $datosQueSeCapturan['gastoNominaGerenciaC'] ?? '-' }}">
+                                <input type="text" id="gastoNominaGerenciaC" name="gastoNominaGerenciaC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoNominaGerenciaC'], 2, '.', ',') ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -991,13 +991,13 @@
                                 Total:
                             </th>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMantenimientosTotalC" name="gastoMantenimientosTotalC" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosTotalC'] ?? '-' }}">
+                                <input type="text" id="gastoMantenimientosTotalC" name="gastoMantenimientosTotalC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMantenimientosTotalC'], 2, '.', ',') ?? '-' }}">
                             </td>
                             <th class="text-center table-secondary" colspan="2">
                                 Ejercido:
                             </th>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="gastoMantenimientosEjercidoC" name="gastoMantenimientosEjercidoC" data-capturar value="{{ $datosQueSeCapturan['gastoMantenimientosEjercidoC'] ?? '-' }}">
+                                <input type="text" id="gastoMantenimientosEjercidoC" name="gastoMantenimientosEjercidoC" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMantenimientosEjercidoC'], 2, '.', ',') ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -1082,6 +1082,20 @@
                     }
                 })
                 .catch(err => console.error('Error:', err));
+            });
+
+            document.querySelectorAll('[data-capturar]').forEach(function(input) {
+                let valorOriginal = input.value;
+
+                input.addEventListener('focus', function() {
+                    input.value = '';
+                });
+
+                input.addEventListener('blur', function() {
+                    if (input.value.trim() === '') {
+                        input.value = valorOriginal;
+                    }
+                });
             });
         </script>
 
