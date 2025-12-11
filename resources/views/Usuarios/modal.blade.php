@@ -42,7 +42,7 @@
                                 <label for="contrasena">Contraseña</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#contrasena">
-                                <input type="text" class="form-control" id="contrasena" name="contrasena" maxlength="8">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena" autocomplete="off" minlength="8" maxlength="8">
                             </div>
                         </div>  
                         <div class="form-row">

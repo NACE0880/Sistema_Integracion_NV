@@ -398,7 +398,9 @@ class ControladorPanelUsuarios extends Controller
                 $chat_id = $usuario->userable->TELEGRAM;
                 $payload = "<i>{$usuarioConSesionIniciada->userable->NOMBRE}</i>{$mensaje}{$usuarioRegistrado->userable->NOMBRE}";
                 try {
-                    $telegram->sendText($chat_id, $payload, ['parse_mode' => 'HTML']);
+                    if ($chat_id != '100000000000001') {
+                        $telegram->sendText($chat_id, $payload, ['parse_mode' => 'HTML']);
+                    }
                 } catch (\Exception $e) {
                     \Log::error('Error enviando a Telegram: ' . $e->getMessage());
                 }

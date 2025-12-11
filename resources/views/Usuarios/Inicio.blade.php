@@ -47,6 +47,17 @@
         </button>
     </div>
     @include('Usuarios.modal')
+    <div id="overlayBloqueo" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255,255,255,0.4);
+        backdrop-filter: blur(2px);
+        z-index: 9999;
+        display: none;
+    "></div>
 @endsection
 
 @section('js')
@@ -180,6 +191,8 @@
             });
 
             $('#botonRegistrar').on('click', function (e) {
+                $('#overlayBloqueo').show();
+
                 const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
                 const valorAlRegistrarNombre = modalActualizacionUsuarios.find('#nombre').val();
                 const valorAlRegistrarCorreo = modalActualizacionUsuarios.find('#correo').val();
@@ -217,6 +230,7 @@
                 ) {
                     e.preventDefault();
                     alert('Por favor rellene todos los campos requeridos.');
+                    $('#overlayBloqueo').hide();
                     return;
                 }
 
@@ -224,6 +238,8 @@
             });
 
             $('#botonModificar').on('click', function (e) {
+                $('#overlayBloqueo').show();
+
                 const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
                 const valorAlModificarNombre = modalActualizacionUsuarios.find('#nombre').val();
                 const valorAlModificarCorreo = modalActualizacionUsuarios.find('#correo').val();
@@ -259,6 +275,7 @@
                 ) {
                     e.preventDefault();
                     alert('Modifique algún campo primero.');
+                    $('#overlayBloqueo').hide();
                     return;
                 }
 
@@ -266,6 +283,8 @@
             });
 
             $('#botonEliminar').on('click', function (e) {
+                $('#overlayBloqueo').show();
+
                 $('#formularioModalUsuarios').attr('action', baseUrlEliminacion + '/' + nombreClaveUsuario);
             });
 
