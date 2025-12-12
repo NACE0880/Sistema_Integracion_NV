@@ -208,7 +208,7 @@
 
                 <div class="row g-3">
                     <div class="col-6">
-                        <button type="submit" class="btn btn-primary btn-custom"  onclick="cambiarBG();">Finalizar</button>
+                        <button type="submit" class="btn btn-primary btn-custom">Finalizar</button>
                     </div>
                     <div class="col-6">
                         <a  class="btn btn-danger btn-custom" href="{{ route('consultar.tutoria') }}">Cancelar</a>

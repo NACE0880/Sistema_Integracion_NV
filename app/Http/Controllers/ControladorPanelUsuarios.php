@@ -329,6 +329,11 @@ class ControladorPanelUsuarios extends Controller
             if($request->has('casa_director')){
                 $mensajeModificacion .= "\n" . $casaAnteriorUsuario . ' -> ' . $request->input('casa_director') . "\n";
             }
+            if($request->has('rolSinCargos')){
+                foreach($roles as $rol) {
+                    $mensajeModificacion .= "\n" . "Se agregó el rol: ". $rol . "\n";
+                }
+            }
             if($mensajeModificacion){
                 $mensaje = ' modificó: ' . "\n" . $mensajeModificacion . "\n" . "del usuario de: ";
             } else{
