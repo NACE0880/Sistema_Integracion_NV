@@ -723,6 +723,7 @@ class TutoriasController extends Controller
             'numeroConveniosVencidosAdtsInternas' => $conveniosVencidosAdtsInternas->count(),
             'conveniosVigentesAdtsInternas' => $conveniosVigentesAdtsInternas->get(),
             'numeroConveniosVigentesAdtsInternas' => $conveniosVigentesAdtsInternas->count(),
+            'adtsAbiertasInternas' => $adtsAbiertasInternas->get(),
 
             //Datos Cerradas Internas
             'adtsCerradasInternas' => $adtsCerradasInternas->get(),

@@ -594,20 +594,22 @@
                                 %
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-center bg-danger" colspan="4">
-                                -
-                            </td>
-                            <td class="text-center bg-danger" colspan="2">
-                                -
-                            </td>
-                            <td class="text-center bg-danger" colspan="2">
-                                -
-                            </td>
-                            <td class="text-center bg-danger">
-                                -
-                            </td>
-                        </tr>
+                        @foreach($datosAdts['adtsAbiertasInternas'] as $adtAbiertaInterna)
+                            <tr>
+                                <td class="text-center bg-danger" colspan="4">
+                                    {{ $adtAbiertaInterna->NOMBRE }}
+                                </td>
+                                <td class="text-center bg-danger" colspan="2">
+                                    -
+                                </td>
+                                <td class="text-center bg-danger" colspan="2">
+                                    -
+                                </td>
+                                <td class="text-center bg-danger">
+                                    -
+                                </td>
+                            </tr>
+                        @endforeach
                         <tr>
                             <th class="text-center table-info" colspan="9">
                                 6. Gasto mensual <input type="text" class="d-inline-block w-auto" id="gastoMensual" name="gastoMensual" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensual'], 2, '.', ',') ?? '-' }}"> / acumulado 2025 <input type="text" class="d-inline-block w-auto" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAcumulado'], 2, '.', ',') ?? '-' }}">
