@@ -596,16 +596,16 @@
                         </tr>
                         @foreach($datosAdts['adtsAbiertasInternas'] as $adtAbiertaInterna)
                             <tr>
-                                <td class="text-center bg-danger" colspan="4">
+                                <td class="text-center" colspan="4">
                                     {{ $adtAbiertaInterna->NOMBRE }}
                                 </td>
-                                <td class="text-center bg-danger" colspan="2">
-                                    -
+                                <td class="text-center" colspan="2">
+                                    <input type="number" class="d-inline-block" style="width: 50%;" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_meta" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]" data-capturar value="0">
                                 </td>
-                                <td class="text-center bg-danger" colspan="2">
-                                    -
+                                <td class="text-center" colspan="2">
+                                    <input type="number" class="d-inline-block" style="width: 50%" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_real" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]" data-capturar value="0">
                                 </td>
-                                <td class="text-center bg-danger">
+                                <td class="text-center">
                                     -
                                 </td>
                             </tr>
@@ -1062,11 +1062,44 @@
                 }
 
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                const datos = {};
                 const url = "{{ route('registrar.datos.estatus.tutorias') }}";
 
+                // ✅ 1. Estructura base
+                const datos = {
+                    usuarios: {}
+                };
+
+                // ✅ 2. Inputs del grupo usuarios
                 document.querySelectorAll('input[data-capturar]').forEach(input => {
-                    datos[input.id] = input.value;
+
+                    const nombreInput = input.getAttribute('name');
+
+                    // Solo procesamos los que pertenecen a usuarios
+                    if (nombreInput.startsWith("usuarios[")) {
+
+                        // Extraemos casa y campo
+                        const match = nombreInput.match(/usuarios\[(.+?)\]\[(.+?)\]/);
+                        if (!match) return;
+
+                        const casa = match[1];
+                        const campo = match[2];
+
+                        if (!datos.usuarios[casa]) {
+                            datos.usuarios[casa] = {};
+                        }
+
+                        datos.usuarios[casa][campo] = input.value;
+                    }
+                });
+
+                // ✅ 3. Inputs normales (los que NO son usuarios)
+                document.querySelectorAll('input[data-capturar]').forEach(input => {
+
+                    const nombre = input.getAttribute('name');
+
+                    if (!nombre.startsWith("usuarios[")) {
+                        datos[nombre] = input.value;
+                    }
                 });
 
                 fetch(url, {

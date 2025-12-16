@@ -18,6 +18,7 @@ use App\contactos;
 use App\DatosCapturaEstadoTutoriasAbiertas;
 use App\DatosCapturaEstadoTutoriasAbiertasInternas;
 use App\DatosCapturaEstadoTutoriasCerradasInternas;
+use App\UsuariosEstadoTutoriasAbiertasInternas;
 
 use DateTime;
 
@@ -845,9 +846,20 @@ class TutoriasController extends Controller
 
     public function registrarDatosEstatus(Request $request) {
 
-        $datosRequest = $request->all();
+        $adtsAbiertasInternas = adts::whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA'])
+        ->where('INICIATIVA', 'CASA TELMEX');
+
+        $datosRequest = $request->input();
 
         foreach ($datosRequest as $dato => $valor) {
+
+        // ✅ NO tocar el array de usuarios
+        if ($dato === 'usuarios') {
+            continue;
+        }
+
+        // ✅ Solo procesar strings
+        if (is_string($valor)) {
             $valorLimpio = str_replace(['$', ','], '', $valor);
 
             if (str_contains($dato, 'gasto')) {
@@ -856,6 +868,7 @@ class TutoriasController extends Controller
                 $datosRequest[$dato] = (int) $valorLimpio;
             }
         }
+    }
 
         $datosRegistrarTablaAbiertas = [
 
@@ -935,6 +948,17 @@ class TutoriasController extends Controller
             'GASTO_MANTENIMIENTOS_TOTAL' => $datosRequest['gastoMantenimientosTotalC'],
             'GASTO_MANTENIMIENTOS_EJERCIDO' => $datosRequest['gastoMantenimientosEjercidoC'],
         ];
+
+        foreach ($datosRequest['usuarios'] as $nombreCasa => $tipoDato) {
+
+            UsuariosEstadoTutoriasAbiertasInternas::updateOrCreate(
+                ['NOMBRE' => $nombreCasa], // ← criterio de búsqueda
+                [
+                    'META' => $tipoDato['meta'],
+                    'REAL' => $tipoDato['real'],
+                ]
+            );
+        }
 
         DatosCapturaEstadoTutoriasAbiertas::updateOrCreate(
             ['id' => 1],
