@@ -90,10 +90,10 @@
                             <td class="text-center" colspan="5">
                                 {{ $datosAdts['numeroAdtsExternas'] ?? '-' }} Externas
                             </td>
-                            <td class="text-center bg-danger" colspan="2">
+                            <td class="text-center" style="color: red;" colspan="2">
                                 -
                             </td>
-                            <td class="text-center bg-danger" colspan="2">
+                            <td class="text-center" style="color: red;" colspan="2">
                                 -
                             </td>
                         </tr>
@@ -101,10 +101,10 @@
                             <td class="text-center" colspan="5">
                                 {{ $datosAdts['numeroAdtsInternas'] ?? '-' }} Internas
                             </td>
-                            <td class="text-center bg-danger" colspan="2">
+                            <td class="text-center" style="color: red;" colspan="2">
                                 -
                             </td>
-                            <td class="text-center bg-danger" colspan="2">
+                            <td class="text-center" style="color: red;" colspan="2">
                                 -
                             </td>
                         </tr>
