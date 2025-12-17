@@ -557,6 +557,8 @@ class TutoriasController extends Controller
         $relacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas = 
         ($totalEquipamientoFuncionalAdtsInternas * 100) / ($totalEquipamientoInicialAdtsInternas);
 
+        $numeroUsuariosMetaRealAdts = UsuariosEstadoTutoriasAbiertasInternas::all();
+
         $conveniosIndeterminadosAdtsInternas = 
         (clone $adtsAbiertasInternas)->whereNull('FECHA_TERMINO_CONVENIO');
         $conveniosVencidosAdtsInternas = 
@@ -797,6 +799,7 @@ class TutoriasController extends Controller
             'mobiliarioRacks' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_RACKS'),
             'mobiliarioCarritoCargador' => DatosCapturaEstadoTutoriasAbiertasInternas::value('MOBILIARIO_CARRITO_CARGADOR'),
             'usuariosAcumulado' => DatosCapturaEstadoTutoriasAbiertasInternas::value('USUARIOS_ACUMULADO'),
+            'numeroDeUsuariosMetaRealAdts' => $numeroUsuariosMetaRealAdts->keyby('NOMBRE'),
             'gastoMensualAcumulado' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_ACUMULADO'),
             'gastoMensual' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL'),
             'gastoMensualRenta' => DatosCapturaEstadoTutoriasAbiertasInternas::value('GASTO_MENSUAL_RENTA'),
@@ -839,7 +842,7 @@ class TutoriasController extends Controller
             'gastoMantenimientosEjercidoC' => DatosCapturaEstadoTutoriasCerradasInternas::value('GASTO_MANTENIMIENTOS_EJERCIDO'),
 
         ];
-
+        
         return view('Tutorias.consultarEstatusBdt', compact('datosAdts', 'datosQueSeCapturan'));
 
     }
@@ -853,12 +856,10 @@ class TutoriasController extends Controller
 
         foreach ($datosRequest as $dato => $valor) {
 
-        // ✅ NO tocar el array de usuarios
         if ($dato === 'usuarios') {
             continue;
         }
 
-        // ✅ Solo procesar strings
         if (is_string($valor)) {
             $valorLimpio = str_replace(['$', ','], '', $valor);
 
@@ -952,7 +953,7 @@ class TutoriasController extends Controller
         foreach ($datosRequest['usuarios'] as $nombreCasa => $tipoDato) {
 
             UsuariosEstadoTutoriasAbiertasInternas::updateOrCreate(
-                ['NOMBRE' => $nombreCasa], // ← criterio de búsqueda
+                ['NOMBRE' => $nombreCasa],
                 [
                     'META' => $tipoDato['meta'],
                     'REAL' => $tipoDato['real'],

@@ -600,10 +600,10 @@
                                     {{ $adtAbiertaInterna->NOMBRE }}
                                 </td>
                                 <td class="text-center" colspan="2">
-                                    <input type="number" class="d-inline-block" style="width: 50%;" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_meta" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]" data-capturar value="0">
+                                    <input type="number" class="d-inline-block" style="width: 50%;" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_meta" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]" data-capturar value="{{ $datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->META ?? '' }}">
                                 </td>
                                 <td class="text-center" colspan="2">
-                                    <input type="number" class="d-inline-block" style="width: 50%" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_real" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]" data-capturar value="0">
+                                    <input type="number" class="d-inline-block" style="width: 50%" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_real" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]" data-capturar value="{{ $datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->REAL ?? '' }}">
                                 </td>
                                 <td class="text-center">
                                     -
@@ -1023,6 +1023,17 @@
             </div>
             
         </div>
+        <div id="overlayBloqueo" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(2px);
+            z-index: 9999;
+            display: none;
+        "></div>
 
     </body>
 
@@ -1046,6 +1057,7 @@
             });
 
             document.getElementById('botonGuardar').addEventListener('click', function() {
+                $('#overlayBloqueo').show();
 
                 let validacion = true;
                 
@@ -1064,20 +1076,16 @@
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 const url = "{{ route('registrar.datos.estatus.tutorias') }}";
 
-                // ✅ 1. Estructura base
                 const datos = {
                     usuarios: {}
                 };
 
-                // ✅ 2. Inputs del grupo usuarios
                 document.querySelectorAll('input[data-capturar]').forEach(input => {
 
                     const nombreInput = input.getAttribute('name');
 
-                    // Solo procesamos los que pertenecen a usuarios
                     if (nombreInput.startsWith("usuarios[")) {
 
-                        // Extraemos casa y campo
                         const match = nombreInput.match(/usuarios\[(.+?)\]\[(.+?)\]/);
                         if (!match) return;
 
@@ -1092,7 +1100,6 @@
                     }
                 });
 
-                // ✅ 3. Inputs normales (los que NO son usuarios)
                 document.querySelectorAll('input[data-capturar]').forEach(input => {
 
                     const nombre = input.getAttribute('name');
