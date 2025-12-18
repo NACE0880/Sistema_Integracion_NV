@@ -50,7 +50,7 @@
                                 <label for="rol">Rol</label>
                             </div>
                             <div id="opcionesConCargos" class="form-group col-md-8">
-                                <select class="form-control" id="rolConCargos" name="rolConCargos[]" multiple size="4" data-toggle="tooltip" data-placement="left" data-html="true" title="Deje presionado Ctrl para seleccionar varias opciones<br><br>Restricciòn: No puede seleccionar un cargo rojo y uno verde">
+                                <select class="form-control" id="rolConCargos" name="rolConCargos[]" multiple size="4" data-toggle="tooltip" data-placement="left" data-html="true" title="Deje presionado Ctrl para seleccionar varias opciones<br><br>Restricción: No puede seleccionar un cargo rojo y uno verde simultáneamente">
                                     <option value="" selected disabled>
                                     </option>
                                     @foreach($roles as $rol)

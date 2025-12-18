@@ -35,6 +35,33 @@
             border-radius: 0.375rem;
         }
 
+        .wave-loader {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wave-loader span {
+            display: block;
+            width: 6px;
+            height: 20px;
+            background: #007bff; /* color Bootstrap primary */
+            border-radius: 4px;
+            animation: wave 1s infinite ease-in-out;
+        }
+
+        .wave-loader span:nth-child(1) { animation-delay: 0s; }
+        .wave-loader span:nth-child(2) { animation-delay: 0.1s; }
+        .wave-loader span:nth-child(3) { animation-delay: 0.2s; }
+        .wave-loader span:nth-child(4) { animation-delay: 0.3s; }
+        .wave-loader span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 25px; }
+        }
+
     </style>
 @endsection
 
@@ -190,13 +217,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                {{ $datosAdts['cantidadEquipamientoAdts'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoAdts'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosAdts['cantidadEquipamientoInicialAdts'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoInicialAdts'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosAdts['cantidadEquipamientoFuncionalAdts'] ?? '-'}}
+                                {{ number_format($datosAdts['cantidadEquipamientoFuncionalAdts'], 0, ".", ",") ?? '-'}}
                             </td>
                             <td class="text-center" colspan="3">
                                 {{ isset($datosAdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicial']) ? number_format($datosAdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicial'], 2) . "%" : '-' }}
@@ -225,13 +252,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" style="vertical-align: middle;" colspan="2">
-                                {{ $datosAdts['cantidadMobiliarioAdts'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadMobiliarioAdts'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="4">
-                                {{ $datosAdts['cantidadMobiliarioInicialAdts'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadMobiliarioInicialAdts'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;" colspan="3">
-                                {{ $datosAdts['cantidadMobiliarioFuncionaAdts'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadMobiliarioFuncionaAdts'], 0, ".", ",") ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -268,7 +295,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                5. Usuarios BDT (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosBdtsAcumulados" name="usuariosBdtsAcumulados" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsAcumulados'] ?? '-' }}">) y Plataforma
+                                5. Usuarios BDT (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosBdtsAcumulados" name="usuariosBdtsAcumulados" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsAcumulados'], 0, ".", ",") ?? '-' }}">) y Plataforma
                             </th>
                         </tr>
                         <tr>
@@ -287,16 +314,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="usuariosBdtsTotales" name="usuariosBdtsTotales" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsTotales'] ?? '-' }}">
+                                <input type="text" id="usuariosBdtsTotales" name="usuariosBdtsTotales" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsTotales'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="usuariosBdtsRegistrados" name="usuariosBdtsRegistrados" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsRegistrados'] ?? '-' }}">
+                                <input type="text" id="usuariosBdtsRegistrados" name="usuariosBdtsRegistrados" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsRegistrados'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="usuariosBdtsInscritos" name="usuariosBdtsInscritos" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsInscritos'] ?? '-' }}">
+                                <input type="text" id="usuariosBdtsInscritos" name="usuariosBdtsInscritos" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsInscritos'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="usuariosBdtsConstancias" name="usuariosBdtsConstancias" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsConstancias'] ?? '-' }}">
+                                <input type="text" id="usuariosBdtsConstancias" name="usuariosBdtsConstancias" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsConstancias'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -320,21 +347,21 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="ofertaEducativaNuevosTalleres" name="ofertaEducativaNuevosTalleres" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaNuevosTalleres'] ?? '-' }}">
+                                <input type="text" id="ofertaEducativaNuevosTalleres" name="ofertaEducativaNuevosTalleres" data-capturar value="{{ number_format($datosQueSeCapturan['ofertaEducativaNuevosTalleres'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="ofertaEducativaTalleres" name="ofertaEducativaTalleres" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaTalleres'] ?? '-' }}">
+                                <input type="text" id="ofertaEducativaTalleres" name="ofertaEducativaTalleres" data-capturar value="{{ number_format($datosQueSeCapturan['ofertaEducativaTalleres'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="ofertaEducativaEnLinea" name="ofertaEducativaEnLinea" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaEnLinea'] ?? '-' }}">
+                                <input type="text" id="ofertaEducativaEnLinea" name="ofertaEducativaEnLinea" data-capturar value="{{ number_format($datosQueSeCapturan['ofertaEducativaEnLinea'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="ofertaEducativaTalleresEnDesarrollo" name="ofertaEducativaTalleresEnDesarrollo" data-capturar value="{{ $datosQueSeCapturan['ofertaEducativaTalleresEnDesarrollo'] ?? '-' }}">
+                                <input type="text" id="ofertaEducativaTalleresEnDesarrollo" name="ofertaEducativaTalleresEnDesarrollo" data-capturar value="{{ number_format($datosQueSeCapturan['ofertaEducativaTalleresEnDesarrollo'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                7. Nuevas Solicitudes 2025 (<input type="text" class="d-inline-block w-auto" id="solicitudesRecibidas" name="solicitudesRecibidas" data-capturar value="{{ $datosQueSeCapturan['solicitudesRecibidas'] ?? '-' }}"> recibidas)
+                                7. Nuevas Solicitudes 2025 (<input type="text" class="d-inline-block w-auto" id="solicitudesRecibidas" name="solicitudesRecibidas" data-capturar value="{{ number_format($datosQueSeCapturan['solicitudesRecibidas'], 0, ".", ",") ?? '-' }}"> recibidas)
                             </th>
                         </tr>
                         <tr>
@@ -342,7 +369,7 @@
                                 Solicitud BDT o donación de equipos
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="solicitudBdt" name="solicitudBdt" data-capturar value="{{ $datosQueSeCapturan['solicitudBdt'] ?? '-' }}">
+                                <input type="text" id="solicitudBdt" name="solicitudBdt" data-capturar value="{{ number_format($datosQueSeCapturan['solicitudBdt'],0 , ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -350,7 +377,7 @@
                                 Solicitud BDT de reequipamiento
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="solicitudReequipamiento" name="solicitudReequipamiento" data-capturar value="{{ $datosQueSeCapturan['solicitudReequipamiento'] ?? '-' }}">
+                                <input type="text" id="solicitudReequipamiento" name="solicitudReequipamiento" data-capturar value="{{ number_format($datosQueSeCapturan['solicitudReequipamiento'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -358,7 +385,7 @@
                                 Retiro de equipos
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="solicitudRetiro" name="solicitudRetiro" data-capturar value="{{ $datosQueSeCapturan['solicitudRetiro'] ?? '-' }}">
+                                <input type="text" id="solicitudRetiro" name="solicitudRetiro" data-capturar value="{{ number_format($datosQueSeCapturan['solicitudRetiro'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -366,7 +393,7 @@
                                 Otros (visitas a museo, acuario, etc.)
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="solicitudOtros" name="solicitudOtros" data-capturar value="{{ $datosQueSeCapturan['solicitudOtros'] ?? '-' }}">
+                                <input type="text" id="solicitudOtros" name="solicitudOtros" data-capturar value="{{ number_format($datosQueSeCapturan['solicitudOtros'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                     </table>
@@ -407,10 +434,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5">
-                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInterno'] ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInterno" name="internetInfinitumPersonalInterno" data-capturar value="{{ number_format($datosQueSeCapturan['internetInfinitumPersonalInterno'], 0, ".", ",") ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInterno" name="internetVozPersonalInterno" data-capturar value="{{ number_format($datosQueSeCapturan['internetVozPersonalInterno'], 0, ".", ",") ?? '-' }}"> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExterno'] ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExterno" name="internetVozPersonalExterno" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalExterno'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropias'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExterno" name="internetEnlacePersonalExterno" data-capturar value="{{ number_format($datosQueSeCapturan['internetEnlacePersonalExterno'], 0, ".", ",") ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExterno" name="internetVozPersonalExterno" data-capturar value="{{ number_format($datosQueSeCapturan['internetVozPersonalExterno'], 0, ".", ",") ?? '-' }}"> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -476,13 +503,13 @@
                         </tr>
                         <tr>
                             <td class="text-center">
-                                {{ $datosAdts['cantidadEquipamientoAdtsInternas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoAdtsInternas'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
-                                {{ $datosAdts['cantidadEquipamientoFuncionalAdtsInternas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoFuncionalAdtsInternas'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['cantidadEquipamientoBDOFAdtsInternas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoBDOFAdtsInternas'],0 , ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="2">
                                 {{ isset($datosAdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas']) ? number_format($datosAdts['cantidadRelacionPorcentualEquipamientoFuncionalEntreInicialAdtsInternas'], 2) . '%' : '-' }}
@@ -509,16 +536,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioMesas" name="mobiliarioMesas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioMesas'] ?? '-' }}">
+                                <input type="text" id="mobiliarioMesas" name="mobiliarioMesas" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioMesas'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioSillas" name="mobiliarioSillas" data-capturar value="{{ $datosQueSeCapturan['mobiliarioSillas'] ?? '-' }}">
+                                <input type="text" id="mobiliarioSillas" name="mobiliarioSillas" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioSillas'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioLibreros" name="mobiliarioLibreros" data-capturar value="{{ $datosQueSeCapturan['mobiliarioLibreros'] ?? '-' }}">
+                                <input type="text" id="mobiliarioLibreros" name="mobiliarioLibreros" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioLibreros'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3" >
-                                <input type="text" id="mobiliarioTv" name="mobiliarioTv" data-capturar value="{{ $datosQueSeCapturan['mobiliarioTv'] ?? '-' }}">
+                                <input type="text" id="mobiliarioTv" name="mobiliarioTv" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioTv'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -534,13 +561,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioArchiveros" name="mobiliarioArchiveros" data-capturar value="{{ $datosQueSeCapturan['mobiliarioArchiveros'] ?? '-' }}">
+                                <input type="text" id="mobiliarioArchiveros" name="mobiliarioArchiveros" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioArchiveros'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="4">
-                                <input type="text" id="mobiliarioRacks" name="mobiliarioRacks" data-capturar value="{{ $datosQueSeCapturan['mobiliarioRacks'] ?? '-' }}">
+                                <input type="text" id="mobiliarioRacks" name="mobiliarioRacks" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioRacks'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="mobiliarioCarritoCargador" name="mobiliarioCarritoCargador" data-capturar value="{{ $datosQueSeCapturan['mobiliarioCarritoCargador'] ?? '-' }}">
+                                <input type="text" id="mobiliarioCarritoCargador" name="mobiliarioCarritoCargador" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioCarritoCargador'], 0 , ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -577,7 +604,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-info" colspan="9">
-                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumulado" name="usuariosAcumulado" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumulado'] ?? '-' }}">)
+                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumulado" name="usuariosAcumulado" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosAcumulado'], 0 , ".", ",") ?? '-' }}">)
                             </th>
                         </tr>
                         <tr>
@@ -600,10 +627,10 @@
                                     {{ $adtAbiertaInterna->NOMBRE }}
                                 </td>
                                 <td class="text-center" colspan="2">
-                                    <input type="number" class="d-inline-block" style="width: 50%;" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_meta" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]" data-capturar value="{{ $datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->META ?? '' }}">
+                                    <input type="text" class="d-inline-block" style="width: 50%;" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_meta" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]" data-capturar value="{{ number_format($datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->META, 0, ".", ",") ?? '' }}">
                                 </td>
                                 <td class="text-center" colspan="2">
-                                    <input type="number" class="d-inline-block" style="width: 50%" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_real" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]" data-capturar value="{{ $datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->REAL ?? '' }}">
+                                    <input type="text" class="d-inline-block" style="width: 50%" id="usuarios_{{ $adtAbiertaInterna->NOMBRE }}_real" name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]" data-capturar value="{{ number_format($datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE]->REAL, 0, ".", ",") ?? '' }}">
                                 </td>
                                 <td class="text-center">
                                     -
@@ -719,10 +746,10 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="5"><!--En producción seguirá siendo datos que se capturan pero las variables dentro del array al final tendrán C-->
-                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInternoC" name="internetInfinitumPersonalInternoC" data-capturar value="{{ $datosQueSeCapturan['internetInfinitumPersonalInternoC'] ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInternoC" name="internetVozPersonalInternoC" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalInternoC'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasExternasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetInfinitumPersonalInternoC" name="internetInfinitumPersonalInternoC" data-capturar value="{{ number_format($datosQueSeCapturan['internetInfinitumPersonalInternoC'], 0, ".", ",") ?? '-' }}"> infinitum y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalInternoC" name="internetVozPersonalInternoC" data-capturar value="{{ number_format($datosQueSeCapturan['internetVozPersonalInternoC'], 0, ".", ",") ?? '-' }}"> de voz (paga Telmex)
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExternoC" name="internetEnlacePersonalExternoC" data-capturar value="{{ $datosQueSeCapturan['internetEnlacePersonalExternoC'] ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExternoC" name="internetVozPersonalExternoC" data-capturar value="{{ $datosQueSeCapturan['internetVozPersonalExternoC'] ?? '-' }}"> de voz (paga Telmex)
+                                {{ $datosAdts['numeroLineasAdtsInternasPropiasCerradas'] ?? '-' }} CT con <input type="text" class="d-inline-block w-auto" id="internetEnlacePersonalExternoC" name="internetEnlacePersonalExternoC" data-capturar value="{{ number_format($datosQueSeCapturan['internetEnlacePersonalExternoC'], 0, ".", ",") ?? '-' }}"> enlaces y <input type="text" class="d-inline-block w-auto" id="internetVozPersonalExternoC" name="internetVozPersonalExternoC" data-capturar value="{{ number_format($datosQueSeCapturan['internetVozPersonalExternoC'], 0, ".", ",") ?? '-' }}"> de voz (paga Telmex)
                             </td>
                         </tr>
                         <tr>
@@ -785,13 +812,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                {{ $datosAdts['cantidadEquipamientoAdtsInternasCerradas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoAdtsInternasCerradas'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="4">
-                                {{ $datosAdts['cantidadEquipamientoFuncionalAdtsInternasCerradas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoFuncionalAdtsInternasCerradas'], 0, ".", ",") ?? '-' }}
                             </td>
                             <td class="text-center" colspan="3">
-                                {{ $datosAdts['cantidadEquipamientoBDOFAdtsInternasCerradas'] ?? '-' }}
+                                {{ number_format($datosAdts['cantidadEquipamientoBDOFAdtsInternasCerradas'], 0, ".", ",") ?? '-' }}
                             </td>
                         </tr>
                         <tr>
@@ -815,16 +842,16 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioMesasC" name="mobiliarioMesasC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioMesasC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioMesasC" name="mobiliarioMesasC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioMesasC'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioSillasC" name="mobiliarioSillasC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioSillasC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioSillasC" name="mobiliarioSillasC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioSillasC'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
-                                <input type="text" id="mobiliarioLibrerosC" name="mobiliarioLibrerosC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioLibrerosC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioLibrerosC" name="mobiliarioLibrerosC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioLibrerosC'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="mobiliarioTvC" name="mobiliarioTvC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioTvC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioTvC" name="mobiliarioTvC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioTvC'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -840,13 +867,13 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="mobiliarioArchiverosC" name="mobiliarioArchiverosC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioArchiverosC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioArchiverosC" name="mobiliarioArchiverosC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioArchiverosC'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="mobiliarioRacksC" name="mobiliarioRacksC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioRacksC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioRacksC" name="mobiliarioRacksC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioRacksC'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="3">
-                                <input type="text" id="mobiliarioCarritoCargadorC" name="mobiliarioCarritoCargadorC" data-capturar value="{{ $datosQueSeCapturan['mobiliarioCarritoCargadorC'] ?? '-' }}">
+                                <input type="text" id="mobiliarioCarritoCargadorC" name="mobiliarioCarritoCargadorC" data-capturar value="{{ number_format($datosQueSeCapturan['mobiliarioCarritoCargadorC'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -883,7 +910,7 @@
                         </tr>
                         <tr>
                             <th class="text-center table-secondary" colspan="9">
-                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumuladoC" name="usuariosAcumuladoC" data-capturar value="{{ $datosQueSeCapturan['usuariosAcumuladoC'] ?? '-' }}">)
+                                5. Usuarios (acumulado: <input type="text" class="d-inline-block w-auto" id="usuariosAcumuladoC" name="usuariosAcumuladoC" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosAcumuladoC'], 0, ".", ",") ?? '-' }}">)
                             </th>
                         </tr>
                         <tr>
@@ -899,13 +926,13 @@
                                 ene-{{ $mes }} 2025
                             </td>
                             <td class="text-center">
-                                <input type="text" id="numeroUsuariosDelAnioBdts" name="numeroUsuariosDelAnioBdts" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelAnioBdts'] ?? '-' }}">
+                                <input type="text" id="numeroUsuariosDelAnioBdts" name="numeroUsuariosDelAnioBdts" data-capturar value="{{ number_format($datosQueSeCapturan['numeroUsuariosDelAnioBdts'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
                             <td class="text-center">
-                                <input type="text" id="numeroUsuariosDelMesBdts" name="numeroUsuariosDelMesBdts" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelMesBdts'] ?? '-' }}">
+                                <input type="text" id="numeroUsuariosDelMesBdts" name="numeroUsuariosDelMesBdts" data-capturar value="{{ number_format($datosQueSeCapturan['numeroUsuariosDelMesBdts'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -916,13 +943,13 @@
                                 ene-{{ $mes }} 2025
                             </td>
                             <td class="text-center">
-                                <input type="text" id="numeroUsuariosDelAnioFiliales" name="numeroUsuariosDelAnioFiliales" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelAnioFiliales'] ?? '-' }}">
+                                <input type="text" id="numeroUsuariosDelAnioFiliales" name="numeroUsuariosDelAnioFiliales" data-capturar value="{{ number_format($datosQueSeCapturan['numeroUsuariosDelAnioFiliales'], 0, ".", ",") ?? '-' }}">
                             </td>
                             <td class="text-center" colspan="2">
                                 Del mes
                             </td>
                             <td class="text-center">
-                                <input type="text" id="numeroUsuariosDelMesFiliales" name="numeroUsuariosDelMesFiliales" data-capturar value="{{ $datosQueSeCapturan['numeroUsuariosDelMesFiliales'] ?? '-' }}">
+                                <input type="text" id="numeroUsuariosDelMesFiliales" name="numeroUsuariosDelMesFiliales" data-capturar value="{{ number_format($datosQueSeCapturan['numeroUsuariosDelMesFiliales'], 0, ".", ",") ?? '-' }}">
                             </td>
                         </tr>
                         <tr>
@@ -1033,7 +1060,19 @@
             backdrop-filter: blur(2px);
             z-index: 9999;
             display: none;
-        "></div>
+            justify-content: center;
+            align-items: center;
+        ">
+            <div class="text-center">
+                <div class="wave-loader">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div style="font-size: 1.3rem; margin-top: 10px; font-weight: bold;">
+                    Cargando...
+                </div>
+            </div>
+        </div>
+    </div>
 
     </body>
 
@@ -1057,7 +1096,7 @@
             });
 
             document.getElementById('botonGuardar').addEventListener('click', function() {
-                $('#overlayBloqueo').show();
+                $('#overlayBloqueo').css('display', 'flex');
 
                 let validacion = true;
                 

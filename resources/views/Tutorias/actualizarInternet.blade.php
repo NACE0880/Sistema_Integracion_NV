@@ -70,7 +70,13 @@
                         </div>
                         <div class="col-4">
                             <label for="semaforo" class="form-label">Semáforo de Uso</label>
-                            <input type="text" class="form-control" id="semaforo" name="semaforo" value="{{$adt->linea->SEMAFORO}}"  required>
+                            <select class="form-control" name="semaforo" required>
+                                <option value="BAJO"    {{ $adt->linea->SEMAFORO == 'BAJO' ? 'selected' : '' }}>BAJO</option>
+                                <option value="MEDIO"   {{ $adt->linea->SEMAFORO == 'MEDIO' ? 'selected' : '' }}>MEDIO</option>
+                                <option value="ALTO"    {{ $adt->linea->SEMAFORO == 'ALTO' ? 'selected' : '' }}>ALTO</option>
+                                <option value="HEAVY"   {{ $adt->linea->SEMAFORO == 'HEAVY' ? 'selected' : '' }}>HEAVY</option>
+                                <option value="ATÍPICO" {{ $adt->linea->SEMAFORO == 'ATÍPICO' ? 'selected' : '' }}>ATÍPICO</option>
+                            </select>
                         </div>
 
                     </div>

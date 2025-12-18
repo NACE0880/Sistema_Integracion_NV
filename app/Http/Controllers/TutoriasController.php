@@ -849,27 +849,10 @@ class TutoriasController extends Controller
 
     public function registrarDatosEstatus(Request $request) {
 
+        $datosRequest = $this->limpiarValores($request->input());
+
         $adtsAbiertasInternas = adts::whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA'])
         ->where('INICIATIVA', 'CASA TELMEX');
-
-        $datosRequest = $request->input();
-
-        foreach ($datosRequest as $dato => $valor) {
-
-        if ($dato === 'usuarios') {
-            continue;
-        }
-
-        if (is_string($valor)) {
-            $valorLimpio = str_replace(['$', ','], '', $valor);
-
-            if (str_contains($dato, 'gasto')) {
-                $datosRequest[$dato] = (float) $valorLimpio;
-            } else {
-                $datosRequest[$dato] = (int) $valorLimpio;
-            }
-        }
-    }
 
         $datosRegistrarTablaAbiertas = [
 
@@ -980,6 +963,31 @@ class TutoriasController extends Controller
             'success' => true,
             'message' => 'Datos guardados correctamente',
         ]);
+    }
+
+    private function limpiarValores($valor) {
+
+        if (is_array($valor)) {
+            return array_map([$this, 'limpiarValores'], $valor);
+        }
+
+        if (is_string($valor)) {
+            $valor = trim($valor);
+
+            // Quitar $, comas y espacios
+            $valor = str_replace(['$', ','], '', $valor);
+
+            // Mantener punto decimal
+            $valorLimpio = $valor;
+
+            if (is_numeric($valorLimpio)) {
+                return $valorLimpio + 0;
+            }
+
+            return $valorLimpio;
+        }
+
+        return $valor;
     }
 
     /* // CARGA/BAJA IMAGENES y OBTENCION NOMBRE

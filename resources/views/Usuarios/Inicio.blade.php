@@ -36,6 +36,34 @@
         .linea-advertencia-gruesa {
             border-bottom: 2px solid #dc3545;
         }
+
+        .wave-loader {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wave-loader span {
+            display: block;
+            width: 6px;
+            height: 20px;
+            background: #007bff; /* color Bootstrap primary */
+            border-radius: 4px;
+            animation: wave 1s infinite ease-in-out;
+        }
+
+        .wave-loader span:nth-child(1) { animation-delay: 0s; }
+        .wave-loader span:nth-child(2) { animation-delay: 0.1s; }
+        .wave-loader span:nth-child(3) { animation-delay: 0.2s; }
+        .wave-loader span:nth-child(4) { animation-delay: 0.3s; }
+        .wave-loader span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 25px; }
+        }
+
     </style>
 @endsection
 
@@ -57,7 +85,18 @@
         backdrop-filter: blur(2px);
         z-index: 9999;
         display: none;
-    "></div>
+        justify-content: center;
+        align-items: center;
+    ">
+        <div class="text-center">
+            <div class="wave-loader">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div style="font-size: 1.3rem; margin-top: 10px; font-weight: bold;">
+                Cargando...
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
@@ -191,7 +230,7 @@
             });
 
             $('#botonRegistrar').on('click', function (e) {
-                $('#overlayBloqueo').show();
+                $('#overlayBloqueo').css('display', 'flex');
 
                 const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
                 const valorAlRegistrarNombre = modalActualizacionUsuarios.find('#nombre').val();
@@ -238,7 +277,7 @@
             });
 
             $('#botonModificar').on('click', function (e) {
-                $('#overlayBloqueo').show();
+                $('#overlayBloqueo').css('display', 'flex');
 
                 const modalActualizacionUsuarios = $('#modalGeneralUsuarios');
                 const valorAlModificarNombre = modalActualizacionUsuarios.find('#nombre').val();
@@ -283,7 +322,7 @@
             });
 
             $('#botonEliminar').on('click', function (e) {
-                $('#overlayBloqueo').show();
+                $('#overlayBloqueo').css('display', 'flex');
 
                 $('#formularioModalUsuarios').attr('action', baseUrlEliminacion + '/' + nombreClaveUsuario);
             });
