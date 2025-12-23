@@ -351,6 +351,16 @@ class TutoriasController extends Controller
         ->whereIn('ESTATUS_ACTUAL', ['ABIERTA', 'ABIERTA INTERNA']);
         $adtsAbiertasExternas = (clone $adtsAbiertas)->whereIn('INICIATIVA', ['ADT', 'BDT MPAL']);
         $adtsAbiertasInternas = (clone $adtsAbiertas)->where('INICIATIVA', 'CASA TELMEX');
+        $adtsAbiertasInternasObtenidas = $adtsAbiertasInternas->get();
+        foreach ($adtsAbiertasInternasObtenidas as $adt) {
+            UsuariosEstadoTutoriasAbiertasInternas::firstOrCreate(
+                ['NOMBRE' => $adt->NOMBRE],
+                [
+                    'META' => $adt->META ?? 0,
+                    'REAL' => $adt->REAL ?? 0,
+                ]
+            );
+        }
         $adtsCerradasInternas = adts::with(['lineas'])
         ->where('ESTATUS_ACTUAL', 'CERRADA INTERNAS');
 

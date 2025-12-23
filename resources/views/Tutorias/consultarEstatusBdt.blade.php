@@ -621,6 +621,7 @@
                                 %
                             </td>
                         </tr>
+                        <!--
                         @foreach($datosAdts['adtsAbiertasInternas'] as $adtAbiertaInterna)
                             <tr>
                                 <td class="text-center" colspan="4">
@@ -637,6 +638,40 @@
                                 </td>
                             </tr>
                         @endforeach
+                        -->
+                            @foreach($datosAdts['adtsAbiertasInternas'] as $adtAbiertaInterna)
+                                @php
+                                    $registro = $datosQueSeCapturan['numeroDeUsuariosMetaRealAdts'][$adtAbiertaInterna->NOMBRE] ?? null;
+                                    // Para el atributo id, reemplazar espacios por guiones bajos
+                                    $idSafe = preg_replace('/[^A-Za-z0-9_-]/', '_', $adtAbiertaInterna->NOMBRE);
+                                @endphp
+                                <tr>
+                                    <td class="text-center" colspan="4">
+                                        {{ $adtAbiertaInterna->NOMBRE }}
+                                    </td>
+                                    <td class="text-center" colspan="2">
+                                        <input type="text"
+                                            class="d-inline-block"
+                                            style="width: 50%;"
+                                            id="usuarios_{{ $idSafe }}_meta"
+                                            name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][meta]"
+                                            data-capturar
+                                            value="{{ $registro ? number_format((float) $registro->META, 0, '.', ',') : '' }}">
+                                    </td>
+                                    <td class="text-center" colspan="2">
+                                        <input type="text"
+                                            class="d-inline-block"
+                                            style="width: 50%"
+                                            id="usuarios_{{ $idSafe }}_real"
+                                            name="usuarios[{{ $adtAbiertaInterna->NOMBRE }}][real]"
+                                            data-capturar
+                                            value="{{ $registro ? number_format((float) $registro->REAL, 0, '.', ',') : '' }}">
+                                    </td>
+                                    <td class="text-center">
+                                        -
+                                    </td>
+                                </tr>
+                            @endforeach
                         <tr>
                             <th class="text-center table-info" colspan="9">
                                 6. Gasto mensual <input type="text" class="d-inline-block w-auto" id="gastoMensual" name="gastoMensual" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensual'], 2, '.', ',') ?? '-' }}"> / acumulado 2025 <input type="text" class="d-inline-block w-auto" id="gastoMensualAcumulado" name="gastoMensualAcumulado" data-capturar value="${{ number_format($datosQueSeCapturan['gastoMensualAcumulado'], 2, '.', ',') ?? '-' }}">
