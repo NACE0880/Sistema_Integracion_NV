@@ -300,7 +300,7 @@
                         </tr>
                         <tr>
                             <td class="text-center" colspan="3">
-                                BDT's (<input type="text" class="d-inline-block w-auto" id="usuariosBdtsRegistraron" name="usuariosBdtsRegistraron" data-capturar value="{{ $datosQueSeCapturan['usuariosBdtsRegistraron'] ?? '-' }}">)
+                                BDT's (<input type="text" class="d-inline-block w-auto" id="usuariosBdtsRegistraron" name="usuariosBdtsRegistraron" data-capturar value="{{ number_format($datosQueSeCapturan['usuariosBdtsRegistraron'], 0, ".", ",") ?? '-' }}">)
                             </td>
                             <td class="text-center" colspan="2">
                                 Registros
