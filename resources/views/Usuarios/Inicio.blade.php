@@ -271,6 +271,11 @@
                     alert('Por favor rellene todos los campos requeridos.');
                     $('#overlayBloqueo').hide();
                     return;
+                } else if (valorAlRegistrarContrasena.length < 8) {
+                    e.preventDefault();
+                    alert('Compruebe la longitud de la contraseña. Debe tener 8 caracteres.');
+                    $('#overlayBloqueo').hide();
+                    return;
                 }
 
                 $('#formularioModalUsuarios').attr('action', '{{ route("usuarios.registro") }}');
@@ -314,6 +319,11 @@
                 ) {
                     e.preventDefault();
                     alert('Modifique algún campo primero.');
+                    $('#overlayBloqueo').hide();
+                    return;
+                } else if (valorAlRegistrarContrasena.length < 8) {
+                    e.preventDefault();
+                    alert('Compruebe la longitud de la contraseña. Debe tener 8 caracteres.');
                     $('#overlayBloqueo').hide();
                     return;
                 }

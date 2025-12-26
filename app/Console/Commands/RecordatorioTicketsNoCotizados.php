@@ -104,7 +104,7 @@ class RecordatorioTicketsNoCotizados extends Command
 
         foreach ($tickets as $ticket) {
             $lista .= '-- ' . $ticket->FOLIO.' - '.$ticket->CASA.' - '.$ticket->AREA_RESPONSABLE.
-            '%0A';
+            "\n";
         }
 
         $data_telegram['lista'] = $lista;
@@ -146,8 +146,9 @@ class RecordatorioTicketsNoCotizados extends Command
     public function notificarGeneracionReportes($chat_id, $data_telegram){
         $telegram = new TelegramController();
 
-        $payload = "<b>TICKETS NO COTIZADOS</b>%0A".
-        "%0A<blockquote expandable><b><i>Cantidad: ".$data_telegram['total']."</i></b> %0A".$data_telegram['lista']."</blockquote>";
+        $payload = "<b>TICKETS NO COTIZADOS</b>\n\n".
+            "<b><i>Cantidad: ".$data_telegram['total']."</i></b>\n".
+            $data_telegram['lista'];
 
         $telegram->sendText($chat_id, $payload);
     }

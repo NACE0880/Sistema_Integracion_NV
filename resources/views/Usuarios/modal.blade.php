@@ -31,7 +31,12 @@
                         </div>
                         <div id="grupo_campos_telegram" class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="telegram">Identificador Telegram</label>
+                                <label for="telegram">
+                                    Identificador Telegram
+                                    <a href="https://www.youtube.com" target="_blank" class="ml-2"> 
+                                        <i class="bi bi-question-circle" style="font-size: 1.2rem; color:#007bff;"></i> 
+                                    </a>
+                                </label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#telegram">
                                 <input type="tel" class="form-control" id="telegram" name="telegram" maxlength="15">
@@ -42,7 +47,7 @@
                                 <label for="contrasena">Contraseña</label>
                             </div>
                             <div class="form-group col-md-8 campo-wrapper" data-campo="#contrasena">
-                                <input type="text" class="form-control" id="contrasena" name="contrasena" autocomplete="off" minlength="8" maxlength="8">
+                                <input type="text" class="form-control" id="contrasena" name="contrasena" autocomplete="off" minlength="8" maxlength="8" data-toggle="tooltip" data-placement="left" title="Registre una contraseña de mínimo 8 caracteres y con sólo caracteres alfanuméricos.">
                             </div>
                         </div>  
                         <div class="form-row">
@@ -71,7 +76,7 @@
                                 </select>
                             </div>
                             <div id="opcionesSinCargos" class="form-group col-md-8">
-                                <select class="form-control" id="rolSinCargos" name="rolSinCargos[]" multiple size="4" data-toggle="tooltip" data-placement="top" title="Deje presionado Ctrl para seleccionar varias opciones">
+                                <select class="form-control" id="rolSinCargos" name="rolSinCargos[]" multiple size="4" data-toggle="tooltip" data-placement="left" title="Deje presionado Ctrl para seleccionar varias opciones">
                                     <option value="" selected disabled>
                                     </option>
                                     @php

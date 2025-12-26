@@ -1123,6 +1123,7 @@
 
                 
                 inputs.forEach(input => input.disabled = true);
+                inputs.forEach(input => input.setAttribute("maxlength", "10"));
 
                 
                 @if(in_array("15", $UsersServices->permisos()))
