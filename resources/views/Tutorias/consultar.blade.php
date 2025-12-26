@@ -40,6 +40,7 @@
                     <tr>
                         <th class="dt-center">CLAVE</th>
                         <th class="dt-center">NOMBRE</th>
+                        <th class="dt-center">ESTATUS</th>
                         <th class="dt-center">ULTIMO CONTACTO</th>
                         <th class="dt-center">DETALLE</th>
                         <th class="dt-center">DATOS CONTACTO</th>
@@ -51,6 +52,7 @@
                         <tr class="text-sm">
                             <td>{{ $sede->CLAVE_SITIO }}</td>
                             <td >{{ $sede->NOMBRE }}</td>
+                            <td >{{ $sede->ESTATUS_ACTUAL }}</td>
                             <td>
                                 @if ( DateTime::createFromFormat('Y-m-d H:i:s', $sede->ultimoContacto($sede->ID_ADT)) == FALSE )
                                     <a class="btn btn-outline-danger text-smin">
