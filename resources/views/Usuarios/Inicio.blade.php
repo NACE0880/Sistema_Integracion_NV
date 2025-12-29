@@ -321,7 +321,7 @@
                     alert('Modifique algún campo primero.');
                     $('#overlayBloqueo').hide();
                     return;
-                } else if (valorAlRegistrarContrasena.length < 8) {
+                } else if (valorAlModificarContrasena && valorAlRegistrarContrasena.length < 8) {
                     e.preventDefault();
                     alert('Compruebe la longitud de la contraseña. Debe tener 8 caracteres.');
                     $('#overlayBloqueo').hide();
