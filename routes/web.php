@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TelegramWebhookController;
+//use App\Http\Controllers\TelegramWebhookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,7 @@ Route::get('/storage-link', function () {
     Artisan::call('storage:link');
 });
 
-Route::post('/telegram-webhook', 'TelegramWebhookController@handleWebhook');
+//Route::post('/telegram-webhook', 'TelegramWebhookController@handleWebhook');
 
 
 Route::get('/portal/aldea','LandingController@landingAldea')->name('landing.aldea');
