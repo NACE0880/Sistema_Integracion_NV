@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\adts;
+use App\adts;
 use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client;
 
