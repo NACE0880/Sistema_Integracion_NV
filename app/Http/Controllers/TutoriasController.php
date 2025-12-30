@@ -337,10 +337,10 @@ class TutoriasController extends Controller
         $archivo->descargar();
     }
 
-    public function exportarReporteGeneral(Request $request){
+    public function exportarReporteGeneral(){
 
         $reporteGeneralTutorias = new reporteGeneralTutorias();
-        $reporteGeneralTutorias->descargarReporteGeneralActual($request);
+        $reporteGeneralTutorias->descargarReporteGeneralActual();
 
     }
 

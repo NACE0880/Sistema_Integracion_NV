@@ -127,7 +127,7 @@ Route::group(['middleware'=>'XSS'], function() {
 
     // Solicitud de Excel
     Route::get('/exportar/reporte/{adt}', 'TutoriasController@exportReporte')->name('exportar.reporte.adt');
-    Route::post('/exportar/reporte/general/tutorias', 'TutoriasController@exportarReporteGeneral')->name('exportar.reporte.general.tutorias');
+    Route::get('/exportar/reporte/general/tutorias', 'TutoriasController@exportarReporteGeneral')->name('exportar.reporte.general.tutorias');
 
 });
 
