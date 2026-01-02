@@ -411,7 +411,7 @@
                         </thead>
                         <tr><!--2-->
                             <td class="text-center" colspan="9">
-                                {{ $datosAdts['numeroAdtsInternasPropias' ?? '-'] }} con personal interno
+                                {{ $datosAdts['numeroAdtsInternasPropias'] ?? '-' }} con personal interno
                                 @foreach($datosAdts['adtsInternasPropias'] as $adtInternaPropia)
                                     <br>
                                     ({{ $adtInternaPropia->NOMBRE }})

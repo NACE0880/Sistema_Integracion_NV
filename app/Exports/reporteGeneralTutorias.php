@@ -544,15 +544,23 @@ class reporteGeneralTutorias {
                     'datosQueSeCapturan' => $datosQueSeCapturan,
                 ]);
 
-                $sheet->getStyle('A1:B' . $sheet->getHighestRow())
+                $sheet->setAutoSize(true);
+
+                $sheet->cells('A1:AA' . $sheet->getHighestRow(), function($cells) { 
+                    $cells->setAlignment('center'); 
+                    $cells->setValignment('middle'); 
+                });
+                
+                /*$sheet->getStyle('A1:AA' . $sheet->getHighestRow())
                 ->getAlignment()
-                ->setWrapText(true);
+                ->setWrapText(true);*/
 
-                foreach (range('A', $sheet->getHighestColumn()) as $col) {
-                    $sheet->getColumnDimension($col)->setAutoSize(true);
-                }
-
-                $sheet->getDefaultRowDimension()->setRowHeight(-1);
+                $sheet->setWidth([ 
+                    'J' => 50,
+                    'O' => 50,
+                    'S' => 75,
+                    'X' => 75,
+                ]);
 
             });
 
